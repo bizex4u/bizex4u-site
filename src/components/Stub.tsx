@@ -33,10 +33,10 @@ export default function Stub({
                   key={item}
                   className="flex gap-5 border-b border-rule py-4"
                 >
-                  <span className="font-mono text-meta text-ink-30">
+                  <span className="font-mono text-meta text-ink-50">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-ink-60">{item}</span>
+                  <span className="text-ink-70">{item}</span>
                 </li>
               ))}
             </ul>

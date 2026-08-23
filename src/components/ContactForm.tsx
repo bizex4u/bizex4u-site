@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
  */
 
 const field =
-  "mt-2 h-12 w-full rounded-[2px] border border-rule bg-transparent px-3 text-body outline-none transition-colors focus:border-accent";
+  "mt-2 h-12 w-full rounded-[2px] border border-rule bg-transparent px-3 text-body outline-none transition-colors focus:border-accent-text";
 
 const label = "eyebrow block";
 
@@ -79,19 +79,19 @@ export default function ContactForm() {
           name="message"
           rows={5}
           required
-          className="mt-2 w-full rounded-[2px] border border-rule bg-transparent p-3 text-body outline-none transition-colors focus:border-accent"
+          className="mt-2 w-full rounded-[2px] border border-rule bg-transparent p-3 text-body outline-none transition-colors focus:border-accent-text"
         />
       </div>
 
       <button
         type="submit"
-        className="mt-8 rounded-[2px] bg-ink px-6 py-3.5 font-mono text-meta uppercase tracking-[0.08em] text-paper transition-opacity hover:opacity-85"
+        className="mt-8 rounded-[2px] bg-ink px-6 py-4 font-mono text-meta uppercase tracking-[0.09em] text-paper transition-opacity hover:opacity-85"
       >
         Send enquiry →
       </button>
 
       {sent && (
-        <p role="status" className="mt-5 text-[0.9375rem] text-ink-60">
+        <p role="status" className="mt-5 text-[0.9375rem] text-ink-70">
           Your email client should have opened with the message ready to send.
           If it did not, write to{" "}
           <a href={`mailto:${site.email}`} className="link-underline text-ink">

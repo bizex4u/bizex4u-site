@@ -1,57 +1,81 @@
 @import "tailwindcss";
 
 /* ============================================================
-   BIZEX4U — "The Ledger" design system
-   Hairlines, not boxes. Index numbers. Asymmetric grids.
-   Near-monochrome. Restraint reads as expensive.
+   BIZEX4U — "The Ledger"
+
+   Direction verified against the ui-ux-pro-max style database:
+   minimalism-and-swiss-style — grid-based, high contrast, no
+   shadows, 0px radius, a single accent. The words that matter in
+   that spec are HIGH CONTRAST and CLEAR TYPE HIERARCHY. Restraint
+   is not the same thing as low contrast.
+
+   Every text pair below is measured. Ratios are noted inline.
    ============================================================ */
 
 @theme {
   /* Colour ------------------------------------------------- */
-  --color-paper: #fafaf7;
-  --color-paper-hover: #f2f1ec;
-  --color-ink: #101010;
-  --color-ink-60: #6b6b6b;
-  --color-ink-30: #a3a3a0;
-  --color-rule: #e2e1dc;
-  --color-rule-dark: #2a2a2a;
+  --color-paper: #fafaf7; /* warm off-white canvas */
+  --color-paper-2: #f2f1ea; /* recessed band */
+  --color-paper-hover: #ecebe2;
+  --color-ink: #0a0a0a; /*        18.9:1 on paper */
+  --color-ink-70: #57574f; /*      6.97:1 on paper — secondary body */
+  --color-ink-50: #6b6b65; /*      5.35:1 on paper — metadata */
+  --color-rule: #d9d8d0; /* hairlines, non-text */
+  --color-rule-strong: #b4b3a9; /* emphasised hairlines */
+
+  /* Inverted surfaces */
+  --color-rule-dark: #333330;
+  --color-paper-dim: #c4c4bf; /*  11.3:1 on ink — secondary on dark */
+
+  /* Accent. Two values because contrast is not optional:
+     -accent is for rules, fills and marks (non-text);
+     -accent-text passes 6.3:1 as text on paper;
+     -accent-lift passes 6.6:1 as text on ink. */
   --color-accent: #6f4bff;
+  --color-accent-text: #5a34f0;
+  --color-accent-lift: #9c82ff;
 
   /* Type --------------------------------------------------- */
   --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
 
-  --text-display-xl: clamp(3.5rem, 8vw, 8.25rem);
-  --text-display-xl--line-height: 0.92;
-  --text-display-xl--letter-spacing: -0.035em;
-  --text-display-xl--font-weight: 500;
+  /* Wider jumps between steps than before. Uniform sizing was
+     what made the first pass read as flat. */
+  --text-display-xl: clamp(3.25rem, 7.5vw, 7.5rem);
+  --text-display-xl--line-height: 0.9;
+  --text-display-xl--letter-spacing: -0.042em;
+  --text-display-xl--font-weight: 600;
 
-  --text-display-l: clamp(2.5rem, 5vw, 4.75rem);
-  --text-display-l--line-height: 0.98;
-  --text-display-l--letter-spacing: -0.032em;
-  --text-display-l--font-weight: 500;
+  --text-display-l: clamp(2.25rem, 4.6vw, 4.25rem);
+  --text-display-l--line-height: 0.96;
+  --text-display-l--letter-spacing: -0.036em;
+  --text-display-l--font-weight: 600;
 
-  --text-h2: clamp(1.75rem, 3vw, 2.75rem);
-  --text-h2--line-height: 1.05;
-  --text-h2--letter-spacing: -0.022em;
-  --text-h2--font-weight: 500;
+  --text-h2: clamp(1.625rem, 2.6vw, 2.5rem);
+  --text-h2--line-height: 1.04;
+  --text-h2--letter-spacing: -0.026em;
+  --text-h2--font-weight: 600;
 
-  --text-h3: 1.5rem;
-  --text-h3--line-height: 1.2;
-  --text-h3--letter-spacing: -0.012em;
+  --text-h3: 1.375rem;
+  --text-h3--line-height: 1.22;
+  --text-h3--letter-spacing: -0.016em;
   --text-h3--font-weight: 600;
 
   --text-body-l: 1.1875rem;
   --text-body-l--line-height: 1.55;
 
-  --text-body: 1rem;
-  --text-body--line-height: 1.6;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.62;
 
   --text-meta: 0.75rem;
   --text-meta--line-height: 1.2;
-  --text-meta--letter-spacing: 0.08em;
+  --text-meta--letter-spacing: 0.09em;
   --text-meta--font-weight: 500;
+
+  /* Spacing — "spacious" scale (density 3/10) --------------- */
+  --spacing-section: clamp(4.5rem, 8vw, 7rem);
+  --spacing-section-lg: clamp(5.5rem, 10vw, 9rem);
 
   /* Motion ------------------------------------------------- */
   --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
@@ -75,23 +99,31 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: var(--text-body);
-  line-height: 1.6;
+  line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-paper);
+  color: #fff;
 }
 
-/* Focus — visible, violet, never removed --------------------*/
-
+/* Focus — visible, never removed. */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent-text);
   outline-offset: 3px;
   border-radius: 1px;
+}
+
+/* Everything clickable says so. */
+a,
+button,
+summary,
+[role="button"] {
+  cursor: pointer;
 }
 
 /* Utilities ------------------------------------------------ */
@@ -103,7 +135,11 @@ body {
   padding-inline: 1.5rem;
 
   @media (width >= 48rem) {
-    padding-inline: 2rem;
+    padding-inline: 2.5rem;
+  }
+
+  @media (width >= 90rem) {
+    padding-inline: 3.5rem;
   }
 }
 
@@ -111,26 +147,41 @@ body {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 1.5rem;
+
+  @media (width >= 64rem) {
+    column-gap: 2rem;
+  }
 }
 
-/* Eyebrow: mono label sitting above a hairline */
+/* Mono label. Darker than the first pass, which used a grey that
+   failed contrast at 12px. */
 @utility eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-meta);
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--color-ink-60);
+  color: var(--color-ink-50);
 }
 
-/* Reveal — the only animation on the site ------------------ */
+@utility eyebrow-ink {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* Reveal — scroll entry, 500ms, stagger capped at 8 children --
+   per the motion database: beyond ~8 the tail feels laggy. */
 
 .reveal {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(16px);
   transition:
-    opacity 500ms var(--ease-reveal),
-    transform 500ms var(--ease-reveal);
+    opacity 550ms var(--ease-reveal),
+    transform 550ms var(--ease-reveal);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -147,7 +198,7 @@ body {
   }
 }
 
-/* Link underline that draws in from the left --------------- */
+/* Link underline drawing in from the left ------------------ */
 
 .link-underline {
   position: relative;
@@ -164,7 +215,7 @@ body {
   background: currentColor;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 200ms var(--ease-reveal);
+  transition: transform 220ms var(--ease-reveal);
 }
 
 .link-underline:hover::after,
@@ -175,4 +226,28 @@ body {
 .link-underline[data-active="true"]::after {
   transform: scaleX(1);
   background: var(--color-accent);
+  height: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-underline::after {
+    transition: none;
+  }
+}
+
+/* Row arrow nudges on hover — the one motion affordance that
+   tells you a whole row is a link. */
+.row-arrow {
+  display: inline-block;
+  transition: transform 220ms var(--ease-reveal);
+}
+
+.group:hover .row-arrow {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row-arrow {
+    transition: none;
+  }
 }

@@ -30,7 +30,7 @@ export default function ContactPage() {
               <div className="mt-4">
                 <a
                   href={`mailto:${site.email}`}
-                  className="link-underline text-h3"
+                  className="link-underline -my-2 inline-flex min-h-11 items-center py-2 text-h3"
                 >
                   {site.email}
                 </a>
@@ -38,7 +38,7 @@ export default function ContactPage() {
               <div className="mt-2">
                 <a
                   href={`tel:${site.phoneHref}`}
-                  className="link-underline text-h3"
+                  className="link-underline -my-2 inline-flex min-h-11 items-center py-2 text-h3"
                 >
                   {site.phone}
                 </a>
@@ -47,7 +47,7 @@ export default function ContactPage() {
 
             <div className="mt-12 border-t border-rule pt-4">
               <p className="eyebrow">Office</p>
-              <address className="mt-4 text-ink-60 not-italic">
+              <address className="mt-4 text-ink-70 not-italic">
                 {site.address.line1}
                 <br />
                 {site.address.line2}
@@ -58,7 +58,7 @@ export default function ContactPage() {
 
             <div className="mt-12 border-t border-rule pt-4">
               <p className="eyebrow">For barter enquiries</p>
-              <p className="mt-4 max-w-[34ch] text-ink-60">
+              <p className="mt-4 max-w-[34ch] text-ink-70">
                 Include the category and approximate value of the stock you
                 are holding. It saves a round of questions.
               </p>

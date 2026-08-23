@@ -135,15 +135,15 @@ export default function BarterPage() {
       <section className="bg-ink py-20 text-paper md:py-28">
         <div className="shell">
           <Rise className="border-t border-rule-dark pt-4">
-            <h2 className="eyebrow text-paper/50">02 — The equation</h2>
+            <h2 className="eyebrow text-paper-dim">02 — The equation</h2>
           </Rise>
 
           <div className="mt-12">
             <div className="grid grid-cols-2">
-              <p className="eyebrow border-b border-rule-dark pb-3 text-paper/50">
+              <p className="eyebrow border-b border-rule-dark pb-3 text-paper-dim">
                 What you give
               </p>
-              <p className="eyebrow border-b border-rule-dark pb-3 pl-6 text-paper/50 md:pl-10">
+              <p className="eyebrow border-b border-rule-dark pb-3 pl-6 text-paper-dim md:pl-10">
                 What you get
               </p>
             </div>
@@ -166,7 +166,7 @@ export default function BarterPage() {
           </div>
 
           <Rise delay={200} className="mt-10">
-            <p className="text-body-l text-paper/70">
+            <p className="text-body-l text-paper-dim">
               Agreed at fair market value, in writing, before anything moves.
             </p>
           </Rise>
@@ -188,7 +188,7 @@ export default function BarterPage() {
               <h3 className="col-span-12 text-h2 text-balance md:col-span-5">
                 {s.title}
               </h3>
-              <p className="col-span-12 max-w-[52ch] text-body-l text-ink-60 md:col-span-5 md:col-start-8">
+              <p className="col-span-12 max-w-[52ch] text-body-l text-ink-70 md:col-span-5 md:col-start-8">
                 {s.body}
               </p>
             </Rise>
@@ -221,7 +221,7 @@ export default function BarterPage() {
             </p>
           </Rise>
           <Rise delay={80} className="col-span-12 md:col-span-5 md:col-start-7">
-            <p className="text-body-l text-ink-60">
+            <p className="text-body-l text-ink-70">
               Companies entering a new region without a budget to match the
               ambition. And any business holding a marketing mandate against a
               cash constraint.

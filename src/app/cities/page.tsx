@@ -46,7 +46,7 @@ export default function CitiesPage() {
                         className="block py-3.5 group"
                       >
                         <span className="link-underline text-h3">{c.name}</span>
-                        <span className="mt-0.5 block font-mono text-meta uppercase tracking-[0.08em] text-ink-30">
+                        <span className="mt-0.5 block font-mono text-meta uppercase tracking-[0.09em] text-ink-50">
                           {c.state}
                         </span>
                       </Link>
@@ -54,7 +54,7 @@ export default function CitiesPage() {
                   ))}
                   {planned.map((name) => (
                     <li key={name} className="border-b border-rule">
-                      <span className="block py-3.5 text-h3 text-ink-30">
+                      <span className="block py-3.5 text-h3 text-ink-50">
                         {name}
                       </span>
                     </li>
@@ -66,7 +66,7 @@ export default function CitiesPage() {
         </div>
 
         <Rise delay={260} className="mt-14 border-t border-rule pt-4">
-          <p className="max-w-[62ch] text-ink-60">
+          <p className="max-w-[62ch] text-ink-70">
             Cities set in full are written up in detail. The rest are markets
             we plan and buy in regularly — {additionalMarkets.length} of them —
             with pages being written now. Ask us about any of them directly.

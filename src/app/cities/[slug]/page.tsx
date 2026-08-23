@@ -48,20 +48,20 @@ export default async function CityPage({ params }: Params) {
         aria-label="Breadcrumb"
         className="shell pt-28 md:pt-32"
       >
-        <ol className="flex gap-2 font-mono text-meta uppercase tracking-[0.08em] text-ink-30">
+        <ol className="flex gap-2 font-mono text-meta uppercase tracking-[0.09em] text-ink-50">
           <li>
-            <Link href="/" className="link-underline">
+            <Link href="/" className="link-underline -my-2 inline-flex min-h-8 items-center py-2">
               Home
             </Link>
           </li>
           <li aria-hidden>/</li>
           <li>
-            <Link href="/cities" className="link-underline">
+            <Link href="/cities" className="link-underline -my-2 inline-flex min-h-8 items-center py-2">
               Cities
             </Link>
           </li>
           <li aria-hidden>/</li>
-          <li className="text-ink-60">{city.name}</li>
+          <li className="text-ink-70">{city.name}</li>
         </ol>
       </nav>
 
@@ -84,7 +84,7 @@ export default async function CityPage({ params }: Params) {
             >
               <p
                 className={
-                  i === 0 ? "text-body-l" : "text-body-l text-ink-60"
+                  i === 0 ? "text-body-l" : "text-body-l text-ink-70"
                 }
               >
                 {para}
@@ -103,7 +103,6 @@ export default async function CityPage({ params }: Params) {
               index={String(i + 1).padStart(2, "0")}
               title={f.title}
               body={f.note}
-              titleClass="text-h3"
               delay={i * 60}
             />
           ))}
@@ -125,7 +124,7 @@ export default async function CityPage({ params }: Params) {
       {/* 04 — WORK ----------------------------------------------- */}
       <Section index="04" label="Work in this market">
         <Rise className="grid-12">
-          <p className="col-span-12 text-body-l text-ink-60 lg:col-span-6">
+          <p className="col-span-12 text-body-l text-ink-70 lg:col-span-6">
             Campaign documentation for this market is available on request,
             subject to client permission.
           </p>
@@ -156,7 +155,7 @@ export default async function CityPage({ params }: Params) {
         </Rise>
         <Rise delay={140} className="mt-16 border-t border-rule pt-4">
           <p className="eyebrow">Nearby markets</p>
-          <p className="mt-3 text-ink-60">{city.nearby.join(" · ")}</p>
+          <p className="mt-3 text-ink-70">{city.nearby.join(" · ")}</p>
         </Rise>
       </section>
 

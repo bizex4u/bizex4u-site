@@ -14,7 +14,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="link-underline text-[0.9375rem] text-ink-60 hover:text-ink"
+                      className="link-underline -my-2 inline-flex min-h-10 items-center py-2 text-[0.9375rem] text-ink-70 hover:text-ink"
                     >
                       {link.label}
                     </Link>
@@ -29,7 +29,7 @@ export default function Footer() {
           <span className="font-display text-[1.125rem] font-semibold tracking-[-0.04em]">
             {site.wordmark}
           </span>
-          <span className="font-mono text-meta uppercase tracking-[0.08em] text-ink-30">
+          <span className="font-mono text-meta uppercase tracking-[0.09em] text-ink-50">
             © {new Date().getFullYear()} {site.wordmark} — Independent since{" "}
             {site.founded}
           </span>

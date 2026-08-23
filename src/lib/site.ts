@@ -152,6 +152,53 @@ export const footerNav = [
 ];
 
 /* ------------------------------------------------------------------
+   Proof band.
+
+   The trust-authority landing pattern puts credibility immediately
+   after the hero. These four are drawn from the company introduction
+   deck — verify each one before launch, and replace any you cannot
+   stand behind rather than rounding it up.
+------------------------------------------------------------------- */
+
+export const proofStats = [
+  {
+    label: "In market since",
+    value: "2008",
+    note: "Seventeen years planning and buying Indian media.",
+  },
+  {
+    label: "Cities planned",
+    value: "40+",
+    note: "Metros and tier-2, from own catchment data.",
+  },
+  {
+    label: "Capabilities",
+    value: "Six",
+    note: "Outdoor, digital, retail, broadcast, activations, barter.",
+  },
+  {
+    label: "Ownership",
+    value: "Independent",
+    note: "No network mandate. No inherited rate card.",
+  },
+];
+
+/* Sectors are safe to publish; individual client names are not,
+   until written permission exists for each one. */
+export const sectorsServed = [
+  "Consumer electronics",
+  "Footwear",
+  "Beverages",
+  "Cement & building materials",
+  "Commercial vehicles",
+  "Eyewear",
+  "Cosmetics",
+  "Quick commerce",
+  "Retail chains",
+  "Jewellery",
+];
+
+/* ------------------------------------------------------------------
    PLACEHOLDERS — Yash to replace before launch.
    Deliberately unnamed and unquantified: do not publish client names
    or results without written permission from the client.

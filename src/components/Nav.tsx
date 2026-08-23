@@ -69,9 +69,11 @@ export default function Nav() {
       onMouseLeave={closeMega}
     >
       <div className="shell flex h-18 items-center justify-between">
+        {/* -ml-2 px-2 keeps the wordmark optically flush with the grid
+            while giving it a 44px tap target. */}
         <Link
           href="/"
-          className="font-display text-[1.125rem] font-semibold tracking-[-0.04em]"
+          className="-ml-2 inline-flex min-h-11 items-center px-2 font-display text-[1.125rem] font-semibold tracking-[-0.04em]"
           aria-label={`${site.name} — home`}
         >
           {site.wordmark}
@@ -84,7 +86,7 @@ export default function Nav() {
               <button
                 key={item.href}
                 type="button"
-                className="link-underline font-mono text-meta uppercase tracking-[0.08em]"
+                className="link-underline font-mono text-meta uppercase tracking-[0.09em]"
                 data-active={isActive(item.href)}
                 aria-expanded={megaOpen}
                 onMouseEnter={openMega}
@@ -97,7 +99,7 @@ export default function Nav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="link-underline font-mono text-meta uppercase tracking-[0.08em]"
+                className="link-underline font-mono text-meta uppercase tracking-[0.09em]"
                 data-active={isActive(item.href)}
                 onMouseEnter={closeMega}
               >
@@ -105,19 +107,23 @@ export default function Nav() {
               </Link>
             ),
           )}
+          {/* A real primary CTA, not another text link. The
+              trust-authority pattern asks for one in the nav. */}
           <Link
             href="/contact"
-            className="link-underline font-mono text-meta uppercase tracking-[0.08em]"
+            className="group ml-2 inline-flex items-center gap-2.5 rounded-[2px] bg-ink min-h-11 px-5 py-3 font-mono text-meta uppercase tracking-[0.09em] text-paper transition-colors duration-200 hover:bg-accent-text"
           >
-            Start a conversation →
+            Start a conversation
+            <span className="row-arrow">→</span>
           </Link>
         </nav>
 
         {/* Mobile trigger */}
         <button
           type="button"
-          className="font-mono text-meta uppercase tracking-[0.08em] lg:hidden"
+          className="-mr-2 inline-flex min-h-11 items-center px-2 font-mono text-meta uppercase tracking-[0.09em] lg:hidden"
           aria-expanded={mobileOpen}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
           onClick={() => setMobileOpen((v) => !v)}
         >
           {mobileOpen ? "Close" : "Menu"}
@@ -144,13 +150,13 @@ export default function Nav() {
             >
               <span
                 className={`font-mono text-meta ${
-                  c.accent ? "text-accent" : "text-ink-30"
+                  c.accent ? "text-accent-text" : "text-ink-50"
                 }`}
               >
                 {c.index}
               </span>
               <span className="mt-2 block text-h3">{c.title}</span>
-              <span className="mt-1 block max-w-[26ch] text-[0.8125rem] leading-relaxed text-ink-60">
+              <span className="mt-1 block max-w-[26ch] text-[0.8125rem] leading-relaxed text-ink-70">
                 {c.short}
               </span>
             </Link>
@@ -175,10 +181,10 @@ export default function Nav() {
               <Link href="/contact" className="text-h3">
                 Start a conversation →
               </Link>
-              <p className="mt-6 font-mono text-meta uppercase text-ink-60">
+              <p className="mt-6 font-mono text-meta uppercase text-ink-70">
                 {site.email}
               </p>
-              <p className="mt-1 font-mono text-meta uppercase text-ink-60">
+              <p className="mt-1 font-mono text-meta uppercase text-ink-70">
                 {site.phone}
               </p>
             </div>
