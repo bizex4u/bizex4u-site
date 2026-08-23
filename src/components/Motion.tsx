@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -24,10 +23,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
  *   .reveal              the baseline fade-up
  *
  * Everything lives inside gsap.matchMedia. Under prefers-reduced-motion
- * every element is set to its final state immediately, Lenis never
- * starts, and the horizontal track becomes an ordinary swipeable
- * overflow region rather than a pinned scroll hijack. Reduced motion
- * has to mean the content still works, not that the page half-renders.
+ * every element is set to its final state immediately and the
+ * horizontal track becomes an ordinary swipeable overflow region
+ * rather than a pinned scroll hijack. Reduced motion has to mean the
+ * content still works, not that the page half-renders.
+ *
+ * Scrolling is native. See the note in section 1.
  */
 export default function Motion() {
   useEffect(() => {
@@ -81,18 +82,25 @@ export default function Motion() {
         }
 
         /* ---------------------------------------------------------
-           1 — Smooth scroll on GSAP's clock. Two independent RAF
-           loops is what makes scroll-linked animation judder.
+           1 — Native scroll, deliberately.
+
+           This used Lenis. Measured under real wheel input, the page
+           was still moving 928ms after the input stopped, and on a Mac
+           trackpad — which already applies its own momentum — a second
+           of extra coast does not read as "smooth", it reads as the
+           page lagging behind your fingers. Retuning it to lerp only
+           got that to 326ms; removing it gets 10ms.
+
+           Nothing here needed it. ScrollTrigger's own `scrub` does the
+           smoothing for the pinned track and the scale-ins, and it
+           does that off native scroll perfectly well. Lenis mainly
+           earns its place on Windows, where a mouse wheel scrolls in
+           coarse discrete jumps; macOS and iOS already scroll well.
+
+           If it ever goes back in, keep it on GSAP's ticker rather
+           than its own RAF loop — two independent clocks is what makes
+           scroll-linked animation judder.
         ---------------------------------------------------------- */
-        const lenis = new Lenis({
-          duration: 1.05,
-          easing: (t: number) => 1 - Math.pow(1 - t, 3),
-          smoothWheel: true,
-          touchMultiplier: 1.6,
-        });
-        lenis.on("scroll", ScrollTrigger.update);
-        const tick = (time: number) => lenis.raf(time * 1000);
-        gsap.ticker.add(tick);
         gsap.ticker.lagSmoothing(0);
 
         /* ---------------------------------------------------------
@@ -346,10 +354,9 @@ export default function Motion() {
 
         ScrollTrigger.refresh();
 
-        return () => {
-          gsap.ticker.remove(tick);
-          lenis.destroy();
-        };
+        /* ScrollTrigger instances created inside a matchMedia context
+           are reverted by mm.revert() below, so there is nothing to
+           tear down here by hand. */
       },
     );
 

@@ -182,21 +182,37 @@ summary,
   font-weight: 500;
 }
 
-/* Paper grain. Beige without texture reads as flat cream; this
-   is what stops a large light band looking like a default. */
+/* Paper grain.
+
+   NO mix-blend-mode. It was `multiply` on light bands and `overlay`
+   on dark ones, and profiling under real wheel input showed it costing
+   a fifth of all frames: 64 of 269 frames over 32ms with it, 1 of 302
+   without. A blended layer has to be recomposited against everything
+   beneath it on every frame, and there are eleven of these, several
+   thousands of pixels tall, at 2x on a Retina display.
+
+   Isolating it was worth doing — the noise bitmap itself is free
+   (dropping the image while keeping the blend changed nothing: 57 of
+   271 frames still late). It is the blending, not the texture.
+
+   So: greyscale noise painted normally at low opacity. Grey over beige
+   darkens slightly, grey over plum lightens slightly, which is roughly
+   what multiply and overlay were doing anyway — at no compositing cost.
+   stitchTiles keeps the 140px tile seamless where it repeats. */
+
 .grain::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.35;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Dark bands need less of it — the same speckle reads much louder
+   against plum than against beige. */
 .grain-light::after {
-  mix-blend-mode: overlay;
-  opacity: 0.16;
+  opacity: 0.055;
 }
 
 /* Reveal --------------------------------------------------- */
