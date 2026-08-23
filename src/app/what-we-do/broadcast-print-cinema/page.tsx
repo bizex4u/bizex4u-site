@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import Stub from "@/components/Stub";
+import CapabilityPage from "@/components/CapabilityPage";
 
-export const metadata: Metadata = { title: "Broadcast, Print & Cinema." };
+export const metadata: Metadata = {
+  title: "Broadcast, Print & Cinema Advertising in India",
+  description: "Regional news television, radio drive-time, the dailies people actually read and cinema on-screen \u2014 planned market by market rather than on a national average.",
+  alternates: { canonical: "/what-we-do/broadcast-print-cinema" },
+};
 
 export default function Page() {
-  return (
-    <Stub
-      eyebrow="What We Do — Broadcast, Print \& Cinema"
-      title="Broadcast, Print & Cinema."
-      lede="Traditional weight where it still carries a market."
-      outline={["Where broadcast still works","Format categories","Regional language planning","Markets covered"]}
-    />
-  );
+  return <CapabilityPage slug="broadcast-print-cinema" plate="broadcast" />;
 }

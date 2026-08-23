@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import Stub from "@/components/Stub";
+import CapabilityPage from "@/components/CapabilityPage";
 
-export const metadata: Metadata = { title: "Outdoor & Transit." };
+export const metadata: Metadata = {
+  title: "Outdoor & Transit Advertising in India",
+  description: "Hoardings, billboards, bus and cab media planned around how a city actually moves. Corridor and catchment reasoning before any site list, with geo-tagged proof of every placement.",
+  alternates: { canonical: "/what-we-do/outdoor-transit" },
+};
 
 export default function Page() {
-  return (
-    <Stub
-      eyebrow="What We Do — Outdoor \& Transit"
-      title="Outdoor & Transit."
-      lede="Large-format and transit media planned around how a city actually moves."
-      outline={["What large-format outdoor is good for","Format categories","How we plan a corridor","Cities where this runs"]}
-    />
-  );
+  return <CapabilityPage slug="outdoor-transit" plate="outdoor" />;
 }

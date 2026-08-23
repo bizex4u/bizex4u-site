@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import Stub from "@/components/Stub";
+import CapabilityPage from "@/components/CapabilityPage";
 
-export const metadata: Metadata = { title: "Digital Out-of-Home." };
+export const metadata: Metadata = {
+  title: "Digital Out-of-Home (DOOH) Advertising in India",
+  description: "LED screens and digital billboards bought by daypart and location rather than by the month, with loop composition confirmed in writing and play-out logs reconciled against the booking.",
+  alternates: { canonical: "/what-we-do/dooh" },
+};
 
 export default function Page() {
-  return (
-    <Stub
-      eyebrow="What We Do — Digital Out-of-Home"
-      title="Digital Out-of-Home."
-      lede="Screens bought by daypart and location rather than by month."
-      outline={["Where digital screens beat static","Format categories","Daypart planning","Cities where this runs"]}
-    />
-  );
+  return <CapabilityPage slug="dooh" plate="dooh" />;
 }

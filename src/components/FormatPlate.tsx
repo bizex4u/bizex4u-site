@@ -71,8 +71,13 @@ export default function FormatPlate({
   formats: Format[];
   tone?: "light" | "dark";
 }) {
+  /* A faint fill as well as a stroke. Outline alone reads as an
+     unfinished wireframe; the fill makes each plate read as an object
+     drawn at a size, which is the whole point of the device. */
   const stroke =
-    tone === "dark" ? "border-white/30" : "border-on-sand/25";
+    tone === "dark"
+      ? "border-white/35 bg-white/5"
+      : "border-on-sand/30 bg-on-sand/5";
   const label = tone === "dark" ? "text-on-plum-dim" : "text-on-sand-dim";
 
   return (

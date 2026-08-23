@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import Stub from "@/components/Stub";
+import CapabilityPage from "@/components/CapabilityPage";
 
-export const metadata: Metadata = { title: "Activations & Corporate Gifting." };
+export const metadata: Metadata = {
+  title: "Brand Activations & Corporate Gifting in India",
+  description: "Ground presence in the places a brand needs to be seen, and the corporate and distributor gifting programmes that keep the trade engaged.",
+  alternates: { canonical: "/what-we-do/activations" },
+};
 
 export default function Page() {
-  return (
-    <Stub
-      eyebrow="What We Do — Activations"
-      title="Activations & Corporate Gifting."
-      lede="Physical presence, and the channel programmes that keep distribution engaged."
-      outline={["Activation formats","Corporate gifting and channel engagement","How this pairs with media","Markets covered"]}
-    />
-  );
+  return <CapabilityPage slug="activations" plate="activation" />;
 }

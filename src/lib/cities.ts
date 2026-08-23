@@ -25,6 +25,22 @@ export type City = {
   market: string[];
   /* 02 — Format categories planned here (names only) ------------ */
   formats: { title: string; note: string }[];
+  /* 02b — Where the crowds actually are.
+     Named public places with a reason each one is busy. This is the
+     section a local reads to decide whether we know their city.
+     Describe the place and its crowd — NEVER a site, a structure we
+     hold, a count or an availability. */
+  crowdPlaces: { place: string; note: string }[];
+  /* 02c — The local press and radio that carry the market.
+     Mastheads and stations by name. No circulation figures and no
+     listenership figures: those are licensed research numbers and we
+     do not have the right to publish them. Character of the audience
+     only. */
+  localMedia: {
+    press: { title: string; language: string; note: string }[];
+    radio: { station: string; note: string }[];
+    radioNote: string;
+  };
   /* 03 — How we plan it ---------------------------------------- */
   planning: string;
   /* 05 — FAQ, rendered with FAQPage schema ---------------------- */
@@ -72,6 +88,88 @@ export const cities: City[] = [
         note: "Ground presence in high-footfall retail and residential clusters.",
       },
     ],
+    crowdPlaces: [
+      {
+        place: "Gariahat",
+        note: "The city's most concentrated street-retail crowd. Pavement stalls and established stores share the same footpath, and the density peaks on weekend evenings and through the Durga Puja shopping weeks.",
+      },
+      {
+        place: "New Market and Esplanade",
+        note: "Central Kolkata's oldest shopping district, sitting directly on top of the bus and metro interchange. The crowd is broad rather than affluent — it is where the whole city converges rather than where any one segment lives.",
+      },
+      {
+        place: "Howrah Bridge and the station approach",
+        note: "One of the busiest crossings in the country. An enormous commuter population from across the river funnels through a narrow set of decision points every morning and back again every evening.",
+      },
+      {
+        place: "Sealdah",
+        note: "The suburban rail gateway for the eastern districts. Volume here is daily, repetitive and largely the same faces — a frequency audience rather than a reach one.",
+      },
+      {
+        place: "Park Street and Camac Street",
+        note: "Discretionary spending and eating out. The crowd is younger and higher-income, it arrives in the evening, and it stays long enough to notice things.",
+      },
+      {
+        place: "Salt Lake Sector V",
+        note: "The IT and services district. A predictable weekday population, heavily concentrated at commute hours and at lunch, and almost empty at the weekend.",
+      },
+      {
+        place: "Dakshinapan and Rashbehari",
+        note: "South Kolkata's settled residential retail belt — older, locally rooted households who shop close to home and respond to neighbourhood presence far more than to city-wide weight.",
+      },
+      {
+        place: "Maidan and the Eden Gardens approach",
+        note: "Ordinary daily crowds through the week, then very large event crowds on match days and through the winter fair and festival calendar.",
+      },
+    ],
+    localMedia: {
+      press: [
+        {
+          title: "Anandabazar Patrika",
+          language: "Bengali",
+          note: "The masthead with the deepest standing in the state. Being in it carries an implicit local credibility that an English title cannot transfer.",
+        },
+        {
+          title: "Bartaman",
+          language: "Bengali",
+          note: "Strong household readership with a notably loyal, older reader base across the city and the districts.",
+        },
+        {
+          title: "Sangbad Pratidin",
+          language: "Bengali",
+          note: "Widely read, with a lighter and more contemporary register than the older Bengali titles.",
+        },
+        {
+          title: "Ei Samay",
+          language: "Bengali",
+          note: "The newer Bengali daily, skewing urban and younger than the established mastheads.",
+        },
+        {
+          title: "The Telegraph",
+          language: "English",
+          note: "The English title with genuine Kolkata identity rather than a national edition dropped into the city.",
+        },
+        {
+          title: "The Times of India, Kolkata",
+          language: "English",
+          note: "Reaches the corporate and expatriate-professional audience, particularly in Salt Lake and New Town.",
+        },
+      ],
+      radio: [
+        { station: "Radio Mirchi 98.3", note: "Bengali-language mainstream." },
+        { station: "Red FM 93.5", note: "Bengali, younger and more irreverent." },
+        { station: "Friends FM 91.9", note: "Bengali, long-established locally." },
+        { station: "Big FM 92.7", note: "Broad-appeal mainstream." },
+        { station: "Fever 104", note: "Skews urban and English-comfortable." },
+        { station: "Radio One 94.3", note: "Urban, English-leaning playlist." },
+        {
+          station: "Akashvani Kolkata",
+          note: "Public service, on several frequencies, with real reach outside the metro core.",
+        },
+      ],
+      radioNote:
+        "Radio in Kolkata is a drive-time medium and a Bengali-language one. The commercial stations do their real work between roughly seven and eleven in the morning and five and nine in the evening, when the city is in a vehicle. Station branding and frequencies do change, so we confirm what is on air at the point of buying rather than working from a list.",
+    },
     planning:
       "We plan Kolkata from the catchment outwards. Before any site list exists we map the trade area around each priority location — who lives and works inside it, how they move through the week, and how dense the category already is — and the plan follows that map. In practice that usually means fewer sites than a conventional proposal would offer, held for longer, positioned against movement rather than against footfall counts.",
     faq: [

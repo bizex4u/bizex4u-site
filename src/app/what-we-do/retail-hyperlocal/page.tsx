@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import Stub from "@/components/Stub";
+import CapabilityPage from "@/components/CapabilityPage";
 
-export const metadata: Metadata = { title: "Retail & Hyperlocal." };
+export const metadata: Metadata = {
+  title: "Retail & Hyperlocal Advertising in India",
+  description: "Mall, multiplex, society lift and store-catchment media planned from catchment behaviour rather than city-level reach, so weight lands on people who can actually reach the outlet.",
+  alternates: { canonical: "/what-we-do/retail-hyperlocal" },
+};
 
 export default function Page() {
-  return (
-    <Stub
-      eyebrow="What We Do — Retail \& Hyperlocal"
-      title="Retail & Hyperlocal."
-      lede="Media placed inside the trade area of a specific store or cluster."
-      outline={["Catchment-led planning","Format categories","Working from a store list","Cities where this runs"]}
-    />
-  );
+  return <CapabilityPage slug="retail-hyperlocal" plate="retail" />;
 }

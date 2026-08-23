@@ -248,7 +248,7 @@ export const proofFrames = [
   {
     src: "/media/proof-cyberhub.jpg",
     place: "Cyber Hub, Gurugram",
-    stamp: "Dated newspaper verification · 30 Aug 2024",
+    stamp: "Newspaper-verified · 30 Aug 2024",
     alt: "Digital screen at Cyber Hub photographed alongside that morning's newspaper as proof of the run date",
   },
   {
