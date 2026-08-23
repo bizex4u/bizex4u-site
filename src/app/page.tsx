@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import HeroReel from "@/components/HeroReel";
+import DayClock from "@/components/DayClock";
+import Marquee from "@/components/Marquee";
 import FormatPlate, {
   ExchangePlate,
   formatSets,
@@ -15,6 +17,21 @@ import {
   site,
 } from "@/lib/site";
 import { additionalMarkets, cities } from "@/lib/cities";
+
+/* ------------------------------------------------------------------
+   The homepage, positioned as a brand activation company.
+
+   The earlier version led with "outdoor advertising", which is a
+   commodity with semi-public rates. Activation is a service with
+   judgment in it, and it is the frame that makes the other six things
+   — including barter — parts of one system rather than a menu.
+
+   Section mechanisms deliberately differ: split hero, marquee, an
+   argument in two columns, a verb ledger, a pinned horizontal day,
+   subgrid cards, scroll-scaled proof frames, a violet band, a city
+   grid, counting numbers. The old page used the same band-and-cards
+   device eight times, which is what made it read as static.
+------------------------------------------------------------------- */
 
 const platesFor: Record<string, keyof typeof formatSets> = {
   "01": "outdoor",
@@ -61,33 +78,44 @@ export default function Home() {
   return (
     <>
       {/* 01 — HERO ------------------------------------------------
-          Split rather than overlaid. v3 put the headline on top of
-          bright daylight footage and it was hard to read; type and
-          video now occupy separate columns and neither compromises. */}
+          Split, not overlaid. Type and footage hold separate columns,
+          so neither has to compromise for the other. The headline
+          reveals line by line — each line is its own element because
+          splitting text at runtime breaks screen readers. */}
       <section className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20">
         <div className="shell relative z-10">
           <div className="grid-12 items-center gap-y-12">
             <div className="col-span-12 lg:col-span-6">
               <Rise>
                 <Eyebrow deva="भारत भर में">
-                  Outdoor advertising across India
+                  Brand activation across India
                 </Eyebrow>
               </Rise>
 
-              <Rise delay={60}>
-                <h1 className="mt-6 font-display text-display-xl text-balance">
-                  We put brands where India{" "}
-                  <span className="em-serif text-violet-deep">actually</span>{" "}
-                  is.
-                </h1>
-              </Rise>
+              <h1
+                data-split
+                className="mt-6 font-display text-display-xl text-balance"
+              >
+                <span className="line-clip">
+                  <span className="block">The brands India</span>
+                </span>
+                <span className="line-clip">
+                  <span className="block">trusts are the ones</span>
+                </span>
+                <span className="line-clip">
+                  <span className="block">
+                    it <span className="em-serif text-violet-deep">keeps</span>{" "}
+                    seeing.
+                  </span>
+                </span>
+              </h1>
 
               <Rise delay={120}>
                 <p className="mt-7 max-w-[46ch] text-body-l text-on-sand-dim">
-                  Hoardings, LED, transit and retail media across 40+ Indian
-                  cities. Every placement geo-tagged and dated, so you can see
-                  it ran — and if the budget isn&rsquo;t there, you can pay in
-                  stock instead of cash.
+                  We put brands into the streets, malls, lifts, papers and
+                  screens of more than forty Indian cities — and prove every
+                  placement went up. If the cash budget is not there, you can
+                  pay in stock instead.
                 </p>
 
                 <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -95,7 +123,7 @@ export default function Home() {
                     Get a plan for your market
                   </Btn>
                   <Btn href="/barter" variant="outline-plum" size="lg">
-                    How barter works
+                    Pay in stock instead
                   </Btn>
                 </div>
 
@@ -105,38 +133,90 @@ export default function Home() {
               </Rise>
             </div>
 
-            <Rise delay={180} className="col-span-12 lg:col-span-5 lg:col-start-8">
+            <Rise
+              delay={180}
+              className="col-span-12 lg:col-span-5 lg:col-start-8"
+            >
               <HeroReel />
             </Rise>
           </div>
         </div>
       </section>
 
-      {/* 02 — CLIENT NAMES -------------------------------------- */}
-      <Band tone="sand2" className="py-10 md:py-12" grain>
-        <Rise>
-          <p className="eyebrow text-on-sand-dim">
-            Campaigns planned and run for
-          </p>
-          <ul className="mt-5 flex flex-wrap gap-x-7 gap-y-3">
-            {clients.map((c) => (
-              <li key={c} className="text-h3 text-on-sand-dim">
-                {c}
-              </li>
-            ))}
-          </ul>
+      {/* 02 — CLIENT MARQUEE --------------------------------------
+          Drifts rather than sitting in a wrapped block, and slows on
+          hover so a name can actually be read. */}
+      <section className="grain relative overflow-hidden bg-sand-2 py-10 text-on-sand md:py-12">
+        <div className="shell relative z-10">
+          <Rise>
+            <p className="eyebrow text-on-sand-dim">
+              Campaigns planned and run for
+            </p>
+          </Rise>
+        </div>
+        <Rise delay={80} className="relative z-10 mt-6">
+          <Marquee
+            items={clients}
+            speed={46}
+            renderItem={(name) => (
+              <span className="font-display text-[clamp(1.5rem,3vw,2.5rem)] text-on-sand-dim">
+                {name}
+              </span>
+            )}
+          />
         </Rise>
+      </section>
+
+      {/* 03 — THE ARGUMENT ----------------------------------------
+          Why physical presence, now. The old homepage never made this
+          case at all; it went straight to what we sell. */}
+      <Band tone="sand" grain>
+        <div className="grid-12 gap-y-10">
+          <Rise className="col-span-12 lg:col-span-6">
+            <Eyebrow>Why physical, why now</Eyebrow>
+            <h2 className="mt-5 max-w-[16ch] font-display text-display-l text-balance">
+              Digital attention got cheap.{" "}
+              <span className="em-serif text-violet-deep">
+                Physical attention didn&rsquo;t.
+              </span>
+            </h2>
+          </Rise>
+
+          <div className="col-span-12 lg:col-span-5 lg:col-start-8">
+            <Rise>
+              <p className="text-body-l">
+                An online impression can be blocked, skipped, muted or
+                scrolled past in under a second, and most of them are. A
+                hoarding on somebody&rsquo;s commute cannot be closed. They
+                pass it going to work and again coming home, five days a
+                week, whether or not they were in the mood.
+              </p>
+            </Rise>
+            <Rise delay={80}>
+              <p className="mt-6 text-on-sand-dim">
+                That is the whole case for physical presence, and it is a
+                case about frequency rather than reach. It is also why we
+                would rather own one corridor for a month than dust an
+                entire city for a fortnight — and why we will say so even
+                when the wider plan is the easier sell.
+              </p>
+            </Rise>
+          </div>
+        </div>
       </Band>
 
-      {/* 03 — WHAT WE BUY --------------------------------------- */}
+      {/* 04 — THE SIX, AS VERBS -----------------------------------
+          Six product names read as a menu to choose from. Six verbs
+          read as one system with an order to it. */}
       <Band tone="plum" grain>
         <div className="grid-12 items-end">
           <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow tone="plum" deva="हम क्या ख़रीदते हैं">
-              What we buy
+            <Eyebrow tone="plum" deva="हम क्या करते हैं">
+              What activation means here
             </Eyebrow>
             <h2 className="mt-5 font-display text-display-l text-balance">
-              Six formats. <span className="em-serif">One plan.</span>
+              Six ways to be{" "}
+              <span className="em-serif">present</span>.
             </h2>
           </Rise>
           <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
@@ -150,7 +230,7 @@ export default function Home() {
             <Rise key={c.href} as="li" delay={i * 55}>
               <Link
                 href={c.href}
-                className={`group flex h-full flex-col rounded-(--radius-card) p-6 transition-colors duration-200 md:p-7 ${
+                className={`lift group flex h-full flex-col rounded-(--radius-card) p-6 md:p-7 ${
                   c.accent
                     ? "bg-violet-deep text-white hover:bg-violet"
                     : "bg-plum-2 hover:bg-plum-3"
@@ -163,9 +243,21 @@ export default function Home() {
                 >
                   {c.index}
                 </span>
-                <h3 className="mt-3 font-display text-h2">{c.title}</h3>
+
+                {/* The verb leads. The product name is the subtitle. */}
+                <h3 className="mt-3 font-display text-h2 text-balance">
+                  {c.verb}
+                </h3>
                 <p
-                  className={`mt-3 max-w-[34ch] ${
+                  className={`mt-1.5 font-mono text-[0.75rem] tracking-[0.08em] uppercase ${
+                    c.accent ? "text-on-violet-dim" : "text-violet-lift"
+                  }`}
+                >
+                  {c.title}
+                </p>
+
+                <p
+                  className={`mt-4 max-w-[34ch] ${
                     c.accent ? "text-on-violet-dim" : "text-on-plum-dim"
                   }`}
                 >
@@ -194,8 +286,16 @@ export default function Home() {
         </ul>
       </Band>
 
-      {/* 04 — OBJECTIVES ---------------------------------------- */}
-      <Band tone="sand" grain>
+      {/* 05 — THE DAY ---------------------------------------------
+          The signature. Pins and scrolls sideways through one day in
+          an Indian city. */}
+      <DayClock />
+
+      {/* 06 — OBJECTIVES ------------------------------------------
+          Subgrid so the eyebrow, heading, body and rule land on the
+          same four lines in every card. Without it each card sets its
+          own rhythm and the dividers stagger. */}
+      <Band tone="sand" id="objectives" grain>
         <Rise>
           <Eyebrow deva="आप क्या करना चाहते हैं">Start with the objective</Eyebrow>
           <h2 className="mt-5 max-w-[20ch] font-display text-display-l text-balance">
@@ -204,9 +304,6 @@ export default function Home() {
           </h2>
         </Rise>
 
-        {/* Subgrid so the eyebrow, heading, body and rule land on the same
-            four lines in every card. Without it each card sets its own
-            rhythm and the dividers stagger. */}
         <ul className="mt-12 grid gap-4 lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr_auto]">
           {objectives.map((o, i) => (
             <Rise
@@ -215,7 +312,7 @@ export default function Home() {
               delay={i * 70}
               className="lg:row-span-4 lg:grid lg:grid-rows-subgrid"
             >
-              <Card className="flex h-full flex-col lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:gap-0">
+              <Card className="lift flex h-full flex-col lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:gap-0">
                 <span className="eyebrow text-violet-deep">{o.index}</span>
                 <h3 className="mt-3 font-display text-h2 text-balance">
                   {o.title}
@@ -237,7 +334,10 @@ export default function Home() {
         </ul>
       </Band>
 
-      {/* 05 — PROOF OF DELIVERY --------------------------------- */}
+      {/* 07 — PROOF ------------------------------------------------
+          The frames now scale into place on scroll and run two-up at
+          a much larger size. Small thumbnails undersold the one thing
+          on the site nobody else offers. */}
       <Band tone="plum2" grain>
         <div className="grid-12 items-end">
           <Rise className="col-span-12 lg:col-span-7">
@@ -250,69 +350,68 @@ export default function Home() {
             </h2>
           </Rise>
           <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-            Every placement photographed on site, geo-tagged and dated. You get
-            the file, not a summary. Where a screen is digital we verify the run
-            date against that morning&rsquo;s newspaper in frame.
+            Every placement photographed on site, geo-tagged and dated. You
+            get the file, not a summary. Where a screen is digital we verify
+            the run date against that morning&rsquo;s newspaper in frame.
           </p>
         </div>
 
-        <ul className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <ul className="mt-12 grid gap-5 sm:grid-cols-2">
           {proofFrames.map((f, i) => (
             <Rise key={f.src} as="li" delay={i * 60}>
-              <div className="overflow-hidden rounded-(--radius-card) bg-plum">
-                <div className="relative aspect-3/2">
+              <figure className="overflow-hidden rounded-(--radius-card) bg-plum">
+                <div className="frame relative aspect-3/2">
                   <Image
+                    data-scale-in
                     src={f.src}
                     alt={f.alt}
                     fill
-                    sizes="(min-width: 1024px) 22vw, 45vw"
+                    sizes="(min-width: 640px) 46vw, 92vw"
                     className="object-cover"
                   />
                 </div>
-                <div className="p-4">
-                  <p className="text-[0.9375rem] leading-snug font-medium">
-                    {f.place}
-                  </p>
-                  <p className="mt-1 font-mono text-[0.6875rem] leading-snug tracking-[0.05em] text-on-plum-dim">
+                <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 p-5">
+                  <p className="text-h3">{f.place}</p>
+                  <p className="font-mono text-[0.6875rem] tracking-[0.05em] text-on-plum-dim">
                     {f.stamp}
                   </p>
-                </div>
-              </div>
+                </figcaption>
+              </figure>
             </Rise>
           ))}
         </ul>
       </Band>
 
-      {/* 06 — BARTER -------------------------------------------- */}
+      {/* 08 — BARTER ---------------------------------------------- */}
       <Band tone="violet" grain>
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-          <Rise>
+        <div className="grid-12 items-start gap-y-10">
+          <Rise className="col-span-12 lg:col-span-6">
             <Eyebrow tone="violet" deva="बार्टर विज्ञापन">
               Barter advertising
             </Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
+            <h2 className="mt-5 max-w-[16ch] font-display text-display-l text-balance">
               Stock loses value every month.{" "}
               <span className="em-serif">Media doesn&rsquo;t.</span>
             </h2>
-            <p className="mt-7 max-w-[46ch] text-body-l text-on-violet-dim">
+            <p className="mt-6 max-w-[48ch] text-body-l">
               If you are holding goods, capacity or vouchers, you are already
               paying for them — in warehousing, in working capital, in
               depreciation. Barter moves that cost off the shelf and onto a
               hoarding, at a value agreed in writing before anything moves.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-9">
               <Btn href="/barter" variant="sand" size="lg">
                 See how barter works
               </Btn>
             </div>
           </Rise>
 
-          <Rise delay={100}>
-            <div className="rounded-(--radius-card) bg-white/8 p-6 md:p-7">
+          <Rise delay={100} className="col-span-12 lg:col-span-5 lg:col-start-8">
+            <div className="rounded-(--radius-card) bg-white/10 p-6 md:p-7">
               <p className="eyebrow text-on-violet-dim">What you can trade</p>
               <ul className="mt-5 divide-y divide-white/15">
                 {tradeable.map((t) => (
-                  <li key={t} className="flex items-center gap-3 py-3.5">
+                  <li key={t} className="flex items-start gap-3 py-3.5">
                     <span aria-hidden className="text-on-violet-dim">
                       →
                     </span>
@@ -330,16 +429,14 @@ export default function Home() {
         </div>
       </Band>
 
-      {/* 07 — CITIES -------------------------------------------- */}
+      {/* 09 — CITIES ---------------------------------------------- */}
       <Band tone="sand" grain>
         <div className="grid-12 items-end">
           <Rise className="col-span-12 lg:col-span-8">
             <Eyebrow deva="शहर">Where we operate</Eyebrow>
             <h2 className="mt-5 font-display text-display-l text-balance">
               Planned from catchment data,{" "}
-              <span className="em-serif text-violet-deep">
-                not a rate card
-              </span>
+              <span className="em-serif text-violet-deep">not a rate card</span>
               .
             </h2>
           </Rise>
@@ -356,7 +453,7 @@ export default function Home() {
               {c.href ? (
                 <Link
                   href={c.href}
-                  className="group flex flex-col gap-0.5 rounded-xl bg-sand-2 px-4 py-4 transition-colors duration-200 hover:bg-sand-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3"
+                  className="lift group flex flex-col gap-0.5 rounded-xl bg-sand-2 px-4 py-4 hover:bg-sand-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3"
                 >
                   <span className="text-h3">{c.name}</span>
                   <span className="deva text-[0.8125rem] text-violet-deep">
@@ -376,7 +473,9 @@ export default function Home() {
         </ul>
       </Band>
 
-      {/* 08 — NUMBERS ------------------------------------------- */}
+      {/* 10 — NUMBERS ---------------------------------------------
+          The values count up once on entry. data-count carries the
+          final string so reduced motion and no-JS both land on it. */}
       <Band tone="sand2" grain>
         <Rise>
           <Eyebrow>The short version</Eyebrow>
@@ -385,7 +484,10 @@ export default function Home() {
           {proofStats.map((s, i) => (
             <Rise key={s.label} delay={i * 60}>
               <dt className="eyebrow text-on-sand-dim">{s.label}</dt>
-              <dd className="mt-3 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] leading-none">
+              <dd
+                data-count={/\d/.test(s.value) ? s.value : undefined}
+                className="mt-3 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] leading-none"
+              >
                 {s.value}
               </dd>
               <p className="mt-2.5 max-w-[24ch] text-[0.875rem] text-on-sand-dim">

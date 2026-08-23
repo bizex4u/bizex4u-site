@@ -6,23 +6,32 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
- * The motion layer. Replaces the old IntersectionObserver reveal.
+ * The motion layer.
  *
- * Three things only:
- *   1. Lenis smooth scroll, driven by GSAP's ticker so the two agree on
- *      a single clock. Two independent RAF loops is what makes
- *      scroll-linked animation judder.
- *   2. A fade-up on entry for anything carrying `.reveal`, staggered
- *      within its section and capped at 8 steps.
- *   3. The hero holds while the page slides up over it.
+ * The brief was that the site felt static, and the diagnosis was that
+ * every section used the same mechanism — a coloured band with a
+ * heading and some cards. Colour changed; behaviour never did. So the
+ * job here is not "more animation", it is a different *kind* of
+ * movement per section, driven by data attributes the pages declare:
  *
- * Everything is wrapped in gsap.matchMedia so `prefers-reduced-motion`
- * gets the final state immediately and Lenis never starts.
+ *   [data-hero]          hero holds while the page rises over it
+ *   [data-marquee]       seamless infinite horizontal drift
+ *   [data-pin-track]     pinned section scrolled sideways
+ *   [data-scale-in]      image grows into place as it enters
+ *   [data-count]         number counts up once, on entry
+ *   [data-parallax]      slow drift against the scroll
+ *   [data-split]         headline reveals line by line
+ *   .reveal              the baseline fade-up
+ *
+ * Everything lives inside gsap.matchMedia. Under prefers-reduced-motion
+ * every element is set to its final state immediately, Lenis never
+ * starts, and the horizontal track becomes an ordinary swipeable
+ * overflow region rather than a pinned scroll hijack. Reduced motion
+ * has to mean the content still works, not that the page half-renders.
  */
 export default function Motion() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-
     const mm = gsap.matchMedia();
 
     mm.add(
@@ -30,26 +39,51 @@ export default function Motion() {
         motion: "(prefers-reduced-motion: no-preference)",
         calm: "(prefers-reduced-motion: reduce)",
         wide: "(min-width: 1024px)",
+        /* The pinned track needs vertical room as well as width. On a
+           short laptop the panels would clip inside a 100vh pin, so
+           below this the section falls back to the swipe strip. */
+        tall: "(min-height: 860px)",
       },
       (ctx) => {
-        const { motion, calm, wide } = ctx.conditions as Record<
+        const { motion, calm, wide, tall } = ctx.conditions as Record<
           string,
           boolean
         >;
 
-        /* Hand opacity control to GSAP — the CSS transition on .reveal is
+        /* Hand opacity control to GSAP. The CSS transition on .reveal is
            the no-JS fallback and would otherwise double-animate. */
         document.documentElement.classList.add("gsap-ready");
 
+        /* ---------------------------------------------------------
+           Reduced motion: final state, immediately, and get out.
+        ---------------------------------------------------------- */
         if (calm || !motion) {
           gsap.set(".reveal", { opacity: 1, y: 0, clearProps: "transform" });
           document
             .querySelectorAll<HTMLElement>(".reveal")
             .forEach((n) => n.setAttribute("data-shown", "true"));
+          gsap.set("[data-scale-in], [data-parallax], [data-split] > *", {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            clearProps: "transform",
+          });
+          document
+            .querySelectorAll<HTMLElement>("[data-count]")
+            .forEach((n) => {
+              n.textContent = n.dataset.count ?? n.textContent;
+            });
+          /* The pinned track becomes a plain scrollable strip. */
+          document
+            .querySelectorAll<HTMLElement>("[data-pin-track]")
+            .forEach((n) => n.setAttribute("data-static", "true"));
           return;
         }
 
-        /* 1 — smooth scroll on GSAP's clock */
+        /* ---------------------------------------------------------
+           1 — Smooth scroll on GSAP's clock. Two independent RAF
+           loops is what makes scroll-linked animation judder.
+        ---------------------------------------------------------- */
         const lenis = new Lenis({
           duration: 1.05,
           easing: (t: number) => 1 - Math.pow(1 - t, 3),
@@ -61,14 +95,16 @@ export default function Motion() {
         gsap.ticker.add(tick);
         gsap.ticker.lagSmoothing(0);
 
-        /* 2 — entry reveals, grouped so the stagger reads per section */
+        /* ---------------------------------------------------------
+           2 — Baseline reveal, grouped so the stagger reads per
+           section rather than marching down the whole document.
+        ---------------------------------------------------------- */
         const groups = new Map<Element, HTMLElement[]>();
         document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => {
           const key = el.closest("section") ?? document.body;
           if (!groups.has(key)) groups.set(key, []);
           groups.get(key)!.push(el);
         });
-
         groups.forEach((els) => {
           els.forEach((el) => el.setAttribute("data-shown", "true"));
           gsap.set(els, { opacity: 0, y: 18 });
@@ -81,18 +117,201 @@ export default function Motion() {
                 y: 0,
                 duration: 0.62,
                 ease: "power2.out",
-                stagger: { each: 0.07, amount: Math.min(batch.length, 8) * 0.07 },
+                stagger: {
+                  each: 0.07,
+                  amount: Math.min(batch.length, 8) * 0.07,
+                },
                 overwrite: true,
               }),
           });
         });
 
-        /* 3 — the hero holds while the page rises over it.
-              Desktop only; on touch it costs more than it returns. */
+        /* ---------------------------------------------------------
+           3 — Headlines that arrive line by line.
+           The page wraps each line in its own element; we only move
+           them. Splitting text nodes at runtime breaks screen readers
+           and re-splits badly on resize.
+        ---------------------------------------------------------- */
+        document
+          .querySelectorAll<HTMLElement>("[data-split]")
+          .forEach((wrap) => {
+            const lines = Array.from(wrap.children) as HTMLElement[];
+            if (!lines.length) return;
+            gsap.set(lines, { yPercent: 108, opacity: 0 });
+            gsap.to(lines, {
+              yPercent: 0,
+              opacity: 1,
+              duration: 0.9,
+              ease: "power3.out",
+              stagger: 0.08,
+              scrollTrigger: { trigger: wrap, start: "top 85%", once: true },
+            });
+          });
+
+        /* ---------------------------------------------------------
+           4 — Marquee. Two identical halves; translate the pair by
+           exactly -50% and the seam never shows.
+        ---------------------------------------------------------- */
+        document
+          .querySelectorAll<HTMLElement>("[data-marquee]")
+          .forEach((el) => {
+            const speed = Number(el.dataset.marquee) || 38;
+            const anim = gsap.to(el, {
+              xPercent: -50,
+              duration: speed,
+              ease: "none",
+              repeat: -1,
+            });
+            /* Slow to a crawl on hover so a name can actually be read. */
+            const host = el.parentElement ?? el;
+            host.addEventListener("pointerenter", () =>
+              gsap.to(anim, { timeScale: 0.15, duration: 0.4 }),
+            );
+            host.addEventListener("pointerleave", () =>
+              gsap.to(anim, { timeScale: 1, duration: 0.6 }),
+            );
+          });
+
+        /* ---------------------------------------------------------
+           5 — The pinned horizontal track. Desktop only: on touch a
+           scroll hijack costs far more than it returns, and the same
+           markup works as a native swipe strip instead.
+        ---------------------------------------------------------- */
+        document
+          .querySelectorAll<HTMLElement>("[data-pin-track]")
+          .forEach((section) => {
+            const track = section.querySelector<HTMLElement>("[data-track]");
+            if (!track) return;
+
+            if (!wide || !tall) {
+              section.setAttribute("data-static", "true");
+              return;
+            }
+            section.removeAttribute("data-static");
+
+            const distance = () => track.scrollWidth - window.innerWidth;
+
+            gsap.to(track, {
+              x: () => -distance(),
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                /* Scroll length equals the horizontal distance, so the
+                   sideways speed matches the wheel. Anything else feels
+                   either sticky or out of control. */
+                end: () => "+=" + distance(),
+                pin: true,
+                scrub: 0.6,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+              },
+            });
+
+            /* Progress rail, if the section declares one. It rides the
+               same scroll range as the track rather than its own, so
+               the bar and the panels can never disagree. */
+            const bar = section.querySelector<HTMLElement>("[data-track-bar]");
+            if (bar) {
+              gsap.set(bar, { transformOrigin: "left center", scaleX: 0 });
+              ScrollTrigger.create({
+                trigger: section,
+                start: "top top",
+                end: () => "+=" + distance(),
+                scrub: 0.6,
+                onUpdate: (self) => gsap.set(bar, { scaleX: self.progress }),
+              });
+            }
+          });
+
+        /* ---------------------------------------------------------
+           6 — Images that grow into place. Subtle: 1.08 to 1. Any
+           more and it reads as a bug rather than as intent.
+        ---------------------------------------------------------- */
+        document
+          .querySelectorAll<HTMLElement>("[data-scale-in]")
+          .forEach((el) => {
+            gsap.fromTo(
+              el,
+              { scale: 1.08, opacity: 0.55 },
+              {
+                scale: 1,
+                opacity: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top 92%",
+                  end: "top 45%",
+                  scrub: 0.5,
+                },
+              },
+            );
+          });
+
+        /* ---------------------------------------------------------
+           7 — Parallax drift. data-parallax is the travel in px.
+        ---------------------------------------------------------- */
+        document
+          .querySelectorAll<HTMLElement>("[data-parallax]")
+          .forEach((el) => {
+            const travel = Number(el.dataset.parallax) || 60;
+            gsap.fromTo(
+              el,
+              { y: -travel / 2 },
+              {
+                y: travel / 2,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: el.parentElement ?? el,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 0.8,
+                },
+              },
+            );
+          });
+
+        /* ---------------------------------------------------------
+           8 — Counters. Integers count; anything with other
+           characters (40+, ₹2.5Cr) counts the numeric part and keeps
+           its prefix and suffix.
+        ---------------------------------------------------------- */
+        document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
+          const target = el.dataset.count ?? "";
+          const m = target.match(/^(\D*)(\d[\d,.]*)(.*)$/);
+          if (!m) {
+            el.textContent = target;
+            return;
+          }
+          const [, pre, numRaw, post] = m;
+          const decimals = (numRaw.split(".")[1] ?? "").length;
+          const value = parseFloat(numRaw.replace(/,/g, ""));
+          const box = { n: 0 };
+          el.textContent = pre + (0).toFixed(decimals) + post;
+          gsap.to(box, {
+            n: value,
+            duration: 1.4,
+            ease: "power2.out",
+            scrollTrigger: { trigger: el, start: "top 88%", once: true },
+            onUpdate: () => {
+              el.textContent =
+                pre +
+                box.n.toLocaleString("en-IN", {
+                  minimumFractionDigits: decimals,
+                  maximumFractionDigits: decimals,
+                }) +
+                post;
+            },
+          });
+        });
+
+        /* ---------------------------------------------------------
+           9 — The hero holds while the page rises over it.
+           pinSpacing:false is what makes the next section climb over
+           the hero rather than push it down the document.
+        ---------------------------------------------------------- */
         const hero = document.querySelector<HTMLElement>("[data-hero]");
         if (hero && wide) {
-          /* pinSpacing:false is what makes the next section rise over the
-             hero rather than push it down the page. */
           ScrollTrigger.create({
             trigger: hero,
             start: "top top",
@@ -101,7 +320,6 @@ export default function Motion() {
             pinSpacing: false,
             anticipatePin: 1,
           });
-
           const copy = hero.querySelector<HTMLElement>("[data-hero-copy]");
           if (copy) {
             gsap.to(copy, {

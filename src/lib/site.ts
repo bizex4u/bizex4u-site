@@ -31,6 +31,10 @@ export const site = {
 
 export type Capability = {
   index: string;
+  /* The verb the client cares about. Six product names read as a
+     menu; six verbs read as one system with an order to it. This is
+     what the homepage leads with — the product name is the subtitle. */
+  verb: string;
   title: string;
   short: string;
   long: string;
@@ -42,6 +46,7 @@ export type Capability = {
 export const capabilities: Capability[] = [
   {
     index: "01",
+    verb: "Be seen",
     title: "Outdoor & Transit",
     short:
       "Hoardings, billboards, bus and cab media across metros and tier-2 cities.",
@@ -50,6 +55,7 @@ export const capabilities: Capability[] = [
   },
   {
     index: "02",
+    verb: "Be timed",
     title: "Digital Out-of-Home",
     short: "LED screens, digital billboards and programmatic DOOH.",
     long: "Digital screens bought by daypart and location rather than by month, so weight lands when the audience is present.",
@@ -57,6 +63,7 @@ export const capabilities: Capability[] = [
   },
   {
     index: "03",
+    verb: "Be seen where they decide",
     title: "Retail & Hyperlocal",
     short: "Mall, multiplex, society lift and store-catchment media.",
     long: "Media placed inside the trade area of a specific store or cluster, planned from catchment data rather than city-level reach.",
@@ -64,6 +71,7 @@ export const capabilities: Capability[] = [
   },
   {
     index: "04",
+    verb: "Be heard",
     title: "Broadcast, Print & Cinema",
     short: "News television, radio, national dailies and on-screen.",
     long: "Traditional weight where it still carries a market — regional news, radio drive-time, dailies and cinema on-screen.",
@@ -71,6 +79,7 @@ export const capabilities: Capability[] = [
   },
   {
     index: "05",
+    verb: "Be there in person",
     title: "Activations & Corporate Gifting",
     short: "Ground presence and distributor engagement.",
     long: "Physical presence in the places a brand needs to be seen, and the channel programmes that keep distribution engaged.",
@@ -78,6 +87,7 @@ export const capabilities: Capability[] = [
   },
   {
     index: "06",
+    verb: "Be affordable",
     title: "Barter & Trade Structuring",
     short: "The commercial model that funds all of the above.",
     long: "Converting what a business already owns into media, contracted and valued in advance.",

@@ -67,9 +67,15 @@ export function ExchangePlate() {
 export default function FormatPlate({
   formats,
   tone = "light",
+  base = 58,
 }: {
   formats: Format[];
   tone?: "light" | "dark";
+  /* Height in px of a 1:1 plate. Everything else is derived from it,
+     so one number scales the whole set. The day-clock panels run
+     smaller because they are fighting for vertical room inside a
+     pinned viewport. */
+  base?: number;
 }) {
   /* A faint fill as well as a stroke. Outline alone reads as an
      unfinished wireframe; the fill makes each plate read as an object
@@ -85,7 +91,7 @@ export default function FormatPlate({
       {formats.map((f) => {
         /* Normalised so each plate occupies a similar visual area —
            a wide format reads short, a portrait reads tall. */
-        const h = Math.round(58 / Math.sqrt(f.ratio));
+        const h = Math.round(base / Math.sqrt(f.ratio));
         const w = Math.round(h * f.ratio);
         return (
           <li key={f.label} className="shrink-0">

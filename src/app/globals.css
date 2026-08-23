@@ -273,3 +273,140 @@ summary,
     transition: none;
   }
 }
+
+/* ------------------------------------------------------------------
+   Section mechanisms
+
+   The site read as static because every band used the same device: a
+   colour, a heading, a grid of cards. These are the alternatives. Each
+   one is driven by a data attribute the page declares and Motion.tsx
+   picks up, and each degrades to something usable when the JS or the
+   motion never arrives.
+------------------------------------------------------------------- */
+
+/* Horizontal track ------------------------------------------------
+   Swipeable by default, so the panels are reachable with no JS at all
+   and on every touch device. The desktop pinned path clips it instead,
+   because there GSAP is translating the track itself and a native
+   scrollbar on top of that fights the wheel. */
+
+[data-track-viewport] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+}
+
+[data-track-viewport]::-webkit-scrollbar {
+  display: none;
+}
+
+[data-track] > * {
+  scroll-snap-align: center;
+}
+
+/* Once the pinned path is live, hand scrolling back to GSAP. */
+.gsap-ready [data-pin-track]:not([data-static]) [data-track-viewport] {
+  overflow-x: clip;
+  scroll-snap-type: none;
+}
+
+/* Marquee ----------------------------------------------------------
+   The row is duplicated in the markup and translated by exactly -50%,
+   so the seam never shows. aria-hidden on the copy keeps it out of the
+   accessibility tree. */
+
+.marquee-mask {
+  /* Fade the ends rather than cutting them — a hard edge reads as a
+     clipping bug, a fade reads as depth. */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6rem,
+    #000 calc(100% - 6rem),
+    transparent
+  );
+}
+
+@media (max-width: 640px) {
+  .marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 2rem,
+      #000 calc(100% - 2rem),
+      transparent
+    );
+  }
+}
+
+/* Line-by-line headline reveal ------------------------------------
+   The page wraps each line in its own span; this clips the overflow so
+   lines rise out of nothing. Splitting text at runtime instead would
+   break screen readers and re-split badly on resize. */
+
+[data-split] {
+  display: block;
+}
+
+[data-split] > * {
+  display: block;
+}
+
+.line-clip {
+  overflow: hidden;
+  padding-bottom: 0.08em; /* descenders would otherwise be shaved */
+}
+
+/* Media frames -----------------------------------------------------
+   Scroll-scaled images need their own clipping context, or the 1.08
+   start state bleeds over neighbouring content. */
+
+.frame {
+  overflow: hidden;
+  position: relative;
+}
+
+/* Cursor-aware card lift ------------------------------------------
+   Pointer-only: on touch there is no hover state and a sticky
+   translate is worse than none. */
+
+@media (hover: hover) and (pointer: fine) {
+  .lift {
+    transition:
+      transform 320ms var(--ease-reveal),
+      background-color 320ms var(--ease-reveal);
+  }
+
+  .lift:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lift,
+  .lift:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* When the pinned track cannot run — narrow viewport, short viewport,
+   reduced motion, or no JS at all — the section stops being one screen
+   tall and the panels size to their content. Without this the panels
+   keep the pinned layout's fixed height and clip themselves. */
+
+[data-pin-track][data-static] {
+  height: auto;
+}
+
+[data-pin-track][data-static] [data-track] {
+  height: auto;
+  align-items: flex-start;
+}
+
+[data-pin-track][data-static] [data-track] > * {
+  overflow: visible;
+}
