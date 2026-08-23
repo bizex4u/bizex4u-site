@@ -1,91 +1,95 @@
 @import "tailwindcss";
 
 /* ============================================================
-   BIZEX4U — v3 design language
+   BIZEX4U — v4
 
-   Brief: the structure and density of the Savee board (#paid,
-   Runway, Figma, GoCardless) with the intensity of Laqshya.
+   Direction: purple and beige. Structure and density from the
+   Savee board; the confidence of Laqshya without copying its
+   black-and-vermillion.
 
-   What that means concretely:
-   · Sectioned colour blocking. Every band owns its background —
-     charcoal, deep ink, cream, amber. Never one continuous field.
-   · An artefact in every section. Show the thing, don't describe it.
-   · Rounded. 16px on cards, full pills on buttons.
-   · One accent, amber, used the Laqshya way: to highlight a phrase
-     INSIDE a headline rather than as decoration.
-   · Sentence case. Not all-caps.
+   Typography: Instrument Serif for display against Instrument
+   Sans for text. A serif display is the single fastest way out
+   of the all-grotesk look that every AI-built site shares, and
+   it carries warmth that a beige palette needs.
 
-   Every text pair below is measured; ratios noted inline.
+   Every text pair is measured. Ratios noted inline.
    ============================================================ */
 
 @theme {
-  /* Dark surfaces ------------------------------------------ */
-  --color-ink: #0b0b0d; /* base canvas */
-  --color-ink-2: #141417; /* raised card on dark */
-  --color-ink-3: #1e1e22; /* hover / border on dark */
-  --color-on-ink: #ffffff; /*        19.7:1 */
-  --color-on-ink-dim: #a8a69e; /*     8.07:1 — secondary on dark */
+  /* Beige — the primary canvas ----------------------------- */
+  --color-sand: #f3eee5;
+  --color-sand-2: #e9e2d5; /* recessed band / card on beige */
+  --color-sand-3: #ded5c3; /* hover on beige */
+  --color-on-sand: #1b1030; /*        15.6:1 */
+  --color-on-sand-dim: #4a3f5e; /*     8.4:1 — secondary on beige */
 
-  /* Light surfaces ----------------------------------------- */
-  --color-cream: #f5f1e8; /* warm light band */
-  --color-cream-2: #ebe6d9; /* recessed light / card on cream */
-  --color-on-cream: #0b0b0d; /*      17.5:1 */
-  --color-on-cream-dim: #4a4842; /*   8.11:1 — secondary on light */
+  /* Plum — the dark counterweight -------------------------- */
+  --color-plum: #1b1030;
+  --color-plum-2: #271741; /* raised card on plum */
+  --color-plum-3: #34205a; /* hover on plum */
+  --color-on-plum: #ffffff; /*        18.1:1 */
+  --color-on-plum-dim: #b9aecd; /*     8.59:1 — secondary on plum */
 
-  /* Accent -------------------------------------------------
-     amber reads at 11:1 on charcoal, so it is the highlight
-     colour on dark. On cream it collapses to 1.6:1, so text
-     there uses the deep variant instead (4.94:1). */
-  --color-amber: #f5b841;
-  --color-amber-lift: #ffc559;
-  --color-amber-deep: #8f5e05;
-  --color-on-amber: #0b0b0d; /*      11.1:1 */
-  --color-on-amber-dim: #3a3a35; /*   6.43:1 */
+  /* Violet — brand accent -----------------------------------
+     Three values because one cannot serve every ground:
+     · violet       highlight on plum            (4.14 — large type only)
+     · violet-lift  readable highlight on plum   (6.14:1)
+     · violet-deep  readable text/fill on beige  (7.26:1)
+     A filled violet band uses violet-deep with white (8.4:1). */
+  --color-violet: #7b5cff;
+  --color-violet-lift: #9b84ff;
+  --color-violet-deep: #5327c9;
+  --color-on-violet: #ffffff;
+  --color-on-violet-dim: #dcd2ff; /*   5.88:1 on violet-deep */
 
   /* Hairlines ---------------------------------------------- */
-  --color-rule-dark: #2a2a2e;
-  --color-rule-light: #dcd6c6;
+  --color-rule-plum: #38295a;
+  --color-rule-sand: #d8cfbd;
 
   /* Type --------------------------------------------------- */
-  --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
-  --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-instrument-serif), Georgia, serif;
+  --font-sans: var(--font-instrument-sans), var(--font-inter), system-ui,
+    sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
-  --font-deva: var(--font-deva), "Noto Sans Devanagari", sans-serif;
+  --font-deva: var(--font-mukta), "Noto Sans Devanagari", sans-serif;
 
-  --text-display-xl: clamp(2.75rem, 6.4vw, 6rem);
-  --text-display-xl--line-height: 0.98;
-  --text-display-xl--letter-spacing: -0.035em;
-  --text-display-xl--font-weight: 600;
+  /* Serif display runs larger and looser than a grotesk would.
+     Weight stays 400 — Instrument Serif has one weight and does
+     not need more. */
+  --text-display-xl: clamp(3rem, 7vw, 6.5rem);
+  --text-display-xl--line-height: 0.96;
+  --text-display-xl--letter-spacing: -0.022em;
+  --text-display-xl--font-weight: 400;
 
-  --text-display-l: clamp(2.125rem, 4vw, 3.75rem);
-  --text-display-l--line-height: 1.02;
-  --text-display-l--letter-spacing: -0.03em;
-  --text-display-l--font-weight: 600;
+  --text-display-l: clamp(2.25rem, 4.4vw, 4rem);
+  --text-display-l--line-height: 1;
+  --text-display-l--letter-spacing: -0.018em;
+  --text-display-l--font-weight: 400;
 
-  --text-h2: clamp(1.625rem, 2.4vw, 2.375rem);
-  --text-h2--line-height: 1.1;
-  --text-h2--letter-spacing: -0.022em;
-  --text-h2--font-weight: 600;
+  --text-h2: clamp(1.75rem, 2.6vw, 2.5rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.014em;
+  --text-h2--font-weight: 400;
 
-  --text-h3: 1.3125rem;
-  --text-h3--line-height: 1.25;
-  --text-h3--letter-spacing: -0.014em;
+  /* H3 and below are sans — serif at small sizes reads dated. */
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.011em;
   --text-h3--font-weight: 600;
 
   --text-body-l: 1.125rem;
-  --text-body-l--line-height: 1.55;
+  --text-body-l--line-height: 1.6;
 
   --text-body: 1rem;
-  --text-body--line-height: 1.6;
+  --text-body--line-height: 1.62;
 
   --text-meta: 0.75rem;
   --text-meta--line-height: 1.2;
-  --text-meta--letter-spacing: 0.07em;
+  --text-meta--letter-spacing: 0.08em;
   --text-meta--font-weight: 500;
 
-  /* Rhythm — tighter than v2. The references are dense. */
-  --spacing-band: clamp(3.5rem, 6vw, 6rem);
-  --radius-card: 1rem;
+  --spacing-band: clamp(3.5rem, 6vw, 6.5rem);
+  --radius-card: 1.25rem;
 
   --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -95,7 +99,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  background: var(--color-ink);
+  background: var(--color-sand);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -105,8 +109,8 @@ html {
 }
 
 body {
-  background: var(--color-ink);
-  color: var(--color-on-ink);
+  background: var(--color-sand);
+  color: var(--color-on-sand);
   font-family: var(--font-sans);
   font-size: var(--text-body);
   -webkit-font-smoothing: antialiased;
@@ -115,14 +119,14 @@ body {
 }
 
 ::selection {
-  background: var(--color-amber);
-  color: var(--color-ink);
+  background: var(--color-violet);
+  color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-amber);
+  outline: 2px solid var(--color-violet-deep);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 a,
@@ -158,44 +162,41 @@ summary,
   }
 }
 
-/* Mono label. `on-dark` and `on-light` variants keep contrast
-   honest without callers having to think about it. */
 @utility eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-meta);
   font-weight: 500;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-/* The Laqshya move: amber highlight on a phrase inside a headline.
-   On light bands it swaps to the deep amber so it stays readable. */
-@utility hl {
-  color: var(--color-amber);
+/* Italic serif for the emphasised phrase inside a headline.
+   Replaces v3's colour highlight — with a serif display the
+   italic does the same job with more class and no contrast risk. */
+@utility em-serif {
+  font-style: italic;
 }
 
-@utility hl-on-light {
-  color: var(--color-amber-deep);
-}
-
-/* Devanagari companion setting, used beside Latin city and
-   section names. Sits a little smaller and lighter. */
 @utility deva {
   font-family: var(--font-deva);
   font-weight: 500;
 }
 
-/* Grain — the texture under Laqshya's gradient fields. Cheap,
-   pure CSS, and it stops large flat blocks looking like a
-   template. Applied via .grain on a positioned parent. */
+/* Paper grain. Beige without texture reads as flat cream; this
+   is what stops a large light band looking like a default. */
 .grain::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.18;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+.grain-light::after {
   mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.16;
 }
 
 /* Reveal --------------------------------------------------- */
@@ -253,7 +254,7 @@ summary,
 
 .link-underline[data-active="true"]::after {
   transform: scaleX(1);
-  background: var(--color-amber);
+  background: var(--color-violet);
   height: 2px;
 }
 

@@ -10,12 +10,12 @@ export default function NotFound() {
         lede="The link may be out of date, or the page may not have been written yet. Everything below still works."
       />
       <Section index="01" label="Try these">
-        <ul className="border-b border-rule">
+        <ul className="border-b border-rule-sand">
           {capabilities.map((c) => (
-            <Rise key={c.href} as="li" className="border-t border-rule">
+            <Rise key={c.href} as="li" className="border-t border-rule-sand">
               <a
                 href={c.href}
-                className="block py-5 text-h3 transition-colors hover:bg-paper-hover"
+                className="block py-5 text-h3 transition-colors hover:bg-sand-3"
               >
                 {c.title}
               </a>

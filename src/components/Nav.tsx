@@ -67,7 +67,7 @@ export default function Nav() {
         <Link
           href="/"
           className={`inline-flex min-h-11 items-center rounded-full px-4 font-display text-[1.0625rem] font-semibold tracking-[-0.03em] transition-colors duration-200 ${
-            scrolled ? "bg-ink-2/90 backdrop-blur-md" : ""
+            scrolled ? "bg-plum/92 text-on-plum backdrop-blur-md" : ""
           }`}
           aria-label={`${site.name} — home`}
         >
@@ -75,7 +75,7 @@ export default function Nav() {
         </Link>
 
         <nav
-          className="hidden items-center gap-1 rounded-full bg-ink-2/90 px-2 py-1.5 backdrop-blur-md lg:flex"
+          className="hidden items-center gap-1 rounded-full bg-plum/92 px-2 py-1.5 text-on-plum backdrop-blur-md lg:flex"
           aria-label="Primary"
         >
           {primaryNav.map((item) =>
@@ -83,8 +83,8 @@ export default function Nav() {
               <button
                 key={item.href}
                 type="button"
-                className={`rounded-full px-4 py-2.5 text-[0.9375rem] transition-colors duration-200 hover:bg-ink-3 ${
-                  isActive(item.href) ? "text-amber" : ""
+                className={`rounded-full px-4 py-2.5 text-[0.9375rem] transition-colors duration-200 hover:bg-plum-2 ${
+                  isActive(item.href) ? "text-violet-lift" : ""
                 }`}
                 aria-expanded={megaOpen}
                 onMouseEnter={openMega}
@@ -97,8 +97,8 @@ export default function Nav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded-full px-4 py-2.5 text-[0.9375rem] transition-colors duration-200 hover:bg-ink-3 ${
-                  isActive(item.href) ? "text-amber" : ""
+                className={`rounded-full px-4 py-2.5 text-[0.9375rem] transition-colors duration-200 hover:bg-plum-2 ${
+                  isActive(item.href) ? "text-violet-lift" : ""
                 }`}
                 onMouseEnter={closeMega}
               >
@@ -113,14 +113,14 @@ export default function Nav() {
             href={site.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="group hidden min-h-11 items-center gap-2 rounded-full bg-amber px-5 text-[0.9375rem] font-medium text-on-amber transition-colors duration-200 hover:bg-amber-lift sm:inline-flex"
+            className="group hidden min-h-11 items-center gap-2 rounded-full bg-violet-deep px-5 text-[0.9375rem] font-medium text-white transition-colors duration-200 hover:bg-violet sm:inline-flex"
           >
             WhatsApp
             <span className="row-arrow">→</span>
           </a>
           <button
             type="button"
-            className="inline-flex min-h-11 items-center rounded-full bg-ink-2/90 px-5 text-[0.9375rem] backdrop-blur-md lg:hidden"
+            className="inline-flex min-h-11 items-center rounded-full bg-plum/92 px-5 text-[0.9375rem] text-on-plum backdrop-blur-md lg:hidden"
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((v) => !v)}
@@ -137,20 +137,20 @@ export default function Nav() {
         }`}
         onMouseEnter={openMega}
       >
-        <div className="grid grid-cols-3 gap-3 rounded-2xl bg-ink-2/95 p-3 backdrop-blur-md">
+        <div className="grid grid-cols-3 gap-3 rounded-2xl bg-plum/96 p-3 text-on-plum backdrop-blur-md">
           {capabilities.map((c) => (
             <Link
               key={c.href}
               href={c.href}
-              className="rounded-xl p-4 transition-colors duration-200 hover:bg-ink-3"
+              className="rounded-xl p-4 transition-colors duration-200 hover:bg-plum-2"
             >
               <span
-                className={`eyebrow ${c.accent ? "text-amber" : "text-on-ink-dim"}`}
+                className={`eyebrow ${c.accent ? "text-violet-lift" : "text-on-plum-dim"}`}
               >
                 {c.index}
               </span>
               <span className="mt-2 block text-h3">{c.title}</span>
-              <span className="mt-1.5 block max-w-[30ch] text-[0.875rem] leading-relaxed text-on-ink-dim">
+              <span className="mt-1.5 block max-w-[30ch] text-[0.875rem] leading-relaxed text-on-plum-dim">
                 {c.short}
               </span>
             </Link>
@@ -160,13 +160,13 @@ export default function Nav() {
 
       {/* Mobile panel */}
       {mobileOpen && (
-        <div className="fixed inset-x-0 top-20 bottom-0 overflow-y-auto bg-ink lg:hidden">
+        <div className="fixed inset-x-0 top-20 bottom-0 overflow-y-auto bg-sand lg:hidden">
           <nav className="shell py-6" aria-label="Mobile">
             {primaryNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block border-b border-rule-dark py-5 text-h2"
+                className="block border-b border-rule-sand py-5 text-h2"
               >
                 {item.label}
               </Link>
@@ -176,12 +176,12 @@ export default function Nav() {
                 href={site.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-amber px-6 font-medium text-on-amber"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-violet-deep px-6 font-medium text-white"
               >
                 Talk on WhatsApp →
               </a>
-              <p className="mt-2 text-on-ink-dim">{site.email}</p>
-              <p className="text-on-ink-dim">{site.phone}</p>
+              <p className="mt-2 text-on-sand-dim">{site.email}</p>
+              <p className="text-on-sand-dim">{site.phone}</p>
             </div>
           </nav>
         </div>

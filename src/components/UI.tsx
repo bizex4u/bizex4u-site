@@ -2,62 +2,58 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 /* ------------------------------------------------------------------
-   v3 primitives.
+   v4 primitives — purple and beige.
 
-   Everything is tone-aware. A Band declares its background and every
-   child asks it what colour to be, so a section can be moved from
-   charcoal to cream without touching its contents.
+   Everything is tone-aware. A Band declares its ground and children
+   ask it what colour to be, so a section can move from beige to plum
+   without touching its contents.
 ------------------------------------------------------------------- */
 
-export type Tone = "ink" | "ink2" | "cream" | "amber";
+export type Tone = "sand" | "sand2" | "plum" | "plum2" | "violet";
 
 export const toneStyles: Record<
   Tone,
-  {
-    bg: string;
-    text: string;
-    dim: string;
-    rule: string;
-    card: string;
-    hl: string;
-    eyebrow: string;
-  }
+  { bg: string; text: string; dim: string; rule: string; card: string; hl: string }
 > = {
-  ink: {
-    bg: "bg-ink",
-    text: "text-on-ink",
-    dim: "text-on-ink-dim",
-    rule: "border-rule-dark",
-    card: "bg-ink-2",
-    hl: "text-amber",
-    eyebrow: "text-amber",
+  sand: {
+    bg: "bg-sand",
+    text: "text-on-sand",
+    dim: "text-on-sand-dim",
+    rule: "border-rule-sand",
+    card: "bg-sand-2",
+    hl: "text-violet-deep",
   },
-  ink2: {
-    bg: "bg-ink-2",
-    text: "text-on-ink",
-    dim: "text-on-ink-dim",
-    rule: "border-rule-dark",
-    card: "bg-ink-3",
-    hl: "text-amber",
-    eyebrow: "text-amber",
+  sand2: {
+    bg: "bg-sand-2",
+    text: "text-on-sand",
+    dim: "text-on-sand-dim",
+    rule: "border-rule-sand",
+    card: "bg-sand",
+    hl: "text-violet-deep",
   },
-  cream: {
-    bg: "bg-cream",
-    text: "text-on-cream",
-    dim: "text-on-cream-dim",
-    rule: "border-rule-light",
-    card: "bg-cream-2",
-    hl: "text-amber-deep",
-    eyebrow: "text-amber-deep",
+  plum: {
+    bg: "bg-plum",
+    text: "text-on-plum",
+    dim: "text-on-plum-dim",
+    rule: "border-rule-plum",
+    card: "bg-plum-2",
+    hl: "text-violet-lift",
   },
-  amber: {
-    bg: "bg-amber",
-    text: "text-on-amber",
-    dim: "text-on-amber-dim",
-    rule: "border-on-amber/20",
-    card: "bg-on-amber/6",
-    hl: "text-on-amber",
-    eyebrow: "text-on-amber-dim",
+  plum2: {
+    bg: "bg-plum-2",
+    text: "text-on-plum",
+    dim: "text-on-plum-dim",
+    rule: "border-rule-plum",
+    card: "bg-plum-3",
+    hl: "text-violet-lift",
+  },
+  violet: {
+    bg: "bg-violet-deep",
+    text: "text-on-violet",
+    dim: "text-on-violet-dim",
+    rule: "border-white/20",
+    card: "bg-white/8",
+    hl: "text-on-violet",
   },
 };
 
@@ -82,11 +78,8 @@ export function Rise({
   );
 }
 
-/* A full-width colour band. This is the unit the whole page is
-   built from — the references never run one background for more
-   than a section at a time. */
 export function Band({
-  tone = "ink",
+  tone = "sand",
   children,
   className = "",
   id,
@@ -101,25 +94,24 @@ export function Band({
   flush?: boolean;
 }) {
   const t = toneStyles[tone];
+  const grainClass =
+    tone === "sand" || tone === "sand2" ? "grain" : "grain grain-light";
   return (
     <section
       id={id}
       className={`relative ${t.bg} ${t.text} ${
         flush ? "" : "py-(--spacing-band)"
-      } ${grain ? "grain" : ""} ${className}`}
+      } ${grain ? grainClass : ""} ${className}`}
     >
       <div className="shell relative z-10">{children}</div>
     </section>
   );
 }
 
-/* Section label. Mono, amber, with an optional Devanagari companion
-   — the cheapest way to make the page read as Indian rather than as
-   a template with rupee prices. */
 export function Eyebrow({
   children,
   deva,
-  tone = "ink",
+  tone = "sand",
   className = "",
 }: {
   children: ReactNode;
@@ -129,62 +121,75 @@ export function Eyebrow({
 }) {
   const t = toneStyles[tone];
   return (
-    <p className={`eyebrow ${t.eyebrow} ${className}`}>
+    <p className={`eyebrow ${t.hl} ${className}`}>
       {children}
-      {deva && (
-        <span className={`deva ml-2.5 normal-case ${t.dim}`}>{deva}</span>
-      )}
+      {deva && <span className={`deva ml-2.5 normal-case ${t.dim}`}>{deva}</span>}
     </p>
   );
 }
 
-/* Rounded card. Every reference on the board uses these; v2 banned
-   them, which was wrong for this brief. */
+/**
+ * `bg` replaces the tone's default card ground rather than sitting
+ * alongside it. Passing a background through `className` does not
+ * work — two `bg-*` utilities both land in the stylesheet and source
+ * order there, not attribute order, decides the winner. That silently
+ * put white text on beige once. Use `bg` for a card that departs from
+ * its band, and pair it with the matching text colour.
+ */
 export function Card({
-  tone = "ink",
+  tone = "sand",
   children,
   className = "",
+  bg,
   as: Tag = "div",
 }: {
   tone?: Tone;
   children: ReactNode;
   className?: string;
+  bg?: string;
   as?: "div" | "li" | "article";
 }) {
   const t = toneStyles[tone];
   return (
     <Tag
-      className={`rounded-(--radius-card) ${t.card} p-6 md:p-7 ${className}`}
+      className={`rounded-(--radius-card) ${bg ?? t.card} p-6 md:p-7 ${className}`}
     >
       {children}
     </Tag>
   );
 }
 
-/* Pill buttons. Also banned in v2, also wrong. */
 export function Btn({
   href,
   children,
-  variant = "amber",
+  variant = "violet",
   external = false,
+  size = "md",
   className = "",
 }: {
   href: string;
   children: ReactNode;
-  variant?: "amber" | "light" | "outline-light" | "outline-dark";
+  variant?: "violet" | "plum" | "sand" | "outline-plum" | "outline-sand";
   external?: boolean;
+  size?: "md" | "lg";
   className?: string;
 }) {
   const styles = {
-    amber: "bg-amber text-on-amber hover:bg-amber-lift",
-    light: "bg-on-ink text-ink hover:bg-white",
-    "outline-light":
-      "border border-on-ink/30 text-on-ink hover:border-on-ink hover:bg-on-ink/6",
-    "outline-dark":
-      "border border-on-cream/25 text-on-cream hover:border-on-cream hover:bg-on-cream/6",
+    violet: "bg-violet-deep text-white hover:bg-violet",
+    plum: "bg-plum text-on-plum hover:bg-plum-2",
+    sand: "bg-sand text-on-sand hover:bg-white",
+    "outline-plum":
+      "border border-on-sand/25 text-on-sand hover:border-on-sand hover:bg-on-sand/5",
+    "outline-sand":
+      "border border-on-plum/30 text-on-plum hover:border-on-plum hover:bg-on-plum/8",
   }[variant];
 
-  const cls = `group inline-flex min-h-12 items-center gap-2.5 rounded-full px-6 py-3 text-[0.9375rem] font-medium transition-colors duration-200 ${styles} ${className}`;
+  const dims =
+    size === "lg"
+      ? "min-h-14 px-7 text-[1rem]"
+      : "min-h-12 px-6 text-[0.9375rem]";
+
+  const cls = `group inline-flex items-center justify-center gap-2.5 rounded-full py-3 font-medium transition-colors duration-200 ${dims} ${styles} ${className}`;
 
   if (external) {
     return (
@@ -205,7 +210,7 @@ export function Btn({
 export function ArrowLink({
   href,
   children,
-  tone = "ink",
+  tone = "sand",
   className = "",
 }: {
   href: string;
@@ -224,12 +229,11 @@ export function ArrowLink({
   );
 }
 
-/* A big number with a label under it — Laqshya's stat treatment. */
 export function Stat({
   value,
   label,
   note,
-  tone = "ink",
+  tone = "sand",
 }: {
   value: string;
   label: string;
@@ -239,12 +243,10 @@ export function Stat({
   const t = toneStyles[tone];
   return (
     <div>
-      <p
-        className={`font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-none font-semibold tracking-[-0.035em] ${t.hl}`}
-      >
+      <p className="font-display text-[clamp(2.25rem,4.5vw,3.5rem)] leading-none">
         {value}
       </p>
-      <p className="mt-2.5 text-h3">{label}</p>
+      <p className="mt-3 text-h3">{label}</p>
       {note && <p className={`mt-1.5 max-w-[26ch] text-[0.875rem] ${t.dim}`}>{note}</p>}
     </div>
   );

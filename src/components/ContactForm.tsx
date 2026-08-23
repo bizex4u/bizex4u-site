@@ -10,9 +10,9 @@ import { site } from "@/lib/site";
  */
 
 const field =
-  "mt-2 h-12 w-full rounded-[2px] border border-rule bg-transparent px-3 text-body outline-none transition-colors focus:border-accent-text";
+  "mt-2 h-12 w-full rounded-xl border border-rule-sand bg-sand px-4 text-body outline-none transition-colors focus:border-violet-deep";
 
-const label = "eyebrow block";
+const label = "eyebrow block text-on-sand-dim";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -79,22 +79,22 @@ export default function ContactForm() {
           name="message"
           rows={5}
           required
-          className="mt-2 w-full rounded-[2px] border border-rule bg-transparent p-3 text-body outline-none transition-colors focus:border-accent-text"
+          className="mt-2 w-full rounded-xl border border-rule-sand bg-sand p-4 text-body outline-none transition-colors focus:border-violet-deep"
         />
       </div>
 
       <button
         type="submit"
-        className="mt-8 rounded-[2px] bg-ink px-6 py-4 font-mono text-meta uppercase tracking-[0.09em] text-paper transition-opacity hover:opacity-85"
+        className="group mt-8 inline-flex min-h-12 items-center gap-2.5 rounded-full bg-violet-deep px-6 font-medium text-white transition-colors duration-200 hover:bg-violet"
       >
-        Send enquiry →
+        Send enquiry <span className="row-arrow">→</span>
       </button>
 
       {sent && (
-        <p role="status" className="mt-5 text-[0.9375rem] text-ink-70">
+        <p role="status" className="mt-5 text-[0.9375rem] text-on-sand-dim">
           Your email client should have opened with the message ready to send.
           If it did not, write to{" "}
-          <a href={`mailto:${site.email}`} className="link-underline text-ink">
+          <a href={`mailto:${site.email}`} className="link-underline text-violet-deep">
             {site.email}
           </a>
           .

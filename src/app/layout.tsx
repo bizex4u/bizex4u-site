@@ -9,12 +9,34 @@ import "./globals.css";
 /* Fonts are self-hosted rather than pulled from Google.
    Faster first paint, no third-party request, no consent question. */
 
-const archivo = localFont({
-  variable: "--font-archivo",
+/* Display: Instrument Serif. One weight, wide range, and the
+   fastest way out of the all-grotesk look every AI-built page
+   shares. Its italic carries the emphasis inside headlines. */
+const instrumentSerif = localFont({
+  variable: "--font-instrument-serif",
   display: "swap",
   src: [
     {
-      path: "../fonts/archivo-latin-wght-normal.woff2",
+      path: "../fonts/instrument-serif-latin-400-normal.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/instrument-serif-latin-400-italic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+});
+
+/* Text: Instrument Sans — same family programme as the serif, so
+   they sit together without argument. */
+const instrumentSans = localFont({
+  variable: "--font-instrument-sans",
+  display: "swap",
+  src: [
+    {
+      path: "../fonts/instrument-sans-latin-wght-normal.woff2",
       weight: "100 900",
       style: "normal",
     },
@@ -39,7 +61,7 @@ const inter = localFont({
    and is open licensed. It is the cheapest way to make the page read
    as Indian rather than as a London template with rupee prices. */
 const mukta = localFont({
-  variable: "--font-deva",
+  variable: "--font-mukta",
   display: "swap",
   src: [
     {
@@ -88,17 +110,25 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+/* The font variables go on <html>, not <body>.
+   Tailwind's @theme writes `--font-display: var(--font-instrument-serif)`
+   onto :root. A custom property is substituted at computed-value time on the
+   element it is DECLARED on — so if --font-instrument-serif only exists
+   further down the tree, --font-display is invalid at :root, computes to
+   nothing, and every heading silently falls back to system sans. That is
+   exactly what happened once. Same element, or it does not resolve. */
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN">
-      <body
-        className={`${archivo.variable} ${inter.variable} ${plexMono.variable} ${mukta.variable}`}
-      >
+    <html
+      lang="en-IN"
+      className={`${instrumentSerif.variable} ${instrumentSans.variable} ${inter.variable} ${plexMono.variable} ${mukta.variable}`}
+    >
+      <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-100 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-100 focus:rounded-full focus:bg-plum focus:px-5 focus:py-3 focus:text-on-plum"
         >
           Skip to content
         </a>

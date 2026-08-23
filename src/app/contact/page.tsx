@@ -25,7 +25,7 @@ export default function ContactPage() {
           </Rise>
 
           <Rise delay={100} className="col-span-12 mt-16 lg:col-span-4 lg:col-start-9 lg:mt-0">
-            <div className="border-t border-ink pt-4">
+            <div className="border-t border-on-sand pt-4">
               <p className="eyebrow">Direct</p>
               <div className="mt-4">
                 <a
@@ -45,9 +45,9 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="mt-12 border-t border-rule pt-4">
+            <div className="mt-12 border-t border-rule-sand pt-4">
               <p className="eyebrow">Office</p>
-              <address className="mt-4 text-ink-70 not-italic">
+              <address className="mt-4 text-on-sand-dim not-italic">
                 {site.address.line1}
                 <br />
                 {site.address.line2}
@@ -56,9 +56,9 @@ export default function ContactPage() {
               </address>
             </div>
 
-            <div className="mt-12 border-t border-rule pt-4">
+            <div className="mt-12 border-t border-rule-sand pt-4">
               <p className="eyebrow">For barter enquiries</p>
-              <p className="mt-4 max-w-[34ch] text-ink-70">
+              <p className="mt-4 max-w-[34ch] text-on-sand-dim">
                 Include the category and approximate value of the stock you
                 are holding. It saves a round of questions.
               </p>

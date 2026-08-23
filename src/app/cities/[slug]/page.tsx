@@ -48,7 +48,7 @@ export default async function CityPage({ params }: Params) {
         aria-label="Breadcrumb"
         className="shell pt-28 md:pt-32"
       >
-        <ol className="flex gap-2 font-mono text-meta uppercase tracking-[0.09em] text-ink-50">
+        <ol className="flex gap-2 font-mono text-meta uppercase tracking-[0.09em] text-on-sand-dim">
           <li>
             <Link href="/" className="link-underline -my-2 inline-flex min-h-8 items-center py-2">
               Home
@@ -61,7 +61,7 @@ export default async function CityPage({ params }: Params) {
             </Link>
           </li>
           <li aria-hidden>/</li>
-          <li className="text-ink-70">{city.name}</li>
+          <li className="text-on-sand-dim">{city.name}</li>
         </ol>
       </nav>
 
@@ -84,7 +84,7 @@ export default async function CityPage({ params }: Params) {
             >
               <p
                 className={
-                  i === 0 ? "text-body-l" : "text-body-l text-ink-70"
+                  i === 0 ? "text-body-l" : "text-body-l text-on-sand-dim"
                 }
               >
                 {para}
@@ -115,7 +115,7 @@ export default async function CityPage({ params }: Params) {
           <Rise className="col-span-12 lg:col-span-7">
             <p className="text-body-l">{city.planning}</p>
             <div className="mt-8">
-              <ArrowLink href="/atlas">How Atlas works</ArrowLink>
+              <ArrowLink href="/what-we-do">How we plan a market</ArrowLink>
             </div>
           </Rise>
         </div>
@@ -124,7 +124,7 @@ export default async function CityPage({ params }: Params) {
       {/* 04 — WORK ----------------------------------------------- */}
       <Section index="04" label="Work in this market">
         <Rise className="grid-12">
-          <p className="col-span-12 text-body-l text-ink-70 lg:col-span-6">
+          <p className="col-span-12 text-body-l text-on-sand-dim lg:col-span-6">
             Campaign documentation for this market is available on request,
             subject to client permission.
           </p>
@@ -142,7 +142,7 @@ export default async function CityPage({ params }: Params) {
       {/* 06 — CTA + NEARBY --------------------------------------- */}
       <section className="shell pt-8 pb-28 md:pb-36">
         <Rise>
-          <p className="text-display-l font-display text-balance">
+          <p className="font-display text-display-l text-balance">
             Planning something in {city.name}?
           </p>
         </Rise>
@@ -153,9 +153,9 @@ export default async function CityPage({ params }: Params) {
             address={site.address}
           />
         </Rise>
-        <Rise delay={140} className="mt-16 border-t border-rule pt-4">
+        <Rise delay={140} className="mt-16 border-t border-rule-sand pt-4">
           <p className="eyebrow">Nearby markets</p>
-          <p className="mt-3 text-ink-70">{city.nearby.join(" · ")}</p>
+          <p className="mt-3 text-on-sand-dim">{city.nearby.join(" · ")}</p>
         </Rise>
       </section>
 

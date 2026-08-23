@@ -28,7 +28,41 @@ export const formatSets: Record<string, Format[]> = {
     { label: "Broadcast", ratio: 1.78, note: "16 : 9" },
     { label: "Quarter", ratio: 0.78, note: "Daily" },
   ],
+  activation: [
+    { label: "Canopy", ratio: 1, note: "10 × 10 ft" },
+    { label: "Gate arch", ratio: 2.8, note: "Entry" },
+    { label: "Kiosk", ratio: 0.5, note: "Mall court" },
+  ],
 };
+
+/**
+ * The barter card carries no format plate — barter is not a medium,
+ * it is how the medium gets paid for. It gets its own artefact: the
+ * two legs of the swap, drawn as one line.
+ */
+export function ExchangePlate() {
+  return (
+    <div aria-hidden="true" className="flex items-center gap-3">
+      {["Your stock", "Our media"].map((side, i) => (
+        <div key={side} className="flex items-center gap-3">
+          {i === 1 && (
+            <span className="font-mono text-[0.8125rem] text-on-violet-dim">
+              ⇄
+            </span>
+          )}
+          <div className="rounded-[3px] border border-white/35 px-3 py-4">
+            <p className="text-[0.75rem] leading-tight font-medium whitespace-nowrap">
+              {side}
+            </p>
+            <p className="mt-1 font-mono text-[0.625rem] tracking-[0.05em] text-on-violet-dim uppercase">
+              {i === 0 ? "At list value" : "At card rate"}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function FormatPlate({
   formats,
@@ -38,8 +72,8 @@ export default function FormatPlate({
   tone?: "light" | "dark";
 }) {
   const stroke =
-    tone === "dark" ? "border-on-ink/25" : "border-on-cream/25";
-  const label = tone === "dark" ? "text-on-ink-dim" : "text-on-cream-dim";
+    tone === "dark" ? "border-white/30" : "border-on-sand/25";
+  const label = tone === "dark" ? "text-on-plum-dim" : "text-on-sand-dim";
 
   return (
     <ul className="flex items-end gap-3" aria-hidden="true">

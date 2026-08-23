@@ -7,7 +7,7 @@ export const site = {
   description:
     "Bizex4U is an independent Indian media network. We plan, negotiate and run outdoor, retail and broadcast campaigns across India.",
   email: "yash@bizex4u.com",
-  phone: "+91 8090500009",
+  phone: "+91\u00a08090500009", /* nbsp: the number must not break across lines */
   phoneHref: "+918090500009",
   /* Indian B2B closes on WhatsApp. This is the highest-intent action on
      the site — treat it as the primary CTA, not a footer afterthought. */
@@ -87,38 +87,13 @@ export const capabilities: Capability[] = [
   },
 ];
 
-/* Atlas modules --------------------------------------------------- */
-
-export const atlasModules = [
-  {
-    index: "01",
-    title: "Brand Intelligence",
-    body: "Where a brand is present, where its competitors are, and where the gap between the two is worth buying.",
-  },
-  {
-    index: "02",
-    title: "Spatial Intelligence",
-    body: "Catchments, trade areas and movement patterns, mapped at street level rather than city level.",
-  },
-  {
-    index: "03",
-    title: "Market Intelligence",
-    body: "Category density, retail footprint and demand signals for the markets a campaign is entering.",
-  },
-  {
-    index: "04",
-    title: "Media Intelligence",
-    body: "What media exists in a market, how it performs, and what it should reasonably cost.",
-  },
-];
-
 /* Navigation ------------------------------------------------------ */
 
 export const primaryNav = [
   { label: "What We Do", href: "/what-we-do", mega: true },
   { label: "Work", href: "/work" },
   { label: "Cities", href: "/cities" },
-  { label: "Atlas", href: "/atlas" },
+  { label: "Barter", href: "/barter" },
   { label: "About", href: "/about" },
   { label: "Perspectives", href: "/perspectives" },
 ];
@@ -142,7 +117,6 @@ export const footerNav = [
     links: [
       { label: "About", href: "/about" },
       { label: "Work", href: "/work" },
-      { label: "Atlas", href: "/atlas" },
       { label: "Perspectives", href: "/perspectives" },
       { label: "Careers", href: "/careers" },
     ],
@@ -279,9 +253,9 @@ export const proofFrames = [
   },
   {
     src: "/media/proof-vip-road.jpg",
-    place: "VIP Road, Kanpur",
-    stamp: "26.4819° N, 80.3454° E · 03 Dec 2025",
-    alt: "Hoarding on VIP Road, Kanpur, photographed with a geo-tagged timestamp",
+    place: "Naveen Market, Kanpur",
+    stamp: "26.4745° N, 80.3448° E · 20 Jan 2026",
+    alt: "Hoardings above the Naveen Market crossing, Parmat, Kanpur, photographed with a geo-tagged timestamp",
   },
 ];
 

@@ -27,16 +27,16 @@ export default function Stub({
             <p className="text-body-l">
               This page is being written. It will cover:
             </p>
-            <ul className="mt-8 border-t border-rule">
+            <ul className="mt-8 border-t border-rule-sand">
               {outline.map((item, i) => (
                 <li
                   key={item}
-                  className="flex gap-5 border-b border-rule py-4"
+                  className="flex gap-5 border-b border-rule-sand py-4"
                 >
-                  <span className="font-mono text-meta text-ink-50">
+                  <span className="font-mono text-meta text-on-sand-dim">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-ink-70">{item}</span>
+                  <span className="text-on-sand-dim">{item}</span>
                 </li>
               ))}
             </ul>

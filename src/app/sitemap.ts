@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/what-we-do", priority: 0.8 },
     { path: "/cities", priority: 0.8 },
     { path: "/work", priority: 0.7 },
-    { path: "/atlas", priority: 0.7 },
     { path: "/about", priority: 0.6 },
     { path: "/perspectives", priority: 0.6 },
     { path: "/careers", priority: 0.4 },

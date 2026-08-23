@@ -37,24 +37,24 @@ export default function CitiesPage() {
             const planned = plannedByRegion[region] ?? [];
             return (
               <Rise key={region} delay={ri * 60}>
-                <h2 className="eyebrow border-t border-ink pt-4">{region}</h2>
+                <h2 className="eyebrow border-t border-on-sand pt-4">{region}</h2>
                 <ul className="mt-5">
                   {written.map((c) => (
-                    <li key={c.slug} className="border-b border-rule">
+                    <li key={c.slug} className="border-b border-rule-sand">
                       <Link
                         href={`/cities/${c.slug}`}
                         className="block py-3.5 group"
                       >
                         <span className="link-underline text-h3">{c.name}</span>
-                        <span className="mt-0.5 block font-mono text-meta uppercase tracking-[0.09em] text-ink-50">
+                        <span className="mt-0.5 block font-mono text-meta uppercase tracking-[0.09em] text-on-sand-dim">
                           {c.state}
                         </span>
                       </Link>
                     </li>
                   ))}
                   {planned.map((name) => (
-                    <li key={name} className="border-b border-rule">
-                      <span className="block py-3.5 text-h3 text-ink-50">
+                    <li key={name} className="border-b border-rule-sand">
+                      <span className="block py-3.5 text-h3 text-on-sand-dim">
                         {name}
                       </span>
                     </li>
@@ -65,8 +65,8 @@ export default function CitiesPage() {
           })}
         </div>
 
-        <Rise delay={260} className="mt-14 border-t border-rule pt-4">
-          <p className="max-w-[62ch] text-ink-70">
+        <Rise delay={260} className="mt-14 border-t border-rule-sand pt-4">
+          <p className="max-w-[62ch] text-on-sand-dim">
             Cities set in full are written up in detail. The rest are markets
             we plan and buy in regularly — {additionalMarkets.length} of them —
             with pages being written now. Ask us about any of them directly.

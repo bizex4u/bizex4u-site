@@ -41,7 +41,7 @@ export const cities: City[] = [
     region: "East",
     metaTitle: "Advertising in Kolkata | Outdoor, Retail & Transit Media | Bizex4U",
     metaDescription:
-      "Outdoor, digital, retail and transit advertising in Kolkata, planned from catchment data. Bizex4U is an independent Indian media network with 17 years in the market.",
+      "Outdoor, digital, retail and transit advertising in Kolkata, planned from catchment data. Independent Indian media network, planning outdoor across 40+ cities.",
     heroLede:
       "Kolkata is a corridor city. Attention concentrates along a handful of routes that almost everyone uses, which makes the difference between a good buy and a wasted one unusually sharp.",
     market: [
@@ -73,7 +73,7 @@ export const cities: City[] = [
       },
     ],
     planning:
-      "We plan Kolkata from catchment outwards. Atlas maps the trade area around each priority location — who lives and works inside it, how they move through the week, and how dense the category already is — and the media plan follows that map. In practice that usually means fewer sites than a conventional proposal would offer, held for longer, positioned against movement rather than against footfall counts.",
+      "We plan Kolkata from the catchment outwards. Before any site list exists we map the trade area around each priority location — who lives and works inside it, how they move through the week, and how dense the category already is — and the plan follows that map. In practice that usually means fewer sites than a conventional proposal would offer, held for longer, positioned against movement rather than against footfall counts.",
     faq: [
       {
         q: "Which parts of Kolkata work best for outdoor advertising?",

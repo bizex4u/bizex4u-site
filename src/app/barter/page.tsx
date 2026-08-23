@@ -1,269 +1,388 @@
 import type { Metadata } from "next";
-import {
-  ContactLedger,
-  Faq,
-  LedgerList,
-  LedgerRow,
-  PageHero,
-  Rise,
-  Section,
-} from "@/components/Ledger";
+import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
+import { Faq } from "@/components/Ledger";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Barter & Trade Structuring — The Commercial Model",
+  title: "Barter Advertising in India — Trade Stock for Media",
   description:
-    "Bizex4U converts what a business already owns — finished goods, unsold stock, capacity, vouchers — into media across India. Contracted, valued in advance, GST-compliant.",
+    "Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast media across India. Contracted, valued in advance, GST-compliant on both legs.",
   alternates: { canonical: "/barter" },
 };
+
+/* Framing note: this page is built around the three objections that
+   actually stop the first call — will my pricing be destroyed, will
+   my finance team allow it, and am I being short-changed on value.
+   Everything else is secondary. */
 
 const problems = [
   {
     index: "01",
-    title: "Capital sits still",
-    body: "Ageing stock occupies space and depreciates daily. It is a marketing asset being carried as a warehousing cost.",
+    title: "Stock depreciates. Quietly.",
+    body: "Ageing inventory costs warehousing, ties up working capital and loses value every month it sits. None of that appears as a line item, which is exactly why it goes unaddressed.",
   },
   {
     index: "02",
-    title: "Media costs cash",
-    body: "Upfront buys make national campaigns unrealistic for most balance sheets, so reach gets cut before the plan is even written.",
+    title: "The marketing budget is capped.",
+    body: "The mandate to grow is there. The cash to buy national media is not. So reach gets cut before the plan is even written.",
   },
   {
     index: "03",
-    title: "Liquidation destroys value",
-    body: "Bulk cash sales return a fraction of value, build nothing, and often damage the pricing you spent years defending.",
+    title: "Liquidation destroys pricing.",
+    body: "Bulk cash sales return a fraction of value, build nothing, and put your product in front of exactly the channels you spent years keeping it away from.",
   },
 ];
 
-/* The equation. Left is what a business already holds. Right is the
-   category of media it converts into. Categories only — never units. */
 const equation = [
   { give: "Finished goods", get: "Outdoor across 40+ cities" },
-  { give: "Unsold stock", get: "Broadcast and radio" },
-  { give: "Capacity", get: "Retail and mall presence" },
-  { give: "Vouchers", get: "Digital out-of-home" },
-  { give: "Services", get: "Activations and gifting" },
+  { give: "Unsold or seasonal stock", get: "Broadcast, radio and print" },
+  { give: "Manufacturing capacity", get: "Retail and mall presence" },
+  { give: "Vouchers and gift cards", get: "Digital out-of-home" },
+  { give: "Services and subscriptions", get: "Activations and gifting" },
 ];
 
 const steps = [
   {
     index: "01",
-    title: "Agreement & Strategy",
-    body: "Objectives, target markets and total media value are locked in a signed reciprocal trade agreement before any work begins. Nothing moves on a handshake.",
+    title: "Valuation, before anything else",
+    body: "You tell us what you hold and what it is realistically worth. We tell you what media that buys. Both numbers are agreed in writing before either side performs — there is no deal until they are.",
   },
   {
     index: "02",
-    title: "Media Selection",
-    body: "A curated plan across outdoor, broadcast, retail and digital — built to the campaign rather than to whatever needs clearing that quarter.",
+    title: "A signed reciprocal trade agreement",
+    body: "Scope, markets, media value, timelines and the channels your goods may move through, all documented. Nothing proceeds on a handshake.",
   },
   {
     index: "03",
-    title: "Campaign Execution",
-    body: "Run and managed by our team, with run schedules, placement documentation and post-campaign reporting delivered as a matter of course.",
+    title: "The media plan",
+    body: "Built to your objective and your markets — not to whatever happens to be unsold this quarter. You approve the plan before it is booked.",
   },
   {
     index: "04",
-    title: "Settlement",
-    body: "The agreed media value is fulfilled in goods, distributed through controlled corporate and institutional channels that protect your pricing and your positioning.",
+    title: "Campaign and documentation",
+    body: "Run and managed by our team, with run schedules, geo-tagged placement photographs and post-campaign reporting delivered as standard.",
+  },
+  {
+    index: "05",
+    title: "Settlement in goods",
+    body: "You fulfil the agreed value in product. It moves through controlled corporate, institutional and channel-partner networks that protect your pricing.",
   },
 ];
 
 const governance = [
   {
-    index: "01",
-    title: "Contracted",
-    body: "A reciprocal trade agreement with valuation fixed in advance, in writing, before either side performs.",
+    title: "Your pricing is protected",
+    body: "Goods are placed through defined corporate, institutional and gifting channels, agreed with you in advance and named in the contract. They do not enter the open market and they do not reach the discounters who would undercut your own trade.",
   },
   {
-    index: "02",
-    title: "Compliant",
-    body: "GST-compliant invoicing on both legs of the exchange. Auditable books, treated as two supplies rather than an off-record swap.",
+    title: "Your finance team will recognise it",
+    body: "This is not an off-record swap. It is two distinct supplies — a sale of goods by you, a supply of media services by us — each separately invoiced and taxed under GST. Your auditor sees a clean paper trail on both sides.",
   },
   {
-    index: "03",
-    title: "Controlled",
-    body: "Goods are placed through defined corporate and institutional channels. Never dumped into the open market, never routed through grey channels.",
+    title: "The valuation is yours to challenge",
+    body: "We work from realistic net realisable value, not MRP, and we quote media on the same commercial basis you would be given for a cash buy. If either number does not stand up to your scrutiny, we would rather you walked.",
   },
 ];
 
 const faq = [
   {
-    q: "How are the goods valued?",
-    a: "At a value both sides agree in writing before the agreement is signed. We work from your realistic net realisable value rather than from MRP, and the media is valued on the same commercial basis you would be quoted for a cash buy. If we cannot agree on both numbers, there is no deal — which is the point of settling them first.",
+    q: "How is the value of our goods decided?",
+    a: "By agreement, in writing, before the contract is signed. We start from realistic net realisable value rather than MRP, because MRP-based barter is where most of these deals go wrong. The media is priced on the same commercial basis you would be quoted for a cash campaign. If we cannot agree on both numbers there is no transaction — which is precisely why we settle them first.",
   },
   {
-    q: "What actually happens to our products?",
-    a: "They move through controlled corporate, institutional and channel-partner networks. That protects your pricing and keeps the stock away from the discount channels that would undercut your own trade. Where the category is sensitive, we will agree the placement channels with you in advance and document them.",
+    q: "Where do our products actually end up?",
+    a: "In controlled corporate, institutional and channel-partner networks — corporate gifting programmes, employee benefit schemes, distributor incentives and similar. The permitted channels are agreed with you before signing and written into the agreement. Your goods do not go to open-market discounters, and if a category is sensitive we will restrict the channels further at your instruction.",
+  },
+  {
+    q: "How does our finance team book this?",
+    a: "As two separate transactions, not a netted-off barter entry. You raise a tax invoice for the goods; we raise a tax invoice for the media services. GST applies on both legs and both are claimable in the normal way. We will walk your finance team through the treatment before signing, and we would encourage you to take your own tax advice as well — it is a straightforward structure, but it should be your advisor who confirms that.",
+  },
+  {
+    q: "Are we getting a worse media rate because we are paying in stock?",
+    a: "No — and you should ask us to prove it. We quote the media at the rate we would quote for cash, and you are free to benchmark it against any other agency before you sign. The saving to you comes from moving the cost off your cash budget, not from us discounting the media or over-valuing your goods.",
   },
   {
     q: "How long does it take to go live?",
-    a: "Once the agreement is signed and the media plan is approved, most campaigns launch within three to five weeks. Outdoor and retail placements depend on site availability cycles; broadcast and digital typically move faster.",
-  },
-  {
-    q: "How is this treated in our books?",
-    a: "As two distinct transactions — a sale of goods by you and a supply of media services by us — each invoiced and taxed on its own merits, not as a netted-off barter entry. Your auditor should see a clean paper trail on both sides. We will work with your finance team on the treatment before signing, and we would encourage you to take your own tax advice as well.",
+    a: "Typically three to five weeks from a signed agreement and an approved media plan. Outdoor and retail depend on site availability cycles; broadcast and digital usually move faster. Seasonal stock has its own clock, so tell us the deadline early and we will plan backwards from it.",
   },
   {
     q: "Is there a minimum size?",
-    a: "The model works best above a level where a media plan is worth building properly. Below that the structuring effort outweighs the saving. Tell us the value of stock you are holding and we will say plainly whether barter is the right route or whether you are better off with a cash buy.",
+    a: "The model works best above a level where building a proper media plan is worth the structuring effort. Below that you are better off with a straight cash buy and we will say so. Tell us roughly what you are holding and we will give you a direct answer rather than a proposal.",
   },
   {
-    q: "Which media can we get?",
-    a: "Outdoor and transit, digital out-of-home, retail and hyperlocal, broadcast, print, radio, cinema, and ground activations. What is available in a specific market at a specific time varies, so we build the plan against your objective first and confirm availability second.",
+    q: "What if we only want to trade part of the campaign?",
+    a: "That is common and often sensible. Many engagements are part cash, part goods — you cover the portion your budget allows and trade the remainder. The structure and the documentation are identical.",
   },
 ];
 
 export default function BarterPage() {
   return (
     <>
-      <PageHero
-        eyebrow="The Commercial Model"
-        title="Inventory is a currency."
-        lede="Most companies just don’t spend it. Bizex4U converts what a business already owns — finished goods, unsold stock, capacity, vouchers — into media across India. No cash leaves the marketing budget."
-      />
-
-      {/* 01 — THE PROBLEM ---------------------------------------- */}
-      <Section index="01" label="The problem">
-        <LedgerList>
-          {problems.map((p, i) => (
-            <LedgerRow key={p.index} {...p} delay={i * 60} />
-          ))}
-        </LedgerList>
-      </Section>
-
-      {/* 02 — THE EQUATION --------------------------------------- */}
-      <section className="bg-ink py-20 text-paper md:py-28">
-        <div className="shell">
-          <Rise className="border-t border-rule-dark pt-4">
-            <h2 className="eyebrow text-paper-dim">02 — The equation</h2>
-          </Rise>
-
-          <div className="mt-12">
-            <div className="grid grid-cols-2">
-              <p className="eyebrow border-b border-rule-dark pb-3 text-paper-dim">
-                What you give
-              </p>
-              <p className="eyebrow border-b border-rule-dark pb-3 pl-6 text-paper-dim md:pl-10">
-                What you get
-              </p>
+      {/* HERO ---------------------------------------------------- */}
+      <section className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20">
+        <div className="shell relative z-10">
+          <div className="grid-12 items-center gap-y-10">
+            <div className="col-span-12 lg:col-span-7">
+              <Rise>
+                <Eyebrow deva="बार्टर विज्ञापन">Barter advertising</Eyebrow>
+              </Rise>
+              <Rise delay={60}>
+                <h1 className="mt-6 font-display text-display-xl text-balance">
+                  Advertise with what you{" "}
+                  <span className="em-serif text-violet-deep">already own</span>.
+                </h1>
+              </Rise>
+              <Rise delay={120}>
+                <p className="mt-7 max-w-[52ch] text-body-l text-on-sand-dim">
+                  Finished goods, unsold stock, capacity or vouchers, converted
+                  into outdoor, retail and broadcast media across India. Valued
+                  in writing before anything moves. No cash leaves the marketing
+                  budget.
+                </p>
+                <div className="mt-9 flex flex-wrap gap-3">
+                  <Btn href={site.whatsapp} external size="lg">
+                    Tell us what you&rsquo;re holding
+                  </Btn>
+                  <Btn href="#how" variant="outline-plum" size="lg">
+                    How it works
+                  </Btn>
+                </div>
+                <p className="mt-5 text-[0.875rem] text-on-sand-dim">
+                  Send the category and rough value. You&rsquo;ll get a straight
+                  answer on whether barter is right for it — including when it
+                  isn&rsquo;t.
+                </p>
+              </Rise>
             </div>
 
-            <ul>
-              {equation.map((row, i) => (
-                <Rise
-                  key={row.give}
-                  as="li"
-                  delay={i * 60}
-                  className="grid grid-cols-2 border-b border-rule-dark"
-                >
-                  <span className="py-5 pr-4 text-h3 md:py-6">{row.give}</span>
-                  <span className="border-l border-accent py-5 pl-6 text-h3 md:py-6 md:pl-10">
-                    {row.get}
-                  </span>
-                </Rise>
-              ))}
-            </ul>
+            <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
+              <Card bg="bg-plum" className="text-on-plum">
+                <p className="eyebrow text-violet-lift">The short version</p>
+                <p className="mt-5 font-display text-h2">
+                  Your warehouse is a media budget that hasn&rsquo;t been spent
+                  yet.
+                </p>
+                <p className="mt-5 text-on-plum-dim">
+                  It is already costing you storage, capital and depreciation.
+                  Barter converts that cost into visibility instead of writing
+                  it off.
+                </p>
+              </Card>
+            </Rise>
           </div>
-
-          <Rise delay={200} className="mt-10">
-            <p className="text-body-l text-paper-dim">
-              Agreed at fair market value, in writing, before anything moves.
-            </p>
-          </Rise>
         </div>
       </section>
 
-      {/* 03 — HOW IT WORKS --------------------------------------- */}
-      <Section index="03" label="How it works">
-        <div className="border-b border-rule">
-          {steps.map((s, i) => (
-            <Rise
-              key={s.index}
-              delay={i * 60}
-              className="grid-12 items-start gap-y-4 border-t border-rule py-12 md:py-16"
-            >
-              <span className="col-span-12 font-mono text-meta text-accent md:col-span-1">
-                {s.index}
-              </span>
-              <h3 className="col-span-12 text-h2 text-balance md:col-span-5">
-                {s.title}
-              </h3>
-              <p className="col-span-12 max-w-[52ch] text-body-l text-ink-70 md:col-span-5 md:col-start-8">
-                {s.body}
-              </p>
+      {/* 01 — WHY IT EXISTS -------------------------------------- */}
+      <Band tone="sand2" grain>
+        <Rise>
+          <Eyebrow>Why this exists</Eyebrow>
+          <h2 className="mt-5 max-w-[22ch] font-display text-display-l text-balance">
+            Three costs that never appear{" "}
+            <span className="em-serif text-violet-deep">on a line item</span>.
+          </h2>
+        </Rise>
+        <ul className="mt-12 grid gap-4 lg:grid-cols-3">
+          {problems.map((p, i) => (
+            <Rise key={p.index} as="li" delay={i * 70}>
+              <Card tone="sand2" className="h-full">
+                <span className="eyebrow text-violet-deep">{p.index}</span>
+                <h3 className="mt-3 font-display text-h2 text-balance">
+                  {p.title}
+                </h3>
+                <p className="mt-4 text-on-sand-dim">{p.body}</p>
+              </Card>
             </Rise>
           ))}
+        </ul>
+      </Band>
+
+      {/* 02 — THE EQUATION --------------------------------------- */}
+      <Band tone="plum" grain>
+        <Rise>
+          <Eyebrow tone="plum">The exchange</Eyebrow>
+          <h2 className="mt-5 font-display text-display-l text-balance">
+            What you give, <span className="em-serif">what you get</span>.
+          </h2>
+        </Rise>
+
+        <div className="mt-12">
+          <div className="grid grid-cols-2 gap-4 border-b border-rule-plum pb-4">
+            <p className="eyebrow text-on-plum-dim">You give</p>
+            <p className="eyebrow text-violet-lift">You get</p>
+          </div>
+          <ul>
+            {equation.map((row, i) => (
+              <Rise
+                key={row.give}
+                as="li"
+                delay={i * 55}
+                className="grid grid-cols-2 gap-4 border-b border-rule-plum py-5 md:py-6"
+              >
+                <span className="font-display text-h2">{row.give}</span>
+                <span className="font-display text-h2 text-violet-lift">
+                  {row.get}
+                </span>
+              </Rise>
+            ))}
+          </ul>
+          <Rise delay={200}>
+            <p className="mt-8 max-w-[56ch] text-body-l text-on-plum-dim">
+              Agreed at fair market value, in writing, before either side
+              performs.
+            </p>
+          </Rise>
         </div>
-      </Section>
+      </Band>
+
+      {/* 03 — HOW IT WORKS --------------------------------------- */}
+      <Band tone="sand" id="how" grain>
+        <Rise>
+          <Eyebrow deva="यह कैसे काम करता है">How it works</Eyebrow>
+          <h2 className="mt-5 max-w-[20ch] font-display text-display-l text-balance">
+            Five steps. <span className="em-serif text-violet-deep">No surprises.</span>
+          </h2>
+        </Rise>
+
+        {/* A ladder, not a 3 x 2 grid. Five steps in a three-column grid
+            leaves a hole in the second row, and a sequence laid out as a
+            grid stops reading as a sequence. The rule between rows is the
+            process line. */}
+        <ol className="mt-12 border-t border-rule-sand">
+          {steps.map((s, i) => (
+            <Rise key={s.index} as="li" delay={i * 55}>
+              <div className="grid grid-cols-12 gap-x-6 gap-y-3 border-b border-rule-sand py-7 md:py-9">
+                <span className="col-span-12 font-mono text-[0.8125rem] tracking-[0.08em] text-violet-deep md:col-span-1">
+                  {s.index}
+                </span>
+                <h3 className="col-span-12 font-display text-h2 text-balance md:col-span-5">
+                  {s.title}
+                </h3>
+                <p className="col-span-12 max-w-[62ch] text-on-sand-dim md:col-span-6">
+                  {s.body}
+                </p>
+              </div>
+            </Rise>
+          ))}
+        </ol>
+      </Band>
 
       {/* 04 — GOVERNANCE ----------------------------------------- */}
-      <Section index="04" label="Governance">
-        <Rise className="mb-10 grid-12">
-          <p className="col-span-12 max-w-[46ch] text-body-l lg:col-span-6">
-            Barter has a reputation problem because it is often done badly.
-            Here is how it is done properly.
-          </p>
+      <Band tone="violet" grain>
+        <Rise>
+          <Eyebrow tone="violet">The part that usually worries people</Eyebrow>
+          <h2 className="mt-5 max-w-[24ch] font-display text-display-l text-balance">
+            Barter has a reputation problem because it is often done{" "}
+            <span className="em-serif">badly</span>.
+          </h2>
         </Rise>
-        <LedgerList>
-          {governance.map((g, i) => (
-            <LedgerRow key={g.index} {...g} delay={i * 60} />
-          ))}
-        </LedgerList>
-      </Section>
 
-      {/* 05 — WHO THIS SUITS ------------------------------------- */}
-      <Section index="05" label="Who this suits">
-        <div className="grid-12 gap-y-6">
-          <Rise className="col-span-12 md:col-span-5">
-            <p className="text-body-l">
-              Consumer brands carrying seasonal stock. Manufacturers with
-              unused capacity. Retail chains with slow-moving lines.
-            </p>
+        <ul className="mt-12 grid gap-4 lg:grid-cols-3">
+          {governance.map((g, i) => (
+            <Rise key={g.title} as="li" delay={i * 70}>
+              <div className="h-full rounded-(--radius-card) bg-white/10 p-6 md:p-7">
+                <h3 className="font-display text-h2 text-balance">{g.title}</h3>
+                <p className="mt-4 text-on-violet-dim">{g.body}</p>
+              </div>
+            </Rise>
+          ))}
+        </ul>
+      </Band>
+
+      {/* 05 — WHO IT SUITS --------------------------------------- */}
+      <Band tone="sand2" grain>
+        <div className="grid-12 gap-y-8">
+          <Rise className="col-span-12 lg:col-span-5">
+            <Eyebrow>Who it suits</Eyebrow>
+            <h2 className="mt-5 font-display text-display-l text-balance">
+              And who it doesn&rsquo;t.
+            </h2>
           </Rise>
-          <Rise delay={80} className="col-span-12 md:col-span-5 md:col-start-7">
-            <p className="text-body-l text-ink-70">
-              Companies entering a new region without a budget to match the
-              ambition. And any business holding a marketing mandate against a
-              cash constraint.
+          <Rise delay={80} className="col-span-12 lg:col-span-6 lg:col-start-7">
+            <p className="text-body-l">
+              Consumer brands carrying seasonal stock. Manufacturers with unused
+              capacity. Retail chains with slow-moving lines. Companies entering
+              a region without a budget to match the ambition.
+            </p>
+            <p className="mt-6 text-body-l text-on-sand-dim">
+              It suits you less if your stock is fast-moving and fully priced,
+              if your category cannot tolerate secondary distribution, or if the
+              value you hold is too small to justify building a proper media
+              plan around. In any of those cases we will tell you to buy media
+              with cash — it is a shorter conversation and a better outcome.
             </p>
           </Rise>
         </div>
-      </Section>
+      </Band>
 
       {/* 06 — FAQ ------------------------------------------------ */}
-      <Section index="06" label="Questions">
-        <Faq items={faq} />
-      </Section>
+      <Band tone="sand" grain>
+        <Rise>
+          <Eyebrow deva="सवाल">Questions</Eyebrow>
+          <h2 className="mt-5 font-display text-display-l text-balance">
+            The ones people{" "}
+            <span className="em-serif text-violet-deep">actually ask</span>.
+          </h2>
+        </Rise>
+        <div className="mt-12">
+          <Faq items={faq} />
+        </div>
+      </Band>
 
       {/* 07 — CTA ------------------------------------------------ */}
-      <section className="shell pt-8 pb-28 md:pb-36">
-        <Rise>
-          <p className="text-display-l font-display text-balance">
-            Send us what you&rsquo;re sitting on.
-          </p>
-        </Rise>
-        <Rise delay={80} className="mt-14">
-          <ContactLedger
-            email={site.email}
-            phone={site.phone}
-            address={site.address}
-          />
-        </Rise>
-      </section>
+      <Band tone="plum" grain>
+        <div className="grid-12 items-center gap-y-8">
+          <Rise className="col-span-12 lg:col-span-7">
+            <h2 className="font-display text-display-l text-balance">
+              Tell us what you&rsquo;re{" "}
+              <span className="em-serif">sitting on</span>.
+            </h2>
+            <p className="mt-6 max-w-[46ch] text-body-l text-on-plum-dim">
+              The category and a rough value is enough to start. We will tell
+              you what media it buys, or that it doesn&rsquo;t.
+            </p>
+          </Rise>
+          <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
+            <div className="flex flex-col gap-3">
+              <Btn href={site.whatsapp} external size="lg">
+                Message on WhatsApp
+              </Btn>
+              <Btn href="/contact" variant="outline-sand" size="lg">
+                Send a brief instead
+              </Btn>
+            </div>
+          </Rise>
+        </div>
+      </Band>
 
-      {/* FAQ structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faq.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
-          }),
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Service",
+              serviceType: "Barter advertising and media trade structuring",
+              provider: {
+                "@type": "Organization",
+                name: site.name,
+                url: site.url,
+                email: site.email,
+                telephone: site.phone,
+              },
+              areaServed: { "@type": "Country", name: "India" },
+              url: `${site.url}/barter`,
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faq.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            },
+          ]),
         }}
       />
     </>
