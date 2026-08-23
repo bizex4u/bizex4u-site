@@ -21,13 +21,18 @@ import { dayClock } from "@/lib/dayclock";
  * a carousel.
  */
 
+/* Each panel carries its own dim-text and rule colours, not just a
+   background. on-plum-dim reaches only 4.0:1 against violet-deep, so a
+   shared text colour across both grounds fails AA on the violet panel.
+   Measured: on-plum-dim on plum-2/plum-3 = 7.4:1 and 6.2:1;
+   on-violet-dim on violet-deep = 5.88:1. */
 const tint = [
-  "bg-plum-2",
-  "bg-plum-2",
-  "bg-plum-3",
-  "bg-plum-3",
-  "bg-violet-deep",
-  "bg-plum-2",
+  { bg: "bg-plum-2", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
+  { bg: "bg-plum-2", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
+  { bg: "bg-plum-3", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
+  { bg: "bg-plum-3", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
+  { bg: "bg-violet-deep", dim: "text-on-violet-dim", rule: "border-white/25", plate: "violet" as const },
+  { bg: "bg-plum-2", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
 ];
 
 export default function DayClock() {
@@ -57,7 +62,7 @@ export default function DayClock() {
           <p className="mt-3 max-w-[74ch] text-[0.9375rem] text-on-plum-dim">
             The same person is reachable six different ways before midnight,
             and each one needs a different format.
-            <span className="ml-2 hidden text-on-plum-dim/70 lg:inline">
+            <span className="ml-2 hidden text-on-plum-dim lg:inline">
               Keep scrolling to move through the day.
             </span>
           </p>
@@ -76,13 +81,13 @@ export default function DayClock() {
             {dayClock.map((h, i) => (
               <article
                 key={h.time}
-                className={`flex w-[80vw] max-w-[25rem] flex-col overflow-y-auto rounded-(--radius-card) p-6 sm:w-[56vw] md:w-[25rem] ${tint[i]}`}
+                className={`flex w-[80vw] max-w-[25rem] flex-col overflow-y-auto rounded-(--radius-card) p-6 sm:w-[56vw] md:w-[25rem] ${tint[i].bg}`}
               >
                 <div className="flex shrink-0 items-baseline justify-between gap-4">
                   <p className="font-display text-[clamp(2.25rem,4vw,3rem)] leading-none">
                     {h.time}
                   </p>
-                  <p className="deva text-[0.9375rem] text-on-plum-dim">
+                  <p className={`deva text-[0.9375rem] ${tint[i].dim}`}>
                     {h.deva}
                   </p>
                 </div>
@@ -90,13 +95,17 @@ export default function DayClock() {
                 <h3 className="mt-3 shrink-0 font-display text-h2 text-balance">
                   {h.title}
                 </h3>
-                <p className="mt-3 shrink-0 text-[0.9375rem] text-on-plum-dim">
+                <p className={`mt-3 shrink-0 text-[0.9375rem] ${tint[i].dim}`}>
                   {h.body}
                 </p>
 
                 {h.plate && (
                   <div className="mt-4 shrink-0">
-                    <FormatPlate formats={formatSets[h.plate]} tone="dark" base={46} />
+                    <FormatPlate
+                      formats={formatSets[h.plate]}
+                      tone={tint[i].plate}
+                      base={46}
+                    />
                   </div>
                 )}
 
@@ -111,7 +120,9 @@ export default function DayClock() {
                   ))}
                 </ul>
 
-                <p className="mt-3 shrink-0 border-t border-white/15 pt-2.5 font-mono text-[0.6875rem] leading-relaxed tracking-[0.04em] text-on-plum-dim uppercase">
+                <p
+                  className={`mt-3 shrink-0 border-t pt-2.5 font-mono text-[0.6875rem] leading-relaxed tracking-[0.04em] uppercase ${tint[i].rule} ${tint[i].dim}`}
+                >
                   {h.examples}
                 </p>
               </article>
@@ -130,7 +141,7 @@ export default function DayClock() {
               </p>
               <a
                 href="#objectives"
-                className="group mt-8 inline-flex items-center gap-2 text-[0.9375rem] font-medium text-violet-lift"
+                className="group mt-8 -mb-2 inline-flex min-h-11 items-center gap-2 py-2 text-[0.9375rem] font-medium text-violet-lift"
               >
                 Start with the objective <span className="row-arrow">→</span>
               </a>

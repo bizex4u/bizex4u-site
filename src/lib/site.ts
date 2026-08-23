@@ -10,11 +10,15 @@ export const site = {
   phone: "+91\u00a08090500009", /* nbsp: the number must not break across lines */
   phoneHref: "+918090500009",
   /* Indian B2B closes on WhatsApp. This is the highest-intent action on
-     the site — treat it as the primary CTA, not a footer afterthought. */
+     the site — treat it as the primary CTA, not a footer afterthought.
+     whatsappBase is exported separately so components that compose
+     their own prefilled message (the barter selector) do not have to
+     rebuild the deep link and get the number wrong. */
+  whatsappBase: "https://wa.me/918090500009",
   whatsapp:
     "https://wa.me/918090500009?text=" +
     encodeURIComponent(
-      "Hi Bizex4U — I'd like to talk about an outdoor campaign.",
+      "Hi Bizex4U — I'd like to talk about a campaign.",
     ),
   address: {
     line1: "Mona Enclave",

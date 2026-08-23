@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
 import { Faq } from "@/components/Ledger";
+import GstFlow from "@/components/GstFlow";
+import BarterSelector from "@/components/BarterSelector";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -315,7 +317,59 @@ export default function BarterPage() {
         </div>
       </Band>
 
-      {/* 06 — FAQ ------------------------------------------------ */}
+      {/* 06 — THE FINANCE TREATMENT ------------------------------
+          The finance objection is the one that actually kills these
+          deals, and it was previously answered in a paragraph. A CFO
+          cannot forward a paragraph to their CA. */}
+      <Band tone="sand" grain>
+        <div className="grid-12 items-start gap-y-10">
+          <Rise className="col-span-12 lg:col-span-4">
+            <Eyebrow deva="जीएसटी">For your finance team</Eyebrow>
+            <h2 className="mt-5 max-w-[14ch] font-display text-display-l text-balance">
+              Two invoices.{" "}
+              <span className="em-serif text-violet-deep">
+                Nothing netted off
+              </span>
+              .
+            </h2>
+            <p className="mt-6 max-w-[40ch] text-on-sand-dim">
+              Most objections to barter are really objections to how it used
+              to be done — off the books, on a handshake, impossible to
+              audit. This is the structure we actually contract under, drawn
+              so you can forward it.
+            </p>
+          </Rise>
+          <Rise delay={80} className="col-span-12 lg:col-span-7 lg:col-start-6">
+            <GstFlow />
+          </Rise>
+        </div>
+      </Band>
+
+      {/* 07 — THE SELECTOR ---------------------------------------
+          Barter stays abstract until someone names their own stock out
+          loud. This makes them do it in three taps, then hands the
+          answers to WhatsApp. It collects; it never quotes. */}
+      <Band tone="sand2" id="start" grain>
+        <div className="grid-12 items-start gap-y-10">
+          <Rise className="col-span-12 lg:col-span-4">
+            <Eyebrow>Start here</Eyebrow>
+            <h2 className="mt-5 max-w-[14ch] font-display text-display-l text-balance">
+              Three taps and a{" "}
+              <span className="em-serif text-violet-deep">real answer</span>.
+            </h2>
+            <p className="mt-6 max-w-[40ch] text-on-sand-dim">
+              We will not put a number on your stock from a web form, and you
+              should be suspicious of anyone who does. Tell us the shape of it
+              and you will get a straight reply from a person.
+            </p>
+          </Rise>
+          <Rise delay={80} className="col-span-12 lg:col-span-7 lg:col-start-6">
+            <BarterSelector />
+          </Rise>
+        </div>
+      </Band>
+
+      {/* 08 — FAQ ------------------------------------------------ */}
       <Band tone="sand" grain>
         <Rise>
           <Eyebrow deva="सवाल">Questions</Eyebrow>
@@ -329,7 +383,7 @@ export default function BarterPage() {
         </div>
       </Band>
 
-      {/* 07 — CTA ------------------------------------------------ */}
+      {/* 09 — CTA ------------------------------------------------ */}
       <Band tone="plum" grain>
         <div className="grid-12 items-center gap-y-8">
           <Rise className="col-span-12 lg:col-span-7">

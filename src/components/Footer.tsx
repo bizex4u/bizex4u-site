@@ -54,7 +54,7 @@ export default function Footer() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="link-underline -my-1.5 inline-flex min-h-9 items-center py-1.5 text-[0.9375rem] text-balance text-on-plum-dim hover:text-on-plum"
+                        className="link-underline -my-1.5 inline-flex min-h-10 items-center py-1.5 text-[0.9375rem] text-balance text-on-plum-dim hover:text-on-plum"
                       >
                         {link.label}
                       </Link>

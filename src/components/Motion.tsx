@@ -286,6 +286,14 @@ export default function Motion() {
           const [, pre, numRaw, post] = m;
           const decimals = (numRaw.split(".")[1] ?? "").length;
           const value = parseFloat(numRaw.replace(/,/g, ""));
+          /* Only zero it out if it is still below the fold. A page
+             restored mid-scroll (back navigation) can start with the
+             number already on screen, and blanking it to zero there
+             would leave it at zero if the trigger never re-fires. */
+          const rect = el.getBoundingClientRect();
+          const alreadyVisible = rect.top < window.innerHeight * 0.88;
+          if (alreadyVisible) return;
+
           const box = { n: 0 };
           el.textContent = pre + (0).toFixed(decimals) + post;
           gsap.to(box, {

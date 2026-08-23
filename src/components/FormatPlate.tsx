@@ -70,7 +70,10 @@ export default function FormatPlate({
   base = 58,
 }: {
   formats: Format[];
-  tone?: "light" | "dark";
+  /* "violet" exists because on-plum-dim only reaches 4.0:1 against
+     violet-deep. The violet ground needs on-violet-dim (5.88:1) or
+     the format notes fail AA. */
+  tone?: "light" | "dark" | "violet";
   /* Height in px of a 1:1 plate. Everything else is derived from it,
      so one number scales the whole set. The day-clock panels run
      smaller because they are fighting for vertical room inside a
@@ -81,10 +84,15 @@ export default function FormatPlate({
      unfinished wireframe; the fill makes each plate read as an object
      drawn at a size, which is the whole point of the device. */
   const stroke =
-    tone === "dark"
-      ? "border-white/35 bg-white/5"
-      : "border-on-sand/30 bg-on-sand/5";
-  const label = tone === "dark" ? "text-on-plum-dim" : "text-on-sand-dim";
+    tone === "light"
+      ? "border-on-sand/30 bg-on-sand/5"
+      : "border-white/35 bg-white/5";
+  const label =
+    tone === "light"
+      ? "text-on-sand-dim"
+      : tone === "violet"
+        ? "text-on-violet-dim"
+        : "text-on-plum-dim";
 
   return (
     <ul className="flex items-end gap-3" aria-hidden="true">

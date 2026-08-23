@@ -41,13 +41,16 @@ export default async function CityPage({ params }: Params) {
           <nav aria-label="Breadcrumb" className="mb-10">
             <ol className="flex flex-wrap gap-2 font-mono text-[0.75rem] tracking-[0.08em] text-on-sand-dim uppercase">
               <li>
-                <Link href="/" className="link-underline">
+                <Link href="/" className="link-underline -my-2 inline-flex min-h-8 items-center py-2">
                   Home
                 </Link>
               </li>
               <li aria-hidden>/</li>
               <li>
-                <Link href="/cities" className="link-underline">
+                <Link
+                  href="/cities"
+                  className="link-underline -my-2 inline-flex min-h-8 items-center py-2"
+                >
                   Cities
                 </Link>
               </li>
