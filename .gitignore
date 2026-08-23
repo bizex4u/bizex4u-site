@@ -42,3 +42,11 @@ next-env.d.ts
 
 # scratch
 /preview
+
+# Scratch and delivery leftovers. These have lived inside the project
+# root before; a duplicate src tree in here gets picked up by the dev
+# file watcher and makes `next dev` crawl.
+/_to_delete
+/_bizex4u_new
+/_incoming
+/_incoming.tar.gz
