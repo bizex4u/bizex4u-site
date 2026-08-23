@@ -15,9 +15,9 @@ import {
   objectives,
   proofFrames,
   proofStats,
-  site,
 } from "@/lib/site";
 import { additionalMarkets, cities } from "@/lib/cities";
+import BriefButton from "@/components/BriefButton";
 
 /* ------------------------------------------------------------------
    The homepage, positioned as a brand activation company.
@@ -120,16 +120,16 @@ export default function Home() {
                 </p>
 
                 <div className="mt-9 flex flex-wrap items-center gap-3">
-                  <Btn href={site.whatsapp} external size="lg">
+                  <BriefButton size="lg" context="A plan for my market">
                     Get a plan for your market
-                  </Btn>
+                  </BriefButton>
                   <Btn href="/barter" variant="outline-plum" size="lg">
                     Pay in stock instead
                   </Btn>
                 </div>
 
                 <p className="mt-5 text-[0.875rem] text-on-sand-dim">
-                  Straight to WhatsApp. Usually answered the same working day.
+                  Two fields, then straight to WhatsApp. Usually answered the same working day.
                 </p>
               </Rise>
             </div>

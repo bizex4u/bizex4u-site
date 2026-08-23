@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
 import { clients, sectorsServed, site } from "@/lib/site";
+import BriefButton from "@/components/BriefButton";
 
 export const metadata: Metadata = {
   title: "About — An Independent Indian Media Network",
@@ -213,9 +214,9 @@ export default function AboutPage() {
           </Rise>
           <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
             <div className="flex flex-wrap gap-3">
-              <Btn href={site.whatsapp} external variant="sand" size="lg">
-                Talk on WhatsApp
-              </Btn>
+              <BriefButton variant="sand" size="lg" context="About Bizex4U">
+                Send a brief
+              </BriefButton>
               <Btn href="/contact" variant="outline-sand" size="lg">
                 Contact
               </Btn>

@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
+import { Band, Card, Eyebrow, Rise } from "@/components/UI";
 import FormatPlate, { formatSets, type Format } from "@/components/FormatPlate";
 import { capabilityDetail } from "@/lib/capabilityDetail";
-import { capabilities, site } from "@/lib/site";
+import { capabilities } from "@/lib/site";
+import BriefButton from "@/components/BriefButton";
 
 /**
  * One template, five pages. The capability pages differ in content and
@@ -71,9 +72,9 @@ export default function CapabilityPage({
                   {d.lede}
                 </p>
                 <div className="mt-9">
-                  <Btn href={site.whatsapp} external size="lg">
+                  <BriefButton size="lg" context={cap.title}>
                     Get a plan for your market
-                  </Btn>
+                  </BriefButton>
                 </div>
               </Rise>
             </div>
@@ -195,9 +196,9 @@ export default function CapabilityPage({
           <Rise delay={80} className="col-span-12 lg:col-span-6 lg:col-start-7">
             <p className="max-w-[58ch] text-body-l">{d.notFor}</p>
             <div className="mt-9">
-              <Btn href={site.whatsapp} external variant="sand" size="lg">
+              <BriefButton variant="sand" size="lg" context={cap.title}>
                 Tell us the objective
-              </Btn>
+              </BriefButton>
             </div>
           </Rise>
         </div>

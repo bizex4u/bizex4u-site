@@ -5,6 +5,7 @@ import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
 import { Faq } from "@/components/Ledger";
 import { cities, cityBySlug } from "@/lib/cities";
 import { site } from "@/lib/site";
+import BriefButton from "@/components/BriefButton";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -76,9 +77,13 @@ export default async function CityPage({ params }: Params) {
                   {city.heroLede}
                 </p>
                 <div className="mt-9">
-                  <Btn href={site.whatsapp} external size="lg">
+                  <BriefButton
+                    size="lg"
+                    context={`Advertising in ${city.name}`}
+                    market={city.name}
+                  >
                     Get a plan for {city.name}
-                  </Btn>
+                  </BriefButton>
                 </div>
               </Rise>
             </div>
@@ -263,9 +268,14 @@ export default async function CityPage({ params }: Params) {
           <Rise delay={80} className="col-span-12 lg:col-span-6 lg:col-start-7">
             <p className="max-w-[58ch] text-body-l">{city.planning}</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Btn href={site.whatsapp} external variant="sand" size="lg">
+              <BriefButton
+                variant="sand"
+                size="lg"
+                context={`Advertising in ${city.name}`}
+                market={city.name}
+              >
                 Get a plan for {city.name}
-              </Btn>
+              </BriefButton>
               <Btn href="/what-we-do" variant="outline-sand" size="lg">
                 How we plan a market
               </Btn>

@@ -46,16 +46,26 @@ export default function BarterSelector() {
   const [category, setCategory] = useState<string | null>(null);
   const [scale, setScale] = useState<string | null>(null);
   const [markets, setMarkets] = useState<string[]>([]);
+  /* Brand and name are mandatory before this reaches WhatsApp. The
+     chips on their own describe an opportunity with nobody attached to
+     it, which is not a lead. */
+  const [brand, setBrand] = useState("");
+  const [person, setPerson] = useState("");
 
   const toggleMarket = (m: string) =>
     setMarkets((prev) =>
       prev.includes(m) ? prev.filter((x) => x !== m) : [...prev, m],
     );
 
-  const ready = Boolean(category && scale);
+  const named = brand.trim().length > 0 && person.trim().length > 0;
+  const chosen = Boolean(category && scale);
+  const ready = chosen && named;
 
   const message = [
     "Hi Bizex4U — I'd like to look at a barter structure.",
+    "",
+    `Brand: ${brand.trim()}`,
+    `Name: ${person.trim()}`,
     category && `What we hold: ${category}`,
     scale && `Rough value: ${scale}`,
     markets.length > 0 && `Markets of interest: ${markets.join(", ")}`,
@@ -135,6 +145,46 @@ export default function BarterSelector() {
         </div>
       </fieldset>
 
+      <fieldset className="mt-8">
+        <legend className="eyebrow text-on-sand-dim">
+          04 — Who is asking?
+        </legend>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div>
+            <label
+              className="eyebrow block text-on-sand-dim"
+              htmlFor="barter-brand"
+            >
+              Brand or company <span aria-hidden>*</span>
+            </label>
+            <input
+              id="barter-brand"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+              autoComplete="organization"
+              required
+              className="mt-2 h-12 w-full rounded-xl border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+            />
+          </div>
+          <div>
+            <label
+              className="eyebrow block text-on-sand-dim"
+              htmlFor="barter-person"
+            >
+              Your name <span aria-hidden>*</span>
+            </label>
+            <input
+              id="barter-person"
+              value={person}
+              onChange={(e) => setPerson(e.target.value)}
+              autoComplete="name"
+              required
+              className="mt-2 h-12 w-full rounded-xl border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+            />
+          </div>
+        </div>
+      </fieldset>
+
       <div className="mt-9 border-t border-rule-sand pt-6">
         {ready ? (
           <>
@@ -154,8 +204,9 @@ export default function BarterSelector() {
           </>
         ) : (
           <p className="text-[0.9375rem] text-on-sand-dim">
-            Pick a category and a rough value and this turns into a message you
-            can send.
+            {!chosen
+              ? "Pick a category and a rough value, then tell us who is asking."
+              : "Add your brand and your name and this turns into a message you can send."}
           </p>
         )}
 

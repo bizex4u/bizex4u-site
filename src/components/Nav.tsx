@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { capabilities, primaryNav, site } from "@/lib/site";
+import BriefButton from "@/components/BriefButton";
 
 /* Floating pill navigation — the Laqshya container treatment, with a
    mega panel borrowed from JCDecaux's audience-first structure. */
@@ -109,15 +110,12 @@ export default function Nav() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href={site.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group hidden min-h-11 items-center gap-2 rounded-full bg-violet-deep px-5 text-[0.9375rem] font-medium text-white transition-colors duration-200 hover:bg-violet sm:inline-flex"
+          <BriefButton
+            context="Nav"
+            className="hidden !min-h-11 !px-5 !py-0 !text-[0.9375rem] sm:inline-flex"
           >
-            WhatsApp
-            <span className="row-arrow">→</span>
-          </a>
+            Send a brief
+          </BriefButton>
           <button
             type="button"
             className="inline-flex min-h-11 items-center rounded-full bg-plum/92 px-5 text-[0.9375rem] text-on-plum backdrop-blur-md lg:hidden"
@@ -172,14 +170,9 @@ export default function Nav() {
               </Link>
             ))}
             <div className="mt-8 grid gap-3">
-              <a
-                href={site.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-violet-deep px-6 font-medium text-white"
-              >
-                Talk on WhatsApp →
-              </a>
+              <BriefButton context="Nav" className="w-full">
+                Send a brief
+              </BriefButton>
               <p className="mt-2 text-on-sand-dim">{site.email}</p>
               <p className="text-on-sand-dim">{site.phone}</p>
             </div>

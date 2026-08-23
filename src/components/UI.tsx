@@ -159,21 +159,21 @@ export function Card({
   );
 }
 
-export function Btn({
-  href,
-  children,
-  variant = "violet",
-  external = false,
-  size = "md",
+export type BtnVariant =
+  | "violet"
+  | "plum"
+  | "sand"
+  | "outline-plum"
+  | "outline-sand";
+
+/* Shared so BriefButton — which is a <button> opening a dialog rather
+   than a link — is visually identical to Btn. Two hand-maintained copies
+   of this string would drift within a week. */
+export function btnClass(
+  variant: BtnVariant = "violet",
+  size: "md" | "lg" = "md",
   className = "",
-}: {
-  href: string;
-  children: ReactNode;
-  variant?: "violet" | "plum" | "sand" | "outline-plum" | "outline-sand";
-  external?: boolean;
-  size?: "md" | "lg";
-  className?: string;
-}) {
+) {
   const styles = {
     violet: "bg-violet-deep text-white hover:bg-violet",
     plum: "bg-plum text-on-plum hover:bg-plum-2",
@@ -189,7 +189,25 @@ export function Btn({
       ? "min-h-14 px-7 text-[1rem]"
       : "min-h-12 px-6 text-[0.9375rem]";
 
-  const cls = `group inline-flex items-center justify-center gap-2.5 rounded-full py-3 font-medium transition-colors duration-200 ${dims} ${styles} ${className}`;
+  return `group inline-flex items-center justify-center gap-2.5 rounded-full py-3 font-medium transition-colors duration-200 ${dims} ${styles} ${className}`;
+}
+
+export function Btn({
+  href,
+  children,
+  variant = "violet",
+  external = false,
+  size = "md",
+  className = "",
+}: {
+  href: string;
+  children: ReactNode;
+  variant?: BtnVariant;
+  external?: boolean;
+  size?: "md" | "lg";
+  className?: string;
+}) {
+  const cls = btnClass(variant, size, className);
 
   if (external) {
     return (

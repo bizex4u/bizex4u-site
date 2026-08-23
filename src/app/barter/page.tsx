@@ -4,6 +4,7 @@ import { Faq } from "@/components/Ledger";
 import GstFlow from "@/components/GstFlow";
 import BarterSelector from "@/components/BarterSelector";
 import { site } from "@/lib/site";
+import BriefButton from "@/components/BriefButton";
 
 export const metadata: Metadata = {
   title: "Barter Advertising in India — Trade Stock for Media",
@@ -142,9 +143,9 @@ export default function BarterPage() {
                   budget.
                 </p>
                 <div className="mt-9 flex flex-wrap gap-3">
-                  <Btn href={site.whatsapp} external size="lg">
+                  <BriefButton size="lg" context="Barter advertising">
                     Tell us what you&rsquo;re holding
-                  </Btn>
+                  </BriefButton>
                   <Btn href="#how" variant="outline-plum" size="lg">
                     How it works
                   </Btn>
@@ -398,9 +399,9 @@ export default function BarterPage() {
           </Rise>
           <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
             <div className="flex flex-col gap-3">
-              <Btn href={site.whatsapp} external size="lg">
-                Message on WhatsApp
-              </Btn>
+              <BriefButton size="lg" context="Barter advertising">
+                Send a brief
+              </BriefButton>
               <Btn href="/contact" variant="outline-sand" size="lg">
                 Send a brief instead
               </Btn>

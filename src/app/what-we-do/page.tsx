@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
 import FormatPlate, { ExchangePlate, formatSets } from "@/components/FormatPlate";
-import { capabilities, site } from "@/lib/site";
+import { capabilities } from "@/lib/site";
 import { capabilityDetail } from "@/lib/capabilityDetail";
+import BriefButton from "@/components/BriefButton";
 
 export const metadata: Metadata = {
   title: "What We Do — Outdoor, DOOH, Retail, Broadcast & Barter",
@@ -66,9 +67,9 @@ export default function WhatWeDoPage() {
                   budget is not always the constraint.
                 </p>
                 <div className="mt-9">
-                  <Btn href={site.whatsapp} external size="lg">
+                  <BriefButton size="lg" context="A plan for my market">
                     Get a plan for your market
-                  </Btn>
+                  </BriefButton>
                 </div>
               </Rise>
             </div>
@@ -218,9 +219,9 @@ export default function WhatWeDoPage() {
           </Rise>
           <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
             <div className="flex flex-wrap gap-3">
-              <Btn href={site.whatsapp} external variant="sand" size="lg">
-                Talk on WhatsApp
-              </Btn>
+              <BriefButton variant="sand" size="lg" context="What we do">
+                Send a brief
+              </BriefButton>
               <Btn href="/contact" variant="outline-sand" size="lg">
                 Contact
               </Btn>

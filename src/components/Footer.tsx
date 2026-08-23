@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { footerNav, site } from "@/lib/site";
+import BriefButton from "@/components/BriefButton";
 
 export default function Footer() {
   return (
@@ -34,15 +35,14 @@ export default function Footer() {
               Tell us the market and the objective. We will tell you plainly
               whether we are the right people for it.
             </p>
-            <a
-              href={site.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-8 inline-flex min-h-12 items-center gap-2.5 rounded-full bg-violet-deep px-6 font-medium text-white transition-colors duration-200 hover:bg-violet"
-            >
-              Talk on WhatsApp
-              <span className="row-arrow">→</span>
-            </a>
+            {/* The footer CTA is the brief form too. WhatsApp still
+                appears in the Connect column as a direct contact
+                method — it is no longer the way a lead starts. */}
+            <div className="mt-8">
+              <BriefButton context="Footer" size="lg">
+                Send a brief
+              </BriefButton>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
@@ -50,16 +50,32 @@ export default function Footer() {
               <div key={col.heading}>
                 <h2 className="eyebrow text-on-plum-dim">{col.heading}</h2>
                 <ul className="mt-4 space-y-1">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        className="link-underline -my-1.5 inline-flex min-h-10 items-center py-1.5 text-[0.9375rem] text-balance text-on-plum-dim hover:text-on-plum"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
+                  {col.links.map((link) => {
+                    const cls =
+                      "link-underline -my-1.5 inline-flex min-h-10 items-center py-1.5 text-[0.9375rem] text-balance text-on-plum-dim hover:text-on-plum";
+                    /* mailto:, tel: and wa.me are not app routes, so
+                       they must not go through next/link. */
+                    const isExternal =
+                      "external" in link && link.external === true;
+                    return (
+                      <li key={link.label}>
+                        {isExternal ? (
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={cls}
+                          >
+                            {link.label}
+                          </a>
+                        ) : (
+                          <Link href={link.href} className={cls}>
+                            {link.label}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}

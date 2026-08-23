@@ -426,3 +426,72 @@ summary,
 [data-pin-track][data-static] [data-track] > * {
   overflow: visible;
 }
+
+/* ------------------------------------------------------------------
+   The brief dialog
+
+   Native <dialog>, so focus trapping, Escape, page inertness and the
+   top layer all come from the browser. Only the presentation is ours.
+------------------------------------------------------------------- */
+
+.brief-dialog {
+  margin: auto; /* centres in the top layer; the UA default is top-left */
+  max-height: min(46rem, calc(100dvh - 2rem));
+  overflow-y: auto;
+  border: 1px solid var(--color-rule-sand);
+  box-shadow: 0 2rem 5rem -1rem rgb(27 16 48 / 0.45);
+}
+
+.brief-dialog::backdrop {
+  background: rgb(27 16 48 / 0.55);
+}
+
+/* Opening animation, and the matching close. allow-discrete is what
+   lets a display:none element animate in at all. */
+@media (prefers-reduced-motion: no-preference) {
+  .brief-dialog {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.985);
+    transition:
+      opacity 220ms var(--ease-reveal),
+      transform 220ms var(--ease-reveal),
+      overlay 220ms allow-discrete,
+      display 220ms allow-discrete;
+  }
+
+  .brief-dialog[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @starting-style {
+    .brief-dialog[open] {
+      opacity: 0;
+      transform: translateY(0.75rem) scale(0.985);
+    }
+  }
+
+  .brief-dialog::backdrop {
+    opacity: 0;
+    transition:
+      opacity 220ms var(--ease-reveal),
+      overlay 220ms allow-discrete,
+      display 220ms allow-discrete;
+  }
+
+  .brief-dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .brief-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+}
+
+/* The page behind must not scroll while the dialog is up. :has() is
+   supported everywhere <dialog> is. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}

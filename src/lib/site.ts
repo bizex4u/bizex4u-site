@@ -137,10 +137,15 @@ export const footerNav = [
   },
   {
     heading: "Connect",
+    /* WhatsApp lives here as a direct contact method, not as a call to
+       action. Leads start from the brief form so they arrive with a
+       brand and a name attached; this is for someone who already knows
+       who they want to talk to. */
     links: [
       { label: site.email, href: `mailto:${site.email}` },
       { label: site.phone, href: `tel:${site.phoneHref}` },
-      { label: "Start a conversation", href: "/contact" },
+      { label: "WhatsApp", href: site.whatsappBase, external: true },
+      { label: "Send a brief", href: "/contact" },
     ],
   },
 ];

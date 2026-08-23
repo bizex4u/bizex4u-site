@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
-import { clients, proofFrames, sectorsServed, site } from "@/lib/site";
+import { clients, proofFrames, sectorsServed } from "@/lib/site";
+import BriefButton from "@/components/BriefButton";
 
 export const metadata: Metadata = {
   title: "Work — Campaigns Planned and Run Across India",
@@ -207,9 +208,9 @@ export default function WorkPage() {
           </Rise>
           <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
             <div className="flex flex-wrap gap-3">
-              <Btn href={site.whatsapp} external variant="sand" size="lg">
-                Talk on WhatsApp
-              </Btn>
+              <BriefButton variant="sand" size="lg" context="Work in my category">
+                Ask about your category
+              </BriefButton>
               <Btn href="/cities" variant="outline-sand" size="lg">
                 Cities
               </Btn>
