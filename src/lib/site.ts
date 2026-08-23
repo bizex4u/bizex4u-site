@@ -16,10 +16,9 @@ export const site = {
     encodeURIComponent(
       "Hi Bizex4U — I'd like to talk about an outdoor campaign.",
     ),
-  /* TODO(yash): replace with the registered office address before launch. */
   address: {
-    line1: "Registered office address",
-    line2: "City, State PIN",
+    line1: "Mona Enclave",
+    line2: "Kanpur, Uttar Pradesh",
     country: "India",
   },
 } as const;
@@ -167,16 +166,13 @@ export const footerNav = [
    stand behind rather than rounding it up.
 ------------------------------------------------------------------- */
 
+/* Tenure claims are deliberately absent — Yash asked for the years
+   not to be stated until they are verified. 40+ cities is confirmed. */
 export const proofStats = [
   {
-    label: "In market since",
-    value: "2008",
-    note: "Seventeen years planning and buying Indian media.",
-  },
-  {
-    label: "Cities planned",
+    label: "Cities",
     value: "40+",
-    note: "Metros and tier-2, from own catchment data.",
+    note: "Metros and tier-2, planned from catchment data.",
   },
   {
     label: "Capabilities",
@@ -184,9 +180,75 @@ export const proofStats = [
     note: "Outdoor, digital, retail, broadcast, activations, barter.",
   },
   {
+    label: "Categories",
+    value: "10+",
+    note: "From consumer electronics to cement.",
+  },
+  {
     label: "Ownership",
     value: "Independent",
     note: "No network mandate. No inherited rate card.",
+  },
+];
+
+/* Client names, listed as names only — no logos, no results, no
+   creative. Yash confirmed these can be named. Anything beyond the
+   name (a logo mark, a campaign photo, a result) still needs that
+   client's written permission. */
+export const clients = [
+  "Zebronics",
+  "Sharp",
+  "Portronics",
+  "Carrera",
+  "Safilo",
+  "Nisara",
+  "Bodycraft",
+  "Naturoz",
+  "Mishrambu",
+  "Aditya Vision",
+  "Asian Footwears",
+  "Wingreens World",
+  "Bangur Cement",
+  "BharatBenz",
+  "Goldmedal",
+  "Giva",
+  "Mars Cosmetics",
+  "Timezone",
+];
+
+/* The Runway move — segment by what the buyer is trying to do, not
+   by what we sell. This is also the JCDecaux nav lesson, executed
+   as page sections rather than as a menu. */
+export const objectives = [
+  {
+    index: "01",
+    title: "Launching in a new market",
+    body: "You need presence fast in a city you don't know. We plan from catchment and movement data rather than from whatever is unsold this month.",
+    points: [
+      "Corridor and catchment mapping before any site list",
+      "Local press and radio planned alongside outdoor",
+      "Documented delivery so the head office can see it ran",
+    ],
+  },
+  {
+    index: "02",
+    title: "Defending a home market",
+    body: "You already own the city and a competitor is moving in. Density and frequency matter more than reach, and the buy has to hold long enough to compound.",
+    points: [
+      "Share-of-voice mapping against competitor sites",
+      "Sustained presence over short high-reach bursts",
+      "Store-catchment and hyperlocal formats",
+    ],
+  },
+  {
+    index: "03",
+    title: "Marketing without the cash",
+    body: "The mandate is there, the budget isn't. You hold stock, capacity or vouchers. We convert them into media at a value agreed in writing first.",
+    points: [
+      "Valuation fixed before either side performs",
+      "GST-compliant invoicing on both legs",
+      "Goods placed through controlled channels",
+    ],
   },
 ];
 

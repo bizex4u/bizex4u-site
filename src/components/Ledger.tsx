@@ -1,36 +1,39 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-
-/* Reveal helper. Stagger is capped at 8 steps by callers — beyond that
-   the motion database warns the tail reads as lag, not rhythm. */
-export function Rise({
-  delay = 0,
-  className = "",
-  children,
-  as: Tag = "div",
-}: {
-  delay?: number;
-  className?: string;
-  children: ReactNode;
-  as?: "div" | "li" | "section" | "p" | "h2";
-}) {
-  return (
-    <Tag
-      className={`reveal ${className}`}
-      style={{ ["--reveal-delay" as string]: `${Math.min(delay, 480)}ms` }}
-    >
-      {children}
-    </Tag>
-  );
-}
+import { Band, Btn, Eyebrow, Rise, toneStyles, type Tone } from "@/components/UI";
 
 /* ------------------------------------------------------------------
-   Section bands.
+   Compatibility layer.
 
-   The first pass put every section on the same paper with the same
-   padding, which is why it read as flat. Sections now carry a tone —
-   paper, recessed, or inverted — and alternate down the page.
+   The inner pages (/barter, /cities, /contact and the stubs) were
+   written against the v2 editorial system. These re-express the same
+   API on top of the v3 tone system so nothing breaks while those
+   pages are rewritten section by section.
 ------------------------------------------------------------------- */
+
+export { Rise, ArrowLink } from "@/components/UI";
+
+export function ButtonLink({
+  href,
+  children,
+  tone,
+  className = "",
+}: {
+  href: string;
+  children: ReactNode;
+  tone?: "ink" | "paper";
+  className?: string;
+}) {
+  return (
+    <Btn
+      href={href}
+      variant={tone === "paper" ? "light" : "amber"}
+      className={className}
+    >
+      {children}
+    </Btn>
+  );
+}
 
 export function Section({
   index,
@@ -39,7 +42,6 @@ export function Section({
   className = "",
   id,
   tone = "paper",
-  size = "default",
 }: {
   index?: string;
   label?: string;
@@ -49,48 +51,26 @@ export function Section({
   tone?: "paper" | "recessed" | "ink";
   size?: "default" | "large";
 }) {
-  const bg =
-    tone === "ink"
-      ? "bg-ink text-paper"
-      : tone === "recessed"
-        ? "bg-paper-2"
-        : "";
-  const ruleClass = tone === "ink" ? "border-rule-dark" : "border-ink";
-  const labelClass = tone === "ink" ? "text-paper-dim" : "text-ink";
-
+  const mapped: Tone =
+    tone === "recessed" ? "ink2" : tone === "ink" ? "ink" : "ink";
   return (
-    <section
-      id={id}
-      className={`${bg} ${
-        size === "large" ? "py-(--spacing-section-lg)" : "py-(--spacing-section)"
-      } ${className}`}
-    >
-      <div className="shell">
-        {label && (
-          <Rise className={`mb-14 border-t ${ruleClass} pt-4`}>
-            <h2
-              className={`font-mono text-meta uppercase tracking-[0.09em] ${labelClass}`}
-            >
-              {index && (
-                <span className="text-accent-text">{index}&nbsp;&nbsp;</span>
-              )}
-              {label}
-            </h2>
-          </Rise>
-        )}
-        {children}
-      </div>
-    </section>
+    <Band tone={mapped} id={id} className={className}>
+      {label && (
+        <Rise className="mb-10">
+          <Eyebrow tone={mapped}>
+            {index ? `${index} — ` : ""}
+            {label}
+          </Eyebrow>
+        </Rise>
+      )}
+      {children}
+    </Band>
   );
 }
 
-/* ------------------------------------------------------------------
-   The ledger row.
-
-   Changes from the first pass: the title carries real weight, the
-   description is at readable contrast rather than pale grey, and the
-   arrow nudges on hover so it is obvious the whole row is a target.
-------------------------------------------------------------------- */
+export function LedgerList({ children }: { children: ReactNode; tone?: string }) {
+  return <ul className="grid gap-4 md:grid-cols-2">{children}</ul>;
+}
 
 export function LedgerRow({
   index,
@@ -101,7 +81,6 @@ export function LedgerRow({
   accent = false,
   delay = 0,
   aside,
-  tone = "light",
 }: {
   index: string;
   title: string;
@@ -113,144 +92,42 @@ export function LedgerRow({
   aside?: ReactNode;
   tone?: "light" | "dark";
 }) {
-  const dark = tone === "dark";
-  const secondary = dark ? "text-paper-dim" : "text-ink-70";
-  const idx = accent
-    ? dark
-      ? "text-accent-lift"
-      : "text-accent-text"
-    : dark
-      ? "text-paper-dim"
-      : "text-ink-50";
-
   const inner = (
-    <div className="grid-12 items-baseline gap-y-4 py-8 md:py-11">
+    <>
       <span
-        className={`col-span-12 font-mono text-meta transition-colors md:col-span-1 ${idx} ${
-          !accent &&
-          (dark
-            ? "group-hover:text-accent-lift"
-            : "group-hover:text-accent-text")
-        }`}
+        className={`eyebrow ${accent ? "text-amber" : "text-on-ink-dim"}`}
       >
         {index}
       </span>
-
-      <div className="col-span-12 md:col-span-5">
-        <h3 className="text-h2">{title}</h3>
-        {aside && <div className="mt-7 hidden lg:block">{aside}</div>}
-      </div>
-
-      <p
-        className={`col-span-12 max-w-[50ch] text-body ${secondary} ${
-          linkLabel ? "md:col-span-4" : "md:col-span-5"
-        }`}
-      >
-        {body}
-      </p>
-
+      <h3 className="mt-3 text-h2">{title}</h3>
+      <p className="mt-3 max-w-[46ch] text-on-ink-dim">{body}</p>
+      {aside && <div className="mt-6">{aside}</div>}
       {href && (
-        <span
-          className={`col-span-12 font-mono text-meta uppercase tracking-[0.09em] md:text-right lg:whitespace-nowrap ${
-            linkLabel ? "md:col-span-2" : "hidden md:col-span-1 md:block"
-          } ${accent ? idx : dark ? "text-paper-dim" : "text-ink-50"}`}
-        >
-          {linkLabel ? `${linkLabel} ` : ""}
-          <span className="row-arrow">→</span>
+        <span className="mt-5 inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-amber">
+          {linkLabel ?? "Read more"} <span className="row-arrow">→</span>
         </span>
       )}
-    </div>
+    </>
   );
 
-  const hoverBg = dark ? "hover:bg-white/[0.04]" : "hover:bg-paper-hover";
-  const border = dark ? "border-rule-dark" : "border-rule";
-
   return (
-    <Rise as="li" delay={delay} className={`border-t ${border}`}>
+    <Rise as="li" delay={delay}>
       {href ? (
         <Link
           href={href}
-          className={`group -mx-3 block px-3 transition-colors duration-200 ${hoverBg}`}
+          className="group block h-full rounded-(--radius-card) bg-ink-2 p-6 transition-colors duration-200 hover:bg-ink-3 md:p-7"
         >
           {inner}
         </Link>
       ) : (
-        <div className="group -mx-3 px-3">{inner}</div>
+        <div className="group h-full rounded-(--radius-card) bg-ink-2 p-6 md:p-7">
+          {inner}
+        </div>
       )}
     </Rise>
   );
 }
 
-export function LedgerList({
-  children,
-  tone = "light",
-}: {
-  children: ReactNode;
-  tone?: "light" | "dark";
-}) {
-  return (
-    <ul className={`border-b ${tone === "dark" ? "border-rule-dark" : "border-rule"}`}>
-      {children}
-    </ul>
-  );
-}
-
-/* ------------------------------------------------------------------
-   Calls to action.
-
-   The trust-authority landing pattern asks for a real primary CTA in
-   the nav and repeated down the page. The first pass had only mono
-   text links, which is why nothing on the page asked for the meeting.
-------------------------------------------------------------------- */
-
-export function ButtonLink({
-  href,
-  children,
-  tone = "ink",
-  className = "",
-}: {
-  href: string;
-  children: ReactNode;
-  tone?: "ink" | "paper";
-  className?: string;
-}) {
-  const styles =
-    tone === "paper"
-      ? "bg-paper text-ink hover:bg-white"
-      : "bg-ink text-paper hover:bg-accent-text";
-  return (
-    <Link
-      href={href}
-      className={`group inline-flex items-center gap-2.5 rounded-[2px] px-6 py-4 font-mono text-meta uppercase tracking-[0.09em] transition-colors duration-200 ${styles} ${className}`}
-    >
-      {children}
-      <span className="row-arrow">→</span>
-    </Link>
-  );
-}
-
-export function ArrowLink({
-  href,
-  children,
-  className = "",
-}: {
-  href: string;
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <Link
-      href={href}
-      /* min-h-11 gives a 44px tap target on touch; the -my offset keeps
-         the visual rhythm identical to a plain inline link. */
-      className={`link-underline group -my-3 inline-flex min-h-11 items-center py-3 font-mono text-meta uppercase tracking-[0.09em] ${className}`}
-    >
-      {children} <span className="row-arrow">→</span>
-    </Link>
-  );
-}
-
-/* Page hero — asymmetric, no image, one primary action. */
 export function PageHero({
   eyebrow,
   title,
@@ -265,59 +142,59 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="shell pt-34 pb-14 md:pt-40 md:pb-20">
-      <Rise className="border-t border-ink pt-4">
-        <p className="eyebrow-ink">{eyebrow}</p>
-      </Rise>
-      <div className="grid-12 mt-10">
-        <Rise delay={60} className="col-span-12 lg:col-span-10">
-          <h1 className="text-display-xl font-display text-balance">{title}</h1>
+    <section className="bg-ink pt-32 pb-14 md:pt-40 md:pb-20">
+      <div className="shell">
+        <Rise>
+          <Eyebrow>{eyebrow}</Eyebrow>
         </Rise>
-      </div>
-      {lede && (
-        <div className="grid-12 mt-10">
-          <Rise delay={120} className="col-span-12 lg:col-span-6 lg:col-start-7">
-            <p className="text-body-l text-ink-70">{lede}</p>
-            {cta && (
-              <div className="mt-8">
-                <ButtonLink href={cta.href}>{cta.label}</ButtonLink>
-              </div>
-            )}
+        <div className="grid-12 mt-6">
+          <Rise delay={60} className="col-span-12 lg:col-span-9">
+            <h1 className="font-display text-display-xl text-balance">
+              {title}
+            </h1>
           </Rise>
         </div>
-      )}
-      {children}
+        {lede && (
+          <div className="grid-12 mt-8">
+            <Rise delay={120} className="col-span-12 lg:col-span-6">
+              <p className="text-body-l text-on-ink-dim">{lede}</p>
+              {cta && (
+                <div className="mt-8">
+                  <Btn href={cta.href}>{cta.label}</Btn>
+                </div>
+              )}
+            </Rise>
+          </div>
+        )}
+        {children}
+      </div>
     </section>
   );
 }
 
-/* Contact ledger — two columns split by a vertical hairline. */
 export function ContactLedger({
   email,
   phone,
   address,
-  tone = "light",
 }: {
   email: string;
   phone: string;
   address: { line1: string; line2: string; country: string };
   tone?: "light" | "dark";
 }) {
-  const dark = tone === "dark";
   return (
-    <div className={`grid-12 border-t ${dark ? "border-rule-dark" : "border-ink"} pt-8`}>
-      <div
-        className={`col-span-12 md:col-span-6 md:border-r md:pr-6 ${
-          dark ? "md:border-rule-dark" : "md:border-rule"
-        }`}
-      >
-        <p className={dark ? "eyebrow text-paper-dim" : "eyebrow"}>Talk to us</p>
+    <div className="grid gap-4 md:grid-cols-2">
+      <div className="rounded-(--radius-card) bg-ink-2 p-6 md:p-7">
+        <Eyebrow>Talk to us</Eyebrow>
         <div className="mt-4">
-          <a href={`mailto:${email}`} className="link-underline -my-2 inline-flex min-h-11 items-center py-2 text-h3">
+          <a
+            href={`mailto:${email}`}
+            className="link-underline -my-2 inline-flex min-h-11 items-center py-2 text-h3"
+          >
             {email}
           </a>
         </div>
-        <div className="mt-2">
+        <div className="mt-1">
           <a
             href={`tel:${phone.replace(/\s/g, "")}`}
             className="link-underline -my-2 inline-flex min-h-11 items-center py-2 text-h3"
@@ -326,11 +203,9 @@ export function ContactLedger({
           </a>
         </div>
       </div>
-      <div className="col-span-12 mt-10 md:col-span-5 md:col-start-8 md:mt-0">
-        <p className={dark ? "eyebrow text-paper-dim" : "eyebrow"}>Office</p>
-        <address
-          className={`mt-4 not-italic ${dark ? "text-paper-dim" : "text-ink-70"}`}
-        >
+      <div className="rounded-(--radius-card) bg-ink-2 p-6 md:p-7">
+        <Eyebrow>Office</Eyebrow>
+        <address className="mt-4 text-on-ink-dim not-italic">
           {address.line1}
           <br />
           {address.line2}
@@ -342,23 +217,24 @@ export function ContactLedger({
   );
 }
 
-/* FAQ — hairline rules only. No boxes, no shadows, no radius. */
 export function Faq({ items }: { items: { q: string; a: string }[] }) {
   return (
-    <div className="border-b border-rule">
+    <div className="grid gap-3">
       {items.map((item, i) => (
-        <Rise key={item.q} delay={Math.min(i, 8) * 60} className="border-t border-rule">
-          <details className="group">
-            <summary className="-mx-3 flex list-none items-baseline justify-between gap-6 px-3 py-6 transition-colors duration-200 hover:bg-paper-hover [&::-webkit-details-marker]:hidden">
+        <Rise key={item.q} delay={Math.min(i, 8) * 60}>
+          <details className="group rounded-(--radius-card) bg-ink-2 px-6 py-1 md:px-7">
+            <summary className="flex list-none items-baseline justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
               <h3 className="max-w-[46ch] text-h3">{item.q}</h3>
-              <span className="font-mono text-lg leading-none text-ink-50 transition-transform duration-200 group-open:rotate-45">
+              <span className="font-mono text-lg leading-none text-amber transition-transform duration-200 group-open:rotate-45">
                 +
               </span>
             </summary>
-            <p className="max-w-[68ch] pb-8 text-body text-ink-70">{item.a}</p>
+            <p className="max-w-[68ch] pb-6 text-on-ink-dim">{item.a}</p>
           </details>
         </Rise>
       ))}
     </div>
   );
 }
+
+export { toneStyles };

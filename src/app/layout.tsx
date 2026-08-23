@@ -33,6 +33,28 @@ const inter = localFont({
   ],
 });
 
+/* Devanagari. The site is an Indian media network selling Indian
+   streets — city names, formats and section labels carry their Hindi
+   setting alongside the Latin. Mukta is by Ek Type, a Mumbai foundry,
+   and is open licensed. It is the cheapest way to make the page read
+   as Indian rather than as a London template with rupee prices. */
+const mukta = localFont({
+  variable: "--font-deva",
+  display: "swap",
+  src: [
+    {
+      path: "../fonts/mukta-devanagari-500-normal.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/mukta-devanagari-600-normal.woff2",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+});
+
 const plexMono = localFont({
   variable: "--font-plex-mono",
   display: "swap",
@@ -72,7 +94,7 @@ export default function RootLayout({
   return (
     <html lang="en-IN">
       <body
-        className={`${archivo.variable} ${inter.variable} ${plexMono.variable}`}
+        className={`${archivo.variable} ${inter.variable} ${plexMono.variable} ${mukta.variable}`}
       >
         <a
           href="#main"

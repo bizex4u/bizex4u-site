@@ -91,25 +91,25 @@ export default function HeroReel() {
           gradient under it rather than a token 20% overlay. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-linear-to-t from-ink/92 via-ink/38 to-ink/20"
+        className="absolute inset-0 bg-linear-to-t from-ink/95 via-ink/55 to-ink/35"
       />
 
       {/* Location ticker */}
       <div className="absolute right-0 bottom-0 hidden p-8 text-right md:block lg:p-12">
         <p
           key={current.place}
-          className="reveal font-mono text-meta uppercase tracking-[0.09em] text-paper"
+          className="reveal font-mono text-meta uppercase tracking-[0.09em] text-on-ink"
           data-shown="true"
         >
           {current.place}
-          <span className="text-paper-dim"> — {current.city}</span>
+          <span className="text-on-ink-dim"> — {current.city}</span>
         </p>
         <div className="mt-3 flex justify-end gap-1.5" aria-hidden="true">
           {SEGMENTS.map((s, i) => (
             <span
               key={s.at}
               className={`h-px w-7 transition-colors duration-300 ${
-                i === index ? "bg-paper" : "bg-paper/30"
+                i === index ? "bg-on-ink" : "bg-on-ink/30"
               }`}
             />
           ))}

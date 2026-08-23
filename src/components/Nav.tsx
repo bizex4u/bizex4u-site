@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { capabilities, primaryNav, site } from "@/lib/site";
 
+/* Floating pill navigation — the Laqshya container treatment, with a
+   mega panel borrowed from JCDecaux's audience-first structure. */
 export default function Nav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -13,15 +15,12 @@ export default function Nav() {
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Close both panels when the route changes. Adjusting state during
-     render is the supported pattern here — an effect would fire a second
-     render pass for no reason. */
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
     setLastPath(pathname);
@@ -53,46 +52,40 @@ export default function Nav() {
   };
   const closeMega = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setMegaOpen(false), 120);
+    closeTimer.current = setTimeout(() => setMegaOpen(false), 130);
   };
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  const solid = scrolled || megaOpen || mobileOpen;
-
-  /* The homepage opens on full-bleed video, so the nav has to invert
-     until it lands on paper. Every other page starts light. */
-  const overDarkHero = pathname === "/" && !solid;
-  const inkText = overDarkHero ? "text-paper" : "";
-
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
-        solid ? "bg-paper border-b border-rule" : "bg-transparent"
-      } ${inkText}`}
+      className="fixed inset-x-0 top-0 z-50 pt-3 md:pt-4"
       onMouseLeave={closeMega}
     >
-      <div className="shell flex h-18 items-center justify-between">
-        {/* -ml-2 px-2 keeps the wordmark optically flush with the grid
-            while giving it a 44px tap target. */}
+      <div className="shell flex items-center justify-between gap-3">
         <Link
           href="/"
-          className="-ml-2 inline-flex min-h-11 items-center px-2 font-display text-[1.125rem] font-semibold tracking-[-0.04em]"
+          className={`inline-flex min-h-11 items-center rounded-full px-4 font-display text-[1.0625rem] font-semibold tracking-[-0.03em] transition-colors duration-200 ${
+            scrolled ? "bg-ink-2/90 backdrop-blur-md" : ""
+          }`}
           aria-label={`${site.name} — home`}
         >
           {site.wordmark}
         </Link>
 
-        {/* Desktop navigation */}
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+        <nav
+          className="hidden items-center gap-1 rounded-full bg-ink-2/90 px-2 py-1.5 backdrop-blur-md lg:flex"
+          aria-label="Primary"
+        >
           {primaryNav.map((item) =>
             item.mega ? (
               <button
                 key={item.href}
                 type="button"
-                className="link-underline font-mono text-meta uppercase tracking-[0.09em]"
-                data-active={isActive(item.href)}
+                className={`rounded-full px-4 py-2.5 text-[0.9375rem] transition-colors duration-200 hover:bg-ink-3 ${
+                  isActive(item.href) ? "text-amber" : ""
+                }`}
                 aria-expanded={megaOpen}
                 onMouseEnter={openMega}
                 onFocus={openMega}
@@ -104,71 +97,60 @@ export default function Nav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="link-underline font-mono text-meta uppercase tracking-[0.09em]"
-                data-active={isActive(item.href)}
+                className={`rounded-full px-4 py-2.5 text-[0.9375rem] transition-colors duration-200 hover:bg-ink-3 ${
+                  isActive(item.href) ? "text-amber" : ""
+                }`}
                 onMouseEnter={closeMega}
               >
                 {item.label}
               </Link>
             ),
           )}
-          {/* A real primary CTA, not another text link. The
-              trust-authority pattern asks for one in the nav. */}
-          {/* WhatsApp is the primary action. Indian B2B closes there. */}
+        </nav>
+
+        <div className="flex items-center gap-2">
           <a
             href={site.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className={`group ml-2 inline-flex min-h-11 items-center gap-2.5 rounded-[2px] px-5 py-3 font-mono text-meta uppercase tracking-[0.09em] transition-colors duration-200 ${
-              overDarkHero
-                ? "bg-paper text-ink hover:bg-white"
-                : "bg-ink text-paper hover:bg-accent-text"
-            }`}
+            className="group hidden min-h-11 items-center gap-2 rounded-full bg-amber px-5 text-[0.9375rem] font-medium text-on-amber transition-colors duration-200 hover:bg-amber-lift sm:inline-flex"
           >
             WhatsApp
             <span className="row-arrow">→</span>
           </a>
-        </nav>
-
-        {/* Mobile trigger */}
-        <button
-          type="button"
-          className="-mr-2 inline-flex min-h-11 items-center px-2 font-mono text-meta uppercase tracking-[0.09em] lg:hidden"
-          aria-expanded={mobileOpen}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMobileOpen((v) => !v)}
-        >
-          {mobileOpen ? "Close" : "Menu"}
-        </button>
+          <button
+            type="button"
+            className="inline-flex min-h-11 items-center rounded-full bg-ink-2/90 px-5 text-[0.9375rem] backdrop-blur-md lg:hidden"
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((v) => !v)}
+          >
+            {mobileOpen ? "Close" : "Menu"}
+          </button>
+        </div>
       </div>
 
-      {/* Mega panel — four hairline columns, plain text, no icons */}
+      {/* Mega panel */}
       <div
-        className={`absolute inset-x-0 top-full hidden border-b border-rule bg-paper transition-opacity duration-200 lg:block ${
-          megaOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
+        className={`shell mt-2 hidden transition-opacity duration-200 lg:block ${
+          megaOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         onMouseEnter={openMega}
       >
-        <div className="shell grid grid-cols-4 gap-x-6 py-10">
-          {capabilities.map((c, i) => (
+        <div className="grid grid-cols-3 gap-3 rounded-2xl bg-ink-2/95 p-3 backdrop-blur-md">
+          {capabilities.map((c) => (
             <Link
               key={c.href}
               href={c.href}
-              className={`group border-t pt-4 pr-6 pb-2 transition-colors hover:bg-paper-hover ${
-                i === 0 ? "border-ink" : "border-rule"
-              }`}
+              className="rounded-xl p-4 transition-colors duration-200 hover:bg-ink-3"
             >
               <span
-                className={`font-mono text-meta ${
-                  c.accent ? "text-accent-text" : "text-ink-50"
-                }`}
+                className={`eyebrow ${c.accent ? "text-amber" : "text-on-ink-dim"}`}
               >
                 {c.index}
               </span>
               <span className="mt-2 block text-h3">{c.title}</span>
-              <span className="mt-1 block max-w-[26ch] text-[0.8125rem] leading-relaxed text-ink-70">
+              <span className="mt-1.5 block max-w-[30ch] text-[0.875rem] leading-relaxed text-on-ink-dim">
                 {c.short}
               </span>
             </Link>
@@ -178,27 +160,28 @@ export default function Nav() {
 
       {/* Mobile panel */}
       {mobileOpen && (
-        <div className="fixed inset-x-0 top-18 bottom-0 overflow-y-auto bg-paper lg:hidden">
-          <nav className="shell py-8" aria-label="Mobile">
+        <div className="fixed inset-x-0 top-20 bottom-0 overflow-y-auto bg-ink lg:hidden">
+          <nav className="shell py-6" aria-label="Mobile">
             {primaryNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="block border-t border-rule py-5 text-h3"
+                className="block border-b border-rule-dark py-5 text-h2"
               >
                 {item.label}
               </Link>
             ))}
-            <div className="mt-10 border-t border-ink pt-6">
-              <Link href="/contact" className="text-h3">
-                Start a conversation →
-              </Link>
-              <p className="mt-6 font-mono text-meta uppercase text-ink-70">
-                {site.email}
-              </p>
-              <p className="mt-1 font-mono text-meta uppercase text-ink-70">
-                {site.phone}
-              </p>
+            <div className="mt-8 grid gap-3">
+              <a
+                href={site.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-amber px-6 font-medium text-on-amber"
+              >
+                Talk on WhatsApp →
+              </a>
+              <p className="mt-2 text-on-ink-dim">{site.email}</p>
+              <p className="text-on-ink-dim">{site.phone}</p>
             </div>
           </nav>
         </div>

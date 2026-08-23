@@ -1,23 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowLink,
-  ButtonLink,
-  ContactLedger,
-  LedgerList,
-  LedgerRow,
-  Rise,
-  Section,
-} from "@/components/Ledger";
 import HeroReel from "@/components/HeroReel";
 import FormatPlate, { formatSets } from "@/components/FormatPlate";
+import { Band, Btn, Card, Eyebrow, Rise, Stat } from "@/components/UI";
 import {
   atlasModules,
   capabilities,
-  perspectives,
+  clients,
+  objectives,
   proofFrames,
   proofStats,
-  sectorsServed,
   site,
 } from "@/lib/site";
 import { additionalMarkets, cities } from "@/lib/cities";
@@ -29,326 +21,359 @@ const platesFor: Record<string, keyof typeof formatSets> = {
   "04": "broadcast",
 };
 
+/* Devanagari companions for the city grid. */
+const deva: Record<string, string> = {
+  Kolkata: "कोलकाता",
+  "Delhi NCR": "दिल्ली",
+  Mumbai: "मुंबई",
+  Bangalore: "बेंगलुरु",
+  Hyderabad: "हैदराबाद",
+  Chennai: "चेन्नई",
+  Pune: "पुणे",
+  Ahmedabad: "अहमदाबाद",
+  Lucknow: "लखनऊ",
+  Jaipur: "जयपुर",
+  Chandigarh: "चंडीगढ़",
+  Agra: "आगरा",
+  Meerut: "मेरठ",
+  Patna: "पटना",
+  Indore: "इंदौर",
+  Kochi: "कोच्चि",
+};
+
 export default function Home() {
   const cityLinks: { name: string; href?: string }[] = [
     ...cities.map((c) => ({ name: c.name, href: `/cities/${c.slug}` })),
     ...additionalMarkets.map((name) => ({ name })),
   ];
 
-  /* Outdoor leads the page. Barter is one capability among six and lives
-     on its own page — it is the commercial model, not the product. */
-  const outdoorFirst = capabilities;
-
   return (
     <>
-      {/* 01 — HERO ------------------------------------------------
-          Full-bleed reel of live sites. Type sits on a real gradient,
-          not a token overlay — the footage is bright daylight. */}
+      {/* 01 — HERO ------------------------------------------------ */}
       <section
         data-hero
-        className="relative flex min-h-[92svh] flex-col justify-end overflow-hidden"
+        className="relative flex min-h-[88svh] flex-col justify-end overflow-hidden bg-ink"
       >
         <HeroReel />
 
-        <div data-hero-copy className="shell relative z-10 pt-32 pb-14 md:pb-20">
-          <Rise className="max-w-[20ch] border-t border-paper/40 pt-4 md:max-w-none">
-            <p className="font-mono text-meta uppercase tracking-[0.09em] text-paper">
-              Outdoor Advertising Across India — Independent Since{" "}
-              {site.founded}
-            </p>
+        <div data-hero-copy className="shell relative z-10 pt-32 pb-12 md:pb-16">
+          <Rise>
+            <Eyebrow deva="भारत भर में">Outdoor advertising across India</Eyebrow>
           </Rise>
 
-          <div className="grid-12 mt-8">
+          <div className="grid-12 mt-6">
             <Rise delay={60} className="col-span-12 lg:col-span-9">
-              {/* Accuracy note: an earlier draft read "we own the places it
-                  passes". Bizex4U plans and buys this media, it does not
-                  own the sites. Do not reinstate that line. */}
-              <h1 className="font-display text-display-xl text-balance text-paper">
-                We put brands where India actually is.
+              {/* The Laqshya move: accent a phrase inside the headline
+                  rather than adding decoration around it. */}
+              <h1 className="font-display text-display-xl text-balance">
+                We put brands where <span className="hl">India actually is</span>.
               </h1>
             </Rise>
           </div>
 
-          <div className="grid-12 mt-10">
-            <Rise delay={120} className="col-span-12 lg:col-span-5">
-              <p className="text-body-l text-paper-dim">
-                Hoardings, LED, transit and retail media planned, bought and
-                proven across 40+ Indian cities. Seventeen years of it.
+          <div className="grid-12 mt-8">
+            <Rise delay={120} className="col-span-12 lg:col-span-6">
+              <p className="text-body-l text-on-ink-dim">
+                Hoardings, LED, transit and retail media — planned from
+                catchment data, bought properly, and photographed on site so
+                you can see it ran.
               </p>
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-                <a
-                  href={site.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex min-h-11 items-center gap-2.5 rounded-[2px] bg-paper px-6 py-4 font-mono text-meta uppercase tracking-[0.09em] text-ink transition-colors duration-200 hover:bg-white"
-                >
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Btn href={site.whatsapp} external>
                   Talk on WhatsApp
-                  <span className="row-arrow">→</span>
-                </a>
-                <Link
-                  href="/what-we-do"
-                  className="link-underline -my-3 inline-flex min-h-11 items-center py-3 font-mono text-meta uppercase tracking-[0.09em] text-paper"
-                >
-                  See what we buy <span className="row-arrow">→</span>
-                </Link>
+                </Btn>
+                <Btn href="/what-we-do" variant="outline-light">
+                  See what we buy
+                </Btn>
               </div>
             </Rise>
           </div>
         </div>
       </section>
 
-      {/* Everything below rises over the pinned hero, so it needs its own
-          stacking context and an opaque ground. */}
-      <div className="relative z-10 bg-paper">
-      {/* 02 — PROOF ---------------------------------------------- */}
-      <section className="border-b border-ink bg-paper-2 py-16 md:py-20">
-        <div className="shell">
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
-            {proofStats.map((s, i) => (
-              <Rise key={s.label} delay={i * 70}>
-                <dt className="eyebrow">{s.label}</dt>
-                <dd className="mt-3 font-display text-[clamp(1.375rem,6vw,3.25rem)] leading-[1] font-semibold tracking-[-0.035em] lg:text-[clamp(2rem,3.4vw,3.25rem)]">
-                  {s.value}
-                </dd>
-                <p className="mt-2 max-w-[24ch] text-[0.9375rem] text-ink-70">
-                  {s.note}
-                </p>
-              </Rise>
-            ))}
-          </dl>
-
-          <Rise delay={300} className="mt-16 border-t border-rule-strong pt-5">
-            <p className="eyebrow mb-4">Categories we have run campaigns for</p>
-            <p className="max-w-[80ch] text-body-l">
-              {sectorsServed.join(" · ")}
+      <div className="relative z-10">
+        {/* 02 — CLIENT NAMES ------------------------------------- */}
+        <Band tone="ink2" className="py-10 md:py-12">
+          <Rise>
+            <p className="eyebrow text-on-ink-dim">
+              Campaigns planned and run for
             </p>
-          </Rise>
-        </div>
-      </section>
-
-      {/* 03 — WHAT WE BUY ---------------------------------------- */}
-      <Section index="03" label="What we buy" size="large">
-        <LedgerList>
-          {outdoorFirst.map((c, i) => (
-            <LedgerRow
-              key={c.href}
-              index={c.index}
-              title={c.title}
-              body={c.short}
-              href={c.href}
-              linkLabel={c.linkLabel}
-              accent={c.accent}
-              delay={i * 60}
-              aside={
-                platesFor[c.index] ? (
-                  <FormatPlate formats={formatSets[platesFor[c.index]]} />
-                ) : undefined
-              }
-            />
-          ))}
-        </LedgerList>
-      </Section>
-
-      {/* 04 — CITIES --------------------------------------------- */}
-      <Section index="04" label="Where we operate" tone="recessed">
-        <div className="grid-12">
-          <Rise className="col-span-12 lg:col-span-4">
-            <p className="text-h2 text-balance">
-              Every market is planned from catchment data, not a rate card.
-            </p>
-            <div className="mt-8">
-              <ArrowLink href="/cities">See all cities</ArrowLink>
-            </div>
-          </Rise>
-
-          <div className="col-span-12 mt-12 lg:col-span-7 lg:col-start-6 lg:mt-0">
-            <ul className="grid grid-cols-2 gap-x-8 border-t border-rule-strong sm:grid-cols-3">
-              {cityLinks.map((c, i) => (
-                <Rise
-                  key={c.name}
-                  as="li"
-                  delay={Math.min(i, 8) * 40}
-                  className="border-b border-rule"
-                >
-                  {c.href ? (
-                    <Link href={c.href} className="link-underline block py-4 text-h3">
-                      {c.name}
-                    </Link>
-                  ) : (
-                    <span className="block py-4 text-h3 text-ink-50">
-                      {c.name}
-                    </span>
-                  )}
-                </Rise>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* 05 — PROOF OF DELIVERY ----------------------------------
-          Kept deliberately small. The overlays are the argument. */}
-      <Section index="05" label="Proof of delivery">
-        <div className="grid-12">
-          <Rise className="col-span-12 lg:col-span-4">
-            <p className="text-body-l">
-              Every placement is photographed on site, geo-tagged and dated.
-              You get the file, not a summary.
-            </p>
-            <p className="mt-4 max-w-[38ch] text-[0.9375rem] text-ink-70">
-              Where a screen is digital, we verify the run date against that
-              morning&rsquo;s newspaper in frame.
-            </p>
-          </Rise>
-
-          <ul className="col-span-12 mt-10 grid grid-cols-2 gap-4 lg:col-span-7 lg:col-start-6 lg:mt-0 lg:grid-cols-4">
-            {proofFrames.map((f, i) => (
-              <Rise key={f.src} as="li" delay={i * 60}>
-                <div className="relative aspect-square overflow-hidden rounded-[3px] bg-paper-2">
-                  <Image
-                    src={f.src}
-                    alt={f.alt}
-                    fill
-                    sizes="(min-width: 1024px) 12vw, 45vw"
-                    className="object-cover"
-                  />
-                </div>
-                <p className="mt-2.5 text-[0.8125rem] leading-snug font-medium">
-                  {f.place}
-                </p>
-                <p className="font-mono text-[0.6875rem] leading-snug tracking-[0.06em] text-ink-50">
-                  {f.stamp}
-                </p>
-              </Rise>
-            ))}
-          </ul>
-        </div>
-      </Section>
-
-      {/* 06 — THE COMMERCIAL MODEL (barter lives on its own page) */}
-      <section className="bg-ink py-(--spacing-section-lg) text-paper">
-        <div className="shell grid-12">
-          <Rise className="col-span-12 lg:col-span-10 lg:col-start-2">
-            <p className="eyebrow mb-8 text-paper-dim">06 — And one more thing</p>
-            <p className="font-display text-display-l text-balance">
-              You can pay for all of this without cash.
-            </p>
-            <p className="mt-10 max-w-[52ch] text-body-l text-paper-dim">
-              We take finished goods, unsold stock, capacity or vouchers
-              against media value — contracted, GST-compliant, and valued in
-              writing before anything moves. It is a separate conversation,
-              and it has its own page.
-            </p>
-            <div className="mt-10">
-              <ButtonLink href="/barter" tone="paper">
-                How barter works
-              </ButtonLink>
-            </div>
-          </Rise>
-        </div>
-      </section>
-
-      {/* 07 — ATLAS ---------------------------------------------- */}
-      <Section index="07" label="How we plan">
-        <div className="grid-12">
-          <Rise className="col-span-12 lg:col-span-5">
-            <h3 className="font-display text-display-l">Atlas</h3>
-            <p className="mt-8 max-w-[46ch] text-body-l text-ink-70">
-              Our in-house intelligence layer. It maps brands, catchments,
-              markets and media into one view, and every campaign this
-              network plans is built on it.
-            </p>
-            <p className="mt-5 max-w-[46ch] text-ink-70">
-              It is the reason our recommendations tend to be shorter than the
-              proposals they compete against.
-            </p>
-            <div className="mt-9">
-              <ArrowLink href="/atlas">Explore Atlas</ArrowLink>
-            </div>
-          </Rise>
-
-          <Rise
-            delay={120}
-            className="col-span-12 mt-12 lg:col-span-6 lg:col-start-7 lg:mt-0"
-          >
-            <ul className="border-t border-rule-strong">
-              {atlasModules.map((m) => (
-                <li key={m.index} className="border-b border-rule py-6">
-                  <div className="flex items-baseline gap-6">
-                    <span className="font-mono text-meta text-accent-text">
-                      {m.index}
-                    </span>
-                    <div>
-                      <h4 className="text-h3">{m.title}</h4>
-                      <p className="mt-2 max-w-[46ch] text-[0.9375rem] text-ink-70">
-                        {m.body}
-                      </p>
-                    </div>
-                  </div>
+            <ul className="mt-5 flex flex-wrap gap-x-7 gap-y-3">
+              {clients.map((c) => (
+                <li key={c} className="text-h3 text-on-ink-dim">
+                  {c}
                 </li>
               ))}
             </ul>
           </Rise>
-        </div>
-      </Section>
+        </Band>
 
-      {/* 08 — PERSPECTIVES --------------------------------------- */}
-      <Section index="08" label="Perspectives" tone="recessed">
-        <ul className="border-b border-rule">
-          {perspectives.map((p, i) => (
-            <Rise key={p.title} as="li" delay={i * 60} className="border-t border-rule">
-              <Link
-                href={p.href}
-                className="group -mx-3 grid-12 items-baseline gap-y-2 px-3 py-8 transition-colors duration-200 hover:bg-paper-hover"
-              >
-                <time
-                  dateTime={p.date}
-                  className="col-span-12 font-mono text-meta uppercase tracking-[0.09em] text-ink-50 md:col-span-2"
+        {/* 03 — WHAT WE BUY (cream) ------------------------------ */}
+        <Band tone="cream">
+          <Rise className="grid-12 items-end">
+            <div className="col-span-12 lg:col-span-7">
+              <Eyebrow tone="cream" deva="हम क्या ख़रीदते हैं">
+                What we buy
+              </Eyebrow>
+              <h2 className="mt-5 font-display text-display-l text-balance">
+                Six formats. One plan.
+              </h2>
+            </div>
+            <p className="col-span-12 mt-5 max-w-[44ch] text-body-l text-on-cream-dim lg:col-span-5 lg:mt-0">
+              Every format drawn at its true proportion, because a hoarding and
+              a lift panel are not the same product.
+            </p>
+          </Rise>
+
+          <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {capabilities.map((c, i) => (
+              <Rise key={c.href} as="li" delay={i * 60}>
+                <Link
+                  href={c.href}
+                  className={`group flex h-full flex-col rounded-(--radius-card) p-6 transition-colors duration-200 md:p-7 ${
+                    c.accent
+                      ? "bg-amber text-on-amber hover:bg-amber-lift"
+                      : "bg-cream-2 hover:bg-rule-light"
+                  }`}
                 >
-                  {p.dateLabel}
-                </time>
-                <h3 className="col-span-12 max-w-[40ch] text-h3 md:col-span-7">
-                  {p.title}
-                </h3>
-                <span className="col-span-12 font-mono text-meta uppercase tracking-[0.09em] text-ink-50 md:col-span-2 md:col-start-11 md:text-right">
-                  {p.category}
-                </span>
-              </Link>
-            </Rise>
-          ))}
-        </ul>
-        <Rise delay={200} className="mt-10">
-          <ArrowLink href="/perspectives">All perspectives</ArrowLink>
-        </Rise>
-      </Section>
+                  <span
+                    className={`eyebrow ${
+                      c.accent ? "text-on-amber-dim" : "text-amber-deep"
+                    }`}
+                  >
+                    {c.index}
+                  </span>
+                  <h3 className="mt-3 text-h2">{c.title}</h3>
+                  <p
+                    className={`mt-3 max-w-[34ch] ${
+                      c.accent ? "text-on-amber-dim" : "text-on-cream-dim"
+                    }`}
+                  >
+                    {c.short}
+                  </p>
 
-      {/* 09 — CONTACT -------------------------------------------- */}
-      <section className="shell py-(--spacing-section)">
-        <Rise>
-          <p className="font-display text-display-l text-balance">
-            Tell us the market and the objective.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <a
-              href={site.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex min-h-11 items-center gap-2.5 rounded-[2px] bg-ink px-6 py-4 font-mono text-meta uppercase tracking-[0.09em] text-paper transition-colors duration-200 hover:bg-accent-text"
-            >
-              Talk on WhatsApp
-              <span className="row-arrow">→</span>
-            </a>
-            <ArrowLink href="/contact">Or send a brief</ArrowLink>
+                  {platesFor[c.index] && (
+                    <div className="mt-7">
+                      <FormatPlate formats={formatSets[platesFor[c.index]]} />
+                    </div>
+                  )}
+
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-[0.9375rem] font-medium">
+                    {c.linkLabel ?? "Explore"}{" "}
+                    <span className="row-arrow">→</span>
+                  </span>
+                </Link>
+              </Rise>
+            ))}
+          </ul>
+        </Band>
+
+        {/* 04 — OBJECTIVES (the Runway split) -------------------- */}
+        <Band tone="ink">
+          <Rise>
+            <Eyebrow deva="आप क्या करना चाहते हैं">Start with the objective</Eyebrow>
+            <h2 className="mt-5 max-w-[18ch] font-display text-display-l text-balance">
+              Tell us what you&rsquo;re <span className="hl">trying to do</span>.
+            </h2>
+          </Rise>
+
+          <ul className="mt-12 grid gap-4 lg:grid-cols-3">
+            {objectives.map((o, i) => (
+              <Rise key={o.index} as="li" delay={i * 70}>
+                <Card className="flex h-full flex-col">
+                  <span className="eyebrow text-amber">{o.index}</span>
+                  <h3 className="mt-3 text-h2 text-balance">{o.title}</h3>
+                  <p className="mt-4 text-on-ink-dim">{o.body}</p>
+                  <ul className="mt-6 space-y-2.5 border-t border-rule-dark pt-5">
+                    {o.points.map((p) => (
+                      <li key={p} className="flex gap-3 text-[0.9375rem]">
+                        <span aria-hidden className="text-amber">
+                          —
+                        </span>
+                        <span className="text-on-ink-dim">{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </Rise>
+            ))}
+          </ul>
+        </Band>
+
+        {/* 05 — PROOF OF DELIVERY -------------------------------- */}
+        <Band tone="ink2">
+          <div className="grid-12 items-end">
+            <Rise className="col-span-12 lg:col-span-7">
+              <Eyebrow deva="डिलीवरी का सबूत">Proof of delivery</Eyebrow>
+              <h2 className="mt-5 font-display text-display-l text-balance">
+                Every placement <span className="hl">photographed</span>,
+                geo-tagged and dated.
+              </h2>
+            </Rise>
+            <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-ink-dim lg:col-span-5 lg:mt-0">
+              You get the file, not a summary. Where a screen is digital we
+              verify the run date against that morning&rsquo;s newspaper in
+              frame.
+            </p>
           </div>
-        </Rise>
-        <Rise delay={80} className="mt-16">
-          <ContactLedger
-            email={site.email}
-            phone={site.phone}
-            address={site.address}
-          />
-        </Rise>
-      </section>
+
+          <ul className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {proofFrames.map((f, i) => (
+              <Rise key={f.src} as="li" delay={i * 60}>
+                <div className="overflow-hidden rounded-(--radius-card) bg-ink-3">
+                  <div className="relative aspect-4/3">
+                    <Image
+                      src={f.src}
+                      alt={f.alt}
+                      fill
+                      sizes="(min-width: 1024px) 22vw, 45vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <p className="text-[0.9375rem] leading-snug font-medium">
+                      {f.place}
+                    </p>
+                    <p className="mt-1 font-mono text-[0.6875rem] leading-snug tracking-[0.05em] text-on-ink-dim">
+                      {f.stamp}
+                    </p>
+                  </div>
+                </div>
+              </Rise>
+            ))}
+          </ul>
+        </Band>
+
+        {/* 06 — ATLAS (cream) ------------------------------------ */}
+        <Band tone="cream">
+          <div className="grid-12 gap-y-10">
+            <Rise className="col-span-12 lg:col-span-5">
+              <Eyebrow tone="cream" deva="हमारा प्लानिंग सिस्टम">
+                How we plan
+              </Eyebrow>
+              <h2 className="mt-5 font-display text-display-l">Atlas</h2>
+              <p className="mt-6 max-w-[42ch] text-body-l text-on-cream-dim">
+                Our in-house planning layer. It maps brands, catchments,
+                markets and media into one view — and it is the reason our
+                recommendations are shorter than the proposals they compete
+                against.
+              </p>
+              <div className="mt-8">
+                <Btn href="/atlas" variant="outline-dark">
+                  Explore Atlas
+                </Btn>
+              </div>
+            </Rise>
+
+            {/* The artefact. Every section on the reference board shows
+                the product rather than describing it. */}
+            <Rise delay={120} className="col-span-12 lg:col-span-6 lg:col-start-7">
+              <div className="rounded-(--radius-card) bg-ink p-3">
+                <div className="flex items-center gap-2 px-3 py-2.5">
+                  <span className="size-2 rounded-full bg-amber" />
+                  <span className="eyebrow text-on-ink-dim">
+                    Atlas — Kanpur, catchment view
+                  </span>
+                </div>
+                <ul className="grid gap-px overflow-hidden rounded-xl bg-rule-dark">
+                  {atlasModules.map((m) => (
+                    <li key={m.index} className="bg-ink-2 p-4">
+                      <div className="flex items-baseline gap-4">
+                        <span className="eyebrow text-amber">{m.index}</span>
+                        <div>
+                          <p className="text-h3 text-on-ink">{m.title}</p>
+                          <p className="mt-1 max-w-[46ch] text-[0.875rem] text-on-ink-dim">
+                            {m.body}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Rise>
+          </div>
+        </Band>
+
+        {/* 07 — CITIES ------------------------------------------- */}
+        <Band tone="ink">
+          <div className="grid-12 items-end">
+            <Rise className="col-span-12 lg:col-span-7">
+              <Eyebrow deva="शहर">Where we operate</Eyebrow>
+              <h2 className="mt-5 font-display text-display-l text-balance">
+                Planned from catchment data, <span className="hl">not a rate card</span>.
+              </h2>
+            </Rise>
+            <div className="col-span-12 mt-6 lg:col-span-4 lg:col-start-9 lg:mt-0">
+              <Btn href="/cities" variant="outline-light">
+                All cities
+              </Btn>
+            </div>
+          </div>
+
+          <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {cityLinks.map((c, i) => (
+              <Rise key={c.name} as="li" delay={Math.min(i, 8) * 35}>
+                {c.href ? (
+                  <Link
+                    href={c.href}
+                    className="group flex items-baseline justify-between gap-3 rounded-xl bg-ink-2 px-4 py-4 transition-colors duration-200 hover:bg-ink-3"
+                  >
+                    <span className="text-h3">{c.name}</span>
+                    <span className="deva text-[0.875rem] text-amber">
+                      {deva[c.name]}
+                    </span>
+                  </Link>
+                ) : (
+                  <div className="flex items-baseline justify-between gap-3 rounded-xl px-4 py-4 ring-1 ring-rule-dark ring-inset">
+                    <span className="text-h3 text-on-ink-dim">{c.name}</span>
+                    <span className="deva text-[0.875rem] text-on-ink-dim/60">
+                      {deva[c.name]}
+                    </span>
+                  </div>
+                )}
+              </Rise>
+            ))}
+          </ul>
+        </Band>
+
+        {/* 08 — NUMBERS + BARTER (amber) ------------------------- */}
+        <Band tone="amber">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+            <Rise>
+              <Eyebrow tone="amber">The commercial model</Eyebrow>
+              <h2 className="mt-5 font-display text-display-l text-balance">
+                You can pay for all of this without cash.
+              </h2>
+              <p className="mt-6 max-w-[44ch] text-body-l text-on-amber-dim">
+                We take finished goods, unsold stock, capacity or vouchers
+                against media value — contracted, GST-compliant, and valued in
+                writing before anything moves.
+              </p>
+              <div className="mt-8">
+                <Btn href="/barter" variant="light">
+                  How barter works
+                </Btn>
+              </div>
+            </Rise>
+
+            <Rise delay={100}>
+              <dl className="grid grid-cols-2 gap-x-6 gap-y-9 border-t border-on-amber/20 pt-9">
+                {proofStats.map((s) => (
+                  <div key={s.label}>
+                    <dt className="eyebrow text-on-amber-dim">{s.label}</dt>
+                    <dd className="mt-2.5 font-display text-[clamp(2rem,4vw,3rem)] leading-none font-semibold tracking-[-0.035em]">
+                      {s.value}
+                    </dd>
+                    <p className="mt-2 max-w-[24ch] text-[0.875rem] text-on-amber-dim">
+                      {s.note}
+                    </p>
+                  </div>
+                ))}
+              </dl>
+            </Rise>
+          </div>
+        </Band>
       </div>
     </>
   );

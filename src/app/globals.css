@@ -1,83 +1,92 @@
 @import "tailwindcss";
 
 /* ============================================================
-   BIZEX4U — "The Ledger"
+   BIZEX4U — v3 design language
 
-   Direction verified against the ui-ux-pro-max style database:
-   minimalism-and-swiss-style — grid-based, high contrast, no
-   shadows, 0px radius, a single accent. The words that matter in
-   that spec are HIGH CONTRAST and CLEAR TYPE HIERARCHY. Restraint
-   is not the same thing as low contrast.
+   Brief: the structure and density of the Savee board (#paid,
+   Runway, Figma, GoCardless) with the intensity of Laqshya.
 
-   Every text pair below is measured. Ratios are noted inline.
+   What that means concretely:
+   · Sectioned colour blocking. Every band owns its background —
+     charcoal, deep ink, cream, amber. Never one continuous field.
+   · An artefact in every section. Show the thing, don't describe it.
+   · Rounded. 16px on cards, full pills on buttons.
+   · One accent, amber, used the Laqshya way: to highlight a phrase
+     INSIDE a headline rather than as decoration.
+   · Sentence case. Not all-caps.
+
+   Every text pair below is measured; ratios noted inline.
    ============================================================ */
 
 @theme {
-  /* Colour ------------------------------------------------- */
-  --color-paper: #fafaf7; /* warm off-white canvas */
-  --color-paper-2: #f2f1ea; /* recessed band */
-  --color-paper-hover: #ecebe2;
-  --color-ink: #0a0a0a; /*        18.9:1 on paper */
-  --color-ink-70: #57574f; /*      6.97:1 on paper — secondary body */
-  --color-ink-50: #6b6b65; /*      5.35:1 on paper — metadata */
-  --color-rule: #d9d8d0; /* hairlines, non-text */
-  --color-rule-strong: #b4b3a9; /* emphasised hairlines */
+  /* Dark surfaces ------------------------------------------ */
+  --color-ink: #0b0b0d; /* base canvas */
+  --color-ink-2: #141417; /* raised card on dark */
+  --color-ink-3: #1e1e22; /* hover / border on dark */
+  --color-on-ink: #ffffff; /*        19.7:1 */
+  --color-on-ink-dim: #a8a69e; /*     8.07:1 — secondary on dark */
 
-  /* Inverted surfaces */
-  --color-rule-dark: #333330;
-  --color-paper-dim: #c4c4bf; /*  11.3:1 on ink — secondary on dark */
+  /* Light surfaces ----------------------------------------- */
+  --color-cream: #f5f1e8; /* warm light band */
+  --color-cream-2: #ebe6d9; /* recessed light / card on cream */
+  --color-on-cream: #0b0b0d; /*      17.5:1 */
+  --color-on-cream-dim: #4a4842; /*   8.11:1 — secondary on light */
 
-  /* Accent. Two values because contrast is not optional:
-     -accent is for rules, fills and marks (non-text);
-     -accent-text passes 6.3:1 as text on paper;
-     -accent-lift passes 6.6:1 as text on ink. */
-  --color-accent: #6f4bff;
-  --color-accent-text: #5a34f0;
-  --color-accent-lift: #9c82ff;
+  /* Accent -------------------------------------------------
+     amber reads at 11:1 on charcoal, so it is the highlight
+     colour on dark. On cream it collapses to 1.6:1, so text
+     there uses the deep variant instead (4.94:1). */
+  --color-amber: #f5b841;
+  --color-amber-lift: #ffc559;
+  --color-amber-deep: #8f5e05;
+  --color-on-amber: #0b0b0d; /*      11.1:1 */
+  --color-on-amber-dim: #3a3a35; /*   6.43:1 */
+
+  /* Hairlines ---------------------------------------------- */
+  --color-rule-dark: #2a2a2e;
+  --color-rule-light: #dcd6c6;
 
   /* Type --------------------------------------------------- */
   --font-display: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
+  --font-deva: var(--font-deva), "Noto Sans Devanagari", sans-serif;
 
-  /* Wider jumps between steps than before. Uniform sizing was
-     what made the first pass read as flat. */
-  --text-display-xl: clamp(3.25rem, 7.5vw, 7.5rem);
-  --text-display-xl--line-height: 0.9;
-  --text-display-xl--letter-spacing: -0.042em;
+  --text-display-xl: clamp(2.75rem, 6.4vw, 6rem);
+  --text-display-xl--line-height: 0.98;
+  --text-display-xl--letter-spacing: -0.035em;
   --text-display-xl--font-weight: 600;
 
-  --text-display-l: clamp(2.25rem, 4.6vw, 4.25rem);
-  --text-display-l--line-height: 0.96;
-  --text-display-l--letter-spacing: -0.036em;
+  --text-display-l: clamp(2.125rem, 4vw, 3.75rem);
+  --text-display-l--line-height: 1.02;
+  --text-display-l--letter-spacing: -0.03em;
   --text-display-l--font-weight: 600;
 
-  --text-h2: clamp(1.625rem, 2.6vw, 2.5rem);
-  --text-h2--line-height: 1.04;
-  --text-h2--letter-spacing: -0.026em;
+  --text-h2: clamp(1.625rem, 2.4vw, 2.375rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.022em;
   --text-h2--font-weight: 600;
 
-  --text-h3: 1.375rem;
-  --text-h3--line-height: 1.22;
-  --text-h3--letter-spacing: -0.016em;
+  --text-h3: 1.3125rem;
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.014em;
   --text-h3--font-weight: 600;
 
-  --text-body-l: 1.1875rem;
+  --text-body-l: 1.125rem;
   --text-body-l--line-height: 1.55;
 
-  --text-body: 1.0625rem;
-  --text-body--line-height: 1.62;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
 
   --text-meta: 0.75rem;
   --text-meta--line-height: 1.2;
-  --text-meta--letter-spacing: 0.09em;
+  --text-meta--letter-spacing: 0.07em;
   --text-meta--font-weight: 500;
 
-  /* Spacing — "spacious" scale (density 3/10) --------------- */
-  --spacing-section: clamp(4.5rem, 8vw, 7rem);
-  --spacing-section-lg: clamp(5.5rem, 10vw, 9rem);
+  /* Rhythm — tighter than v2. The references are dense. */
+  --spacing-band: clamp(3.5rem, 6vw, 6rem);
+  --radius-card: 1rem;
 
-  /* Motion ------------------------------------------------- */
   --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -86,6 +95,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  background: var(--color-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -95,30 +105,26 @@ html {
 }
 
 body {
-  background: var(--color-paper);
-  color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-on-ink);
   font-family: var(--font-sans);
   font-size: var(--text-body);
-  line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-synthesis-weight: none;
-  text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: #fff;
+  background: var(--color-amber);
+  color: var(--color-ink);
 }
 
-/* Focus — visible, never removed. */
 :focus-visible {
-  outline: 2px solid var(--color-accent-text);
+  outline: 2px solid var(--color-amber);
   outline-offset: 3px;
-  border-radius: 1px;
+  border-radius: 4px;
 }
 
-/* Everything clickable says so. */
 a,
 button,
 summary,
@@ -130,51 +136,69 @@ summary,
 
 @utility shell {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1320px;
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: 1.25rem;
 
   @media (width >= 48rem) {
-    padding-inline: 2.5rem;
+    padding-inline: 2rem;
   }
-
-  @media (width >= 90rem) {
-    padding-inline: 3.5rem;
+  @media (width >= 80rem) {
+    padding-inline: 2.5rem;
   }
 }
 
 @utility grid-12 {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: 1.5rem;
+  column-gap: 1.25rem;
 
   @media (width >= 64rem) {
-    column-gap: 2rem;
+    column-gap: 1.75rem;
   }
 }
 
-/* Mono label. Darker than the first pass, which used a grey that
-   failed contrast at 12px. */
+/* Mono label. `on-dark` and `on-light` variants keep contrast
+   honest without callers having to think about it. */
 @utility eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-meta);
   font-weight: 500;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--color-ink-50);
 }
 
-@utility eyebrow-ink {
-  font-family: var(--font-mono);
-  font-size: var(--text-meta);
+/* The Laqshya move: amber highlight on a phrase inside a headline.
+   On light bands it swaps to the deep amber so it stays readable. */
+@utility hl {
+  color: var(--color-amber);
+}
+
+@utility hl-on-light {
+  color: var(--color-amber-deep);
+}
+
+/* Devanagari companion setting, used beside Latin city and
+   section names. Sits a little smaller and lighter. */
+@utility deva {
+  font-family: var(--font-deva);
   font-weight: 500;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--color-ink);
 }
 
-/* Reveal — scroll entry, 500ms, stagger capped at 8 children --
-   per the motion database: beyond ~8 the tail feels laggy. */
+/* Grain — the texture under Laqshya's gradient fields. Cheap,
+   pure CSS, and it stops large flat blocks looking like a
+   template. Applied via .grain on a positioned parent. */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Reveal --------------------------------------------------- */
 
 .reveal {
   opacity: 0;
@@ -198,12 +222,11 @@ summary,
   }
 }
 
-/* Once GSAP is driving, it owns opacity and transform outright. */
 .gsap-ready .reveal {
   transition: none;
 }
 
-/* Link underline drawing in from the left ------------------ */
+/* Link + arrow --------------------------------------------- */
 
 .link-underline {
   position: relative;
@@ -230,18 +253,10 @@ summary,
 
 .link-underline[data-active="true"]::after {
   transform: scaleX(1);
-  background: var(--color-accent);
+  background: var(--color-amber);
   height: 2px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .link-underline::after {
-    transition: none;
-  }
-}
-
-/* Row arrow nudges on hover — the one motion affordance that
-   tells you a whole row is a link. */
 .row-arrow {
   display: inline-block;
   transition: transform 220ms var(--ease-reveal);
@@ -252,6 +267,7 @@ summary,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .link-underline::after,
   .row-arrow {
     transition: none;
   }
