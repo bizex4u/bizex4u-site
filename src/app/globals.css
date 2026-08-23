@@ -198,6 +198,11 @@ summary,
   }
 }
 
+/* Once GSAP is driving, it owns opacity and transform outright. */
+.gsap-ready .reveal {
+  transition: none;
+}
+
 /* Link underline drawing in from the left ------------------ */
 
 .link-underline {

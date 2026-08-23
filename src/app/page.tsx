@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowLink,
   ButtonLink,
@@ -8,19 +9,19 @@ import {
   Rise,
   Section,
 } from "@/components/Ledger";
+import HeroReel from "@/components/HeroReel";
 import FormatPlate, { formatSets } from "@/components/FormatPlate";
 import {
   atlasModules,
   capabilities,
   perspectives,
+  proofFrames,
   proofStats,
   sectorsServed,
-  selectedWork,
   site,
 } from "@/lib/site";
 import { additionalMarkets, cities } from "@/lib/cities";
 
-/* Format plates attach to the capabilities they describe. */
 const platesFor: Record<string, keyof typeof formatSets> = {
   "01": "outdoor",
   "02": "dooh",
@@ -34,64 +35,78 @@ export default function Home() {
     ...additionalMarkets.map((name) => ({ name })),
   ];
 
+  /* Outdoor leads the page. Barter is one capability among six and lives
+     on its own page — it is the commercial model, not the product. */
+  const outdoorFirst = capabilities;
+
   return (
     <>
-      {/* 01 — HERO -----------------------------------------------
-          Trimmed from a full viewport. The first pass left a dead
-          band of 300px between the standfirst and the fold, which
-          read as an unfinished page rather than as confidence. */}
-      <section className="shell pt-34 pb-16 md:pt-44 md:pb-24">
-        <Rise className="border-t border-ink pt-4">
-          <p className="eyebrow-ink">
-            Independent Media Network — India — Est. {site.founded}
-          </p>
-        </Rise>
+      {/* 01 — HERO ------------------------------------------------
+          Full-bleed reel of live sites. Type sits on a real gradient,
+          not a token overlay — the footage is bright daylight. */}
+      <section
+        data-hero
+        className="relative flex min-h-[92svh] flex-col justify-end overflow-hidden"
+      >
+        <HeroReel />
 
-        <div className="grid-12 mt-12 md:mt-16">
-          <Rise delay={60} className="col-span-12 lg:col-span-10">
-            <h1 className="text-display-xl font-display text-balance">
-              We put brands where India actually is.
-            </h1>
-          </Rise>
-        </div>
-
-        <div className="grid-12 mt-12">
-          <Rise delay={120} className="col-span-12 lg:col-span-5">
-            <p className="text-body-l text-ink-70">
-              Bizex4U plans, negotiates and runs outdoor, retail and broadcast
-              campaigns across India. We have done it for seventeen years — and
-              we structure the commercials so clients spend less cash doing it.
+        <div data-hero-copy className="shell relative z-10 pt-32 pb-14 md:pb-20">
+          <Rise className="max-w-[20ch] border-t border-paper/40 pt-4 md:max-w-none">
+            <p className="font-mono text-meta uppercase tracking-[0.09em] text-paper">
+              Outdoor Advertising Across India — Independent Since{" "}
+              {site.founded}
             </p>
-            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <ButtonLink href="/contact">Start a conversation</ButtonLink>
-              <ArrowLink href="/barter">How the barter model works</ArrowLink>
-            </div>
           </Rise>
 
-          {/* The formats we sell, drawn at true proportion. Gives the
-              hero something to look at that is actually the product. */}
-          <Rise
-            delay={200}
-            className="col-span-12 mt-14 hidden lg:col-span-6 lg:col-start-7 lg:mt-2 lg:block"
-          >
-            <p className="eyebrow mb-6">A sample of what we buy</p>
-            <FormatPlate formats={formatSets.outdoor} />
-          </Rise>
+          <div className="grid-12 mt-8">
+            <Rise delay={60} className="col-span-12 lg:col-span-9">
+              {/* Accuracy note: an earlier draft read "we own the places it
+                  passes". Bizex4U plans and buys this media, it does not
+                  own the sites. Do not reinstate that line. */}
+              <h1 className="font-display text-display-xl text-balance text-paper">
+                We put brands where India actually is.
+              </h1>
+            </Rise>
+          </div>
+
+          <div className="grid-12 mt-10">
+            <Rise delay={120} className="col-span-12 lg:col-span-5">
+              <p className="text-body-l text-paper-dim">
+                Hoardings, LED, transit and retail media planned, bought and
+                proven across 40+ Indian cities. Seventeen years of it.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+                <a
+                  href={site.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex min-h-11 items-center gap-2.5 rounded-[2px] bg-paper px-6 py-4 font-mono text-meta uppercase tracking-[0.09em] text-ink transition-colors duration-200 hover:bg-white"
+                >
+                  Talk on WhatsApp
+                  <span className="row-arrow">→</span>
+                </a>
+                <Link
+                  href="/what-we-do"
+                  className="link-underline -my-3 inline-flex min-h-11 items-center py-3 font-mono text-meta uppercase tracking-[0.09em] text-paper"
+                >
+                  See what we buy <span className="row-arrow">→</span>
+                </Link>
+              </div>
+            </Rise>
+          </div>
         </div>
       </section>
 
-      {/* 02 — PROOF ----------------------------------------------
-          The trust-authority pattern puts proof directly after the
-          hero, before anything is explained. The first pass buried
-          credibility at position 07. */}
-      <section className="border-y border-ink bg-paper-2 py-16 md:py-20">
+      {/* Everything below rises over the pinned hero, so it needs its own
+          stacking context and an opaque ground. */}
+      <div className="relative z-10 bg-paper">
+      {/* 02 — PROOF ---------------------------------------------- */}
+      <section className="border-b border-ink bg-paper-2 py-16 md:py-20">
         <div className="shell">
           <dl className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
             {proofStats.map((s, i) => (
               <Rise key={s.label} delay={i * 70}>
                 <dt className="eyebrow">{s.label}</dt>
-                {/* Sized to the longest value ("Independent"), not to the
-                    shortest — display-l clipped it at the grid edge. */}
                 <dd className="mt-3 font-display text-[clamp(1.375rem,6vw,3.25rem)] leading-[1] font-semibold tracking-[-0.035em] lg:text-[clamp(2rem,3.4vw,3.25rem)]">
                   {s.value}
                 </dd>
@@ -107,18 +122,14 @@ export default function Home() {
             <p className="max-w-[80ch] text-body-l">
               {sectorsServed.join(" · ")}
             </p>
-            <p className="mt-4 text-[0.9375rem] text-ink-70">
-              Client names and campaign results are published only with written
-              permission. Ask and we will show you the documentation.
-            </p>
           </Rise>
         </div>
       </section>
 
-      {/* 03 — THE NETWORK ---------------------------------------- */}
-      <Section index="03" label="What we do" size="large">
+      {/* 03 — WHAT WE BUY ---------------------------------------- */}
+      <Section index="03" label="What we buy" size="large">
         <LedgerList>
-          {capabilities.map((c, i) => (
+          {outdoorFirst.map((c, i) => (
             <LedgerRow
               key={c.href}
               index={c.index}
@@ -138,59 +149,8 @@ export default function Home() {
         </LedgerList>
       </Section>
 
-      {/* 04 — POSITION ------------------------------------------- */}
-      <section className="bg-ink py-(--spacing-section-lg) text-paper">
-        <div className="shell grid-12">
-          <Rise className="col-span-12 lg:col-span-10 lg:col-start-2">
-            <p className="font-display text-display-l text-balance">
-              Most media is bought with cash.
-              <br />
-              It does not have to be.
-            </p>
-            <p className="mt-10 max-w-[52ch] text-body-l text-paper-dim">
-              Bizex4U converts what a business already owns — finished goods,
-              unsold stock, capacity, vouchers — into media across India, at a
-              value agreed in writing before anything moves.
-            </p>
-            <div className="mt-10">
-              <ButtonLink href="/barter" tone="paper">
-                Our commercial model
-              </ButtonLink>
-            </div>
-          </Rise>
-        </div>
-      </section>
-
-      {/* 05 — SELECTED WORK -------------------------------------- */}
-      <Section index="05" label="Selected work">
-        <LedgerList>
-          {selectedWork.map((w, i) => (
-            <Rise key={w.index} as="li" delay={i * 60} className="border-t border-rule">
-              <Link
-                href={w.href}
-                className="group -mx-3 grid-12 items-baseline gap-y-3 px-3 py-8 transition-colors duration-200 hover:bg-paper-hover md:py-10"
-              >
-                <span className="col-span-12 font-mono text-meta text-ink-50 transition-colors group-hover:text-accent-text md:col-span-1">
-                  {w.index}
-                </span>
-                <h3 className="col-span-12 text-h3 md:col-span-3">{w.client}</h3>
-                <p className="col-span-12 font-mono text-meta uppercase tracking-[0.09em] text-ink-50 md:col-span-3">
-                  {w.sector} · {w.markets}
-                </p>
-                <p className="col-span-12 max-w-[44ch] text-ink-70 md:col-span-4 md:col-start-9">
-                  {w.result}
-                </p>
-              </Link>
-            </Rise>
-          ))}
-        </LedgerList>
-        <Rise delay={200} className="mt-10">
-          <ArrowLink href="/work">All work</ArrowLink>
-        </Rise>
-      </Section>
-
-      {/* 06 — WHERE WE OPERATE ----------------------------------- */}
-      <Section index="06" label="Where we operate" tone="recessed">
+      {/* 04 — CITIES --------------------------------------------- */}
+      <Section index="04" label="Where we operate" tone="recessed">
         <div className="grid-12">
           <Rise className="col-span-12 lg:col-span-4">
             <p className="text-h2 text-balance">
@@ -222,23 +182,81 @@ export default function Home() {
                 </Rise>
               ))}
             </ul>
-            <p className="mt-5 text-[0.9375rem] text-ink-70">
-              Markets in grey are planned and bought regularly; their pages are
-              being written.
-            </p>
           </div>
         </div>
       </Section>
 
+      {/* 05 — PROOF OF DELIVERY ----------------------------------
+          Kept deliberately small. The overlays are the argument. */}
+      <Section index="05" label="Proof of delivery">
+        <div className="grid-12">
+          <Rise className="col-span-12 lg:col-span-4">
+            <p className="text-body-l">
+              Every placement is photographed on site, geo-tagged and dated.
+              You get the file, not a summary.
+            </p>
+            <p className="mt-4 max-w-[38ch] text-[0.9375rem] text-ink-70">
+              Where a screen is digital, we verify the run date against that
+              morning&rsquo;s newspaper in frame.
+            </p>
+          </Rise>
+
+          <ul className="col-span-12 mt-10 grid grid-cols-2 gap-4 lg:col-span-7 lg:col-start-6 lg:mt-0 lg:grid-cols-4">
+            {proofFrames.map((f, i) => (
+              <Rise key={f.src} as="li" delay={i * 60}>
+                <div className="relative aspect-square overflow-hidden rounded-[3px] bg-paper-2">
+                  <Image
+                    src={f.src}
+                    alt={f.alt}
+                    fill
+                    sizes="(min-width: 1024px) 12vw, 45vw"
+                    className="object-cover"
+                  />
+                </div>
+                <p className="mt-2.5 text-[0.8125rem] leading-snug font-medium">
+                  {f.place}
+                </p>
+                <p className="font-mono text-[0.6875rem] leading-snug tracking-[0.06em] text-ink-50">
+                  {f.stamp}
+                </p>
+              </Rise>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      {/* 06 — THE COMMERCIAL MODEL (barter lives on its own page) */}
+      <section className="bg-ink py-(--spacing-section-lg) text-paper">
+        <div className="shell grid-12">
+          <Rise className="col-span-12 lg:col-span-10 lg:col-start-2">
+            <p className="eyebrow mb-8 text-paper-dim">06 — And one more thing</p>
+            <p className="font-display text-display-l text-balance">
+              You can pay for all of this without cash.
+            </p>
+            <p className="mt-10 max-w-[52ch] text-body-l text-paper-dim">
+              We take finished goods, unsold stock, capacity or vouchers
+              against media value — contracted, GST-compliant, and valued in
+              writing before anything moves. It is a separate conversation,
+              and it has its own page.
+            </p>
+            <div className="mt-10">
+              <ButtonLink href="/barter" tone="paper">
+                How barter works
+              </ButtonLink>
+            </div>
+          </Rise>
+        </div>
+      </section>
+
       {/* 07 — ATLAS ---------------------------------------------- */}
-      <Section index="07" label="Intelligence">
+      <Section index="07" label="How we plan">
         <div className="grid-12">
           <Rise className="col-span-12 lg:col-span-5">
             <h3 className="font-display text-display-l">Atlas</h3>
             <p className="mt-8 max-w-[46ch] text-body-l text-ink-70">
-              Atlas is our in-house intelligence layer. It maps brands,
-              catchments, markets and media into one view, and every campaign
-              this network plans is built on it.
+              Our in-house intelligence layer. It maps brands, catchments,
+              markets and media into one view, and every campaign this
+              network plans is built on it.
             </p>
             <p className="mt-5 max-w-[46ch] text-ink-70">
               It is the reason our recommendations tend to be shorter than the
@@ -308,10 +326,19 @@ export default function Home() {
       <section className="shell py-(--spacing-section)">
         <Rise>
           <p className="font-display text-display-l text-balance">
-            Start a conversation.
+            Tell us the market and the objective.
           </p>
-          <div className="mt-9">
-            <ButtonLink href="/contact">Tell us what you need</ButtonLink>
+          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <a
+              href={site.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex min-h-11 items-center gap-2.5 rounded-[2px] bg-ink px-6 py-4 font-mono text-meta uppercase tracking-[0.09em] text-paper transition-colors duration-200 hover:bg-accent-text"
+            >
+              Talk on WhatsApp
+              <span className="row-arrow">→</span>
+            </a>
+            <ArrowLink href="/contact">Or send a brief</ArrowLink>
           </div>
         </Rise>
         <Rise delay={80} className="mt-16">
@@ -322,6 +349,7 @@ export default function Home() {
           />
         </Rise>
       </section>
+      </div>
     </>
   );
 }

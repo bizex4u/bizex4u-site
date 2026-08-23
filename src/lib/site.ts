@@ -9,6 +9,13 @@ export const site = {
   email: "yash@bizex4u.com",
   phone: "+91 8090500009",
   phoneHref: "+918090500009",
+  /* Indian B2B closes on WhatsApp. This is the highest-intent action on
+     the site — treat it as the primary CTA, not a footer afterthought. */
+  whatsapp:
+    "https://wa.me/918090500009?text=" +
+    encodeURIComponent(
+      "Hi Bizex4U — I'd like to talk about an outdoor campaign.",
+    ),
   /* TODO(yash): replace with the registered office address before launch. */
   address: {
     line1: "Registered office address",
@@ -180,6 +187,39 @@ export const proofStats = [
     label: "Ownership",
     value: "Independent",
     note: "No network mandate. No inherited rate card.",
+  },
+];
+
+/* Proof of delivery.
+
+   These are real monitoring frames. The GPS and timestamp overlays are
+   left on deliberately — non-delivery is the loudest unspoken fear an
+   Indian media buyer has, and no amount of art direction answers it as
+   well as a geo-tagged photograph does. */
+export const proofFrames = [
+  {
+    src: "/media/proof-safdarjung.jpg",
+    place: "Safdarjung Enclave, New Delhi",
+    stamp: "28.5694° N, 77.2061° E · 30 Aug 2024",
+    alt: "Backlit panel above a market row in Safdarjung Enclave, photographed with a geo-tagged timestamp",
+  },
+  {
+    src: "/media/proof-kanpur.jpg",
+    place: "Green Park, Kanpur",
+    stamp: "26.4819° N, 80.3454° E · 03 Dec 2025",
+    alt: "Hoarding near Green Park Stadium, Kanpur, photographed with a geo-tagged timestamp",
+  },
+  {
+    src: "/media/proof-cyberhub.jpg",
+    place: "Cyber Hub, Gurugram",
+    stamp: "Dated newspaper verification · 30 Aug 2024",
+    alt: "Digital screen at Cyber Hub photographed alongside that morning's newspaper as proof of the run date",
+  },
+  {
+    src: "/media/proof-vip-road.jpg",
+    place: "VIP Road, Kanpur",
+    stamp: "26.4819° N, 80.3454° E · 03 Dec 2025",
+    alt: "Hoarding on VIP Road, Kanpur, photographed with a geo-tagged timestamp",
   },
 ];
 

@@ -61,11 +61,16 @@ export default function Nav() {
 
   const solid = scrolled || megaOpen || mobileOpen;
 
+  /* The homepage opens on full-bleed video, so the nav has to invert
+     until it lands on paper. Every other page starts light. */
+  const overDarkHero = pathname === "/" && !solid;
+  const inkText = overDarkHero ? "text-paper" : "";
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
         solid ? "bg-paper border-b border-rule" : "bg-transparent"
-      }`}
+      } ${inkText}`}
       onMouseLeave={closeMega}
     >
       <div className="shell flex h-18 items-center justify-between">
@@ -109,13 +114,20 @@ export default function Nav() {
           )}
           {/* A real primary CTA, not another text link. The
               trust-authority pattern asks for one in the nav. */}
-          <Link
-            href="/contact"
-            className="group ml-2 inline-flex items-center gap-2.5 rounded-[2px] bg-ink min-h-11 px-5 py-3 font-mono text-meta uppercase tracking-[0.09em] text-paper transition-colors duration-200 hover:bg-accent-text"
+          {/* WhatsApp is the primary action. Indian B2B closes there. */}
+          <a
+            href={site.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`group ml-2 inline-flex min-h-11 items-center gap-2.5 rounded-[2px] px-5 py-3 font-mono text-meta uppercase tracking-[0.09em] transition-colors duration-200 ${
+              overDarkHero
+                ? "bg-paper text-ink hover:bg-white"
+                : "bg-ink text-paper hover:bg-accent-text"
+            }`}
           >
-            Start a conversation
+            WhatsApp
             <span className="row-arrow">→</span>
-          </Link>
+          </a>
         </nav>
 
         {/* Mobile trigger */}

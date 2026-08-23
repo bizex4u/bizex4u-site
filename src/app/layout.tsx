@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Reveal from "@/components/Reveal";
+import Motion from "@/components/Motion";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -83,7 +83,7 @@ export default function RootLayout({
         <Nav />
         <main id="main">{children}</main>
         <Footer />
-        <Reveal />
+        <Motion />
       </body>
     </html>
   );
