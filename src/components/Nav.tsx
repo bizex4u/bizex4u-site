@@ -19,10 +19,15 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
+  /* Close both panels when the route changes. Adjusting state during
+     render is the supported pattern here — an effect would fire a second
+     render pass for no reason. */
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
     setMegaOpen(false);
     setMobileOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
