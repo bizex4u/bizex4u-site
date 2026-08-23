@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import HeroReel from "@/components/HeroReel";
 import DayClock from "@/components/DayClock";
+import ReelBand from "@/components/ReelBand";
 import Marquee from "@/components/Marquee";
 import FormatPlate, {
   ExchangePlate,
@@ -334,7 +335,15 @@ export default function Home() {
         </ul>
       </Band>
 
-      {/* 07 — PROOF ------------------------------------------------
+      {/* 07 — THE REEL, FULL BLEED -------------------------------
+          The one band that ignores the grid. Everything else on this
+          page sits inside the shell, in a card, with padding, and that
+          containment is a large part of why the site read as careful
+          rather than confident. No type over it — that was the
+          original complaint about the hero and it was right. */}
+      <ReelBand />
+
+      {/* 08 — PROOF ------------------------------------------------
           The frames now scale into place on scroll and run two-up at
           a much larger size. Small thumbnails undersold the one thing
           on the site nobody else offers. */}
@@ -382,7 +391,41 @@ export default function Home() {
         </ul>
       </Band>
 
-      {/* 08 — BARTER ---------------------------------------------- */}
+      {/* 09 — THE STATEMENT --------------------------------------
+          One sentence, set larger than anything else on the site. The
+          page needed a moment where the type stops behaving like a
+          heading and behaves like an image. It also happens to be the
+          single most useful thing a buyer can know about us. */}
+      <section className="grain relative overflow-hidden bg-sand py-(--spacing-band) text-on-sand">
+        <div className="shell relative z-10">
+          <Rise>
+            <p className="font-display text-[clamp(2.5rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.025em] text-balance">
+              We don&rsquo;t own a single hoarding.{" "}
+              <span className="em-serif text-violet-deep">
+                That&rsquo;s the point.
+              </span>
+            </p>
+          </Rise>
+          <div className="mt-12 grid-12">
+            <Rise delay={80} className="col-span-12 lg:col-span-5 lg:col-start-8">
+              <p className="text-body-l text-on-sand-dim">
+                A media owner recommends what it is holding. A network
+                agency recommends what its group holds. We hold nothing, so
+                when we argue for a site it is because of where that site
+                sits — and when we argue against one, we have nothing to
+                lose by saying so.
+              </p>
+              <div className="mt-8">
+                <Btn href="/about" variant="outline-plum">
+                  How we work
+                </Btn>
+              </div>
+            </Rise>
+          </div>
+        </div>
+      </section>
+
+      {/* 10 — BARTER ---------------------------------------------- */}
       <Band tone="violet" grain>
         <div className="grid-12 items-start gap-y-10">
           <Rise className="col-span-12 lg:col-span-6">
@@ -429,7 +472,7 @@ export default function Home() {
         </div>
       </Band>
 
-      {/* 09 — CITIES ---------------------------------------------- */}
+      {/* 11 — CITIES ---------------------------------------------- */}
       <Band tone="sand" grain>
         <div className="grid-12 items-end">
           <Rise className="col-span-12 lg:col-span-8">
@@ -473,7 +516,7 @@ export default function Home() {
         </ul>
       </Band>
 
-      {/* 10 — NUMBERS ---------------------------------------------
+      {/* 12 — NUMBERS ---------------------------------------------
           The values count up once on entry. data-count carries the
           final string so reduced motion and no-JS both land on it. */}
       <Band tone="sand2" grain>
