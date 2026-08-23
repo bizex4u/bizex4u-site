@@ -3,6 +3,7 @@
 import { useId, useRef, useState } from "react";
 import { btnClass, type BtnVariant } from "@/components/UI";
 import { site } from "@/lib/site";
+import { submitBrief } from "@/lib/submitBrief";
 
 /**
  * The brief form, and the only way into WhatsApp from a call to action.
@@ -62,6 +63,21 @@ export default function BriefButton({
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     const get = (k: string) => String(f.get(k) ?? "").trim();
+
+    /* Record the row first, but do not await it. A slow Sheet write
+       must never stand between someone pressing the button and
+       WhatsApp opening — the browser will not treat a delayed
+       window.open as a user gesture, and the tab gets blocked. */
+    void submitBrief({
+      brand: get("brand"),
+      person: get("person"),
+      role: get("role"),
+      market: get("market"),
+      context: context ?? "",
+      detail: get("detail"),
+      source: "brief",
+      company_website: get("company_website"),
+    });
 
     const lines = [
       "Hi Bizex4U —",
@@ -187,6 +203,19 @@ export default function BriefButton({
               About <span className="text-on-sand">{context}</span>.
             </p>
           )}
+
+          {/* Honeypot. Off-screen rather than display:none, because
+              some bots skip hidden inputs but fill positioned ones.
+              tabIndex and aria-hidden keep it away from real users. */}
+          <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+            <label htmlFor={`${id}-cw`}>Company website</label>
+            <input
+              id={`${id}-cw`}
+              name="company_website"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
 
           <div className="mt-7 grid gap-5 sm:grid-cols-2">
             <div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { site } from "@/lib/site";
+import { submitBrief } from "@/lib/submitBrief";
 
 /**
  * "What are you holding?"
@@ -192,6 +193,20 @@ export default function BarterSelector() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                /* Fire and forget, for the same reason as the brief
+                   dialog: awaiting the Sheet write would delay the
+                   navigation past the user gesture. */
+                void submitBrief({
+                  brand: brand.trim(),
+                  person: person.trim(),
+                  holding: category ?? "",
+                  value: scale ?? "",
+                  markets: markets.join(", "),
+                  context: "Barter advertising",
+                  source: "barter",
+                });
+              }}
               className="group inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-violet-deep px-7 py-3 font-medium text-white transition-colors duration-200 hover:bg-violet"
             >
               Send this on WhatsApp
