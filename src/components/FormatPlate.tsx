@@ -104,6 +104,7 @@ export default function FormatPlate({
         return (
           <li key={f.label} className="shrink-0">
             <div
+              data-plate
               className={`rounded-[3px] border ${stroke}`}
               style={{ width: `${w}px`, height: `${h}px` }}
             />

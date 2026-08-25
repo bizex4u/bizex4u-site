@@ -3,6 +3,7 @@ import Image from "next/image";
 import HeroReel from "@/components/HeroReel";
 import DayClock from "@/components/DayClock";
 import ReelBand from "@/components/ReelBand";
+import CorridorField from "@/components/CorridorField";
 import Marquee from "@/components/Marquee";
 import FormatPlate, {
   ExchangePlate,
@@ -370,14 +371,15 @@ export default function Home() {
             <Rise key={f.src} as="li" delay={i * 60}>
               <figure className="overflow-hidden rounded-(--radius-card) bg-plum">
                 <div className="frame relative aspect-3/2">
-                  <Image
-                    data-scale-in
-                    src={f.src}
-                    alt={f.alt}
-                    fill
-                    sizes="(min-width: 640px) 46vw, 92vw"
-                    className="object-cover"
-                  />
+                  <div data-scale-in className="absolute inset-0">
+                    <Image
+                      src={f.src}
+                      alt={f.alt}
+                      fill
+                      sizes="(min-width: 640px) 46vw, 92vw"
+                      className="kenburns object-cover"
+                    />
+                  </div>
                 </div>
                 <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 p-5">
                   <p className="text-h3">{f.place}</p>
@@ -472,8 +474,19 @@ export default function Home() {
         </div>
       </Band>
 
-      {/* 11 — CITIES ---------------------------------------------- */}
-      <Band tone="sand" grain>
+      {/* 11 — CITIES ----------------------------------------------
+          The corridor field runs behind this band. It is a drawing of
+          how the planning actually works — traffic along arterial
+          routes, junctions where they cross — rather than a photograph
+          of somewhere. Honest about being a diagram, and it moves. */}
+      <section className="grain relative overflow-hidden bg-sand py-(--spacing-band) text-on-sand">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 text-violet-deep opacity-[0.55]"
+        >
+          <CorridorField />
+        </div>
+        <div className="shell relative z-10">
         <div className="grid-12 items-end">
           <Rise className="col-span-12 lg:col-span-8">
             <Eyebrow deva="शहर">Where we operate</Eyebrow>
@@ -514,7 +527,8 @@ export default function Home() {
             </Rise>
           ))}
         </ul>
-      </Band>
+        </div>
+      </section>
 
       {/* 12 — NUMBERS ---------------------------------------------
           The values count up once on entry. data-count carries the

@@ -25,8 +25,36 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title: city.metaTitle,
       description: city.metaDescription,
       url: `${site.url}/cities/${city.slug}`,
+      type: "article",
     },
   };
+}
+
+/* A nearby market that has its own page becomes a link; one that does
+   not stays as text. Internal links between city pages are the cheapest
+   real ranking signal available here, and a link to a page that does not
+   exist is worse than no link at all. */
+function Nearby({ names }: { names: string[] }) {
+  const bySlug = new Map(cities.map((c) => [c.name.toLowerCase(), c.slug]));
+  return (
+    <p className="mt-4 text-h3 text-on-sand-dim">
+      {names.map((n, i) => {
+        const slug = bySlug.get(n.toLowerCase());
+        return (
+          <span key={n}>
+            {i > 0 && <span aria-hidden> · </span>}
+            {slug ? (
+              <Link href={`/cities/${slug}`} className="link-underline">
+                {n}
+              </Link>
+            ) : (
+              n
+            )}
+          </span>
+        );
+      })}
+    </p>
+  );
 }
 
 export default async function CityPage({ params }: Params) {
@@ -42,7 +70,10 @@ export default async function CityPage({ params }: Params) {
           <nav aria-label="Breadcrumb" className="mb-10">
             <ol className="flex flex-wrap gap-2 font-mono text-[0.75rem] tracking-[0.08em] text-on-sand-dim uppercase">
               <li>
-                <Link href="/" className="link-underline -my-2 inline-flex min-h-8 items-center py-2">
+                <Link
+                  href="/"
+                  className="link-underline -my-2 inline-flex min-h-8 items-center py-2"
+                >
                   Home
                 </Link>
               </li>
@@ -66,9 +97,14 @@ export default async function CityPage({ params }: Params) {
                 <Eyebrow>Cities — {city.state}</Eyebrow>
               </Rise>
               <Rise delay={60}>
+                {/* The H1 carries the city name and the category term.
+                    A cleverer headline that omits either is a cleverer
+                    headline that does not rank. */}
                 <h1 className="mt-6 font-display text-display-xl text-balance">
-                  Advertising in{" "}
-                  <span className="em-serif text-violet-deep">{city.name}</span>
+                  {city.h1Lead}{" "}
+                  <span className="em-serif text-violet-deep">
+                    {city.h1Accent}
+                  </span>
                   .
                 </h1>
               </Rise>
@@ -79,7 +115,7 @@ export default async function CityPage({ params }: Params) {
                 <div className="mt-9">
                   <BriefButton
                     size="lg"
-                    context={`Advertising in ${city.name}`}
+                    context={`Outdoor advertising in ${city.name}`}
                     market={city.name}
                   >
                     Get a plan for {city.name}
@@ -91,9 +127,7 @@ export default async function CityPage({ params }: Params) {
             <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
               <Card>
                 <p className="eyebrow text-on-sand-dim">Also planned nearby</p>
-                <p className="mt-4 text-h3 text-on-sand-dim">
-                  {city.nearby.join(" · ")}
-                </p>
+                <Nearby names={city.nearby} />
               </Card>
             </Rise>
           </div>
@@ -105,15 +139,15 @@ export default async function CityPage({ params }: Params) {
         <div className="grid-12 gap-y-8">
           <Rise className="col-span-12 lg:col-span-3">
             <Eyebrow>The market</Eyebrow>
+            <h2 className="mt-5 font-display text-h2 text-balance">
+              How {city.name}{" "}
+              <span className="em-serif text-violet-deep">works</span>.
+            </h2>
           </Rise>
           <div className="col-span-12 grid gap-x-8 gap-y-6 lg:col-span-8 lg:col-start-5 lg:grid-cols-2">
             {city.market.map((para, i) => (
               <Rise key={i} delay={i * 60}>
-                <p
-                  className={
-                    i === 0 ? "text-body-l" : "text-on-sand-dim"
-                  }
-                >
+                <p className={i === 0 ? "text-body-l" : "text-on-sand-dim"}>
                   {para}
                 </p>
               </Rise>
@@ -155,15 +189,60 @@ export default async function CityPage({ params }: Params) {
         </ul>
       </Band>
 
-      {/* 03 — PRESS AND RADIO ------------------------------------ */}
+      {/* 03 — THE FORMAT GUIDE -----------------------------------
+          The long-tail layer. Each H3 answers a query somebody actually
+          types, and each body has to be about THIS city — a generic
+          paragraph explaining what a unipole is helps nobody. */}
       <Band tone="sand" grain>
+        <div className="grid-12 items-end">
+          <Rise className="col-span-12 lg:col-span-7">
+            <Eyebrow deva="माध्यम">The formats</Eyebrow>
+            <h2 className="mt-5 font-display text-display-l text-balance">
+              What actually works{" "}
+              <span className="em-serif text-violet-deep">in {city.name}</span>.
+            </h2>
+          </Rise>
+          <p className="col-span-12 mt-5 max-w-[44ch] text-body-l text-on-sand-dim lg:col-span-5 lg:mt-0">
+            Every format below exists in this city. Not all of them belong in
+            your plan — most briefs need two or three, and the useful work is
+            deciding which.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-2">
+          {city.formatGuide.map((f, i) => (
+            <Rise key={f.title} delay={i * 40}>
+              <article className="border-t border-rule-sand pt-6">
+                <div className="flex items-baseline gap-4">
+                  <span className="font-mono text-[0.8125rem] tracking-[0.08em] text-violet-deep">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-on-sand-dim uppercase">
+                    {f.kicker}
+                  </span>
+                </div>
+                {/* These H3s are the long-tail layer and they are meant
+                    to read as headings, not as bolded labels. text-h2 is
+                    the right rung — there is no text-h1 in the scale, and
+                    reaching for one silently drops to body size. */}
+                <h3 className="mt-3 font-display text-h2 text-balance">
+                  {f.title}
+                </h3>
+                <p className="mt-3 max-w-[56ch] text-on-sand-dim">{f.body}</p>
+              </article>
+            </Rise>
+          ))}
+        </div>
+      </Band>
+
+      {/* 04 — PRESS AND RADIO ------------------------------------ */}
+      <Band tone="sand2" grain>
         <div className="grid-12 items-end">
           <Rise className="col-span-12 lg:col-span-7">
             <Eyebrow deva="अख़बार और रेडियो">The local press and radio</Eyebrow>
             <h2 className="mt-5 font-display text-display-l text-balance">
               What {city.name}{" "}
-              <span className="em-serif text-violet-deep">reads and hears</span>
-              .
+              <span className="em-serif text-violet-deep">reads and hears</span>.
             </h2>
           </Rise>
           <p className="col-span-12 mt-5 max-w-[44ch] text-body-l text-on-sand-dim lg:col-span-5 lg:mt-0">
@@ -205,9 +284,14 @@ export default async function CityPage({ params }: Params) {
             <ul className="mt-5 border-t border-rule-sand">
               {city.localMedia.radio.map((r, i) => (
                 <Rise key={r.station} as="li" delay={i * 45}>
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-rule-sand py-4">
-                    <h3 className="text-h3">{r.station}</h3>
-                    <p className="max-w-[34ch] text-[0.9375rem] text-on-sand-dim">
+                  <div className="border-b border-rule-sand py-4">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <h3 className="text-h3">{r.station}</h3>
+                      <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-violet-deep">
+                        {r.frequency}
+                      </span>
+                    </div>
+                    <p className="mt-2 max-w-[52ch] text-[0.9375rem] text-on-sand-dim">
                       {r.note}
                     </p>
                   </div>
@@ -223,29 +307,73 @@ export default async function CityPage({ params }: Params) {
         </div>
       </Band>
 
-      {/* 04 — FORMATS -------------------------------------------- */}
-      <Band tone="sand2" grain>
-        <div className="grid-12 gap-y-10">
-          <Rise className="col-span-12 lg:col-span-4">
-            <Eyebrow>What we plan here</Eyebrow>
-            <h2 className="mt-5 max-w-[16ch] font-display text-display-l text-balance">
-              Usually two or three,{" "}
-              <span className="em-serif text-violet-deep">not all five</span>.
+      {/* 05 — TRANSIT -------------------------------------------- */}
+      <Band tone="plum" grain>
+        <div className="grid-12 items-end gap-y-6">
+          <Rise className="col-span-12 lg:col-span-6">
+            <Eyebrow tone="plum" deva="आवागमन">Transit media</Eyebrow>
+            <h2 className="mt-5 font-display text-display-l text-balance">
+              How {city.name} <span className="em-serif">moves</span>.
             </h2>
           </Rise>
-          <div className="col-span-12 lg:col-span-7 lg:col-start-6">
+          <p className="col-span-12 max-w-[46ch] text-body-l text-on-plum-dim lg:col-span-5 lg:col-start-8">
+            {city.transit.lede}
+          </p>
+        </div>
+
+        <ul className="mt-12 border-t border-rule-plum">
+          {city.transit.modes.map((m, i) => (
+            <Rise key={m.mode} as="li" delay={i * 50}>
+              <div className="grid grid-cols-12 gap-x-6 gap-y-2 border-b border-rule-plum py-6">
+                <h3 className="col-span-12 text-h2 md:col-span-4">{m.mode}</h3>
+                <p className="col-span-12 text-on-plum-dim md:col-span-8">
+                  {m.note}
+                </p>
+              </div>
+            </Rise>
+          ))}
+        </ul>
+      </Band>
+
+      {/* 06 — WHAT DRIVES THE COST -------------------------------
+          There is a large body of search demand for "hoarding advertising
+          cost in <city>" and every competitor answers it with a rate card.
+          We answer it with the variables, and say why. */}
+      <Band tone="sand" grain>
+        <div className="grid-12 gap-y-8">
+          <Rise className="col-span-12 lg:col-span-5">
+            <Eyebrow>What it costs</Eyebrow>
+            <h2 className="mt-5 max-w-[18ch] font-display text-display-l text-balance">
+              What actually moves{" "}
+              <span className="em-serif text-violet-deep">the price</span>.
+            </h2>
+            <p className="mt-6 max-w-[46ch] text-on-sand-dim">
+              We do not publish a rate card for {city.name}, and it is worth
+              being direct about why. We do not own media here. Every plan is
+              negotiated against several vendors, so a published rate would
+              tell you what we would like to charge rather than what the
+              market will actually take — which is the number you need.
+              Below is what genuinely moves it.
+            </p>
+            <div className="mt-8">
+              <BriefButton
+                size="lg"
+                context={`Costs — outdoor advertising in ${city.name}`}
+                market={city.name}
+              >
+                Get real numbers for {city.name}
+              </BriefButton>
+            </div>
+          </Rise>
+
+          <div className="col-span-12 lg:col-span-6 lg:col-start-7">
             <ul className="border-t border-rule-sand">
-              {city.formats.map((f, i) => (
-                <Rise key={f.title} as="li" delay={i * 50}>
-                  <div className="grid grid-cols-12 gap-x-5 gap-y-2 border-b border-rule-sand py-5">
-                    <span className="col-span-12 font-mono text-[0.8125rem] tracking-[0.08em] text-violet-deep md:col-span-1">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="col-span-12 text-h3 md:col-span-4">
-                      {f.title}
-                    </h3>
-                    <p className="col-span-12 text-[0.9375rem] text-on-sand-dim md:col-span-7">
-                      {f.note}
+              {city.costDrivers.map((d, i) => (
+                <Rise key={d.factor} as="li" delay={i * 45}>
+                  <div className="border-b border-rule-sand py-5">
+                    <h3 className="text-h3">{d.factor}</h3>
+                    <p className="mt-2 max-w-[56ch] text-[0.9375rem] text-on-sand-dim">
+                      {d.note}
                     </p>
                   </div>
                 </Rise>
@@ -255,11 +383,65 @@ export default async function CityPage({ params }: Params) {
         </div>
       </Band>
 
-      {/* 05 — HOW WE PLAN IT ------------------------------------- */}
+      {/* 07 — PERMISSIONS AND COMPLIANCE ------------------------- */}
       <Band tone="violet" grain>
         <div className="grid-12 items-end gap-y-8">
           <Rise className="col-span-12 lg:col-span-5">
-            <Eyebrow tone="violet">How we plan {city.name}</Eyebrow>
+            <Eyebrow tone="violet">Permissions</Eyebrow>
+            <h2 className="mt-5 max-w-[18ch] font-display text-display-l text-balance">
+              Who licenses it,{" "}
+              <span className="em-serif">and what we actually know</span>.
+            </h2>
+            <p className="mt-6 font-mono text-[0.8125rem] tracking-[0.06em] text-on-violet-dim uppercase">
+              Authority — {city.compliance.authority}
+            </p>
+          </Rise>
+          <div className="col-span-12 grid gap-6 lg:col-span-6 lg:col-start-7">
+            {city.compliance.body.map((para, i) => (
+              <Rise key={i} delay={i * 60}>
+                <p className={i === 0 ? "text-body-l" : "text-on-violet-dim"}>
+                  {para}
+                </p>
+              </Rise>
+            ))}
+          </div>
+        </div>
+      </Band>
+
+      {/* 08 — THE CALENDAR --------------------------------------- */}
+      <Band tone="sand2" grain>
+        <div className="grid-12 items-end">
+          <Rise className="col-span-12 lg:col-span-7">
+            <Eyebrow deva="मौसम">The calendar</Eyebrow>
+            <h2 className="mt-5 font-display text-display-l text-balance">
+              When {city.name}{" "}
+              <span className="em-serif text-violet-deep">pays attention</span>.
+            </h2>
+          </Rise>
+          <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-sand-dim lg:col-span-5 lg:mt-0">
+            Timing moves outcomes more than most negotiations do. These are
+            the windows when demand outruns supply — and the ones worth
+            planning around rather than into.
+          </p>
+        </div>
+
+        <ul className="mt-12 grid gap-4 md:grid-cols-2">
+          {city.season.map((s, i) => (
+            <Rise key={s.window} as="li" delay={i * 50}>
+              <div className="h-full rounded-(--radius-card) bg-sand p-6 md:p-7">
+                <h3 className="font-display text-h2 text-balance">{s.window}</h3>
+                <p className="mt-3 text-on-sand-dim">{s.note}</p>
+              </div>
+            </Rise>
+          ))}
+        </ul>
+      </Band>
+
+      {/* 09 — HOW WE PLAN IT ------------------------------------- */}
+      <Band tone="plum" grain>
+        <div className="grid-12 items-end gap-y-8">
+          <Rise className="col-span-12 lg:col-span-5">
+            <Eyebrow tone="plum">How we plan {city.name}</Eyebrow>
             <h2 className="mt-5 max-w-[16ch] font-display text-display-l text-balance">
               Catchment first,{" "}
               <span className="em-serif">sites afterwards</span>.
@@ -271,7 +453,7 @@ export default async function CityPage({ params }: Params) {
               <BriefButton
                 variant="sand"
                 size="lg"
-                context={`Advertising in ${city.name}`}
+                context={`Outdoor advertising in ${city.name}`}
                 market={city.name}
               >
                 Get a plan for {city.name}
@@ -284,13 +466,14 @@ export default async function CityPage({ params }: Params) {
         </div>
       </Band>
 
-      {/* 06 — FAQ ------------------------------------------------ */}
+      {/* 10 — FAQ ------------------------------------------------ */}
       <Band tone="sand" grain>
         <Rise>
           <Eyebrow deva="सवाल">Questions</Eyebrow>
           <h2 className="mt-5 max-w-[24ch] font-display text-display-l text-balance">
-            The ones people{" "}
-            <span className="em-serif text-violet-deep">actually ask</span>.
+            Outdoor advertising in {city.name} —{" "}
+            <span className="em-serif text-violet-deep">the real questions</span>
+            .
           </h2>
         </Rise>
         <div className="mt-12">
@@ -305,7 +488,10 @@ export default async function CityPage({ params }: Params) {
             {
               "@context": "https://schema.org",
               "@type": "Service",
-              serviceType: `Advertising and media planning in ${city.name}`,
+              "@id": `${site.url}/cities/${city.slug}#service`,
+              name: `Outdoor advertising in ${city.name}`,
+              serviceType: "Outdoor advertising and media planning",
+              description: city.metaDescription,
               provider: {
                 "@type": "Organization",
                 name: site.name,
@@ -316,10 +502,30 @@ export default async function CityPage({ params }: Params) {
               areaServed: {
                 "@type": "City",
                 name: city.name,
+                ...(city.alsoKnownAs?.length
+                  ? { alternateName: city.alsoKnownAs }
+                  : {}),
                 containedInPlace: {
                   "@type": "AdministrativeArea",
                   name: city.state,
                 },
+              },
+              /* The format guide is the offer catalogue. It is the one
+                 place the long-tail terms can be stated as structured
+                 data without ever implying we hold the inventory —
+                 these are services planned, not sites owned. */
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: `Media formats planned in ${city.name}`,
+                itemListElement: city.formatGuide.map((f, i) => ({
+                  "@type": "Offer",
+                  position: i + 1,
+                  itemOffered: {
+                    "@type": "Service",
+                    name: f.title,
+                    description: f.body,
+                  },
+                })),
               },
               url: `${site.url}/cities/${city.slug}`,
             },
@@ -345,6 +551,7 @@ export default async function CityPage({ params }: Params) {
             {
               "@context": "https://schema.org",
               "@type": "FAQPage",
+              "@id": `${site.url}/cities/${city.slug}#faq`,
               mainEntity: city.faq.map((f) => ({
                 "@type": "Question",
                 name: f.q,

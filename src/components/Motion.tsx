@@ -63,6 +63,7 @@ export default function Motion() {
           document
             .querySelectorAll<HTMLElement>(".reveal")
             .forEach((n) => n.setAttribute("data-shown", "true"));
+          gsap.set("[data-plate]", { scaleY: 1, clearProps: "transform" });
           gsap.set("[data-scale-in], [data-parallax], [data-split] > *", {
             opacity: 1,
             scale: 1,
@@ -231,6 +232,31 @@ export default function Motion() {
               });
             }
           });
+
+        /* ---------------------------------------------------------
+           5b — Format plates draw themselves in.
+
+           They are the site's signature device and were static
+           rectangles. Growing from the baseline reads as something
+           being measured out, which is what they depict. Scale rather
+           than width/height so it stays off the layout thread.
+        ---------------------------------------------------------- */
+        const plates = document.querySelectorAll<HTMLElement>("[data-plate]");
+        if (plates.length) {
+          gsap.set(plates, { scaleY: 0, transformOrigin: "50% 100%" });
+          ScrollTrigger.batch(plates, {
+            start: "top 92%",
+            once: true,
+            onEnter: (batch) =>
+              gsap.to(batch, {
+                scaleY: 1,
+                duration: 0.7,
+                ease: "power3.out",
+                stagger: 0.06,
+                overwrite: true,
+              }),
+          });
+        }
 
         /* ---------------------------------------------------------
            6 — Images that grow into place. Subtle: 1.08 to 1. Any

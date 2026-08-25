@@ -495,3 +495,91 @@ summary,
 html:has(dialog[open]) {
   overflow: hidden;
 }
+
+/* ------------------------------------------------------------------
+   Corridor field
+
+   Traffic moving along arterial routes, drawn rather than filmed.
+   stroke-dashoffset on a gradient-stroked duplicate of each path: the
+   whole thing runs on the compositor, costs no JS and weighs nothing.
+------------------------------------------------------------------- */
+
+.corridor-field {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.corridor-pulse {
+  /* A short lit segment on a very long gap, walked along the path.
+     2000 comfortably exceeds the longest path here; anything shorter
+     makes a second pulse appear at the tail. */
+  stroke-dasharray: 120 2000;
+  stroke-dashoffset: 2120;
+  animation: corridor-run var(--cf-dur, 15s) linear infinite;
+  animation-delay: var(--cf-delay, 0s);
+}
+
+@keyframes corridor-run {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.corridor-node {
+  opacity: 0.25;
+  animation: corridor-blink var(--cf-dur, 5s) ease-in-out infinite;
+  animation-delay: var(--cf-delay, 0s);
+}
+
+@keyframes corridor-blink {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+/* Ken Burns ---------------------------------------------------------
+   A slow drift on the proof photographs so they breathe instead of
+   sitting dead. Applied to an inner element: the outer frame already
+   carries GSAP's scroll-linked scale, and two transforms on one node
+   would fight. */
+
+.kenburns {
+  animation: kenburns-drift 26s ease-in-out infinite alternate;
+  transform-origin: 55% 45%;
+  will-change: transform;
+}
+
+.kenburns:nth-of-type(even) {
+  animation-duration: 32s;
+  transform-origin: 40% 60%;
+}
+
+@keyframes kenburns-drift {
+  from {
+    transform: scale(1.04) translate3d(-0.6%, 0.4%, 0);
+  }
+  to {
+    transform: scale(1.11) translate3d(0.8%, -0.6%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .corridor-pulse,
+  .corridor-node,
+  .kenburns {
+    animation: none;
+  }
+  .corridor-pulse {
+    /* Without the animation the pulse would sit at its start offset and
+       show as a stray dash. Hide it and leave the routes drawn. */
+    display: none;
+  }
+  .corridor-node {
+    opacity: 0.45;
+  }
+}

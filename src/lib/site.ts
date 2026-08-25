@@ -1,8 +1,9 @@
+import { cities } from "./cities";
+
 export const site = {
   name: "Bizex4U",
   wordmark: "BIZEX4U",
   founded: 2008,
-  yearsLabel: "17 Years",
   url: "https://www.bizex4u.com",
   description:
     "Bizex4U is an independent Indian media network. We plan, negotiate and run outdoor, retail and broadcast campaigns across India.",
@@ -119,10 +120,16 @@ export const footerNav = [
   },
   {
     heading: "Cities",
-    /* Only cities with a written page are linked. Add to cities.ts and
-       the entry appears here automatically. */
+    /* Only cities with a written page are linked, and the list is
+       derived rather than typed — the previous version claimed to do
+       this in a comment while hardcoding Kolkata, which is how a footer
+       ends up six cities out of date. Capped so the footer stays a
+       footer; the rest are one click away on the index. */
     links: [
-      { label: "Kolkata", href: "/cities/kolkata" },
+      ...cities.slice(0, 6).map((c) => ({
+        label: c.name,
+        href: `/cities/${c.slug}`,
+      })),
       { label: "All cities", href: "/cities" },
     ],
   },
