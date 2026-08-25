@@ -24,24 +24,26 @@ const regions = ["North", "West", "South", "East", "Central"] as const;
    pages that happen to exist. Anything not named here falls through to
    the tail list rather than silently disappearing. */
 const regionOf: Record<string, (typeof regions)[number]> = {
-  "Delhi NCR": "North",
-  Jaipur: "North",
-  Chandigarh: "North",
-  Agra: "North",
   Meerut: "North",
-  Ludhiana: "North",
   Prayagraj: "North",
   Gorakhpur: "North",
-  Mumbai: "West",
-  Ahmedabad: "West",
-  Surat: "West",
-  Nagpur: "West",
-  Bangalore: "South",
+  Amritsar: "North",
+  Jalandhar: "North",
+  Jodhpur: "North",
+  Udaipur: "North",
+  Vadodara: "West",
+  Rajkot: "West",
+  Nashik: "West",
+  Raipur: "Central",
   Kochi: "South",
   Coimbatore: "South",
+  Madurai: "South",
+  Mysuru: "South",
+  Visakhapatnam: "South",
+  Vijayawada: "South",
   Patna: "East",
-  Indore: "Central",
-  Bhopal: "Central",
+  Guwahati: "East",
+  Bhubaneswar: "East",
 };
 
 export default function CitiesPage() {

@@ -7,13 +7,25 @@
 
 import type { City } from "./types";
 
+import { delhiNcr } from "./delhi-ncr";
 import { kanpur } from "./kanpur";
 import { lucknow } from "./lucknow";
 import { varanasi } from "./varanasi";
+import { jaipur } from "./jaipur";
+import { chandigarh } from "./chandigarh";
+import { ludhiana } from "./ludhiana";
+import { agra } from "./agra";
 import { kolkata } from "./kolkata";
+import { mumbai } from "./mumbai";
+import { pune } from "./pune";
+import { nagpur } from "./nagpur";
+import { ahmedabad } from "./ahmedabad";
+import { surat } from "./surat";
+import { indore } from "./indore";
+import { bhopal } from "./bhopal";
+import { bangalore } from "./bangalore";
 import { hyderabad } from "./hyderabad";
 import { chennai } from "./chennai";
-import { pune } from "./pune";
 
 export type { City } from "./types";
 
@@ -23,10 +35,22 @@ export const cities: City[] = [
   kanpur,
   lucknow,
   varanasi,
-  kolkata,
+  delhiNcr,
+  jaipur,
+  chandigarh,
+  ludhiana,
+  agra,
+  mumbai,
+  pune,
+  nagpur,
+  ahmedabad,
+  surat,
+  indore,
+  bhopal,
+  bangalore,
   hyderabad,
   chennai,
-  pune,
+  kolkata,
 ];
 
 export const cityBySlug = (slug: string) => cities.find((c) => c.slug === slug);
@@ -39,24 +63,26 @@ export const cityBySlug = (slug: string) => cities.find((c) => c.slug === slug);
    and it drags the pages that are real down with it. These get written
    properly or they stay as text. */
 export const additionalMarkets = [
-  "Delhi NCR",
-  "Mumbai",
-  "Bangalore",
-  "Ahmedabad",
-  "Jaipur",
-  "Surat",
-  "Chandigarh",
-  "Nagpur",
-  "Indore",
-  "Bhopal",
   "Patna",
   "Kochi",
   "Coimbatore",
-  "Agra",
-  "Ludhiana",
+  "Vadodara",
+  "Rajkot",
+  "Nashik",
   "Meerut",
   "Prayagraj",
   "Gorakhpur",
+  "Jodhpur",
+  "Udaipur",
+  "Amritsar",
+  "Jalandhar",
+  "Guwahati",
+  "Bhubaneswar",
+  "Raipur",
+  "Visakhapatnam",
+  "Vijayawada",
+  "Madurai",
+  "Mysuru",
 ];
 
 /* Region groupings for the hub page. */
