@@ -96,6 +96,15 @@ export const metadata: Metadata = {
     siteName: site.name,
     url: site.url,
   },
+  /* summary_large_image, not the default `summary`. With a 1200x630
+     card generated per route, `summary` would crop it to a small
+     square thumbnail and throw away the headline — which is the part
+     doing the work when the link lands in a WhatsApp group. */
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — Independent Indian Media Network`,
+    description: site.description,
+  },
   robots: { index: true, follow: true },
 };
 
