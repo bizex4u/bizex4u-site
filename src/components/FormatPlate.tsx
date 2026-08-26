@@ -46,7 +46,7 @@ export function ExchangePlate() {
       {["Your stock", "Our media"].map((side, i) => (
         <div key={side} className="flex items-center gap-3">
           {i === 1 && (
-            <span className="font-mono text-[0.8125rem] text-on-violet-dim">
+            <span className="font-mono text-caption text-on-violet-dim">
               ⇄
             </span>
           )}

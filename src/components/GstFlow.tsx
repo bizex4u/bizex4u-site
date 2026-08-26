@@ -55,7 +55,7 @@ export default function GstFlow() {
             className="rounded-xl border border-rule-sand bg-sand p-5 md:p-6"
           >
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-violet-deep uppercase">
+              <span className="font-mono text-micro tracking-[0.08em] text-violet-deep uppercase">
                 {leg.index}
               </span>
               <span className="text-h3">{leg.from}</span>
@@ -63,19 +63,19 @@ export default function GstFlow() {
                 →
               </span>
               <span className="text-h3">{leg.to}</span>
-              <span className="text-[0.9375rem] text-on-sand-dim">
+              <span className="text-body-s text-on-sand-dim">
                 {leg.what}
               </span>
             </div>
 
             <p className="mt-4 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
               <span className="font-display text-h2">{leg.invoice}</span>
-              <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-on-sand-dim uppercase">
+              <span className="font-mono text-micro tracking-[0.08em] text-on-sand-dim uppercase">
                 GST charged
               </span>
             </p>
 
-            <p className="mt-2.5 max-w-[62ch] text-[0.9375rem] text-on-sand-dim">
+            <p className="mt-2.5 max-w-[62ch] text-body-s text-on-sand-dim">
               {leg.detail}
             </p>
           </li>
@@ -90,7 +90,7 @@ export default function GstFlow() {
           and nothing sits off the books — your auditor sees an ordinary
           purchase and an ordinary sale.
         </p>
-        <p className="mt-4 max-w-[64ch] text-[0.875rem] text-on-sand-dim">
+        <p className="mt-4 max-w-[64ch] text-body-s text-on-sand-dim">
           We will walk your finance team through this before anything is
           signed. We would also encourage you to have your own tax advisor
           confirm the treatment for your category — it is a straightforward

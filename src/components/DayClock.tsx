@@ -59,7 +59,7 @@ export default function DayClock() {
             India&rsquo;s attention,{" "}
             <span className="em-serif">by the hour</span>.
           </h2>
-          <p className="mt-3 max-w-[74ch] text-[0.9375rem] text-on-plum-dim">
+          <p className="mt-3 max-w-[74ch] text-body-s text-on-plum-dim">
             The same person is reachable six different ways before midnight,
             and each one needs a different format.
             <span className="ml-2 hidden text-on-plum-dim lg:inline">
@@ -87,7 +87,7 @@ export default function DayClock() {
                   <p className="font-display text-[clamp(2.25rem,4vw,3rem)] leading-none">
                     {h.time}
                   </p>
-                  <p className={`deva text-[0.9375rem] ${tint[i].dim}`}>
+                  <p className={`deva text-body-s ${tint[i].dim}`}>
                     {h.deva}
                   </p>
                 </div>
@@ -95,7 +95,7 @@ export default function DayClock() {
                 <h3 className="mt-3 shrink-0 font-display text-h2 text-balance">
                   {h.title}
                 </h3>
-                <p className={`mt-3 shrink-0 text-[0.9375rem] ${tint[i].dim}`}>
+                <p className={`mt-3 shrink-0 text-body-s ${tint[i].dim}`}>
                   {h.body}
                 </p>
 
@@ -113,7 +113,7 @@ export default function DayClock() {
                   {h.formats.map((f) => (
                     <li
                       key={f}
-                      className="rounded-full border border-white/25 px-3 py-1.5 text-[0.8125rem]"
+                      className="rounded-full border border-white/25 px-3 py-1.5 text-caption"
                     >
                       {f}
                     </li>
@@ -121,7 +121,7 @@ export default function DayClock() {
                 </ul>
 
                 <p
-                  className={`mt-3 shrink-0 border-t pt-2.5 font-mono text-[0.6875rem] leading-relaxed tracking-[0.04em] uppercase ${tint[i].rule} ${tint[i].dim}`}
+                  className={`mt-3 shrink-0 border-t pt-2.5 font-mono text-micro leading-relaxed tracking-[0.04em] uppercase ${tint[i].rule} ${tint[i].dim}`}
                 >
                   {h.examples}
                 </p>
@@ -134,14 +134,14 @@ export default function DayClock() {
               <p className="mt-5 font-display text-h2 text-balance">
                 Nobody needs all six. Everybody gets sold all six.
               </p>
-              <p className="mt-4 text-[0.9375rem] text-on-plum-dim">
+              <p className="mt-4 text-body-s text-on-plum-dim">
                 Which two or three actually matter depends on who you need to
                 move and when they are reachable. That is the conversation
                 worth having, and it costs nothing.
               </p>
               <a
                 href="#objectives"
-                className="group mt-8 -mb-2 inline-flex min-h-11 items-center gap-2 py-2 text-[0.9375rem] font-medium text-violet-lift"
+                className="group mt-8 -mb-2 inline-flex min-h-11 items-center gap-2 py-2 text-body-s font-medium text-violet-lift"
               >
                 Start with the objective <span className="row-arrow">→</span>
               </a>

@@ -77,7 +77,7 @@ export default function BarterSelector() {
   const href = `${site.whatsappBase}?text=${encodeURIComponent(message)}`;
 
   const chip = (active: boolean) =>
-    `min-h-11 rounded-full border px-4 py-2.5 text-[0.9375rem] transition-colors duration-200 ${
+    `min-h-11 rounded-full border px-4 py-2.5 text-body-s transition-colors duration-200 ${
       active
         ? "border-violet-deep bg-violet-deep text-white"
         : "border-rule-sand bg-sand text-on-sand-dim hover:border-on-sand/40 hover:text-on-sand"
@@ -121,7 +121,7 @@ export default function BarterSelector() {
             </button>
           ))}
         </div>
-        <p className="mt-3 text-[0.875rem] text-on-sand-dim">
+        <p className="mt-3 text-body-s text-on-sand-dim">
           Your estimate is fine. The number that matters is agreed in writing
           later, by both of us.
         </p>
@@ -212,20 +212,20 @@ export default function BarterSelector() {
               Send this on WhatsApp
               <span className="row-arrow">→</span>
             </a>
-            <p className="mt-4 max-w-[52ch] text-[0.875rem] text-on-sand-dim">
+            <p className="mt-4 max-w-[52ch] text-body-s text-on-sand-dim">
               Opens WhatsApp with your answers written in. Nothing is sent
               until you press send, and nothing is stored here.
             </p>
           </>
         ) : (
-          <p className="text-[0.9375rem] text-on-sand-dim">
+          <p className="text-body-s text-on-sand-dim">
             {!chosen
               ? "Pick a category and a rough value, then tell us who is asking."
               : "Add your brand and your name and this turns into a message you can send."}
           </p>
         )}
 
-        <p className="mt-5 max-w-[56ch] text-[0.875rem] text-on-sand-dim">
+        <p className="mt-5 max-w-[56ch] text-body-s text-on-sand-dim">
           You will get a straight answer on whether barter suits what you are
           holding — including when it does not, and when a cash buy would serve
           you better.

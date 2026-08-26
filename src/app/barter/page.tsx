@@ -150,7 +150,7 @@ export default function BarterPage() {
                     How it works
                   </Btn>
                 </div>
-                <p className="mt-5 text-[0.875rem] text-on-sand-dim">
+                <p className="mt-5 text-body-s text-on-sand-dim">
                   Send the category and rough value. You&rsquo;ll get a straight
                   answer on whether barter is right for it — including when it
                   isn&rsquo;t.
@@ -255,7 +255,7 @@ export default function BarterPage() {
           {steps.map((s, i) => (
             <Rise key={s.index} as="li" delay={i * 55}>
               <div className="grid grid-cols-12 gap-x-6 gap-y-3 border-b border-rule-sand py-7 md:py-9">
-                <span className="col-span-12 font-mono text-[0.8125rem] tracking-[0.08em] text-violet-deep md:col-span-1">
+                <span className="col-span-12 font-mono text-caption tracking-[0.08em] text-violet-deep md:col-span-1">
                   {s.index}
                 </span>
                 <h3 className="col-span-12 font-display text-h2 text-balance md:col-span-5">

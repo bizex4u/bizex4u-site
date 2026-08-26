@@ -52,7 +52,7 @@ export default function Footer() {
                 <ul className="mt-4 space-y-1">
                   {col.links.map((link) => {
                     const cls =
-                      "link-underline -my-1.5 inline-flex min-h-10 items-center py-1.5 text-[0.9375rem] text-balance text-on-plum-dim hover:text-on-plum";
+                      "link-underline -my-1.5 inline-flex min-h-10 items-center py-1.5 text-body-s text-balance text-on-plum-dim hover:text-on-plum";
                     /* mailto:, tel: and wa.me are not app routes, so
                        they must not go through next/link. */
                     const isExternal =
@@ -83,9 +83,9 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-rule-plum pt-6 sm:flex-row sm:items-baseline sm:justify-between">
-          <span className="font-display text-[1.0625rem] font-semibold tracking-[-0.03em]">
+          <span className="font-display text-body-l font-semibold tracking-[-0.03em]">
             {site.wordmark}
-            <span className="deva ml-3 text-[0.875rem] font-medium text-on-plum-dim">
+            <span className="deva ml-3 text-body-s font-medium text-on-plum-dim">
               बिज़ेक्स4यू
             </span>
           </span>

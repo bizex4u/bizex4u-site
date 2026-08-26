@@ -67,7 +67,7 @@ export default function Nav() {
       <div className="shell flex items-center justify-between gap-3">
         <Link
           href="/"
-          className={`inline-flex min-h-11 items-center rounded-full px-4 font-display text-[1.0625rem] font-semibold tracking-[-0.03em] transition-colors duration-200 ${
+          className={`inline-flex min-h-11 items-center rounded-full px-4 font-display text-body-l font-semibold tracking-[-0.03em] transition-colors duration-200 ${
             scrolled ? "bg-plum/92 text-on-plum backdrop-blur-md" : ""
           }`}
           aria-label={`${site.name} — home`}
@@ -84,7 +84,7 @@ export default function Nav() {
               <button
                 key={item.href}
                 type="button"
-                className={`rounded-full px-4 py-2.5 text-[0.9375rem] transition-colors duration-200 hover:bg-plum-2 ${
+                className={`rounded-full px-4 py-2.5 text-body-s transition-colors duration-200 hover:bg-plum-2 ${
                   isActive(item.href) ? "text-violet-lift" : ""
                 }`}
                 aria-expanded={megaOpen}
@@ -98,7 +98,7 @@ export default function Nav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded-full px-4 py-2.5 text-[0.9375rem] transition-colors duration-200 hover:bg-plum-2 ${
+                className={`rounded-full px-4 py-2.5 text-body-s transition-colors duration-200 hover:bg-plum-2 ${
                   isActive(item.href) ? "text-violet-lift" : ""
                 }`}
                 onMouseEnter={closeMega}
@@ -112,13 +112,13 @@ export default function Nav() {
         <div className="flex items-center gap-2">
           <BriefButton
             context="Nav"
-            className="hidden !min-h-11 !px-5 !py-0 !text-[0.9375rem] sm:inline-flex"
+            className="hidden !min-h-11 !px-5 !py-0 !text-body-s sm:inline-flex"
           >
             Send a brief
           </BriefButton>
           <button
             type="button"
-            className="inline-flex min-h-11 items-center rounded-full bg-plum/92 px-5 text-[0.9375rem] text-on-plum backdrop-blur-md lg:hidden"
+            className="inline-flex min-h-11 items-center rounded-full bg-plum/92 px-5 text-body-s text-on-plum backdrop-blur-md lg:hidden"
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((v) => !v)}
@@ -148,7 +148,7 @@ export default function Nav() {
                 {c.index}
               </span>
               <span className="mt-2 block text-h3">{c.title}</span>
-              <span className="mt-1.5 block max-w-[30ch] text-[0.875rem] leading-relaxed text-on-plum-dim">
+              <span className="mt-1.5 block max-w-[30ch] text-body-s leading-relaxed text-on-plum-dim">
                 {c.short}
               </span>
             </Link>

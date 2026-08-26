@@ -136,7 +136,7 @@ export default function WhatWeDoPage() {
                   )}
                 </div>
 
-                <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-[0.9375rem] font-medium">
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
                   {c.linkLabel ?? "Explore"} <span className="row-arrow">→</span>
                 </span>
               </Link>
@@ -159,7 +159,7 @@ export default function WhatWeDoPage() {
           {sequence.map((s, i) => (
             <Rise key={s.title} as="li" delay={i * 55}>
               <div className="grid grid-cols-12 gap-x-6 gap-y-3 border-b border-rule-sand py-7 md:py-9">
-                <span className="col-span-12 font-mono text-[0.8125rem] tracking-[0.08em] text-violet-deep md:col-span-1">
+                <span className="col-span-12 font-mono text-caption tracking-[0.08em] text-violet-deep md:col-span-1">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="col-span-12 font-display text-h2 text-balance md:col-span-5">
@@ -192,7 +192,7 @@ export default function WhatWeDoPage() {
                   <Rise key={c.href} as="li" delay={i * 50}>
                     <div className="border-b border-rule-sand py-5">
                       <h3 className="text-h3">{c.title}</h3>
-                      <p className="mt-2 max-w-[60ch] text-[0.9375rem] text-on-sand-dim">
+                      <p className="mt-2 max-w-[60ch] text-body-s text-on-sand-dim">
                         {capabilityDetail[c.href.split("/").pop()!].notFor}
                       </p>
                     </div>

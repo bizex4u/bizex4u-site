@@ -43,17 +43,11 @@ const instrumentSans = localFont({
   ],
 });
 
-const inter = localFont({
-  variable: "--font-inter",
-  display: "swap",
-  src: [
-    {
-      path: "../fonts/inter-latin-wght-normal.woff2",
-      weight: "100 900",
-      style: "normal",
-    },
-  ],
-});
+/* Inter used to be declared here and shipped on every page — 48 KB
+   that could never render. The stack is
+   `--font-sans: instrumentSans, inter, system-ui`, so Instrument Sans
+   wins every resolution and Inter only ever loaded to sit unused. A
+   fallback that cannot fire is not a fallback, it is a download. */
 
 /* Devanagari. The site is an Indian media network selling Indian
    streets — city names, formats and section labels carry their Hindi
@@ -67,11 +61,6 @@ const mukta = localFont({
     {
       path: "../fonts/mukta-devanagari-500-normal.woff2",
       weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../fonts/mukta-devanagari-600-normal.woff2",
-      weight: "600",
       style: "normal",
     },
   ],
@@ -123,7 +112,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-IN"
-      className={`${instrumentSerif.variable} ${instrumentSans.variable} ${inter.variable} ${plexMono.variable} ${mukta.variable}`}
+      className={`${instrumentSerif.variable} ${instrumentSans.variable} ${plexMono.variable} ${mukta.variable}`}
     >
       <body>
         <a

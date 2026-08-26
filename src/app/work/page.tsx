@@ -110,7 +110,7 @@ export default function WorkPage() {
             {sectorsServed.map((s) => (
               <li
                 key={s}
-                className="rounded-full border border-rule-sand px-4 py-2 text-[0.9375rem] text-on-sand-dim"
+                className="rounded-full border border-rule-sand px-4 py-2 text-body-s text-on-sand-dim"
               >
                 {s}
               </li>
@@ -152,10 +152,10 @@ export default function WorkPage() {
                   />
                 </div>
                 <div className="p-4">
-                  <p className="text-[0.9375rem] leading-snug font-medium">
+                  <p className="text-body-s leading-snug font-medium">
                     {f.place}
                   </p>
-                  <p className="mt-1 font-mono text-[0.6875rem] leading-snug tracking-[0.05em] text-on-plum-dim">
+                  <p className="mt-1 font-mono text-micro leading-snug tracking-[0.05em] text-on-plum-dim">
                     {f.stamp}
                   </p>
                 </div>

@@ -186,8 +186,8 @@ export function btnClass(
 
   const dims =
     size === "lg"
-      ? "min-h-14 px-7 text-[1rem]"
-      : "min-h-12 px-6 text-[0.9375rem]";
+      ? "min-h-14 px-7 text-body"
+      : "min-h-12 px-6 text-body-s";
 
   return `group inline-flex items-center justify-center gap-2.5 rounded-full py-3 font-medium transition-colors duration-200 ${dims} ${styles} ${className}`;
 }
@@ -240,7 +240,7 @@ export function ArrowLink({
   return (
     <Link
       href={href}
-      className={`link-underline group -my-3 inline-flex min-h-11 items-center py-3 text-[0.9375rem] font-medium ${t.hl} ${className}`}
+      className={`link-underline group -my-3 inline-flex min-h-11 items-center py-3 text-body-s font-medium ${t.hl} ${className}`}
     >
       {children} <span className="row-arrow ml-1.5">→</span>
     </Link>
@@ -265,7 +265,7 @@ export function Stat({
         {value}
       </p>
       <p className="mt-3 text-h3">{label}</p>
-      {note && <p className={`mt-1.5 max-w-[26ch] text-[0.875rem] ${t.dim}`}>{note}</p>}
+      {note && <p className={`mt-1.5 max-w-[26ch] text-body-s ${t.dim}`}>{note}</p>}
     </div>
   );
 }

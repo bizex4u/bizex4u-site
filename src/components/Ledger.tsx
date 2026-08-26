@@ -103,7 +103,7 @@ export function LedgerRow({
       <p className="mt-3 max-w-[46ch] text-on-sand-dim">{body}</p>
       {aside && <div className="mt-6">{aside}</div>}
       {href && (
-        <span className="mt-5 inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-violet-deep">
+        <span className="mt-5 inline-flex items-center gap-1.5 text-body-s font-medium text-violet-deep">
           {linkLabel ?? "Read more"} <span className="row-arrow">→</span>
         </span>
       )}

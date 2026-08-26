@@ -102,7 +102,7 @@ export default function AboutPage() {
               <dd className="mt-3 font-display text-[clamp(2rem,4vw,3.25rem)] leading-none">
                 {f.value}
               </dd>
-              <p className="mt-2.5 max-w-[24ch] text-[0.875rem] text-on-sand-dim">
+              <p className="mt-2.5 max-w-[24ch] text-body-s text-on-sand-dim">
                 {f.note}
               </p>
             </Rise>
@@ -133,7 +133,7 @@ export default function AboutPage() {
           {principles.map((p, i) => (
             <Rise key={p.index} as="li" delay={i * 55}>
               <div className="grid grid-cols-12 gap-x-6 gap-y-3 border-b border-rule-plum py-7 md:py-9">
-                <span className="col-span-12 font-mono text-[0.8125rem] tracking-[0.08em] text-violet-lift md:col-span-1">
+                <span className="col-span-12 font-mono text-caption tracking-[0.08em] text-violet-lift md:col-span-1">
                   {p.index}
                 </span>
                 <h3 className="col-span-12 font-display text-h2 text-balance md:col-span-5">
@@ -175,7 +175,7 @@ export default function AboutPage() {
                 {sectorsServed.map((s) => (
                   <li
                     key={s}
-                    className="rounded-full border border-rule-sand px-4 py-2 text-[0.9375rem] text-on-sand-dim"
+                    className="rounded-full border border-rule-sand px-4 py-2 text-body-s text-on-sand-dim"
                   >
                     {s}
                   </li>

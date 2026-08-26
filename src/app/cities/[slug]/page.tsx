@@ -214,10 +214,10 @@ export default async function CityPage({ params }: Params) {
             <Rise key={f.title} delay={i * 40}>
               <article className="border-t border-rule-sand pt-6">
                 <div className="flex items-baseline gap-4">
-                  <span className="font-mono text-[0.8125rem] tracking-[0.08em] text-violet-deep">
+                  <span className="font-mono text-caption tracking-[0.08em] text-violet-deep">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-on-sand-dim uppercase">
+                  <span className="font-mono text-micro tracking-[0.08em] text-on-sand-dim uppercase">
                     {f.kicker}
                   </span>
                 </div>
@@ -264,11 +264,11 @@ export default async function CityPage({ params }: Params) {
                   <div className="border-b border-rule-sand py-5">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h3 className="text-h3">{t.title}</h3>
-                      <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-violet-deep uppercase">
+                      <span className="font-mono text-micro tracking-[0.08em] text-violet-deep uppercase">
                         {t.language}
                       </span>
                     </div>
-                    <p className="mt-2 max-w-[52ch] text-[0.9375rem] text-on-sand-dim">
+                    <p className="mt-2 max-w-[52ch] text-body-s text-on-sand-dim">
                       {t.note}
                     </p>
                   </div>
@@ -287,11 +287,11 @@ export default async function CityPage({ params }: Params) {
                   <div className="border-b border-rule-sand py-4">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h3 className="text-h3">{r.station}</h3>
-                      <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-violet-deep">
+                      <span className="font-mono text-micro tracking-[0.08em] text-violet-deep">
                         {r.frequency}
                       </span>
                     </div>
-                    <p className="mt-2 max-w-[52ch] text-[0.9375rem] text-on-sand-dim">
+                    <p className="mt-2 max-w-[52ch] text-body-s text-on-sand-dim">
                       {r.note}
                     </p>
                   </div>
@@ -299,7 +299,7 @@ export default async function CityPage({ params }: Params) {
               ))}
             </ul>
             <Rise delay={200}>
-              <p className="mt-6 max-w-[52ch] text-[0.9375rem] text-on-sand-dim">
+              <p className="mt-6 max-w-[52ch] text-body-s text-on-sand-dim">
                 {city.localMedia.radioNote}
               </p>
             </Rise>
@@ -372,7 +372,7 @@ export default async function CityPage({ params }: Params) {
                 <Rise key={d.factor} as="li" delay={i * 45}>
                   <div className="border-b border-rule-sand py-5">
                     <h3 className="text-h3">{d.factor}</h3>
-                    <p className="mt-2 max-w-[56ch] text-[0.9375rem] text-on-sand-dim">
+                    <p className="mt-2 max-w-[56ch] text-body-s text-on-sand-dim">
                       {d.note}
                     </p>
                   </div>
@@ -392,7 +392,7 @@ export default async function CityPage({ params }: Params) {
               Who licenses it,{" "}
               <span className="em-serif">and what we actually know</span>.
             </h2>
-            <p className="mt-6 font-mono text-[0.8125rem] tracking-[0.06em] text-on-violet-dim uppercase">
+            <p className="mt-6 font-mono text-caption tracking-[0.06em] text-on-violet-dim uppercase">
               Authority — {city.compliance.authority}
             </p>
           </Rise>

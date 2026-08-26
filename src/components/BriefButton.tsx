@@ -157,12 +157,12 @@ export default function BriefButton({
               <button
                 type="button"
                 onClick={() => ref.current?.close()}
-                className="link-underline text-[0.9375rem] font-medium text-on-sand-dim"
+                className="link-underline text-body-s font-medium text-on-sand-dim"
               >
                 Close
               </button>
             </div>
-            <p className="mt-6 border-t border-rule-sand pt-4 text-[0.8125rem] text-on-sand-dim">
+            <p className="mt-6 border-t border-rule-sand pt-4 text-caption text-on-sand-dim">
               Nothing was stored on this site. If WhatsApp did not open, write
               to{" "}
               <a
@@ -199,7 +199,7 @@ export default function BriefButton({
           </div>
 
           {context && (
-            <p className="mt-4 text-[0.9375rem] text-on-sand-dim">
+            <p className="mt-4 text-body-s text-on-sand-dim">
               About <span className="text-on-sand">{context}</span>.
             </p>
           )}
@@ -283,12 +283,12 @@ export default function BriefButton({
               Continue on WhatsApp
               <span className="row-arrow">→</span>
             </button>
-            <p className="text-[0.875rem] text-on-sand-dim">
+            <p className="text-body-s text-on-sand-dim">
               Usually answered the same working day.
             </p>
           </div>
 
-          <p className="mt-5 border-t border-rule-sand pt-4 text-[0.8125rem] text-on-sand-dim">
+          <p className="mt-5 border-t border-rule-sand pt-4 text-caption text-on-sand-dim">
             This opens WhatsApp with your answers written in. Nothing is sent
             until you press send, and nothing is stored on this site. Prefer
             email?{" "}

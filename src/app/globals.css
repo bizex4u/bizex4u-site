@@ -48,8 +48,7 @@
 
   /* Type --------------------------------------------------- */
   --font-display: var(--font-instrument-serif), Georgia, serif;
-  --font-sans: var(--font-instrument-sans), var(--font-inter), system-ui,
-    sans-serif;
+  --font-sans: var(--font-instrument-sans), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
   --font-deva: var(--font-mukta), "Noto Sans Devanagari", sans-serif;
 
@@ -65,6 +64,18 @@
   --text-display-l--line-height: 1;
   --text-display-l--letter-spacing: -0.018em;
   --text-display-l--font-weight: 400;
+
+  /* H1 fills a hole that cost real time. The scale used to run
+     display-l (36–64px) straight to h2 (28–40px) to h3 (20px) — a 2×
+     cliff with no rung between h2 and h3. Anything that wanted to be a
+     substantial heading without being a section title had nowhere to
+     sit, and reaching for a `text-h1` that did not exist silently
+     rendered at body size, because an unknown utility produces no
+     declaration at all rather than an error. */
+  --text-h1: clamp(2rem, 3.2vw, 3rem);
+  --text-h1--line-height: 1.12;
+  --text-h1--letter-spacing: -0.016em;
+  --text-h1--font-weight: 400;
 
   --text-h2: clamp(1.75rem, 2.6vw, 2.5rem);
   --text-h2--line-height: 1.08;
@@ -83,15 +94,38 @@
   --text-body: 1rem;
   --text-body--line-height: 1.62;
 
+  /* The three rungs below existed already — as 84 arbitrary values
+     scattered across the codebase. A bare 15px size alone appeared 35
+     times, more than any real token, which made it the de facto
+     body-small size while being documented nowhere. Naming them changes
+     almost nothing on screen; it stops the next person inventing a tenth
+     size because they could not find the ninth. */
+  --text-body-s: 0.9375rem; /* 15px — dense prose, card copy, notes */
+  --text-body-s--line-height: 1.6;
+
+  --text-caption: 0.8125rem; /* 13px — captions, inline meta, deva */
+  --text-caption--line-height: 1.4;
+
   --text-meta: 0.75rem;
   --text-meta--line-height: 1.2;
   --text-meta--letter-spacing: 0.08em;
   --text-meta--font-weight: 500;
 
+  --text-micro: 0.6875rem; /* 11px — mono eyebrows and rule labels */
+  --text-micro--line-height: 1.2;
+  --text-micro--letter-spacing: 0.08em;
+  --text-micro--font-weight: 500;
+
   --spacing-band: clamp(3.5rem, 6vw, 6.5rem);
   --radius-card: 1.25rem;
 
+  /* Motion. The reveal stagger was eight different numbers — 30, 40, 45,
+     50, 55, 60, 70, 80 — each picked in the moment. A stagger is a
+     rhythm, and a rhythm that changes every section is not one. */
   --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --stagger: 55ms;
+  --duration-reveal: 700ms;
+  --duration-quick: 200ms;
 }
 
 /* Base ----------------------------------------------------- */

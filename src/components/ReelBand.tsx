@@ -86,13 +86,13 @@ export default function ReelBand() {
 
       <div className="shell absolute inset-x-0 bottom-0 pb-7">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <p className="max-w-[34ch] text-[0.9375rem] text-on-plum">
+          <p className="max-w-[34ch] text-body-s text-on-plum">
             Live sites across Delhi NCR, filmed on location.
-            <span className="mt-0.5 block text-[0.8125rem] text-on-plum-dim">
+            <span className="mt-0.5 block text-caption text-on-plum-dim">
               Cyber Hub · Chanakyapuri · Safdarjung · Vinay Marg
             </span>
           </p>
-          <p className="font-mono text-[0.6875rem] tracking-[0.08em] text-on-plum-dim uppercase">
+          <p className="font-mono text-micro tracking-[0.08em] text-on-plum-dim uppercase">
             Not stock footage
           </p>
         </div>

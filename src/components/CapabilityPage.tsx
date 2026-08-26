@@ -134,7 +134,7 @@ export default function CapabilityPage({
           {d.method.map((m, i) => (
             <Rise key={m.title} as="li" delay={i * 55}>
               <div className="grid grid-cols-12 gap-x-6 gap-y-3 border-b border-rule-plum py-7 md:py-9">
-                <span className="col-span-12 font-mono text-[0.8125rem] tracking-[0.08em] text-violet-lift md:col-span-1">
+                <span className="col-span-12 font-mono text-caption tracking-[0.08em] text-violet-lift md:col-span-1">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="col-span-12 font-display text-h2 text-balance md:col-span-5">
@@ -242,7 +242,7 @@ export default function CapabilityPage({
                 >
                   {c.short}
                 </p>
-                <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-[0.9375rem] font-medium">
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
                   {c.linkLabel ?? "Explore"} <span className="row-arrow">→</span>
                 </span>
               </Link>

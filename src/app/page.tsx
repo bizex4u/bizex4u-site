@@ -3,7 +3,6 @@ import Image from "next/image";
 import HeroReel from "@/components/HeroReel";
 import DayClock from "@/components/DayClock";
 import ReelBand from "@/components/ReelBand";
-import CorridorField from "@/components/CorridorField";
 import Marquee from "@/components/Marquee";
 import FormatPlate, {
   ExchangePlate,
@@ -60,6 +59,13 @@ const deva: Record<string, string> = {
   Patna: "पटना",
   Indore: "इंदौर",
   Kochi: "कोच्चि",
+  Kanpur: "कानपुर",
+  Varanasi: "वाराणसी",
+  Ludhiana: "लुधियाना",
+  Surat: "सूरत",
+  Nagpur: "नागपुर",
+  Bhopal: "भोपाल",
+  Coimbatore: "कोयंबटूर",
 };
 
 /* What a brand can trade. Categories only — never a stock list. */
@@ -72,11 +78,6 @@ const tradeable = [
 ];
 
 export default function Home() {
-  const cityLinks: { name: string; href?: string }[] = [
-    ...cities.map((c) => ({ name: c.name, href: `/cities/${c.slug}` })),
-    ...additionalMarkets.map((name) => ({ name })),
-  ];
-
   return (
     <>
       {/* 01 — HERO ------------------------------------------------
@@ -129,7 +130,7 @@ export default function Home() {
                   </Btn>
                 </div>
 
-                <p className="mt-5 text-[0.875rem] text-on-sand-dim">
+                <p className="mt-5 text-body-s text-on-sand-dim">
                   Two fields, then straight to WhatsApp. Usually answered the same working day.
                 </p>
               </Rise>
@@ -279,7 +280,7 @@ export default function Home() {
                   )}
                 </div>
 
-                <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-[0.9375rem] font-medium">
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
                   {c.linkLabel ?? "Explore"} <span className="row-arrow">→</span>
                 </span>
               </Link>
@@ -322,7 +323,7 @@ export default function Home() {
                 <p className="mt-4 text-on-sand-dim">{o.body}</p>
                 <ul className="mt-6 space-y-2.5 border-t border-rule-sand pt-5">
                   {o.points.map((p) => (
-                    <li key={p} className="flex gap-3 text-[0.9375rem]">
+                    <li key={p} className="flex gap-3 text-body-s">
                       <span aria-hidden className="text-violet-deep">
                         —
                       </span>
@@ -383,7 +384,7 @@ export default function Home() {
                 </div>
                 <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 p-5">
                   <p className="text-h3">{f.place}</p>
-                  <p className="font-mono text-[0.6875rem] tracking-[0.05em] text-on-plum-dim">
+                  <p className="font-mono text-micro tracking-[0.05em] text-on-plum-dim">
                     {f.stamp}
                   </p>
                 </figcaption>
@@ -464,7 +465,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 text-[0.875rem] text-on-violet-dim">
+              <p className="mt-6 text-body-s text-on-violet-dim">
                 Valued at fair market value, invoiced on both legs, GST
                 compliant. Goods move through controlled corporate channels —
                 never the open market.
@@ -480,12 +481,13 @@ export default function Home() {
           routes, junctions where they cross — rather than a photograph
           of somewhere. Honest about being a diagram, and it moves. */}
       <section className="grain relative overflow-hidden bg-sand py-(--spacing-band) text-on-sand">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 text-violet-deep opacity-[0.55]"
-        >
-          <CorridorField />
-        </div>
+        {/* CorridorField used to sit here as a background. Removed: at the
+            opacity it needed to stay behind the text it rendered as a few
+            faint diagonal scratches across the band, which reads as a
+            rendering artefact rather than as art direction. A decorative
+            element that looks like a bug is worse than no decorative
+            element. The component is still in the repo if it is ever given
+            a section of its own where it can be seen properly. */}
         <div className="shell relative z-10">
         <div className="grid-12 items-end">
           <Rise className="col-span-12 lg:col-span-8">
@@ -503,30 +505,46 @@ export default function Home() {
           </div>
         </div>
 
-        <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {cityLinks.map((c, i) => (
-            <Rise key={c.name} as="li" delay={Math.min(i, 8) * 35}>
-              {c.href ? (
-                <Link
-                  href={c.href}
-                  className="lift group flex flex-col gap-0.5 rounded-xl bg-sand-2 px-4 py-4 hover:bg-sand-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3"
-                >
-                  <span className="text-h3">{c.name}</span>
-                  <span className="deva text-[0.8125rem] text-violet-deep">
-                    {deva[c.name]}
-                  </span>
-                </Link>
-              ) : (
-                <div className="flex flex-col gap-0.5 rounded-xl px-4 py-4 ring-1 ring-rule-sand ring-inset sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
-                  <span className="text-h3 text-on-sand-dim">{c.name}</span>
-                  <span className="deva text-[0.8125rem] text-on-sand-dim/60">
-                    {deva[c.name]}
-                  </span>
-                </div>
-              )}
+        {/* Written cities only. The earlier version rendered all forty-two
+            markets as identical pills, which read as a sitemap dump rather
+            than a considered list — forty-two boxes of equal weight tell a
+            visitor nothing about where to look. The markets without a page
+            are one quiet line underneath, which is also more honest: those
+            are names, not destinations. */}
+        <ul className="mt-12 grid grid-cols-1 gap-x-10 border-t border-rule-sand sm:grid-cols-2 lg:grid-cols-3">
+          {cities.map((c, i) => (
+            <Rise key={c.slug} as="li" delay={Math.min(i, 9) * 30}>
+              <Link
+                href={`/cities/${c.slug}`}
+                className="group flex items-baseline justify-between gap-4 border-b border-rule-sand py-4 transition-colors hover:bg-sand-2"
+              >
+                <span className="flex items-baseline gap-3">
+                  <span className="link-underline text-h3">{c.name}</span>
+                  {deva[c.name] && (
+                    <span className="deva text-caption text-violet-deep">
+                      {deva[c.name]}
+                    </span>
+                  )}
+                </span>
+                <span className="font-mono text-micro tracking-[0.08em] text-on-sand-dim uppercase">
+                  {c.state}
+                </span>
+              </Link>
             </Rise>
           ))}
         </ul>
+
+        <Rise delay={340}>
+          <p className="mt-8 max-w-[76ch] text-body-s text-on-sand-dim">
+            <span className="font-mono text-micro tracking-[0.08em] text-violet-deep uppercase">
+              Also planned —{" "}
+            </span>
+            {additionalMarkets.join(" · ")}. Written pages for these are in
+            progress. We would rather name a market honestly than publish a
+            thin page with the city swapped into someone else&rsquo;s
+            paragraph.
+          </p>
+        </Rise>
         </div>
       </section>
 
@@ -547,7 +565,7 @@ export default function Home() {
               >
                 {s.value}
               </dd>
-              <p className="mt-2.5 max-w-[24ch] text-[0.875rem] text-on-sand-dim">
+              <p className="mt-2.5 max-w-[24ch] text-body-s text-on-sand-dim">
                 {s.note}
               </p>
             </Rise>

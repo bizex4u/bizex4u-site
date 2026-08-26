@@ -91,7 +91,7 @@ export default function ContactForm() {
       </button>
 
       {sent && (
-        <p role="status" className="mt-5 text-[0.9375rem] text-on-sand-dim">
+        <p role="status" className="mt-5 text-body-s text-on-sand-dim">
           Your email client should have opened with the message ready to send.
           If it did not, write to{" "}
           <a href={`mailto:${site.email}`} className="link-underline text-violet-deep">

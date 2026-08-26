@@ -96,9 +96,9 @@ export default function HeroReel() {
         />
 
         <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
-          <p className="text-[0.9375rem] font-medium text-on-plum">
+          <p className="text-body-s font-medium text-on-plum">
             {current.place}
-            <span className="block text-[0.8125rem] text-on-plum-dim">
+            <span className="block text-caption text-on-plum-dim">
               {current.city}
             </span>
           </p>
@@ -115,7 +115,7 @@ export default function HeroReel() {
         </figcaption>
       </div>
 
-      <p className="mt-3 text-[0.8125rem] text-on-sand-dim">
+      <p className="mt-3 text-caption text-on-sand-dim">
         Live sites across Delhi NCR, filmed on location.
       </p>
     </figure>
