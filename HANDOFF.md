@@ -104,12 +104,12 @@ capability pages under `/what-we-do/`, `/cities` hub, 19 city pages,
 `/about`, `/work`, `/contact`. `/perspectives` and `/careers` are still
 stubs.
 
-**Cities written (19):** Kanpur, Lucknow, Varanasi, Delhi NCR, Jaipur,
+**Cities written (22):** Kanpur, Lucknow, Varanasi, Delhi NCR, Jaipur,
 Chandigarh, Ludhiana, Agra, Mumbai, Pune, Nagpur, Ahmedabad, Surat,
-Indore, Bhopal, Bangalore, Hyderabad, Chennai, Kolkata.
+Indore, Bhopal, Bangalore, Hyderabad, Chennai, Kochi, Coimbatore,
+Kolkata, Patna.
 
-**Still to write:** Patna, Kochi, Coimbatore — research was started and
-cut off. Then Vadodara, Rajkot, Nashik, Meerut, Prayagraj, Gorakhpur,
+**Still to write:** Vadodara, Rajkot, Nashik, Meerut, Prayagraj, Gorakhpur,
 Jodhpur, Udaipur, Amritsar, Jalandhar, Guwahati, Bhubaneswar, Raipur,
 Visakhapatnam, Vijayawada, Mysuru. These are listed as plain text in
 `additionalMarkets` — deliberately not linked to thin pages.
@@ -263,22 +263,46 @@ was wrong.
 
 ---
 
-## 10. Immediate next steps
+## 10. There is no remote. Nothing is deployed.
 
-1. **Get this repo off the cloud container.** As of this writing the
-   Mac copy at `~/Downloads/bizex4u-site` was 15 commits behind and
-   everything since — the whole design overhaul, barter page, form
-   intake and all 19 city pages — existed only in an ephemeral
-   container. If you are reading this on the Mac, that sync happened.
-   Push to a remote so it cannot happen again.
-2. **Write Patna, Kochi and Coimbatore.** Research was started and cut
-   off. Kerala's High Court rulings on illegal hoardings and flex
-   boards, and Tamil Nadu's post-2019 banner rules as they apply in
-   Coimbatore, are the high-value sections.
-3. **Uncommitted-then-committed but unverified:** `CorridorField.tsx`
+This needs saying plainly because it has already been assumed
+otherwise once. `git remote -v` returns **nothing**. There is no
+GitHub repository, no Vercel project, and no deployment pipeline.
+`git push origin main` will fail with *"'origin' does not appear to be
+a git repository"*.
+
+The README's "Deploying" section — *"Push to GitHub, import at
+vercel.com/new"* — is an **instruction for setting that up**, not a
+description of something that exists. Do not tell Yash that a change
+will "go live on push". Nothing goes live yet.
+
+To actually put the site online, someone with Yash's credentials has
+to: create an empty GitHub repo, `git remote add origin <url>`,
+`git push -u origin main`, then import it at vercel.com/new. Claude
+cannot do any of that — it needs account access, and pasting a token
+into a chat is not an acceptable workaround.
+
+Until then the only copy that matters is `~/Downloads/bizex4u-site`
+on the MacBook Air, and it is one disk failure from gone.
+
+---
+
+## 11. Immediate next steps
+
+1. **Create the GitHub remote and push.** See §10. This is the single
+   most important outstanding item — the entire project currently
+   exists in one folder on one laptop.
+2. **Verify the three newest pages in a browser.** Patna, Kochi and
+   Coimbatore were written in a separate session and merged in as
+   commit `de903d8`. They typecheck, lint, build, pass contrast at AA
+   and carry valid schema, and they were checked for rate figures and
+   licensed research numbers — but nobody has looked at them rendered.
+3. **Committed but never visually verified:** `CorridorField.tsx`
    (animated SVG corridors behind the homepage cities band), the Ken
    Burns wrap on proof images, and the format-plate draw-in. These
    build and lint but were never checked in a browser — they went into
    the commit alongside the city work. Screenshot the homepage and
    confirm they look right.
-4. `/perspectives` and `/careers` are still stubs.
+4. `/perspectives` and `/careers` are still stubs. Both need editorial
+   input from Yash on what actually exists before they can be written —
+   do not invent content for them.
