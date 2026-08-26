@@ -26,6 +26,9 @@ import { bhopal } from "./bhopal";
 import { bangalore } from "./bangalore";
 import { hyderabad } from "./hyderabad";
 import { chennai } from "./chennai";
+import { kochi } from "./kochi";
+import { coimbatore } from "./coimbatore";
+import { patna } from "./patna";
 
 export type { City } from "./types";
 
@@ -50,7 +53,10 @@ export const cities: City[] = [
   bangalore,
   hyderabad,
   chennai,
+  kochi,
+  coimbatore,
   kolkata,
+  patna,
 ];
 
 export const cityBySlug = (slug: string) => cities.find((c) => c.slug === slug);
@@ -63,9 +69,6 @@ export const cityBySlug = (slug: string) => cities.find((c) => c.slug === slug);
    and it drags the pages that are real down with it. These get written
    properly or they stay as text. */
 export const additionalMarkets = [
-  "Patna",
-  "Kochi",
-  "Coimbatore",
   "Vadodara",
   "Rajkot",
   "Nashik",
