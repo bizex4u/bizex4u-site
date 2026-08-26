@@ -100,7 +100,7 @@ it before adding a city.
 ## 4. What exists
 
 **Pages:** homepage (positioned as brand activation), `/barter`, five
-capability pages under `/what-we-do/`, `/cities` hub, 19 city pages,
+capability pages under `/what-we-do/`, `/cities` hub, 22 city pages,
 `/about`, `/work`, `/contact`. `/perspectives` and `/careers` are still
 stubs.
 
@@ -118,7 +118,7 @@ Visakhapatnam, Vijayawada, Mysuru. These are listed as plain text in
 crowds are (8 named places), a format guide (8 long-tail H3s), press and
 radio by name, transit, what drives the price, permissions and
 compliance, the seasonal calendar, how we plan it, and 11-12 FAQs.
-2,700-3,300 words. Schema: `Service` → `OfferCatalog` built from the
+2,700-3,700 words. Schema: `Service` → `OfferCatalog` built from the
 format guide, plus `BreadcrumbList` and `FAQPage`.
 
 **Key files:**
