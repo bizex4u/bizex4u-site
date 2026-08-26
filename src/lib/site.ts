@@ -110,7 +110,6 @@ export const primaryNav = [
   { label: "Cities", href: "/cities" },
   { label: "Barter", href: "/barter" },
   { label: "About", href: "/about" },
-  { label: "Perspectives", href: "/perspectives" },
 ];
 
 export const footerNav = [
@@ -138,8 +137,7 @@ export const footerNav = [
     links: [
       { label: "About", href: "/about" },
       { label: "Work", href: "/work" },
-      { label: "Perspectives", href: "/perspectives" },
-      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
@@ -333,26 +331,3 @@ export const selectedWork = [
   },
 ];
 
-export const perspectives = [
-  {
-    date: "2026-07-14",
-    dateLabel: "14 Jul 2026",
-    title: "What a media plan should tell you before you sign it",
-    category: "Planning",
-    href: "/perspectives",
-  },
-  {
-    date: "2026-06-02",
-    dateLabel: "02 Jun 2026",
-    title: "Catchment, not coverage: rethinking hyperlocal outdoor",
-    category: "Retail",
-    href: "/perspectives",
-  },
-  {
-    date: "2026-04-21",
-    dateLabel: "21 Apr 2026",
-    title: "How barter is treated in the books",
-    category: "Commercial",
-    href: "/perspectives",
-  },
-];
