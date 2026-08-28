@@ -228,46 +228,79 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Six equal cards was six cards nobody read — card 01 and card
+            05 carried identical weight, so nothing led and the eye had
+            no route through. Now the grid states an argument: the core
+            product takes double width and a bigger drawing, four sit at
+            normal weight beneath it, and barter runs full width because
+            it is the thing no competitor offers.
+
+            The 01–06 counter is gone with it. Numbering implies an
+            order the reader needs, and there is no reason "be seen"
+            precedes "be heard". */}
         <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {capabilities.map((c, i) => (
-            <Rise key={c.href} as="li" delay={i * 55}>
+            <Rise
+              key={c.href}
+              as="li"
+              delay={i * 55}
+              className={
+                c.accent
+                  ? "md:col-span-2 lg:col-span-3"
+                  : i === 0
+                    ? "md:col-span-2"
+                    : undefined
+              }
+            >
               <Link
                 href={c.href}
                 className={`lift group flex h-full flex-col rounded-(--radius-card) p-6 md:p-7 ${
                   c.accent
-                    ? "bg-violet-deep text-white hover:bg-violet"
+                    ? "bg-violet-deep text-white hover:bg-violet md:flex-row md:items-end md:gap-12"
                     : "bg-plum-2 hover:bg-plum-3"
                 }`}
               >
-                <span
-                  className={`eyebrow ${
-                    c.accent ? "text-on-violet-dim" : "text-violet-lift"
-                  }`}
-                >
-                  {c.index}
-                </span>
-
-                {/* The verb leads. The product name is the subtitle. */}
-                <h3 className="mt-3 font-display text-h2 text-balance">
-                  {c.verb}
-                </h3>
+                <div className={c.accent ? "md:flex-1" : undefined}>
                 <p
-                  className={`mt-1.5 font-mono text-[0.75rem] tracking-[0.08em] uppercase ${
+                  className={`font-mono text-[0.75rem] tracking-[0.08em] uppercase ${
                     c.accent ? "text-on-violet-dim" : "text-violet-lift"
                   }`}
                 >
                   {c.title}
                 </p>
 
+                {/* The verb leads. The product name is the kicker above. */}
+                <h3
+                  className={`mt-3 font-display text-balance ${
+                    i === 0 || c.accent ? "text-display-l" : "text-h2"
+                  }`}
+                >
+                  {c.verb}
+                </h3>
                 <p
-                  className={`mt-4 max-w-[34ch] ${
+                  className={`mt-4 ${i === 0 || c.accent ? "max-w-[46ch] text-body-l" : "max-w-[34ch]"} ${
                     c.accent ? "text-on-violet-dim" : "text-on-plum-dim"
                   }`}
                 >
-                  {c.short}
+                  {i === 0 ? c.long : c.short}
                 </p>
 
-                <div className="mt-7">
+                {/* On the wide barter card the link closes the copy
+                    column, because the exchange drawing sits beside it
+                    rather than under it. Everywhere else it closes the
+                    card, after the drawing. */}
+                {c.accent && (
+                  <span className="mt-7 inline-flex items-center gap-1.5 text-body-s font-medium">
+                    {c.linkLabel ?? "Explore"}{" "}
+                    <span className="row-arrow">→</span>
+                  </span>
+                )}
+                </div>
+
+                {/* The lead card gets a bigger drawing because it has the
+                    room; the wide barter card puts its exchange beside
+                    the copy rather than under it. */}
+                <div className={c.accent ? "mt-7 md:mt-0" : "mt-auto pt-7"}>
                   {c.accent ? (
                     <ExchangePlate />
                   ) : (
@@ -275,14 +308,19 @@ export default function Home() {
                       <FormatPlate
                         formats={formatSets[platesFor[c.index]]}
                         tone="dark"
+                        base={i === 0 ? 92 : 64}
+                        maxWidth={i === 0 ? 470 : 296}
                       />
                     )
                   )}
                 </div>
 
-                <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
-                  {c.linkLabel ?? "Explore"} <span className="row-arrow">→</span>
-                </span>
+                {!c.accent && (
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
+                    {c.linkLabel ?? "Explore"}{" "}
+                    <span className="row-arrow">→</span>
+                  </span>
+                )}
               </Link>
             </Rise>
           ))}
