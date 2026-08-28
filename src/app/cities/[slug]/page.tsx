@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
+import SeasonBar from "@/components/SeasonBar";
 import { Faq } from "@/components/Ledger";
 import { cities, cityBySlug } from "@/lib/cities";
 import { site } from "@/lib/site";
@@ -425,16 +426,12 @@ export default async function CityPage({ params }: Params) {
           </p>
         </div>
 
-        <ul className="mt-12 grid gap-4 md:grid-cols-2">
-          {city.season.map((s, i) => (
-            <Rise key={s.window} as="li" delay={i * 50}>
-              <div className="h-full rounded-(--radius-card) bg-sand p-6 md:p-7">
-                <h3 className="font-display text-h2 text-balance">{s.window}</h3>
-                <p className="mt-3 text-on-sand-dim">{s.note}</p>
-              </div>
-            </Rise>
-          ))}
-        </ul>
+        {/* Four cards of prose made the reader assemble the year in
+            their head. The question is "when is this market expensive",
+            which is a question about a shape. */}
+        <Rise className="mt-12 rounded-(--radius-card) bg-sand p-6 md:p-9">
+          <SeasonBar seasons={city.season} />
+        </Rise>
       </Band>
 
       {/* 09 — HOW WE PLAN IT ------------------------------------- */}
