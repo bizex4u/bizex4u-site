@@ -3,7 +3,9 @@ import localFont from "next/font/local";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Motion from "@/components/Motion";
+import ScrollCraft from "@/components/ScrollCraft";
 import { site } from "@/lib/site";
+import "@/vendor/scrollcraft/scrollcraft.css";
 import "./globals.css";
 
 /* Fonts are self-hosted rather than pulled from Google.
@@ -134,6 +136,7 @@ export default function RootLayout({
         <main id="main">{children}</main>
         <Footer />
         <Motion />
+        <ScrollCraft />
       </body>
     </html>
   );

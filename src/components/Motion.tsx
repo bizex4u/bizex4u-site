@@ -200,22 +200,14 @@ export default function Motion() {
 
             const distance = () => track.scrollWidth - window.innerWidth;
 
-            gsap.to(track, {
-              x: () => -distance(),
-              ease: "none",
-              scrollTrigger: {
-                trigger: section,
-                start: "top top",
-                /* Scroll length equals the horizontal distance, so the
-                   sideways speed matches the wheel. Anything else feels
-                   either sticky or out of control. */
-                end: () => "+=" + distance(),
-                pin: true,
-                scrub: 0.6,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-              },
-            });
+            /* The pinned horizontal track moved to the scrollcraft
+               engine — see src/vendor/scrollcraft. ScrollTrigger pins by
+               wrapping the node in a .pin-spacer it inserts into the DOM,
+               which re-parents a node React owns; on soft navigation
+               React's removeChild then throws and unmounts <main>.
+               scrollcraft pins with position:sticky and generates no DOM,
+               so the failure cannot happen. This block is intentionally
+               empty: the section is now data-sc-act="pan". */
 
             /* Progress rail, if the section declares one. It rides the
                same scroll range as the track rather than its own, so
@@ -354,14 +346,10 @@ export default function Motion() {
         ---------------------------------------------------------- */
         const hero = document.querySelector<HTMLElement>("[data-hero]");
         if (hero && wide) {
-          ScrollTrigger.create({
-            trigger: hero,
-            start: "top top",
-            end: "bottom top",
-            pin: true,
-            pinSpacing: false,
-            anticipatePin: 1,
-          });
+          /* The hero hold is gone for the same reason as the track: any
+             ScrollTrigger pin creates a pin-spacer and re-parents the
+             node. pinSpacing:false still wraps. The parallax below keeps
+             the depth without pinning anything. */
           const copy = hero.querySelector<HTMLElement>("[data-hero-copy]");
           if (copy) {
             gsap.to(copy, {

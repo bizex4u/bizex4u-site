@@ -38,11 +38,16 @@ const tint = [
 export default function DayClock() {
   return (
     <section
+      /* data-sc-act is applied by ScrollCraft.tsx, desktop only. */
+      data-sc-span="3"
       data-pin-track
       aria-labelledby="dayclock-heading"
-      className="grain grain-light relative bg-plum text-on-plum lg:h-screen"
+      className="grain grain-light relative bg-plum text-on-plum"
     >
-      <div className="flex h-full flex-col py-(--spacing-band) lg:pt-26 lg:pb-8">
+      <div
+        data-sc-stage
+        className="flex h-screen flex-col py-(--spacing-band) lg:pt-26 lg:pb-8"
+      >
         {/* Heading — rides at the head of the track so it is on screen
             for the whole pinned sequence. */}
         <div className="shell shrink-0">
@@ -76,6 +81,7 @@ export default function DayClock() {
         >
           <div
             data-track
+            data-sc-pan="0.35"
             className="flex h-full w-max items-stretch gap-4 px-6 md:px-10"
           >
             {dayClock.map((h, i) => (
