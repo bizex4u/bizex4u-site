@@ -85,10 +85,13 @@ export default function Home() {
           so neither has to compromise for the other. The headline
           reveals line by line — each line is its own element because
           splitting text at runtime breaks screen readers. */}
-      <section className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20">
+      <section
+        data-hero
+        className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20"
+      >
         <div className="shell relative z-10">
           <div className="grid-12 items-center gap-y-12">
-            <div className="col-span-12 lg:col-span-6">
+            <div data-hero-copy className="col-span-12 lg:col-span-6">
               <Rise>
                 <Eyebrow deva="भारत भर में">
                   Brand activation across India

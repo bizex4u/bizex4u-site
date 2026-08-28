@@ -648,3 +648,47 @@ html:has(dialog[open]) {
   --sc-font-text: var(--font-sans);
   --sc-font-mono: var(--font-mono);
 }
+
+/* ------------------------------------------------------------------
+   The hero holds while the page rises over it.
+
+   Motion.tsx described this behaviour in a comment and implemented it
+   with ScrollTrigger pin — but no page ever carried [data-hero], so it
+   was dead code that never ran once. The effect the comment promised
+   has simply never existed on the site.
+
+   It is four lines of position:sticky now that nothing re-parents the
+   DOM. The hero is 833px against a 900px viewport, so it is shorter
+   than the screen and top:0 holds it cleanly rather than clipping its
+   base. The section after it is raised one z-index and carries its own
+   opaque ground, so it slides up and covers the hero rather than
+   pushing it down the document.
+
+   No scrollcraft act on the hero. A flow act with data-sc-parallax on
+   the copy drifted it correctly and also ramped its opacity to zero by
+   700px of scroll, which hid the headline behind the band climbing over
+   it. The hold is the effect; the drift was decoration that broke it.
+
+   Gated to the same 1024x860 as the sideways track: on a short laptop
+   the hero is taller than the viewport and sticky would pin a hero
+   whose bottom is already cut off, which reads as a bug rather than as
+   depth. Reduced motion opts out entirely — a held hero is movement
+   the reader did not ask for.
+------------------------------------------------------------------- */
+
+@media (min-width: 1024px) and (min-height: 860px) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-hero] {
+      position: sticky;
+      top: 0;
+      z-index: 0;
+    }
+
+    /* The covering section needs a ground of its own, or the hero shows
+       through it. Every band on this page already has one. */
+    [data-hero] + * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+}

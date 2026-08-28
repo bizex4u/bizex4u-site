@@ -346,20 +346,29 @@ export default function Motion() {
         ---------------------------------------------------------- */
         const hero = document.querySelector<HTMLElement>("[data-hero]");
         if (hero && wide) {
-          /* The hero hold is gone for the same reason as the track: any
-             ScrollTrigger pin creates a pin-spacer and re-parents the
-             node. pinSpacing:false still wraps. The parallax below keeps
-             the depth without pinning anything. */
+          /* The hold itself is now position:sticky in globals.css — any
+             ScrollTrigger pin creates a pin-spacer and re-parents a node
+             React owns, which is the blank-page bug. pinSpacing:false
+             still wraps, so there is no safe pin here.
+
+             This block only drifts the copy. It used to fade it to
+             opacity 0 as well, which was written to pair with the pin
+             and had never actually run, because no page carried
+             [data-hero] until the sticky hold was added. Switched on, it
+             took the headline to 0.019 by 420px of scroll — invisible
+             while the hero was still most of the screen. A pitch line
+             that dissolves while you are reading it is a defect, not
+             depth. The band climbing over it is the recede cue; the copy
+             just needs to move a little slower than the page. */
           const copy = hero.querySelector<HTMLElement>("[data-hero-copy]");
           if (copy) {
             gsap.to(copy, {
-              yPercent: -14,
-              opacity: 0,
+              yPercent: -9,
               ease: "none",
               scrollTrigger: {
                 trigger: hero,
                 start: "top top",
-                end: "bottom 45%",
+                end: "bottom top",
                 scrub: 0.4,
               },
             });
