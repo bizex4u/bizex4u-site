@@ -617,3 +617,34 @@ html:has(dialog[open]) {
     opacity: 0.45;
   }
 }
+
+/* ------------------------------------------------------------------
+   scrollcraft token remap.
+
+   The vendored engine ships its own design floor — a near-black canvas,
+   Geist, and an acid-green accent — and applies part of it globally:
+   `body`, plus `:root { caret-color; accent-color }`, `::selection` and
+   `:focus-visible`. globals.css is imported after it, so the palette and
+   the fonts already win. Three things did not, because nothing here had
+   ever declared them: the text caret, the form accent-color, and the
+   focus ring all rendered #d8ff3e on a plum-and-sand site.
+
+   Its own documentation says brand guidelines are inputs rather than
+   decoration, so the fix is to feed it this brand rather than to patch
+   over it. Remapping the tokens also means any scrollcraft device added
+   later inherits the right colours instead of needing another override.
+------------------------------------------------------------------- */
+
+:root {
+  --sc-canvas: var(--color-sand);
+  --sc-surface: var(--color-sand-2);
+  --sc-ink: var(--color-on-sand);
+  --sc-ink-soft: var(--color-on-sand-dim);
+  --sc-accent: var(--color-violet-deep);
+  --sc-accent-ink: var(--color-on-violet);
+  --sc-hairline: var(--color-rule-sand);
+  --sc-hairline-strong: var(--color-rule-plum);
+  --sc-font-display: var(--font-display);
+  --sc-font-text: var(--font-sans);
+  --sc-font-mono: var(--font-mono);
+}
