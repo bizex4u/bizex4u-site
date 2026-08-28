@@ -60,11 +60,27 @@ export default function Nav() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
+    /* The header is fixed and full-width, and the mega panel below the
+       bar is `lg:block` with opacity-0 when closed — display:block, so
+       it still occupies its 329px of layout. That made the header's own
+       box 411px tall in a 720px viewport, and because a header defaults
+       to pointer-events:auto it swallowed every click in the top 57% of
+       the screen. On /cities exactly one city sat below the band and
+       was clickable; every other row was dead. Reported as "only able
+       to click and open Chandigarh".
+
+       So the header is transparent to the pointer while the mega is
+       closed, and each interactive child opts back in. It reclaims
+       pointer-events when the mega opens, because onMouseLeave is what
+       closes the panel and a pointer-events:none element never fires
+       it. */
     <header
-      className="fixed inset-x-0 top-0 z-50 pt-3 md:pt-4"
+      className={`fixed inset-x-0 top-0 z-50 pt-3 md:pt-4 ${
+        megaOpen ? "pointer-events-auto" : "pointer-events-none"
+      }`}
       onMouseLeave={closeMega}
     >
-      <div className="shell flex items-center justify-between gap-3">
+      <div className="shell pointer-events-auto flex items-center justify-between gap-3">
         <Link
           href="/"
           className={`inline-flex min-h-11 items-center rounded-full px-4 font-display text-body-l font-semibold tracking-[-0.03em] transition-colors duration-200 ${
@@ -158,7 +174,7 @@ export default function Nav() {
 
       {/* Mobile panel */}
       {mobileOpen && (
-        <div className="fixed inset-x-0 top-20 bottom-0 overflow-y-auto bg-sand lg:hidden">
+        <div className="pointer-events-auto fixed inset-x-0 top-20 bottom-0 overflow-y-auto bg-sand lg:hidden">
           <nav className="shell py-6" aria-label="Mobile">
             {primaryNav.map((item) => (
               <Link
