@@ -692,3 +692,59 @@ html:has(dialog[open]) {
     }
   }
 }
+
+/* ------------------------------------------------------------------
+   Directory links.
+
+   .link-underline draws its rule with scaleX(0) and only scales it in
+   on hover. That is right for a link sitting inside a sentence, where
+   the surrounding prose already tells you it is a link. It is wrong for
+   /cities, which is nothing but a directory: every row was a link, none
+   of them looked like one, and the only thing separating a written city
+   from an unwritten one was text colour — which reads as emphasis, not
+   as "you can click this". Reported as "nothing is hyperlinked", which
+   is exactly how it behaved even though all 22 anchors were there.
+
+   A resting rule at 30% plus an arrow that slides on hover. The arrow
+   is the part that carries it: a name can be bold for any reason, but
+   an arrow means go.
+------------------------------------------------------------------- */
+
+.link-row .link-underline::after {
+  transform: scaleX(1);
+  opacity: 0.3;
+  transition:
+    opacity 200ms var(--ease-reveal),
+    transform 220ms var(--ease-reveal);
+}
+
+.link-row:hover .link-underline::after,
+.link-row:focus-visible .link-underline::after {
+  opacity: 1;
+}
+
+.link-row__go {
+  display: inline-block;
+  margin-left: 0.5ch;
+  color: var(--color-violet-deep);
+  opacity: 0.55;
+  transform: translateX(0);
+  transition:
+    opacity 200ms var(--ease-reveal),
+    transform 200ms var(--ease-reveal);
+}
+
+.link-row:hover .link-row__go,
+.link-row:focus-visible .link-row__go {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-row__go {
+    transition: none;
+  }
+  .link-row:hover .link-row__go {
+    transform: none;
+  }
+}

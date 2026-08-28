@@ -77,9 +77,14 @@ export default function CitiesPage() {
                     <li key={c.slug} className="border-b border-rule-sand">
                       <Link
                         href={`/cities/${c.slug}`}
-                        className="group block py-3.5"
+                        className="link-row group block py-3.5"
                       >
-                        <span className="link-underline text-h3">{c.name}</span>
+                        <span className="link-underline text-h3">
+                          {c.name}
+                        </span>
+                        <span aria-hidden="true" className="link-row__go text-h3">
+                          &rarr;
+                        </span>
                         <span className="mt-0.5 block font-mono text-meta tracking-[0.09em] text-on-sand-dim uppercase">
                           {c.state}
                         </span>
