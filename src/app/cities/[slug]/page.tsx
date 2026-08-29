@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
+import Image from "next/image";
 import SeasonBar from "@/components/SeasonBar";
+import { CityLocator } from "@/components/IndiaField";
+import { framesFor } from "@/lib/streets";
 import { Faq } from "@/components/Ledger";
 import { cities, cityBySlug } from "@/lib/cities";
 import { site } from "@/lib/site";
@@ -63,6 +66,8 @@ export default async function CityPage({ params }: Params) {
   const city = cityBySlug(slug);
   if (!city) notFound();
 
+  const frames = framesFor(city.name);
+
   return (
     <>
       {/* HERO ---------------------------------------------------- */}
@@ -92,7 +97,7 @@ export default async function CityPage({ params }: Params) {
             </ol>
           </nav>
 
-          <div className="grid-12 items-end gap-y-10">
+          <div className="grid-12 items-start gap-y-10">
             <div className="col-span-12 lg:col-span-7">
               <Rise>
                 <Eyebrow>Cities — {city.state}</Eyebrow>
@@ -125,11 +130,22 @@ export default async function CityPage({ params }: Params) {
               </Rise>
             </div>
 
+            {/* The locator replaces a card that held nothing but a list
+                of neighbouring names. Every one of these twenty-two
+                pages opened identically — eyebrow, headline, lede, one
+                grey box — and the box was the least useful thing on the
+                screen. The field answers the question a buyer actually
+                arrives with, which is not "what is near this city" but
+                "do these people work anywhere near me". The nearby list
+                keeps its job underneath, where it belongs. */}
             <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
-              <Card>
-                <p className="eyebrow text-on-sand-dim">Also planned nearby</p>
-                <Nearby names={city.nearby} />
-              </Card>
+              <CityLocator slug={city.slug} name={city.name} />
+              <div className="mt-4">
+                <Card>
+                  <p className="eyebrow text-on-sand-dim">Also planned nearby</p>
+                  <Nearby names={city.nearby} />
+                </Card>
+              </div>
             </Rise>
           </div>
         </div>
@@ -178,17 +194,95 @@ export default async function CityPage({ params }: Params) {
           </p>
         </div>
 
+        {/* Six identical cards in a three-column grid was six cards
+            nobody read: every place carried the same weight, so nothing
+            led and the eye had no route in. The first place named on
+            each of these pages is the one a local would name first, and
+            it now reads that way — double width, larger type, and a
+            counter so the set reads as an argued order rather than as a
+            grid that happened to be filled. */}
         <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {city.crowdPlaces.map((p, i) => (
-            <Rise key={p.place} as="li" delay={i * 45}>
-              <div className="h-full rounded-(--radius-card) bg-plum-2 p-6 md:p-7">
-                <h3 className="font-display text-h2 text-balance">{p.place}</h3>
-                <p className="mt-3 text-on-plum-dim">{p.note}</p>
+            <Rise
+              key={p.place}
+              as="li"
+              delay={i * 45}
+              className={i === 0 ? "md:col-span-2" : undefined}
+            >
+              <div className="flex h-full flex-col rounded-(--radius-card) bg-plum-2 p-6 md:p-7">
+                <span className="font-mono text-[0.75rem] tracking-[0.08em] text-violet-lift">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3
+                  className={`mt-3 font-display text-balance ${
+                    i === 0 ? "text-display-l" : "text-h2"
+                  }`}
+                >
+                  {p.place}
+                </h3>
+                <p
+                  className={`mt-4 text-on-plum-dim ${
+                    i === 0 ? "max-w-[62ch] text-body-l" : ""
+                  }`}
+                >
+                  {p.note}
+                </p>
               </div>
             </Rise>
           ))}
         </ul>
       </Band>
+
+      {/* 02b — WHAT IT LOOKS LIKE ON THE GROUND -----------------
+          Only where we actually hold frames of this market. Two of the
+          twenty-two cities do; see the note on framesFor in
+          lib/streets.ts for why the other twenty get nothing here
+          rather than a street borrowed from elsewhere. */}
+      {frames.length > 0 && (
+        <section className="grain relative overflow-hidden bg-plum-2 py-(--spacing-band) text-on-plum">
+          <div className="shell relative z-10">
+            <div className="grid-12 items-end">
+              <Rise className="col-span-12 lg:col-span-7">
+                <Eyebrow tone="plum">On the ground</Eyebrow>
+                <h2 className="mt-5 font-display text-display-l text-balance">
+                  {city.name}, <span className="em-serif">as we found it</span>.
+                </h2>
+              </Rise>
+              <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
+                Our own frames, taken standing in front of live placements on a
+                working day. Not stock, and not a site list — the geo-stamp is
+                cropped off these deliberately.
+              </p>
+            </div>
+
+            <ul
+              className={`mt-11 grid gap-4 ${
+                frames.length > 1 ? "sm:grid-cols-2" : ""
+              }`}
+            >
+              {frames.slice(0, 4).map((f, i) => (
+                <Rise key={f.src} as="li" delay={i * 60}>
+                  <figure className="m-0 overflow-hidden rounded-(--radius-card) bg-plum">
+                    <div className="relative aspect-16/9">
+                      <Image
+                        src={f.src}
+                        alt={f.alt}
+                        fill
+                        sizes={
+                          frames.length > 1
+                            ? "(min-width: 640px) 46vw, 92vw"
+                            : "(min-width: 640px) 92vw, 92vw"
+                        }
+                        className="object-cover"
+                      />
+                    </div>
+                  </figure>
+                </Rise>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* 03 — THE FORMAT GUIDE -----------------------------------
           The long-tail layer. Each H3 answers a query somebody actually

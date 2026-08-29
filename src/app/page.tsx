@@ -1,13 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import HeroReel from "@/components/HeroReel";
 import DayClock from "@/components/DayClock";
 import ReelBand from "@/components/ReelBand";
+import StreetWall from "@/components/StreetWall";
 import Marquee from "@/components/Marquee";
-import FormatPlate, {
-  ExchangePlate,
-  formatSets,
-} from "@/components/FormatPlate";
 import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
 import {
   capabilities,
@@ -17,6 +13,9 @@ import {
   proofStats,
 } from "@/lib/site";
 import { additionalMarkets, cities } from "@/lib/cities";
+import { exchangeLine, formatLines } from "@/lib/formats";
+import { heroPlate, statementPlate } from "@/lib/streets";
+import MarqueeToggle from "@/components/MarqueeToggle";
 import BriefButton from "@/components/BriefButton";
 
 /* ------------------------------------------------------------------
@@ -33,14 +32,6 @@ import BriefButton from "@/components/BriefButton";
    grid, counting numbers. The old page used the same band-and-cards
    device eight times, which is what made it read as static.
 ------------------------------------------------------------------- */
-
-const platesFor: Record<string, keyof typeof formatSets> = {
-  "01": "outdoor",
-  "02": "dooh",
-  "03": "retail",
-  "04": "broadcast",
-  "05": "activation",
-};
 
 const deva: Record<string, string> = {
   Kolkata: "कोलकाता",
@@ -81,19 +72,75 @@ export default function Home() {
   return (
     <>
       {/* 01 — HERO ------------------------------------------------
-          Split, not overlaid. Type and footage hold separate columns,
-          so neither has to compromise for the other. The headline
-          reveals line by line — each line is its own element because
-          splitting text at runtime breaks screen readers. */}
+          A street, full bleed, with the type over it.
+
+          This was a split hero: type in one column, the reel in the
+          other, on beige. It was safe and it was the reason the page
+          opened like a brochure. A company that sells physical
+          presence has to open with a physical place, and the frame
+          under this type is one of our own — Kozhikode, on a working
+          morning, shot standing in the traffic.
+
+          Photograph rather than video, against the obvious reference.
+          The reel is a megabyte and a half; this plate is ninety-six
+          kilobytes, and the buyer opening it is on Indian mobile data
+          in a meeting. The footage still runs further down the page,
+          full bleed, where it costs nothing to arrive late.
+
+          The headline reveals line by line — each line is its own
+          element because splitting text at runtime breaks screen
+          readers. */}
       <section
         data-hero
-        className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20"
+        className="grain relative isolate flex min-h-[min(88svh,760px)] items-end overflow-hidden bg-plum pt-32 pb-14 text-on-plum md:pt-40 md:pb-20"
       >
-        <div className="shell relative z-10">
-          <div className="grid-12 items-center gap-y-12">
-            <div data-hero-copy className="col-span-12 lg:col-span-6">
+        {/* The image sits in its own absolutely-positioned box rather
+            than filling the section directly. `[data-hero]` becomes
+            `position: sticky` above 1024x860, and next/image warns that
+            a `fill` parent must be relative, absolute or fixed — sticky
+            does establish a containing block and the layout was correct,
+            but a console warning on every dev page load is a warning
+            people learn to scroll past. */}
+        <div aria-hidden className="absolute inset-0 -z-20 overflow-hidden">
+          <Image
+            src={heroPlate.src}
+            alt={heroPlate.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[58%_46%]"
+          />
+        </div>
+        {/* Scrims, tuned by looking rather than by guessing. The first
+            pass ran plum at 85% across two thirds of the frame and the
+            street vanished — a dark purple wash with a ghost in it,
+            which is decoration pretending to be photography.
+
+            So: opaque only under the first four columns, gone by the
+            halfway mark, plus a short bottom fade to seat the section
+            against the band below. Everything right of centre is the
+            photograph at full strength. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-linear-to-t from-plum from-38% via-plum/78 via-72% to-plum/40 lg:bg-linear-to-r lg:from-15% lg:via-plum/72 lg:via-45% lg:to-transparent lg:to-72%"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-linear-to-t from-plum/80 to-transparent"
+        />
+        {/* The sky in this frame blows to white in the top right, which
+            put the nav pill and the brief button on near-paper. A short
+            top fade seats them without touching the street. */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 -z-10 h-40 bg-linear-to-b from-plum/70 to-transparent"
+        />
+
+        <div className="shell relative z-10 w-full">
+          <div className="grid-12 items-end gap-y-10">
+            <div data-hero-copy className="col-span-12 lg:col-span-7">
               <Rise>
-                <Eyebrow deva="भारत भर में">
+                <Eyebrow tone="plum" deva="भारत भर में">
                   Brand activation across India
                 </Eyebrow>
               </Rise>
@@ -110,14 +157,14 @@ export default function Home() {
                 </span>
                 <span className="line-clip">
                   <span className="block">
-                    it <span className="em-serif text-violet-deep">keeps</span>{" "}
+                    it <span className="em-serif text-violet-lift">keeps</span>{" "}
                     seeing.
                   </span>
                 </span>
               </h1>
 
               <Rise delay={120}>
-                <p className="mt-7 max-w-[46ch] text-body-l text-on-sand-dim">
+                <p className="mt-7 max-w-[46ch] text-body-l text-on-plum-dim">
                   We put brands into the streets, malls, lifts, papers and
                   screens of more than forty Indian cities — and prove every
                   placement went up. If the cash budget is not there, you can
@@ -128,22 +175,31 @@ export default function Home() {
                   <BriefButton size="lg" context="A plan for my market">
                     Get a plan for your market
                   </BriefButton>
-                  <Btn href="/barter" variant="outline-plum" size="lg">
+                  <Btn href="/barter" variant="sand" size="lg">
                     Pay in stock instead
                   </Btn>
                 </div>
 
-                <p className="mt-5 text-body-s text-on-sand-dim">
-                  Two fields, then straight to WhatsApp. Usually answered the same working day.
+                <p className="mt-5 text-body-s text-on-plum-dim">
+                  Two fields, then straight to WhatsApp. Usually answered the
+                  same working day.
                 </p>
               </Rise>
             </div>
 
+            {/* Says what the reader is looking at. Without it a
+                photograph behind type is decoration; with it the
+                photograph is evidence, which is the entire argument
+                the page goes on to make. */}
             <Rise
-              delay={180}
-              className="col-span-12 lg:col-span-5 lg:col-start-8"
+              delay={220}
+              className="col-span-12 lg:col-span-4 lg:col-start-9 lg:pb-2 lg:text-right"
             >
-              <HeroReel />
+              <p className="font-mono text-micro leading-relaxed tracking-[0.09em] text-on-plum-dim uppercase">
+                {heroPlate.city}
+                <span className="mx-2 text-violet-lift">/</span>
+                <span className="whitespace-nowrap">our own frame</span>
+              </p>
             </Rise>
           </div>
         </div>
@@ -152,12 +208,18 @@ export default function Home() {
       {/* 02 — CLIENT MARQUEE --------------------------------------
           Drifts rather than sitting in a wrapped block, and slows on
           hover so a name can actually be read. */}
-      <section className="grain relative overflow-hidden bg-sand-2 py-10 text-on-sand md:py-12">
+      <section
+        data-marquee-scope
+        className="grain relative overflow-hidden bg-sand-2 py-10 text-on-sand md:py-12"
+      >
         <div className="shell relative z-10">
           <Rise>
-            <p className="eyebrow text-on-sand-dim">
-              Campaigns planned and run for
-            </p>
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <p className="eyebrow text-on-sand-dim">
+                Campaigns planned and run for
+              </p>
+              <MarqueeToggle label="the client list" tone="sand" />
+            </div>
           </Rise>
         </div>
         <Rise delay={80} className="relative z-10 mt-6">
@@ -213,7 +275,22 @@ export default function Home() {
 
       {/* 04 — THE SIX, AS VERBS -----------------------------------
           Six product names read as a menu to choose from. Six verbs
-          read as one system with an order to it. */}
+          read as one system with an order to it.
+
+          The drawings are gone. Each card used to carry a small
+          FormatPlate — rectangles at their real dimensions — and they
+          failed twice over. On plum, at card width, they rendered as
+          flat grey blocks at a few percent contrast and read as images
+          that had not loaded. And the line above them claimed "drawn at
+          true proportion" while the component scaled every set
+          independently, so a 40 ft hoarding in one card and a 45 ft
+          cinema screen in another sat at different pixels-per-foot. The
+          section's whole argument was contradicted by its own code.
+
+          The same information is a list now: format name, typical spec.
+          Legible at any size, indexable, and it carries the vocabulary
+          Indian buyers actually type — hoarding, unipole, bus queue
+          shelter. See lib/formats.ts. */}
       <Band tone="plum" grain>
         <div className="grid-12 items-end">
           <Rise className="col-span-12 lg:col-span-7">
@@ -225,115 +302,166 @@ export default function Home() {
               <span className="em-serif">present</span>.
             </h2>
           </Rise>
-          <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-            Drawn at true proportion, because a hoarding and a lift panel are
-            not the same product and should not be sold as though they were.
+          <p className="col-span-12 mt-5 max-w-[44ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
+            A hoarding and a lift panel are not the same product and should
+            not be sold as though they were. These are the formats we plan,
+            named the way this market names them.
           </p>
         </div>
 
         {/* Six equal cards was six cards nobody read — card 01 and card
             05 carried identical weight, so nothing led and the eye had
-            no route through. Now the grid states an argument: the core
-            product takes double width and a bigger drawing, four sit at
-            normal weight beneath it, and barter runs full width because
-            it is the thing no competitor offers.
+            no route through. The grid states an argument instead: the
+            core product takes double width, four sit at normal weight
+            beneath it, and barter runs full width because it is the
+            thing no competitor offers.
 
             The 01–06 counter is gone with it. Numbering implies an
             order the reader needs, and there is no reason "be seen"
             precedes "be heard". */}
         <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {capabilities.map((c, i) => (
-            <Rise
-              key={c.href}
-              as="li"
-              delay={i * 55}
-              className={
-                c.accent
-                  ? "md:col-span-2 lg:col-span-3"
-                  : i === 0
-                    ? "md:col-span-2"
-                    : undefined
-              }
-            >
-              <Link
-                href={c.href}
-                className={`lift group flex h-full flex-col rounded-(--radius-card) p-6 md:p-7 ${
+          {capabilities.map((c, i) => {
+            const lines = formatLines[c.index];
+            const lead = i === 0;
+            return (
+              <Rise
+                key={c.href}
+                as="li"
+                delay={i * 55}
+                className={
                   c.accent
-                    ? "bg-violet-deep text-white hover:bg-violet md:flex-row md:items-end md:gap-12"
-                    : "bg-plum-2 hover:bg-plum-3"
-                }`}
+                    ? "md:col-span-2 lg:col-span-3"
+                    : lead
+                      ? "md:col-span-2"
+                      : undefined
+                }
               >
-                <div className={c.accent ? "md:flex-1" : undefined}>
-                <p
-                  className={`font-mono text-[0.75rem] tracking-[0.08em] uppercase ${
-                    c.accent ? "text-on-violet-dim" : "text-violet-lift"
+                <Link
+                  href={c.href}
+                  className={`lift group flex h-full flex-col rounded-(--radius-card) p-6 md:p-7 ${
+                    c.accent
+                      ? "bg-violet-deep text-white hover:bg-violet md:flex-row md:items-center md:gap-12"
+                      : "bg-plum-2 hover:bg-plum-3"
                   }`}
                 >
-                  {c.title}
-                </p>
+                  <div className={c.accent ? "md:flex-1" : "contents"}>
+                    <p
+                      className={`font-mono text-[0.75rem] tracking-[0.08em] uppercase ${
+                        c.accent ? "text-on-violet-dim" : "text-violet-lift"
+                      }`}
+                    >
+                      {c.title}
+                    </p>
 
-                {/* The verb leads. The product name is the kicker above. */}
-                <h3
-                  className={`mt-3 font-display text-balance ${
-                    i === 0 || c.accent ? "text-display-l" : "text-h2"
-                  }`}
-                >
-                  {c.verb}
-                </h3>
-                <p
-                  className={`mt-4 ${i === 0 || c.accent ? "max-w-[46ch] text-body-l" : "max-w-[34ch]"} ${
-                    c.accent ? "text-on-violet-dim" : "text-on-plum-dim"
-                  }`}
-                >
-                  {i === 0 ? c.long : c.short}
-                </p>
+                    {/* The verb leads. The product name is the kicker. */}
+                    <h3
+                      className={`mt-3 font-display text-balance ${
+                        lead || c.accent ? "text-display-l" : "text-h2"
+                      }`}
+                    >
+                      {c.verb}
+                    </h3>
+                    <p
+                      className={`mt-4 ${
+                        lead || c.accent
+                          ? "max-w-[46ch] text-body-l"
+                          : "max-w-[34ch]"
+                      } ${c.accent ? "text-on-violet-dim" : "text-on-plum-dim"}`}
+                    >
+                      {lead ? c.long : c.short}
+                    </p>
 
-                {/* On the wide barter card the link closes the copy
-                    column, because the exchange drawing sits beside it
-                    rather than under it. Everywhere else it closes the
-                    card, after the drawing. */}
-                {c.accent && (
-                  <span className="mt-7 inline-flex items-center gap-1.5 text-body-s font-medium">
-                    {c.linkLabel ?? "Explore"}{" "}
-                    <span className="row-arrow">→</span>
-                  </span>
-                )}
-                </div>
+                    {c.accent && (
+                      <span className="mt-7 inline-flex items-center gap-1.5 text-body-s font-medium">
+                        {c.linkLabel ?? "Explore"}{" "}
+                        <span className="row-arrow">→</span>
+                      </span>
+                    )}
+                  </div>
 
-                {/* The lead card gets a bigger drawing because it has the
-                    room; the wide barter card puts its exchange beside
-                    the copy rather than under it. */}
-                <div className={c.accent ? "mt-7 md:mt-0" : "mt-auto pt-7"}>
-                  {c.accent ? (
-                    <ExchangePlate />
-                  ) : (
-                    platesFor[c.index] && (
-                      <FormatPlate
-                        formats={formatSets[platesFor[c.index]]}
-                        tone="dark"
-                        base={i === 0 ? 92 : 64}
-                        maxWidth={i === 0 ? 470 : 296}
-                      />
-                    )
+                  {/* The spec list. `mt-auto` pins it to the bottom of
+                      the card so five cards of unequal copy length still
+                      line their lists up along one edge — the thing the
+                      old plates never managed, because each one started
+                      wherever its paragraph happened to end. */}
+                  {lines && (
+                    <dl
+                      className={`mt-auto grid gap-x-8 pt-8 ${
+                        lead ? "sm:grid-cols-2" : ""
+                      }`}
+                    >
+                      {lines.map((f) => (
+                        <div
+                          key={f.name}
+                          className="flex items-baseline justify-between gap-4 border-t border-white/12 py-2.5"
+                        >
+                          <dt className="text-body-s">{f.name}</dt>
+                          <dd className="shrink-0 font-mono text-[0.625rem] tracking-[0.06em] text-on-plum-dim uppercase">
+                            {f.spec}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
                   )}
-                </div>
 
-                {!c.accent && (
-                  <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
-                    {c.linkLabel ?? "Explore"}{" "}
-                    <span className="row-arrow">→</span>
-                  </span>
-                )}
-              </Link>
-            </Rise>
-          ))}
+                  {/* Barter is not a medium, so it has no format list.
+                      The two legs of the swap, set as type rather than
+                      as the pair of bordered boxes that used to sit
+                      here. */}
+                  {c.accent && (
+                    <div className="mt-8 shrink-0 md:mt-0 md:text-right">
+                      <p className="font-display text-h2 text-balance">
+                        {exchangeLine.give}
+                      </p>
+                      {/* Left-aligned, this glyph sat off on its own at
+                          the far edge of two long right-running lines
+                          and read as a stray character. It belongs on
+                          the same axis as the things it joins. */}
+                      <p
+                        aria-hidden
+                        className="my-1.5 text-h3 text-on-violet-dim"
+                      >
+                        ⇄
+                      </p>
+                      <p className="font-display text-h2 text-balance">
+                        {exchangeLine.get}
+                      </p>
+                    </div>
+                  )}
+
+                  {!c.accent && (
+                    <span className="inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
+                      {c.linkLabel ?? "Explore"}{" "}
+                      <span className="row-arrow">→</span>
+                    </span>
+                  )}
+                </Link>
+              </Rise>
+            );
+          })}
         </ul>
+
+        <Rise delay={340}>
+          <p className="mt-8 max-w-[74ch] text-body-s text-on-plum-dim">
+            Sizes above are the standard dimensions of each format, not a
+            list of what we hold — actual structures vary by site, and
+            availability is a conversation rather than a page.
+          </p>
+        </Rise>
       </Band>
 
       {/* 05 — THE DAY ---------------------------------------------
           The signature. Pins and scrolls sideways through one day in
           an Indian city. */}
       <DayClock />
+
+      {/* 06 — THE STREETS ------------------------------------------
+          Full bleed, edge to edge, no shell. Every other section on
+          this page is contained; this one is not, and that contrast
+          is the point of putting it here — straight after the day
+          clock, which is a diagram, so the abstraction is followed
+          immediately by the thing itself. */}
+      <StreetWall />
 
       {/* 06 — OBJECTIVES ------------------------------------------
           Subgrid so the eyebrow, heading, body and rule land on the
@@ -438,21 +566,41 @@ export default function Home() {
       {/* 09 — THE STATEMENT --------------------------------------
           One sentence, set larger than anything else on the site. The
           page needed a moment where the type stops behaving like a
-          heading and behaves like an image. It also happens to be the
-          single most useful thing a buyer can know about us. */}
-      <section className="grain relative overflow-hidden bg-sand py-(--spacing-band) text-on-sand">
-        <div className="shell relative z-10">
+          heading and behaves like an image.
+
+          It now sits on a street with hoardings stacked up both sides
+          of it, which is the whole joke: the sentence says we own
+          none of them. On flat beige it was a nicely set claim. On
+          this frame it is an argument you can check by looking. */}
+      <section className="grain relative isolate flex min-h-[min(86svh,780px)] items-center overflow-hidden bg-plum py-(--spacing-band) text-on-plum">
+        <Image
+          src={statementPlate.src}
+          alt={statementPlate.alt}
+          fill
+          sizes="100vw"
+          className="-z-20 object-cover object-[52%_44%]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-plum/62"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-linear-to-b from-plum/75 via-transparent to-plum/80"
+        />
+
+        <div className="shell relative z-10 w-full">
           <Rise>
-            <p className="font-display text-[clamp(2.5rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.025em] text-balance">
+            <p className="max-w-[18ch] font-display text-[clamp(2.5rem,8.5vw,7.5rem)] leading-[0.94] tracking-[-0.025em] text-balance">
               We don&rsquo;t own a single hoarding.{" "}
-              <span className="em-serif text-violet-deep">
+              <span className="em-serif text-violet-lift">
                 That&rsquo;s the point.
               </span>
             </p>
           </Rise>
           <div className="mt-12 grid-12">
             <Rise delay={80} className="col-span-12 lg:col-span-5 lg:col-start-8">
-              <p className="text-body-l text-on-sand-dim">
+              <p className="text-body-l text-on-plum-dim">
                 A media owner recommends what it is holding. A network
                 agency recommends what its group holds. We hold nothing, so
                 when we argue for a site it is because of where that site
@@ -460,7 +608,7 @@ export default function Home() {
                 lose by saying so.
               </p>
               <div className="mt-8">
-                <Btn href="/about" variant="outline-plum">
+                <Btn href="/about" variant="sand">
                   How we work
                 </Btn>
               </div>
@@ -562,7 +710,10 @@ export default function Home() {
                 <span className="flex items-baseline gap-3">
                   <span className="link-underline text-h3">{c.name}</span>
                   {deva[c.name] && (
-                    <span className="deva text-caption text-violet-deep">
+                    <span
+                      lang="hi"
+                      className="deva text-caption text-violet-deep"
+                    >
                       {deva[c.name]}
                     </span>
                   )}

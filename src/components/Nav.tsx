@@ -10,17 +10,14 @@ import BriefButton from "@/components/BriefButton";
    mega panel borrowed from JCDecaux's audience-first structure. */
 export default function Nav() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  /* The scroll listener that drove `scrolled` is gone with it. It
+     existed only to give the wordmark a pill once the page moved; the
+     pill is permanent now, so this was a scroll handler running on
+     every frame to compute a value nothing read. */
 
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
@@ -83,9 +80,15 @@ export default function Nav() {
       <div className="shell pointer-events-auto flex items-center justify-between gap-3">
         <Link
           href="/"
-          className={`inline-flex min-h-11 items-center rounded-full px-4 font-display text-body-l font-semibold tracking-[-0.03em] transition-colors duration-200 ${
-            scrolled ? "bg-plum/92 text-on-plum backdrop-blur-md" : ""
-          }`}
+          /* The pill is permanent now, not scroll-triggered. Two
+             reasons. It was the only naked element in a bar of pills,
+             so the wordmark read as unstyled rather than as a mark.
+             And it inherited its colour from whatever it happened to
+             be floating over — fine while every page opened on beige,
+             invisible the moment the homepage opened on a dark
+             photograph. A mark that disappears on one page in
+             thirteen is a bug waiting for a redesign to trigger it. */
+          className="inline-flex min-h-11 items-center rounded-full bg-plum/92 px-4 font-display text-body-l font-semibold tracking-[-0.03em] text-on-plum backdrop-blur-md"
           aria-label={`${site.name} — home`}
         >
           {site.wordmark}

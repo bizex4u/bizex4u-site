@@ -3,6 +3,8 @@ import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
 import { Faq } from "@/components/Ledger";
 import GstFlow from "@/components/GstFlow";
 import BarterSelector from "@/components/BarterSelector";
+import Image from "next/image";
+import { streets } from "@/lib/streets";
 import { site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
 
@@ -72,17 +74,52 @@ const steps = [
   },
 ];
 
+/* These headings used to be our reassurances — "your pricing is
+   protected", "your finance team will recognise it". A reassurance
+   answers a question the reader has not been allowed to ask yet, and it
+   reads as defensiveness even when every word of it is true.
+
+   They are the buyer's own questions now, in the words they would use
+   in the meeting. The bodies are unchanged: the answers were already
+   the strong part. */
+/* Barter does not usually fail on the merits. It fails because the two
+   people who would have to agree do not share a budget, a ledger or an
+   incentive, and neither of them owns the whole decision — so raising it
+   is nobody's job. Marketing cannot spend inventory; finance cannot book
+   media. That is a mental-accounting problem, not a commercial one, and
+   no amount of argument about media value touches it.
+
+   Naming the gap is the highest-leverage thing this page does. It also
+   tells each reader exactly what to ask the other one for, which is the
+   only action that moves a deal like this forward. */
+const room = [
+  {
+    who: "If you run marketing",
+    deva: "मार्केटिंग",
+    gets: "Reach you were not budgeted for, planned and bought at the same rate you would have paid in cash.",
+    needs:
+      "Finance to agree what the stock is worth and to authorise it moving. Bring them the media plan, not the barter idea.",
+  },
+  {
+    who: "If you run finance",
+    deva: "वित्त",
+    gets: "Ageing inventory off the books at a defensible value, through channels you name, with a tax invoice on both legs.",
+    needs:
+      "Marketing to want the plan on its own merits. If they would not buy it for cash, the trade is not a saving.",
+  },
+];
+
 const governance = [
   {
-    title: "Your pricing is protected",
+    title: "Will this undercut my own trade?",
     body: "Goods are placed through defined corporate, institutional and gifting channels, agreed with you in advance and named in the contract. They do not enter the open market and they do not reach the discounters who would undercut your own trade.",
   },
   {
-    title: "Your finance team will recognise it",
+    title: "What does my auditor actually see?",
     body: "This is not an off-record swap. It is two distinct supplies — a sale of goods by you, a supply of media services by us — each separately invoiced and taxed under GST. Your auditor sees a clean paper trail on both sides.",
   },
   {
-    title: "The valuation is yours to challenge",
+    title: "Am I being short-changed on value?",
     body: "We work from realistic net realisable value, not MRP, and we quote media on the same commercial basis you would be given for a cash buy. If either number does not stand up to your scrutiny, we would rather you walked.",
   },
 ];
@@ -117,6 +154,13 @@ const faq = [
     a: "That is common and often sensible. Many engagements are part cash, part goods — you cover the portion your budget allows and trade the remainder. The structure and the documentation are identical.",
   },
 ];
+
+/* Three markets rather than three frames of one, so the row supports
+   the "across India" claim the equation makes two sections above it
+   rather than quietly undercutting it. */
+const mediaLeg = ["Kochi", "Kozhikode", "Kanpur"]
+  .map((city) => streets.find((f) => f.city === city))
+  .filter((f): f is (typeof streets)[number] => Boolean(f));
 
 export default function BarterPage() {
   return (
@@ -238,6 +282,53 @@ export default function BarterPage() {
         </div>
       </Band>
 
+      {/* 02b — THE OTHER HALF, PHOTOGRAPHED ---------------------
+          Everything above this point is an argument about value made in
+          words, on a page selling something a CFO has to picture before
+          they will authorise it. "Outdoor across forty cities" is an
+          abstraction; a street with a hoarding on it is the thing being
+          bought. Our own frames — same set as the homepage, three of
+          them, because this is a supporting exhibit and not a gallery. */}
+      <section className="grain relative overflow-hidden bg-plum-2 py-(--spacing-band) text-on-plum">
+        <div className="shell relative z-10">
+          <div className="grid-12 items-end">
+            <Rise className="col-span-12 lg:col-span-7">
+              <Eyebrow tone="plum">The other half of the trade</Eyebrow>
+              <h2 className="mt-5 font-display text-display-l text-balance">
+                What the stock{" "}
+                <span className="em-serif">turns into</span>.
+              </h2>
+            </Rise>
+            <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
+              Not a media schedule on a slide. Placements in the street, in
+              traffic, on a working day — photographed by us, on site, while
+              they were running.
+            </p>
+          </div>
+
+          <ul className="mt-11 grid gap-4 sm:grid-cols-3">
+            {mediaLeg.map((f, i) => (
+              <Rise key={f.src} as="li" delay={i * 70}>
+                <figure className="m-0 overflow-hidden rounded-(--radius-card) bg-plum">
+                  <div className="relative aspect-4/3">
+                    <Image
+                      src={f.src}
+                      alt={f.alt}
+                      fill
+                      sizes="(min-width: 640px) 31vw, 92vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <figcaption className="p-4 font-mono text-micro tracking-[0.09em] text-on-plum-dim uppercase">
+                    {f.city}
+                  </figcaption>
+                </figure>
+              </Rise>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* 03 — HOW IT WORKS --------------------------------------- */}
       <Band tone="sand" id="how" grain>
         <Rise>
@@ -316,6 +407,65 @@ export default function BarterPage() {
             </p>
           </Rise>
         </div>
+      </Band>
+
+      {/* 05b — WHO NEEDS TO BE IN THE ROOM -----------------------
+          See the note above `room`. Every other section on this page
+          argues that barter works. This one addresses why a company
+          that agrees with all of it still does nothing. */}
+      <Band tone="plum" grain>
+        <div className="grid-12 items-end">
+          <Rise className="col-span-12 lg:col-span-7">
+            <Eyebrow tone="plum" deva="कौन तय करता है">
+              Who actually decides
+            </Eyebrow>
+            <h2 className="mt-5 font-display text-display-l text-balance">
+              This dies in the gap between{" "}
+              <span className="em-serif">two budgets</span>.
+            </h2>
+          </Rise>
+          <p className="col-span-12 mt-5 max-w-[44ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
+            Marketing has the mandate and no cash. Finance has the stock and no
+            way to book media against it. Neither owns the whole decision, so
+            raising it is nobody&rsquo;s job — and it never gets raised.
+          </p>
+        </div>
+
+        <ul className="mt-12 grid gap-4 md:grid-cols-2">
+          {room.map((r, i) => (
+            <Rise key={r.who} as="li" delay={i * 80}>
+              <div className="flex h-full flex-col rounded-(--radius-card) bg-plum-2 p-6 md:p-8">
+                <p className="font-mono text-[0.75rem] tracking-[0.08em] text-violet-lift uppercase">
+                  {r.who}{" "}
+                  <span
+                    aria-hidden="true"
+                    className="mx-2.5 inline-block h-[0.85em] w-px translate-y-[0.06em] bg-current opacity-35"
+                  />{" "}
+                  <span lang="hi" className="deva normal-case not-italic">
+                    {r.deva}
+                  </span>
+                </p>
+
+                <p className="mt-6 eyebrow text-on-plum-dim">What you get</p>
+                <p className="mt-2.5 text-body-l">{r.gets}</p>
+
+                <p className="mt-7 eyebrow text-on-plum-dim">
+                  What you need from the other one
+                </p>
+                <p className="mt-2.5 text-on-plum-dim">{r.needs}</p>
+              </div>
+            </Rise>
+          ))}
+        </ul>
+
+        <Rise delay={200}>
+          <p className="mt-9 max-w-[62ch] text-body-l text-on-plum-dim">
+            The first meeting that goes anywhere has both of you in it. We are
+            happy to be on that call and to take the finance questions
+            directly — it is a shorter conversation than two rounds of
+            forwarding.
+          </p>
+        </Rise>
       </Band>
 
       {/* 06 — THE FINANCE TREATMENT ------------------------------
@@ -399,11 +549,17 @@ export default function BarterPage() {
           </Rise>
           <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
             <div className="flex flex-col gap-3">
+              {/* These were "Send a brief" and "Send a brief instead",
+                  which is one button offered twice. The dialog is the
+                  fast path; the second is for someone who would rather
+                  see a phone number and an address before they type
+                  anything, which on a page about handing over stock is
+                  a reasonable thing to want. */}
               <BriefButton size="lg" context="Barter advertising">
-                Send a brief
+                Tell us what you hold
               </BriefButton>
               <Btn href="/contact" variant="outline-sand" size="lg">
-                Send a brief instead
+                Or just call us
               </Btn>
             </div>
           </Rise>

@@ -144,15 +144,53 @@ export default function Motion() {
         document
           .querySelectorAll<HTMLElement>("[data-split]")
           .forEach((wrap) => {
-            const lines = Array.from(wrap.children) as HTMLElement[];
+            /* Move the INNER span, not the .line-clip that wraps it.
+               This animated the clip box itself, which carries
+               `overflow: hidden` — so the mask travelled with the text
+               and masked nothing. The line simply slid 108% down the
+               page, out of the h1's own box and straight over the lede
+               paragraph beneath it. The whole point of the two-element
+               markup is that one stays put and clips while the other
+               moves inside it. */
+            const lines = Array.from(wrap.children).map(
+              (line) => (line.firstElementChild ?? line) as HTMLElement,
+            );
             if (!lines.length) return;
+
             gsap.set(lines, { yPercent: 108, opacity: 0 });
-            gsap.to(lines, {
+
+            const reveal = {
               yPercent: 0,
               opacity: 1,
               duration: 0.9,
               ease: "power3.out",
               stagger: 0.08,
+            };
+
+            /* A headline already on screen at setup plays straight away,
+               with no ScrollTrigger involved.
+
+               This used to hand every split headline a `once: true`
+               trigger, including the hero's — a trigger whose start
+               condition was satisfied before the page had finished
+               loading. React StrictMode runs this effect twice in
+               development, and across the teardown and re-setup that
+               already-passed, fires-once trigger did not fire on the
+               second pass. The lines stayed at their 108% start state
+               and the hero simply had no headline on `next dev`, which
+               is the one environment anyone looks at while working.
+
+               A trigger is the wrong tool for an element that is
+               visible on arrival regardless. Anything below the fold
+               still gets one — there the scroll is real. */
+            const box = wrap.getBoundingClientRect();
+            if (box.top < window.innerHeight * 0.85) {
+              gsap.to(lines, reveal);
+              return;
+            }
+
+            gsap.to(lines, {
+              ...reveal,
               scrollTrigger: { trigger: wrap, start: "top 85%", once: true },
             });
           });
@@ -165,19 +203,40 @@ export default function Motion() {
           .querySelectorAll<HTMLElement>("[data-marquee]")
           .forEach((el) => {
             const speed = Number(el.dataset.marquee) || 38;
+            /* Reverse runs the pair the other way. It has to start at
+               -50% and travel to 0, not start at 0 and travel to +50%:
+               the second copy is rendered AFTER the first, so at x=0
+               there is nothing to the left to slide in and the row
+               would drift off its own leading edge. */
+            const back = el.dataset.marqueeReverse !== undefined;
+            if (back) gsap.set(el, { xPercent: -50 });
             const anim = gsap.to(el, {
-              xPercent: -50,
+              xPercent: back ? 0 : -50,
               duration: speed,
               ease: "none",
               repeat: -1,
             });
-            /* Slow to a crawl on hover so a name can actually be read. */
+            /* Slow to a crawl on hover so a name can actually be read.
+               A nicety, not a control — see MarqueeToggle. */
             const host = el.parentElement ?? el;
             host.addEventListener("pointerenter", () =>
               gsap.to(anim, { timeScale: 0.15, duration: 0.4 }),
             );
             host.addEventListener("pointerleave", () =>
               gsap.to(anim, { timeScale: 1, duration: 0.6 }),
+            );
+
+            /* The actual stop, for WCAG 2.2.2. Scoped to the nearest
+               [data-marquee-scope] so a section with two rows pauses
+               both from one button, and a page with two independent
+               marquees does not pause the wrong one. */
+            el.closest("[data-marquee-scope]")?.addEventListener(
+              "marquee:toggle",
+              (e) => {
+                const on = (e as CustomEvent<{ paused: boolean }>).detail
+                  .paused;
+                anim.paused(on);
+              },
             );
           });
 

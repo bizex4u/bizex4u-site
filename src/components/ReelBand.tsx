@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 /**
  * The full-bleed reel band.
@@ -21,6 +21,15 @@ import { useSyncExternalStore } from "react";
  * instead of the video: 1.5MB of autoplaying H.264 is a real cost on
  * an Indian mobile connection, and this band is decoration rather than
  * content.
+ *
+ * It is also mounted lazily, which `preload="none"` alone does not
+ * achieve. `autoPlay` beats `preload` — a browser told to start playing
+ * on its own fetches the file immediately no matter where the element
+ * sits in the document. This band is nine thousand pixels down the
+ * homepage and was costing 1.5MB of the ~1.9MB first paint before the
+ * reader had scrolled a line. The observer holds the poster until the
+ * band is one viewport away, which is far enough ahead that it is
+ * already playing by the time anyone reaches it.
  */
 
 function subscribe(cb: () => void) {
@@ -44,10 +53,37 @@ function shouldPlay() {
 }
 
 export default function ReelBand() {
-  const play = useSyncExternalStore(subscribe, shouldPlay, () => false);
+  const allowed = useSyncExternalStore(subscribe, shouldPlay, () => false);
+  const band = useRef<HTMLElement>(null);
+  const [near, setNear] = useState(false);
+
+  useEffect(() => {
+    const el = band.current;
+    if (!el || near) return;
+    /* A browser without IntersectionObserver keeps the poster frame.
+       That is pre-2019, and the poster is a complete resting state for
+       this band — it carries no information the video adds. Forcing the
+       video in as a fallback would mean the oldest, slowest clients are
+       the only ones that download 1.5MB unconditionally, which is
+       exactly backwards. */
+    if (typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        setNear(true);
+        io.disconnect();
+      },
+      { rootMargin: "100% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [near]);
+
+  const play = allowed && near;
 
   return (
     <section
+      ref={band}
       aria-label="Live sites across Delhi NCR"
       className="relative h-[clamp(22rem,58vh,34rem)] w-full overflow-hidden bg-plum"
     >

@@ -84,8 +84,11 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-3 border-t border-rule-plum pt-6 sm:flex-row sm:items-baseline sm:justify-between">
           <span className="font-display text-body-l font-semibold tracking-[-0.03em]">
-            {site.wordmark}
-            <span className="deva ml-3 text-body-s font-medium text-on-plum-dim">
+            {site.wordmark}{" "}
+            <span
+              lang="hi"
+              className="deva ml-3 text-body-s font-medium text-on-plum-dim"
+            >
               बिज़ेक्स4यू
             </span>
           </span>

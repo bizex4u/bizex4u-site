@@ -1,4 +1,5 @@
 import FormatPlate, { formatSets } from "@/components/FormatPlate";
+import { Eyebrow } from "@/components/UI";
 import { dayClock } from "@/lib/dayclock";
 
 /**
@@ -51,12 +52,14 @@ export default function DayClock() {
         {/* Heading — rides at the head of the track so it is on screen
             for the whole pinned sequence. */}
         <div className="shell shrink-0">
-          <p className="eyebrow text-violet-lift">
+          {/* Was a hand-rolled eyebrow with the Devanagari jammed
+              against the English — JSX strips whitespace that contains
+              a newline, so the DOM held "…has to surviveदिन भर" as one
+              run. Uses the shared component now, which owns the
+              separator, the real space and the lang attribute. */}
+          <Eyebrow tone="plum" deva="दिन भर">
             The day a brand has to survive
-            <span className="deva ml-2.5 text-on-plum-dim normal-case">
-              दिन भर
-            </span>
-          </p>
+          </Eyebrow>
           <h2
             id="dayclock-heading"
             className="mt-4 max-w-[20ch] font-display text-display-l text-balance lg:mt-3"

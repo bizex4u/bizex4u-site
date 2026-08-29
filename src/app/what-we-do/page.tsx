@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
-import FormatPlate, { ExchangePlate, formatSets } from "@/components/FormatPlate";
+import { exchangeLine, formatLines } from "@/lib/formats";
 import { capabilities } from "@/lib/site";
 import { capabilityDetail } from "@/lib/capabilityDetail";
 import BriefButton from "@/components/BriefButton";
@@ -11,14 +11,6 @@ export const metadata: Metadata = {
   description:
     "Six capabilities on one plan: outdoor and transit, digital out-of-home, retail and hyperlocal, broadcast, print and cinema, activations, and the barter model that funds them.",
   alternates: { canonical: "/what-we-do" },
-};
-
-const platesFor: Record<string, keyof typeof formatSets> = {
-  "01": "outdoor",
-  "02": "dooh",
-  "03": "retail",
-  "04": "broadcast",
-  "05": "activation",
 };
 
 /* The order a plan is actually assembled in. Worth stating plainly,
@@ -88,9 +80,12 @@ export default function WhatWeDoPage() {
       <Band tone="plum" grain>
         <Rise>
           <Eyebrow tone="plum">The index</Eyebrow>
-          <h2 className="mt-5 max-w-[24ch] font-display text-display-l text-balance">
-            Drawn at true proportion, because they are{" "}
-            <span className="em-serif">not the same product</span>.
+          {/* Was "Drawn at true proportion" — a claim about a drawing
+              that no longer exists, and which the drawing never
+              honoured anyway. See lib/formats.ts. */}
+          <h2 className="mt-5 max-w-[26ch] font-display text-display-l text-balance">
+            Six products, and they are{" "}
+            <span className="em-serif">not interchangeable</span>.
           </h2>
         </Rise>
 
@@ -123,18 +118,35 @@ export default function WhatWeDoPage() {
                   {c.long}
                 </p>
 
-                <div className="mt-7">
-                  {c.accent ? (
-                    <ExchangePlate />
-                  ) : (
-                    platesFor[c.index] && (
-                      <FormatPlate
-                        formats={formatSets[platesFor[c.index]]}
-                        tone="dark"
-                      />
-                    )
-                  )}
-                </div>
+                {formatLines[c.index] && (
+                  <dl className="mt-auto grid pt-8">
+                    {formatLines[c.index].map((f) => (
+                      <div
+                        key={f.name}
+                        className="flex items-baseline justify-between gap-4 border-t border-white/12 py-2.5"
+                      >
+                        <dt className="text-body-s">{f.name}</dt>
+                        <dd className="shrink-0 font-mono text-[0.625rem] tracking-[0.06em] text-on-plum-dim uppercase">
+                          {f.spec}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+
+                {c.accent && (
+                  <div className="mt-auto pt-8">
+                    <p className="font-display text-h2 text-balance">
+                      {exchangeLine.give}
+                    </p>
+                    <p aria-hidden className="my-1.5 text-h3 text-on-violet-dim">
+                      ⇄
+                    </p>
+                    <p className="font-display text-h2 text-balance">
+                      {exchangeLine.get}
+                    </p>
+                  </div>
+                )}
 
                 <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
                   {c.linkLabel ?? "Explore"} <span className="row-arrow">→</span>

@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+/* The vendored scrollcraft sheet, pulled into `base` rather than
+   imported from layout.tsx.
+
+   It shipped as a standalone design system: engine behaviour, yes, but
+   also a reset, a type scale and a set of browser-surface defaults.
+   Imported from a component it landed UNLAYERED, and unlayered CSS beats
+   every layered rule regardless of specificity — so its
+   `:where(a){color:inherit}` silently outranked every Tailwind text
+   colour utility on every anchor on the site.
+
+   That went unnoticed for a while because links mostly sat on grounds
+   where `inherit` happened to be the right answer. It surfaced the
+   moment the homepage went dark: the wordmark rendered plum-on-plum and
+   the sand button rendered white-on-cream, both invisible, neither
+   explicable from the markup.
+
+   `layer(base)` puts it below `utilities`, which is where a vendor reset
+   belongs. */
+@import "../vendor/scrollcraft/scrollcraft.css" layer(base);
+
 /* ============================================================
    BIZEX4U — v4
 
@@ -376,6 +396,22 @@ summary,
     transparent,
     #000 6rem,
     #000 calc(100% - 6rem),
+    transparent
+  );
+}
+
+/* The photographic variant. The 6rem fade is right for a row of client
+   names, where the point is that the list continues past the edge and
+   no single name matters. It is wrong for a row of photographs: a whole
+   frame sat inside the ramp, half-dissolved, which reads as a failed
+   image rather than as a continuing row. Two rem is enough to say "this
+   keeps going" and leaves every frame legible. */
+.marquee-mask--plate {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 2rem,
+    #000 calc(100% - 2rem),
     transparent
   );
 }

@@ -209,6 +209,53 @@ synthesised anchor click instead.
 **`pkill -f "next-server"` kills your own shell** because the pattern
 matches the command string. Use `scripts/free-port.mjs`.
 
+**GSAP ScrollTrigger `pin: true` blanks the next page.** ScrollTrigger
+pins by wrapping the pinned node in a `.pin-spacer` div it inserts into
+the DOM — it re-parents a node React owns. On App Router soft navigation
+React then tries to remove that node from its original parent, the node
+is gone, `removeChild` throws `NotFoundError`, and React unmounts the
+whole `<main>` subtree. The page is blank until a hard reload.
+
+Proven by controlled test: navigating away from a page carrying a
+pin-spacer blanked the destination every time; navigating away from a
+page without one never did. **Two cleanup-ordering fixes both failed** —
+`usePathname` in the deps array, then `useLayoutEffect` plus
+`ScrollTrigger.kill(true)`. The damage happens during React's
+reconciliation regardless of when GSAP reverts. There is no safe pin.
+Use `position: sticky`, or the vendored scrollcraft engine. Do not add
+`pin: true` back, and note `pinSpacing: false` still wraps.
+
+**A fixed `<header>` swallowed clicks across the top 57% of every
+page.** The mega panel inside it is `opacity-0 pointer-events-none` when
+closed but also `lg:block`, so it still occupies 329px of layout. The
+header's own box was therefore 411px tall, and a header defaults to
+`pointer-events: auto`. On /cities exactly one city sat below the band
+and was clickable. Reported as "only able to click and open
+Chandigarh" — it read as broken linking, it was a dead click region.
+The header is now `pointer-events-none` while the mega is closed, with
+each interactive child opting back in; it reclaims pointer events when
+the mega opens because `onMouseLeave` never fires on a
+`pointer-events: none` element.
+
+**Format plates contradicted their own caption.** The copy promised
+"drawn at true proportion" while the code normalised every plate to the
+same visual *area* (`h = base / sqrt(ratio)`), so a 50x20ft unipole
+rendered shorter than a 40x20ft hoarding. They are now scaled by real
+dimensions in feet with a 5'9" figure for reference. If you add a
+format, give it real `w`/`h` in feet.
+
+**Hover-only link underlines on a directory page.** `.link-underline`
+rests at `scaleX(0)`. Correct inside a sentence, wrong for /cities where
+every row is a link and none looked like one. Use `.link-row`, which
+rests at 30% and adds an arrow.
+
+**`[data-hero]` was dead code for months.** `Motion.tsx` described a
+hero hold and implemented it with a pin, but no page carried the
+attribute, so it never ran once. Switching it on also switched on an
+`opacity: 0` tween that took the headline to 0.019 by 420px of scroll.
+If you enable a long-dormant attribute, read every block that queries
+it.
+
 ---
 
 ## 7. How to verify a change
@@ -263,46 +310,80 @@ was wrong.
 
 ---
 
-## 10. There is no remote. Nothing is deployed.
+## 10. Remote and deployment
 
-This needs saying plainly because it has already been assumed
-otherwise once. `git remote -v` returns **nothing**. There is no
-GitHub repository, no Vercel project, and no deployment pipeline.
-`git push origin main` will fail with *"'origin' does not appear to be
-a git repository"*.
+`origin` is https://github.com/bizex4u/bizex4u-site. Vercel auto-deploys
+`main` to `bizex4u-site-yash-2339s-projects.vercel.app`.
 
-The README's "Deploying" section — *"Push to GitHub, import at
-vercel.com/new"* — is an **instruction for setting that up**, not a
-description of something that exists. Do not tell Yash that a change
-will "go live on push". Nothing goes live yet.
+History diverged once: a second machine pushed `830c5d3` while this line
+of work sat on `170cb7f`. It was resolved by force-pushing this history
+over it (`git checkout -B main <branch>; git push --force-with-lease`).
+The discarded commits were failed attempts at the pin bug plus a stub
+removal this history already contained. **Check `git log origin/main`
+before assuming your local branch is ahead.**
 
-To actually put the site online, someone with Yash's credentials has
-to: create an empty GitHub repo, `git remote add origin <url>`,
-`git push -u origin main`, then import it at vercel.com/new. Claude
-cannot do any of that — it needs account access, and pasting a token
-into a chat is not an acceptable workaround.
-
-Until then the only copy that matters is `~/Downloads/bizex4u-site`
-on the MacBook Air, and it is one disk failure from gone.
+Work reaches the Mac as git bundles in `~/Downloads/*.bundle`:
+`git fetch ~/Downloads/x.bundle HEAD:branch && git merge branch`.
+A range bundle needs its base commit to exist in the target repo; if it
+does not, `git bundle create f.bundle --all` is self-contained.
 
 ---
 
-## 11. Immediate next steps
+## 11. Vendored third-party code
 
-1. **Create the GitHub remote and push.** See §10. This is the single
-   most important outstanding item — the entire project currently
-   exists in one folder on one laptop.
-2. **Verify the three newest pages in a browser.** Patna, Kochi and
-   Coimbatore were written in a separate session and merged in as
-   commit `de903d8`. They typecheck, lint, build, pass contrast at AA
-   and carry valid schema, and they were checked for rate figures and
-   licensed research numbers — but nobody has looked at them rendered.
-3. **Committed but never visually verified:** `CorridorField.tsx`
-   (animated SVG corridors behind the homepage cities band), the Ken
-   Burns wrap on proof images, and the format-plate draw-in. These
-   build and lint but were never checked in a browser — they went into
-   the commit alongside the city work. Screenshot the homepage and
-   confirm they look right.
-4. `/perspectives` and `/careers` are still stubs. Both need editorial
-   input from Yash on what actually exists before they can be written —
-   do not invent content for them.
+`src/vendor/scrollcraft/` and `public/vendor/scrollcraft.js` — the
+engine from github.com/nateherkai/scroll-craft (MIT, (c) 2026 Nate
+Herk), unmodified, with its LICENSE and a README explaining why.
+
+It pins with `position: sticky` and generates zero DOM: it only reads
+`data-sc-*` attributes and writes styles and custom properties. That is
+why it can replace ScrollTrigger pinning safely.
+
+It ships its own design floor and applies part of it globally — `body`,
+`:root { caret-color; accent-color }`, `::selection`, `:focus-visible`.
+`globals.css` is imported after it so the palette and faces win, but the
+caret, form accent-color and focus ring all rendered acid green
+(`#d8ff3e`) until the `--sc-*` tokens were remapped at the bottom of
+`globals.css`. **If you add a scrollcraft device, check what else its
+CSS claims.**
+
+`ScrollCraft.tsx` mounts it once for the document — it has no
+`destroy()` and every `mount()` starts a rAF loop — and calls its
+`layout()` on route change. The engine has no breakpoint gate, so the
+component applies `data-sc-act` only above 1024x860.
+
+---
+
+## 12. Immediate next steps
+
+1. **`/work` is not launchable.** `selectedWork` in `src/lib/site.ts` is
+   still placeholder: three entries reading "Client name". Fill it or
+   pull /work from the nav.
+
+2. **Licensed talent is published.** `proof-safdarjung.jpg` is the
+   Nisara "Midnight Tease" creative, and the same creative appears in
+   the hero reel (`public/media/reel.mp4` and both posters). Both are on
+   the do-not-publish list in section 9. Take them down.
+
+3. **Two number plates are legible** in published proof frames:
+   `UP16BR9582` in `proof-kanpur.jpg`, `UP35BY7077` in
+   `proof-vip-road.jpg`. Blur or reframe.
+
+4. **Photography does not exist.** 11 of 13 routes contain zero images.
+   The Drive library is ~100 monitoring photographs, none above about
+   1440px, most with unreleased faces or legible plates. There is no
+   shoot booked. The working answer has been diagrams built from data
+   the site already carries — `SeasonBar` is the first, and the cost
+   drivers, format guide and radio dayparts are the same shape. Free
+   stock (Unsplash/Pexels) is the licensed route if photographs are
+   wanted; Google Images is not, internal showcase or otherwise.
+
+5. **19 tap targets under 44px**, and one `tel:` link on the entire
+   mobile homepage.
+
+6. **`founded: 2008`** is still in `src/lib/site.ts` feeding
+   `foundingDate` into contact-page schema, against the no-tenure rule.
+
+7. **No vector logo exists.** The master is a 600x600 PNG; a knocked-out
+   pack is in `~/Downloads/bizex4u-logo-pack/`. Fine for web, not for a
+   hoarding or a printed cover.

@@ -123,7 +123,36 @@ export function Eyebrow({
   return (
     <p className={`eyebrow ${t.hl} ${className}`}>
       {children}
-      {deva && <span className={`deva ml-2.5 normal-case ${t.dim}`}>{deva}</span>}
+      {deva && (
+        <>
+          {/* A REAL space, not a margin.
+              The two scripts used to be separated only by `ml-2.5`,
+              which draws a gap and creates no whitespace. So the DOM
+              held "What activation means hereहम क्या करते हैं" as one
+              unbroken run: that is what a copy-paste produces, what a
+              screen reader announces, and what a crawler indexes. It
+              looked correct and was not, which is the worst kind of
+              wrong. These braces are the fix — a JSX space is a text
+              node. */}
+          {" "}
+          {/* A hairline between the scripts rather than empty space.
+              `bg-current` takes the eyebrow's own colour on every one
+              of the five tones, so this needs no token of its own and
+              cannot drift out of step with the text beside it. */}
+          <span
+            aria-hidden="true"
+            className="mx-2.5 inline-block h-[0.85em] w-px translate-y-[0.06em] bg-current opacity-35"
+          />{" "}
+          {/* lang="hi" so a screen reader switches voice instead of
+              reading Devanagari through an English one. The Devanagari
+              is a translation of the line beside it, not extra
+              information, and marking it up as such is the difference
+              between a second voice and noise. */}
+          <span lang="hi" className={`deva normal-case ${t.dim}`}>
+            {deva}
+          </span>
+        </>
+      )}
     </p>
   );
 }
