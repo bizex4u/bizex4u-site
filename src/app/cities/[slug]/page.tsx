@@ -12,6 +12,8 @@ import { termsForCity } from "@/lib/glossary";
 import { site } from "@/lib/site";
 import { organisationId, speakable } from "@/lib/schema";
 import BriefButton from "@/components/BriefButton";
+import PageIndex from "@/components/PageIndex";
+import { Disclosure } from "@/components/Disclosure";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -69,6 +71,20 @@ export default async function CityPage({ params }: Params) {
   if (!city) notFound();
 
   const glossaryTerms = termsForCity(city.slug);
+
+  /* Built here rather than in the component so the labels can use the
+     city's own name, and so a section that stops existing on some city
+     cannot leave a link pointing at nothing. */
+  const index = [
+    { id: "market", label: "The market" },
+    { id: "crowds", label: "Where the crowds are" },
+    { id: "formats", label: "Formats" },
+    { id: "press", label: "Press & radio" },
+    { id: "transit", label: "Transit" },
+    { id: "cost", label: "What it costs" },
+    { id: "permission", label: "Permissions" },
+    { id: "calendar", label: "The calendar" },
+  ];
 
   const frames = framesFor(city.name);
 
@@ -152,11 +168,18 @@ export default async function CityPage({ params }: Params) {
               </div>
             </Rise>
           </div>
+
+          {/* The page runs long on purpose — the depth is why a local
+              trusts it. What it lacked was any way in for a reader who
+              arrived with one question. */}
+          <div className="mt-14">
+            <PageIndex items={index} />
+          </div>
         </div>
       </section>
 
       {/* 01 — THE MARKET ----------------------------------------- */}
-      <Band tone="sand2" grain>
+      <Band id="market" tone="sand2" grain>
         <div className="grid-12 gap-y-8">
           <Rise className="col-span-12 lg:col-span-3">
             <Eyebrow>The market</Eyebrow>
@@ -180,7 +203,7 @@ export default async function CityPage({ params }: Params) {
       {/* 02 — WHERE THE CROWDS ARE -------------------------------
           The section a local reads to decide whether we actually know
           their city. Places and crowds only — never a site we hold. */}
-      <Band tone="plum" grain>
+      <Band id="crowds" tone="plum" grain>
         <SectionHead
             eyebrow="Where the crowds are"
             tone="plum"
@@ -199,32 +222,47 @@ export default async function CityPage({ params }: Params) {
             it now reads that way — double width, larger type, and a
             counter so the set reads as an argued order rather than as a
             grid that happened to be filled. */}
-        <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {city.crowdPlaces.map((p, i) => (
-            <Rise
-              key={p.place}
-              as="li"
-              delay={i * 45}
-              className={i === 0 ? "md:col-span-2" : undefined}
-            >
-              <div className="flex h-full flex-col rounded-(--radius-card) bg-plum-2 p-6 md:p-7">
-                <span className="font-mono text-meta tracking-[0.08em] text-violet-lift">
-                  {String(i + 1).padStart(2, "0")}
+        {/* The first place named on each of these pages is the one a
+            local would name first, so it keeps the card. The rest were
+            eight more cards of identical weight — 2,731px on a phone
+            for a set where every item was making the same shape of
+            point. As a ruled list they read as an argued order and
+            take a third of the height. */}
+        {city.crowdPlaces.length > 0 && (
+          <Rise>
+            <div className="mt-12 rounded-(--radius-card) bg-plum-2 p-6 md:p-8">
+              <span className="font-mono text-meta tracking-[0.08em] text-violet-lift">
+                01
+              </span>
+              <h3 className="mt-3 max-w-[18ch] font-display text-display-l text-balance">
+                {city.crowdPlaces[0].place}
+              </h3>
+              <p className="mt-4 max-w-[62ch] text-body-l text-on-plum-dim">
+                {city.crowdPlaces[0].note}
+              </p>
+            </div>
+          </Rise>
+        )}
+
+        {/* TWO COLUMNS from md up, one below. The first pass made this
+            a full-width ruled list and it read well on a phone and cost
+            273px MORE on desktop than the card grid it replaced — nine
+            full-width rows where there had been three rows of three.
+            Same rows, half the height, and the measure stays readable
+            because each row is now a column rather than a spread. */}
+        <ul className="mt-4 grid border-t border-rule-plum md:grid-cols-2 md:gap-x-10">
+          {city.crowdPlaces.slice(1).map((p, i) => (
+            <Rise key={p.place} as="li" delay={Math.min(i, 6) * 40}>
+              <div className="flex h-full gap-4 border-b border-rule-plum py-4">
+                <span className="shrink-0 pt-1.5 font-mono text-meta tracking-[0.08em] text-violet-lift">
+                  {String(i + 2).padStart(2, "0")}
                 </span>
-                <h3
-                  className={`mt-3 font-display text-balance ${
-                    i === 0 ? "text-display-l" : "text-h2"
-                  }`}
-                >
-                  {p.place}
-                </h3>
-                <p
-                  className={`mt-4 text-on-plum-dim ${
-                    i === 0 ? "max-w-[62ch] text-body-l" : ""
-                  }`}
-                >
-                  {p.note}
-                </p>
+                <div>
+                  <h3 className="text-h3 text-balance">{p.place}</h3>
+                  <p className="mt-1.5 max-w-[52ch] text-body-s text-on-plum-dim">
+                    {p.note}
+                  </p>
+                </div>
               </div>
             </Rise>
           ))}
@@ -281,7 +319,7 @@ export default async function CityPage({ params }: Params) {
           The long-tail layer. Each H3 answers a query somebody actually
           types, and each body has to be about THIS city — a generic
           paragraph explaining what a unipole is helps nobody. */}
-      <Band tone="sand" grain>
+      <Band id="formats" tone="sand" grain>
         <SectionHead
             eyebrow="The formats"
             deva="माध्यम"
@@ -292,28 +330,24 @@ export default async function CityPage({ params }: Params) {
             deciding which.</>}
           />
 
-        <div className="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-2">
+        {/* Eleven headings, each with a paragraph written for THIS
+            city. Stacked open they measured 4,093px on a phone — a
+            fifth of the whole page, eleven consecutive walls, and no
+            way to see what the next one covered without reading the
+            last. Nothing is cut: the headings are still headings, the
+            bodies are still in the DOM and still indexed. They are just
+            no longer all shouting at once. */}
+        <div className="mt-12 border-t border-rule-sand">
           {city.formatGuide.map((f, i) => (
-            <Rise key={f.title} delay={i * 40}>
-              <article className="border-t border-rule-sand pt-6">
-                <div className="flex items-baseline gap-4">
-                  <span className="font-mono text-caption tracking-[0.08em] text-violet-deep">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="font-mono text-micro tracking-[0.08em] text-on-sand-dim uppercase">
-                    {f.kicker}
-                  </span>
-                </div>
-                {/* These H3s are the long-tail layer and they are meant
-                    to read as headings, not as bolded labels. text-h2 is
-                    the right rung — there is no text-h1 in the scale, and
-                    reaching for one silently drops to body size. */}
-                <h3 className="mt-3 font-display text-h2 text-balance">
-                  {f.title}
-                </h3>
-                <p className="mt-3 max-w-[56ch] text-on-sand-dim">{f.body}</p>
-              </article>
-            </Rise>
+            <Disclosure
+              key={f.title}
+              index={i + 1}
+              title={f.title}
+              kicker={f.kicker}
+              defaultOpen={i === 0}
+            >
+              <p>{f.body}</p>
+            </Disclosure>
           ))}
         </div>
 
@@ -349,7 +383,7 @@ export default async function CityPage({ params }: Params) {
       </Band>
 
       {/* 04 — PRESS AND RADIO ------------------------------------ */}
-      <Band tone="sand2" grain>
+      <Band id="press" tone="sand2" grain>
         <SectionHead
             eyebrow="The local press and radio"
             deva="अख़बार और रेडियो"
@@ -369,14 +403,14 @@ export default async function CityPage({ params }: Params) {
             <ul className="mt-5 border-t border-rule-sand">
               {city.localMedia.press.map((t, i) => (
                 <Rise key={t.title} as="li" delay={i * 45}>
-                  <div className="border-b border-rule-sand py-5">
+                  <div className="border-b border-rule-sand py-3.5">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h3 className="text-h3">{t.title}</h3>
                       <span className="font-mono text-micro tracking-[0.08em] text-violet-deep uppercase">
                         {t.language}
                       </span>
                     </div>
-                    <p className="mt-2 max-w-[52ch] text-body-s text-on-sand-dim">
+                    <p className="mt-1.5 max-w-[52ch] text-body-s text-on-sand-dim">
                       {t.note}
                     </p>
                   </div>
@@ -392,14 +426,14 @@ export default async function CityPage({ params }: Params) {
             <ul className="mt-5 border-t border-rule-sand">
               {city.localMedia.radio.map((r, i) => (
                 <Rise key={r.station} as="li" delay={i * 45}>
-                  <div className="border-b border-rule-sand py-4">
+                  <div className="border-b border-rule-sand py-3.5">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h3 className="text-h3">{r.station}</h3>
                       <span className="font-mono text-micro tracking-[0.08em] text-violet-deep">
                         {r.frequency}
                       </span>
                     </div>
-                    <p className="mt-2 max-w-[52ch] text-body-s text-on-sand-dim">
+                    <p className="mt-1.5 max-w-[52ch] text-body-s text-on-sand-dim">
                       {r.note}
                     </p>
                   </div>
@@ -416,7 +450,7 @@ export default async function CityPage({ params }: Params) {
       </Band>
 
       {/* 05 — TRANSIT -------------------------------------------- */}
-      <Band tone="plum" grain>
+      <Band id="transit" tone="plum" grain>
         <div className="grid-12 items-end gap-y-6">
           <Rise className="col-span-12 lg:col-span-6">
             <Eyebrow tone="plum" deva="आवागमन">Transit media</Eyebrow>
@@ -447,7 +481,7 @@ export default async function CityPage({ params }: Params) {
           There is a large body of search demand for "hoarding advertising
           cost in <city>" and every competitor answers it with a rate card.
           We answer it with the variables, and say why. */}
-      <Band tone="sand" grain>
+      <Band id="cost" tone="sand" grain>
         <div className="grid-12 gap-y-8">
           <Rise className="col-span-12 lg:col-span-5">
             <Eyebrow>What it costs</Eyebrow>
@@ -492,7 +526,7 @@ export default async function CityPage({ params }: Params) {
       </Band>
 
       {/* 07 — PERMISSIONS AND COMPLIANCE ------------------------- */}
-      <Band tone="violet" grain>
+      <Band id="permission" tone="violet" grain>
         <div className="grid-12 items-end gap-y-8">
           <Rise className="col-span-12 lg:col-span-5">
             <Eyebrow tone="violet">Permissions</Eyebrow>
@@ -517,7 +551,7 @@ export default async function CityPage({ params }: Params) {
       </Band>
 
       {/* 08 — THE CALENDAR --------------------------------------- */}
-      <Band tone="sand2" grain>
+      <Band id="calendar" tone="sand2" grain>
         <SectionHead
             eyebrow="The calendar"
             deva="मौसम"

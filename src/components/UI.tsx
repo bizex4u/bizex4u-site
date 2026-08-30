@@ -99,7 +99,11 @@ export function Band({
   return (
     <section
       id={id}
-      className={`relative ${t.bg} ${t.text} ${
+      /* scroll-mt only where there is an id to jump to. The nav is a
+         floating pill over the content, so an untreated anchor drops
+         the section heading underneath it — the reader jumps and lands
+         looking at the second paragraph. */
+      className={`relative ${id ? "scroll-mt-28" : ""} ${t.bg} ${t.text} ${
         flush ? "" : "py-(--spacing-band)"
       } ${grain ? grainClass : ""} ${className}`}
     >
