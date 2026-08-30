@@ -24,6 +24,21 @@ export type Format = {
   h: number;
 };
 
+export type PlateSurface = "print" | "led" | "backlit" | "cinema" | "build";
+
+/* Infer the face of the plate from the format name. A 40 ft hoarding
+   is vinyl; a portrait screen is LED; a lift panel is backlit acrylic.
+   The drawing used to be an empty grey box on every medium, which is
+   why the homepage looked like images had failed to load. */
+export function surfaceOf(label: string): PlateSurface {
+  const l = label.toLowerCase();
+  if (/cinema/.test(l)) return "cinema";
+  if (/led|portrait|ribbon|digital/.test(l)) return "led";
+  if (/fascia|atrium|lift/.test(l)) return "backlit";
+  if (/gate|canopy|kiosk|arch/.test(l)) return "build";
+  return "print";
+}
+
 export const formatSets: Record<string, Format[]> = {
   outdoor: [
     { label: "Hoarding", note: "40 × 20 ft", w: 40, h: 20 },
@@ -52,6 +67,14 @@ export const formatSets: Record<string, Format[]> = {
     { label: "Kiosk", note: "3 × 6 ft", w: 3, h: 6 },
   ],
 };
+
+/* The argument a city page has to make in one glance: a hoarding and
+   a lift panel are not the same product. Shared scale, one set. */
+export const cityScaleFormats: Format[] = [
+  formatSets.outdoor[0],
+  formatSets.outdoor[1],
+  formatSets.retail[2],
+];
 
 /**
  * The barter card carries no format plate — barter is not a medium,
@@ -137,12 +160,6 @@ export default function FormatPlate({
 
   const pxPerFt = Math.min(byHeight, byWidth);
 
-  const surface =
-    tone === "light"
-      ? "border-on-sand/40 bg-on-sand/12"
-      : tone === "violet"
-        ? "border-white/45 bg-white/18"
-        : "border-white/40 bg-white/14";
   const label =
     tone === "light"
       ? "text-on-sand-dim"
@@ -153,7 +170,12 @@ export default function FormatPlate({
     tone === "light" ? "text-on-sand/45" : "text-white/40";
 
   return (
-    <div data-visual="format-plate" className="flex items-end gap-4" aria-hidden="true">
+    <div
+      data-visual="format-plate"
+      data-tone={tone === "light" ? "light" : "dark"}
+      className="flex items-end gap-4"
+      aria-hidden="true"
+    >
       {showFigure && (
         <div className="flex shrink-0 flex-col items-center">
           <Figure px={5.75 * pxPerFt} tone={figureTone} />
@@ -180,10 +202,17 @@ export default function FormatPlate({
               style={{ width: `${Math.max(w, 34)}px` }}
             >
               <div
-                data-plate
-                className={`rounded-(--radius-xs) border ${surface}`}
+                data-plate={surfaceOf(f.label)}
+                className="rounded-(--radius-xs)"
                 style={{ width: `${w}px`, height: `${h}px` }}
               />
+              {/unipole/i.test(f.label) && (
+                <div
+                  className={`mx-auto h-3 w-px ${
+                    tone === "light" ? "bg-on-sand/35" : "bg-white/30"
+                  }`}
+                />
+              )}
               <p className="mt-2 text-micro leading-tight font-medium hyphens-auto">
                 {f.label}
               </p>

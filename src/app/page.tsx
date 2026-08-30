@@ -17,6 +17,7 @@ import {
 import { organisationId, speakable } from "@/lib/schema";
 import { additionalMarkets, cities } from "@/lib/cities";
 import { exchangeLine, formatLines } from "@/lib/formats";
+import FormatPlate, { cityScaleFormats } from "@/components/FormatPlate";
 import { heroPlate, statementPlate } from "@/lib/streets";
 import MarqueeToggle from "@/components/MarqueeToggle";
 import BriefButton from "@/components/BriefButton";
@@ -313,6 +314,26 @@ export default function Home() {
             not be sold as though they were. These are the formats we plan,
             named the way this market names them.</>}
           />
+
+        <Rise>
+          <div className="mt-10 rounded-(--radius-card) bg-plum-2 p-5 md:p-6">
+            <p className="font-mono text-micro tracking-[0.08em] text-violet-lift uppercase">
+              Drawn at one scale
+            </p>
+            <p className="mt-2 max-w-[52ch] text-body-s text-on-plum-dim">
+              A 40 ft hoarding next to a 2 ft lift panel. The person is
+              5&prime;9&Prime;. This is why a format list is not a menu.
+            </p>
+            <div className="mt-5 overflow-x-auto">
+              <FormatPlate
+                formats={cityScaleFormats}
+                tone="dark"
+                base={72}
+                maxWidth={420}
+              />
+            </div>
+          </div>
+        </Rise>
 
         {/* Six equal cards was six cards nobody read — card 01 and card
             05 carried identical weight, so nothing led and the eye had

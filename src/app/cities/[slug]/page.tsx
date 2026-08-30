@@ -14,6 +14,7 @@ import { organisationId, speakable } from "@/lib/schema";
 import BriefButton from "@/components/BriefButton";
 import PageIndex from "@/components/PageIndex";
 import { Disclosure } from "@/components/Disclosure";
+import FormatPlate, { cityScaleFormats } from "@/components/FormatPlate";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -159,6 +160,17 @@ export default async function CityPage({ params }: Params) {
                 "do these people work anywhere near me". The nearby list
                 keeps its job underneath, where it belongs. */}
             <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
+              {frames[0] && (
+                <figure className="relative mb-4 aspect-4/3 overflow-hidden rounded-(--radius-card) bg-plum">
+                  <Image
+                    src={frames[0].src}
+                    alt={frames[0].alt}
+                    fill
+                    sizes="(min-width: 1024px) 28vw, 92vw"
+                    className="object-cover"
+                  />
+                </figure>
+              )}
               <CityLocator slug={city.slug} name={city.name} />
               <div className="mt-4">
                 <Card>
@@ -199,6 +211,54 @@ export default async function CityPage({ params }: Params) {
           </div>
         </div>
       </Band>
+
+      {/* 02b — WHAT IT LOOKS LIKE ON THE GROUND -----------------
+          Only where we actually hold frames of this market. The other
+          cities get nothing here rather than a street borrowed from
+          elsewhere — see framesFor in lib/streets.ts.
+
+          Sits after the market and before the crowd list so a phone
+          reader sees a photograph before another wall of type. */}
+      {frames.length > 0 && (
+        <section className="grain relative overflow-hidden bg-plum-2 py-(--spacing-band) text-on-plum">
+          <div className="shell relative z-10">
+            <SectionHead
+            eyebrow="On the ground"
+            tone="plum"
+            title={<>{city.name}, <span className="em-serif">as we found it</span>.</>}
+            lede={<>Our own frames, taken standing in front of live placements on a
+                working day. Not stock, and not a site list — the geo-stamp is
+                cropped off these deliberately.</>}
+          />
+
+            <ul
+              className={`mt-11 grid gap-4 ${
+                frames.length > 1 ? "sm:grid-cols-2" : ""
+              }`}
+            >
+              {frames.slice(0, 4).map((f, i) => (
+                <Rise key={f.src} as="li" delay={i * 60}>
+                  <figure className="m-0 overflow-hidden rounded-(--radius-card) bg-plum">
+                    <div className="relative aspect-16/9">
+                      <Image
+                        src={f.src}
+                        alt={f.alt}
+                        fill
+                        sizes={
+                          frames.length > 1
+                            ? "(min-width: 640px) 46vw, 92vw"
+                            : "(min-width: 640px) 92vw, 92vw"
+                        }
+                        className="object-cover"
+                      />
+                    </div>
+                  </figure>
+                </Rise>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* 02 — WHERE THE CROWDS ARE -------------------------------
           The section a local reads to decide whether we actually know
@@ -269,52 +329,6 @@ export default async function CityPage({ params }: Params) {
         </ul>
       </Band>
 
-      {/* 02b — WHAT IT LOOKS LIKE ON THE GROUND -----------------
-          Only where we actually hold frames of this market. Two of the
-          twenty-two cities do; see the note on framesFor in
-          lib/streets.ts for why the other twenty get nothing here
-          rather than a street borrowed from elsewhere. */}
-      {frames.length > 0 && (
-        <section className="grain relative overflow-hidden bg-plum-2 py-(--spacing-band) text-on-plum">
-          <div className="shell relative z-10">
-            <SectionHead
-            eyebrow="On the ground"
-            tone="plum"
-            title={<>{city.name}, <span className="em-serif">as we found it</span>.</>}
-            lede={<>Our own frames, taken standing in front of live placements on a
-                working day. Not stock, and not a site list — the geo-stamp is
-                cropped off these deliberately.</>}
-          />
-
-            <ul
-              className={`mt-11 grid gap-4 ${
-                frames.length > 1 ? "sm:grid-cols-2" : ""
-              }`}
-            >
-              {frames.slice(0, 4).map((f, i) => (
-                <Rise key={f.src} as="li" delay={i * 60}>
-                  <figure className="m-0 overflow-hidden rounded-(--radius-card) bg-plum">
-                    <div className="relative aspect-16/9">
-                      <Image
-                        src={f.src}
-                        alt={f.alt}
-                        fill
-                        sizes={
-                          frames.length > 1
-                            ? "(min-width: 640px) 46vw, 92vw"
-                            : "(min-width: 640px) 92vw, 92vw"
-                        }
-                        className="object-cover"
-                      />
-                    </div>
-                  </figure>
-                </Rise>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )}
-
       {/* 03 — THE FORMAT GUIDE -----------------------------------
           The long-tail layer. Each H3 answers a query somebody actually
           types, and each body has to be about THIS city — a generic
@@ -329,6 +343,19 @@ export default async function CityPage({ params }: Params) {
             your plan — most briefs need two or three, and the useful work is
             deciding which.</>}
           />
+
+        <Rise>
+          <div className="mt-10 rounded-(--radius-card) bg-sand-2 p-5 md:p-6">
+            <Eyebrow muted>Typical sizes, at true proportion</Eyebrow>
+            <p className="mt-3 max-w-[52ch] text-body-s text-on-sand-dim">
+              A hoarding and a lift panel are not the same product. The
+              drawing is to scale — the person is 5&prime;9&Prime;.
+            </p>
+            <div className="mt-5 overflow-x-auto">
+              <FormatPlate formats={cityScaleFormats} />
+            </div>
+          </div>
+        </Rise>
 
         {/* Eleven headings, each with a paragraph written for THIS
             city. Stacked open they measured 4,093px on a phone — a

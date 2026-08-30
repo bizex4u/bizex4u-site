@@ -26,14 +26,61 @@ import { dayClock } from "@/lib/dayclock";
    background. on-plum-dim reaches only 4.0:1 against violet-deep, so a
    shared text colour across both grounds fails AA on the violet panel.
    Measured: on-plum-dim on plum-2/plum-3 = 7.4:1 and 6.2:1;
-   on-violet-dim on violet-deep = 5.88:1. */
+   on-violet-dim on violet-deep = 5.88:1.
+
+   The sky wash is what makes the strip read as a day. Without it every
+   card was the same plum slab with a grey box in it, which is why the
+   section looked like a wireframe. The grounds stay plum-2 / plum-3 /
+   violet-deep so the measured contrast still holds. */
 const tint = [
-  { bg: "bg-plum-2", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
-  { bg: "bg-plum-2", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
-  { bg: "bg-plum-3", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
-  { bg: "bg-plum-3", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
-  { bg: "bg-violet-deep", dim: "text-on-violet-dim", rule: "border-white/25", plate: "violet" as const },
-  { bg: "bg-plum-2", dim: "text-on-plum-dim", rule: "border-white/15", plate: "dark" as const },
+  {
+    bg: "bg-plum-2",
+    dim: "text-on-plum-dim",
+    rule: "border-white/15",
+    plate: "dark" as const,
+    sky: "from-[#e8a04a]/55 via-[#e8a04a]/18 to-transparent",
+    hour: "text-[#f0c48a]",
+  },
+  {
+    bg: "bg-plum-2",
+    dim: "text-on-plum-dim",
+    rule: "border-white/15",
+    plate: "dark" as const,
+    sky: "from-[#f0d080]/40 via-[#f0d080]/10 to-transparent",
+    hour: "text-[#f5e6c8]",
+  },
+  {
+    bg: "bg-plum-3",
+    dim: "text-on-plum-dim",
+    rule: "border-white/15",
+    plate: "dark" as const,
+    sky: "from-[#f7ecd0]/22 via-transparent to-transparent",
+    hour: "text-white",
+  },
+  {
+    bg: "bg-plum-3",
+    dim: "text-on-plum-dim",
+    rule: "border-white/15",
+    plate: "dark" as const,
+    sky: "from-[#e07040]/42 via-[#e07040]/12 to-transparent",
+    hour: "text-[#f0c4a0]",
+  },
+  {
+    bg: "bg-violet-deep",
+    dim: "text-on-violet-dim",
+    rule: "border-white/25",
+    plate: "violet" as const,
+    sky: "from-[#120530]/55 via-transparent to-transparent",
+    hour: "text-white",
+  },
+  {
+    bg: "bg-plum-2",
+    dim: "text-on-plum-dim",
+    rule: "border-white/15",
+    plate: "dark" as const,
+    sky: "from-[#06040c]/80 via-[#1b1030]/25 to-transparent",
+    hour: "text-[#c4b8e0]",
+  },
 ];
 
 export default function DayClock() {
@@ -90,50 +137,47 @@ export default function DayClock() {
             {dayClock.map((h, i) => (
               <article
                 key={h.time}
-                className={`flex w-[80vw] max-w-[25rem] flex-col overflow-y-auto rounded-(--radius-card) p-6 sm:w-[56vw] md:w-[25rem] ${tint[i].bg}`}
+                className={`relative flex w-[80vw] max-w-[25rem] flex-col overflow-y-auto rounded-(--radius-card) p-6 sm:w-[56vw] md:w-[25rem] ${tint[i].bg}`}
               >
-                <div className="flex shrink-0 items-baseline justify-between gap-4">
-                  <p className="font-display text-[clamp(2.25rem,4vw,3rem)] leading-none">
-                    {h.time}
+                <div
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-x-0 top-0 h-52 bg-linear-to-b ${tint[i].sky}`}
+                />
+                <div className="relative flex min-h-0 flex-1 flex-col overflow-y-auto">
+                  <div className="flex shrink-0 items-baseline justify-between gap-4">
+                    <p
+                      className={`font-display text-[clamp(2.25rem,4vw,3rem)] leading-none ${tint[i].hour}`}
+                    >
+                      {h.time}
+                    </p>
+                    <p className={`deva text-body-s ${tint[i].dim}`}>
+                      {h.deva}
+                    </p>
+                  </div>
+
+                  <h3 className="mt-3 shrink-0 font-display text-h2 text-balance">
+                    {h.title}
+                  </h3>
+                  <p className={`mt-3 shrink-0 text-body-s ${tint[i].dim}`}>
+                    {h.body}
                   </p>
-                  <p className={`deva text-body-s ${tint[i].dim}`}>
-                    {h.deva}
+
+                  {h.plate && (
+                    <div className="mt-5 shrink-0 overflow-x-auto">
+                      <FormatPlate
+                        formats={formatSets[h.plate]}
+                        tone={tint[i].plate}
+                        base={52}
+                      />
+                    </div>
+                  )}
+
+                  <p
+                    className={`mt-auto shrink-0 border-t pt-2.5 font-mono text-micro leading-relaxed tracking-[0.04em] uppercase ${tint[i].rule} ${tint[i].dim}`}
+                  >
+                    {h.examples}
                   </p>
                 </div>
-
-                <h3 className="mt-3 shrink-0 font-display text-h2 text-balance">
-                  {h.title}
-                </h3>
-                <p className={`mt-3 shrink-0 text-body-s ${tint[i].dim}`}>
-                  {h.body}
-                </p>
-
-                {h.plate && (
-                  <div className="mt-4 shrink-0">
-                    <FormatPlate
-                      formats={formatSets[h.plate]}
-                      tone={tint[i].plate}
-                      base={46}
-                    />
-                  </div>
-                )}
-
-                <ul className="mt-auto flex shrink-0 flex-wrap gap-2 pt-3.5">
-                  {h.formats.map((f) => (
-                    <li
-                      key={f}
-                      className="rounded-full border border-white/25 px-3 py-1.5 text-caption"
-                    >
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                <p
-                  className={`mt-3 shrink-0 border-t pt-2.5 font-mono text-micro leading-relaxed tracking-[0.04em] uppercase ${tint[i].rule} ${tint[i].dim}`}
-                >
-                  {h.examples}
-                </p>
               </article>
             ))}
 
