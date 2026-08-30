@@ -186,7 +186,7 @@ export default function BarterPage() {
                 </h1>
               </Rise>
               <Rise delay={120}>
-                <p className="mt-7 max-w-[52ch] text-body-l text-on-sand-dim">
+                <p className="speakable-answer mt-7 max-w-[52ch] text-body-l text-on-sand-dim">
                   Finished goods, unsold stock, capacity or vouchers, converted
                   into outdoor, retail and broadcast media across India. Valued
                   in writing before anything moves. No cash leaves the marketing

@@ -126,7 +126,7 @@ export default function WorkPage() {
                 </h1>
               </Rise>
               <Rise delay={120}>
-                <p className="mt-7 max-w-[50ch] text-body-l text-on-plum-dim">
+                <p className="speakable-answer mt-7 max-w-[50ch] text-body-l text-on-plum-dim">
                   Outdoor, retail, broadcast and barter-funded campaigns across
                   Indian metros and tier-2 markets, for brands in categories
                   where being seen in the physical world still decides whether

@@ -136,7 +136,7 @@ export default async function CityPage({ params }: Params) {
                 </h1>
               </Rise>
               <Rise delay={120}>
-                <p className="mt-7 max-w-[52ch] text-body-l text-on-sand-dim">
+                <p className="speakable-answer mt-7 max-w-[52ch] text-body-l text-on-sand-dim">
                   {city.heroLede}
                 </p>
                 <div className="mt-9">
@@ -645,6 +645,20 @@ export default async function CityPage({ params }: Params) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "@id": `${site.url}/cities/${city.slug}#webpage`,
+              url: `${site.url}/cities/${city.slug}`,
+              name: city.metaTitle,
+              description: city.metaDescription,
+              isPartOf: { "@id": `${site.url}/#website` },
+              about: { "@id": `${site.url}/cities/${city.slug}#service` },
+              publisher: { "@id": organisationId },
+              inLanguage: "en-IN",
+              dateModified: site.contentReviewed,
+              speakable,
+            },
             {
               "@context": "https://schema.org",
               "@type": "Service",

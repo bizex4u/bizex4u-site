@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import { PageHero, Rise, Section } from "@/components/Ledger";
-import { organisationId } from "@/lib/schema";
+import { organisationId, speakable } from "@/lib/schema";
 import { site } from "@/lib/site";
 import { Eyebrow } from "@/components/UI";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact Bizex4U — OOH planning, Kanpur",
   description: `Talk to Bizex4U about outdoor, retail and broadcast media planning in India. Write to ${site.email} or call ${site.phone}.`,
   alternates: { canonical: "/contact" },
 };
@@ -82,9 +82,16 @@ export default function ContactPage() {
                made anywhere on this site and should not have been in the
                structured data either. */
             "@type": "ContactPage",
+            "@id": `${site.url}/contact#webpage`,
             url: `${site.url}/contact`,
             name: `Contact ${site.name}`,
+            description: `Talk to Bizex4U about outdoor, retail and broadcast media planning in India. Write to ${site.email} or call ${site.phone}.`,
+            isPartOf: { "@id": `${site.url}/#website` },
+            about: { "@id": organisationId },
             mainEntity: { "@id": organisationId },
+            inLanguage: "en-IN",
+            dateModified: site.contentReviewed,
+            speakable,
           }),
         }}
       />

@@ -66,7 +66,7 @@ export default function AboutPage() {
                 </h1>
               </Rise>
               <Rise delay={120}>
-                <p className="mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
+                <p className="speakable-answer mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
                   We plan, negotiate and run outdoor, retail and broadcast
                   campaigns in more than forty Indian cities — and structure
                   the commercial side so that a capped budget does not have to

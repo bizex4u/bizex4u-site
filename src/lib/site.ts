@@ -53,7 +53,7 @@ export const site = {
 
      Only URLs that genuinely resolve to this company. A wrong one is
      worse than none: it merges this entity with somebody else's. */
-  profiles: [] as string[],
+  profiles: ["https://www.linkedin.com/company/bizex4u"],
 } as const;
 
 /* ------------------------------------------------------------------
