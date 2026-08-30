@@ -112,7 +112,17 @@ export default function WorkPage() {
               <Rise delay={60}>
                 <h1 className="mt-6 font-display text-display-xl text-balance">
                   Campaigns planned{" "}
-                  <span className="em-serif text-violet-deep">and run</span>.
+                  {/* violet-LIFT, not violet-deep. This hero is white text
+                      on a plum gradient over a photograph, and every other
+                      element in it takes a plum-tone colour — the accent was
+                      the one hand-picked value and it was picked for a sand
+                      ground. Measured against the pixels actually behind it
+                      the deep violet came out at 1.70:1 while the white
+                      words beside it were 14.9:1, so the two words carrying
+                      the emphasis were the two hardest to read on the page.
+                      violet-lift on plum is 6.14:1. The tone system already
+                      knew this: toneStyles.plum.hl IS violet-lift. */}
+                  <span className="em-serif text-violet-lift">and run</span>.
                 </h1>
               </Rise>
               <Rise delay={120}>

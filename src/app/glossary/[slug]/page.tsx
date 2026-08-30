@@ -70,7 +70,15 @@ export default async function GlossaryTermPage({ params }: Params) {
         <div className="shell relative z-10">
           <Rise>
             <p className="eyebrow text-on-sand-dim">
-              <Link href="/glossary" className="link-underline">
+              {/* WCAG 2.2 Target Size (Minimum) is 24x24 CSS px for web —
+                  not the 44pt iOS figure. At the eyebrow's own line-height
+                  this link rendered 65x19, so the padding buys the missing
+                  five pixels and the negative margin keeps the baseline
+                  where the layout expects it. */}
+              <Link
+                href="/glossary"
+                className="link-underline -my-1.5 inline-flex min-h-6 items-center py-1.5"
+              >
                 Glossary
               </Link>
               <span aria-hidden className="mx-2.5 opacity-40">
