@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Band, Btn, Card, Eyebrow, Rise, SectionHead } from "@/components/UI";
+import { Band, Btn, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import { Faq } from "@/components/Ledger";
 import GstFlow from "@/components/GstFlow";
 import BarterSelector from "@/components/BarterSelector";
+import BarterExchange from "@/components/BarterExchange";
 import Image from "next/image";
 import { streets } from "@/lib/streets";
 import { site } from "@/lib/site";
@@ -167,7 +168,10 @@ const mediaLeg = ["Kochi", "Kozhikode", "Kanpur"]
 export default function BarterPage() {
   return (
     <>
-      {/* HERO ---------------------------------------------------- */}
+      {/* HERO ----------------------------------------------------
+          The exchange is the argument, so it sits in the hero — same
+          move as IndiaField on /cities and PlanAssembly on /what-we-do.
+          The plum card that used to live here restated the lede. */}
       <section className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20">
         <div className="shell relative z-10">
           <div className="grid-12 items-center gap-y-10">
@@ -205,18 +209,7 @@ export default function BarterPage() {
             </div>
 
             <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
-              <Card bg="bg-plum" className="text-on-plum">
-                <Eyebrow tone="plum">The short version</Eyebrow>
-                <p className="mt-5 font-display text-h2">
-                  Your warehouse is a media budget that hasn&rsquo;t been spent
-                  yet.
-                </p>
-                <p className="mt-5 text-on-plum-dim">
-                  It is already costing you storage, capital and depreciation.
-                  Barter converts that cost into visibility instead of writing
-                  it off.
-                </p>
-              </Card>
+              <BarterExchange />
             </Rise>
           </div>
         </div>
@@ -231,16 +224,22 @@ export default function BarterPage() {
             <span className="em-serif text-violet-deep">on a line item</span>.
           </h2>
         </Rise>
-        <ul className="mt-12 grid gap-4 lg:grid-cols-3">
+        {/* A ladder, not a three-up of equal cards. The three costs are
+            one argument; a grid of cards makes them look like a menu. */}
+        <ul className="mt-12 border-t border-rule-sand">
           {problems.map((p, i) => (
             <Rise key={p.index} as="li" delay={i * 70}>
-              <Card tone="sand2" className="h-full">
-                <Eyebrow as="span">{p.index}</Eyebrow>
-                <h3 className="mt-3 font-display text-h2 text-balance">
+              <div className="grid grid-cols-12 gap-x-6 gap-y-2 border-b border-rule-sand py-6 md:py-7">
+                <span className="col-span-12 font-mono text-caption tracking-[0.08em] text-violet-deep md:col-span-1">
+                  {p.index}
+                </span>
+                <h3 className="col-span-12 font-display text-h2 text-balance md:col-span-4">
                   {p.title}
                 </h3>
-                <p className="mt-4 text-on-sand-dim">{p.body}</p>
-              </Card>
+                <p className="col-span-12 max-w-[62ch] text-on-sand-dim md:col-span-7">
+                  {p.body}
+                </p>
+              </div>
             </Rise>
           ))}
         </ul>
@@ -368,12 +367,16 @@ export default function BarterPage() {
           </h2>
         </Rise>
 
-        <ul className="mt-12 grid gap-4 lg:grid-cols-3">
+        <ul className="mt-12 border-t border-white/20">
           {governance.map((g, i) => (
             <Rise key={g.title} as="li" delay={i * 70}>
-              <div className="h-full rounded-(--radius-card) bg-white/10 p-6 md:p-7">
-                <h3 className="font-display text-h2 text-balance">{g.title}</h3>
-                <p className="mt-4 text-on-violet-dim">{g.body}</p>
+              <div className="grid grid-cols-12 gap-x-6 gap-y-2 border-b border-white/20 py-6 md:py-7">
+                <h3 className="col-span-12 font-display text-h2 text-balance md:col-span-5">
+                  {g.title}
+                </h3>
+                <p className="col-span-12 max-w-[62ch] text-on-violet-dim md:col-span-7">
+                  {g.body}
+                </p>
               </div>
             </Rise>
           ))}

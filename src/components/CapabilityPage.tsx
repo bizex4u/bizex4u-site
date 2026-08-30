@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { Band, Card, Eyebrow, Rise } from "@/components/UI";
 import FormatPlate, { formatSets, type Format } from "@/components/FormatPlate";
+import { capabilityVisual } from "@/components/CapabilityVisuals";
+import { Faq } from "@/components/Ledger";
+import PageSchema from "@/components/PageSchema";
 import { capabilityDetail } from "@/lib/capabilityDetail";
-import { capabilities } from "@/lib/site";
+import { termsForCapability } from "@/lib/glossary";
+import { capabilities, site } from "@/lib/site";
+import { speakable } from "@/lib/schema";
 import BriefButton from "@/components/BriefButton";
 
 /**
@@ -11,8 +16,9 @@ import BriefButton from "@/components/BriefButton";
  * would make the site feel assembled rather than designed.
  *
  * The order is deliberate and follows how the buyer reads:
- *   why this medium is worth planning  →  how we plan it  →  what
- *   lands on your desk  →  when to spend elsewhere  →  what next.
+ *   why this medium is worth planning  →  the drawing of that argument
+ *   →  how we plan it  →  when it works  →  what lands on your desk
+ *   →  the questions  →  when to spend elsewhere  →  what next.
  *
  * The "when to spend elsewhere" band is the one most agencies omit.
  * It is the cheapest credibility on the site: a page that names the
@@ -30,6 +36,8 @@ export default function CapabilityPage({
   const d = capabilityDetail[slug];
   const others = capabilities.filter((c) => c.href !== cap.href);
   const formats: Format[] | undefined = plate ? formatSets[plate] : undefined;
+  const Visual = capabilityVisual[slug as keyof typeof capabilityVisual];
+  const glossaryTerms = termsForCapability(slug);
 
   return (
     <>
@@ -68,7 +76,7 @@ export default function CapabilityPage({
                 </h1>
               </Rise>
               <Rise delay={120}>
-                <p className="mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
+                <p className="speakable-answer mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
                   {d.lede}
                 </p>
                 <div className="mt-9">
@@ -118,7 +126,14 @@ export default function CapabilityPage({
         </div>
       </Band>
 
-      {/* 02 — METHOD --------------------------------------------- */}
+      {/* 02 — THE DRAWING ---------------------------------------- */}
+      {Visual && (
+        <Band tone="sand" grain>
+          <Visual />
+        </Band>
+      )}
+
+      {/* 03 — METHOD --------------------------------------------- */}
       <Band tone="plum" grain>
         <Rise>
           <Eyebrow tone="plum">How the buy is made</Eyebrow>
@@ -145,10 +160,55 @@ export default function CapabilityPage({
             </Rise>
           ))}
         </ol>
+
+        {glossaryTerms.length ? (
+          <Rise>
+            <div className="mt-16 border-t border-rule-plum pt-8">
+              <Eyebrow tone="plum" muted>
+                If a word above was doing work you had to guess at
+              </Eyebrow>
+              <ul className="mt-5 flex flex-wrap gap-2.5">
+                {glossaryTerms.map((t) => (
+                  <li key={t.slug}>
+                    <Link
+                      href={`/glossary/${t.slug}`}
+                      className="inline-flex min-h-11 items-center rounded-full border border-white/20 px-4 text-body-s transition-colors duration-200 hover:border-white hover:bg-white/8"
+                    >
+                      {t.term}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Rise>
+        ) : null}
       </Band>
 
-      {/* 03 — DELIVERABLES --------------------------------------- */}
+      {/* 04 — WHEN IT WORKS -------------------------------------- */}
       <Band tone="sand" grain>
+        <Rise>
+          <Eyebrow>When it earns its place</Eyebrow>
+          <h2 className="mt-5 max-w-[20ch] font-display text-display-l text-balance">
+            Concrete situations,{" "}
+            <span className="em-serif text-violet-deep">not a menu</span>.
+          </h2>
+        </Rise>
+        <ul className="mt-12 border-t border-rule-sand">
+          {d.whenItWorks.map((item, i) => (
+            <Rise key={item} as="li" delay={i * 45}>
+              <div className="flex gap-4 border-b border-rule-sand py-5">
+                <span className="font-mono text-micro tracking-[0.08em] text-violet-deep">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="max-w-[62ch] text-on-sand-dim">{item}</span>
+              </div>
+            </Rise>
+          ))}
+        </ul>
+      </Band>
+
+      {/* 05 — DELIVERABLES --------------------------------------- */}
+      <Band tone="sand2" grain>
         <div className="grid-12 gap-y-10">
           <Rise className="col-span-12 lg:col-span-5">
             <Eyebrow deva="आपको क्या मिलता है">What lands on your desk</Eyebrow>
@@ -179,9 +239,22 @@ export default function CapabilityPage({
         </div>
       </Band>
 
-      {/* 04 — WHEN NOT TO -----------------------------------------
-          Kept as its own band rather than a footnote. It is the
-          section that makes the rest of the page believable. */}
+      {/* 06 — FAQ ------------------------------------------------
+          Band is sand so the shared Faq cards (sand-2) still read. */}
+      <Band tone="sand" grain>
+        <Rise>
+          <Eyebrow>Questions that actually get asked</Eyebrow>
+          <h2 className="mt-5 max-w-[20ch] font-display text-display-l text-balance">
+            Including the ones about{" "}
+            <span className="em-serif text-violet-deep">cost</span>.
+          </h2>
+        </Rise>
+        <div className="mt-12">
+          <Faq items={d.faq} />
+        </div>
+      </Band>
+
+      {/* 07 — WHEN NOT TO ---------------------------------------- */}
       <Band tone="violet" grain>
         <div className="grid-12 gap-y-8">
           <Rise className="col-span-12 lg:col-span-5">
@@ -202,14 +275,15 @@ export default function CapabilityPage({
         </div>
       </Band>
 
-      {/* 05 — THE REST OF THE NETWORK ---------------------------- */}
-      <Band tone="sand2" grain>
+      {/* 08 — THE REST OF THE NETWORK ---------------------------- */}
+      <Band tone="sand" grain>
         <Rise>
           <Eyebrow>The rest of the network</Eyebrow>
           <h2 className="mt-5 max-w-[24ch] font-display text-display-l text-balance">
             Most plans use{" "}
             <span className="em-serif text-violet-deep">more than one</span>.
           </h2>
+          <p className="mt-6 max-w-[58ch] text-on-sand-dim">{d.sitsInPlan}</p>
         </Rise>
 
         <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -220,7 +294,7 @@ export default function CapabilityPage({
                 className={`group flex h-full flex-col rounded-(--radius-card) p-6 transition-colors duration-200 md:p-7 ${
                   c.accent
                     ? "bg-violet-deep text-white hover:bg-violet"
-                    : "bg-sand hover:bg-sand-3"
+                    : "bg-sand-2 hover:bg-sand-3"
                 }`}
               >
                 <span
@@ -248,6 +322,51 @@ export default function CapabilityPage({
           ))}
         </ul>
       </Band>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "What we do",
+                  item: `${site.url}/what-we-do`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: cap.title,
+                  item: `${site.url}${cap.href}`,
+                },
+              ],
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "@id": `${site.url}${cap.href}#faq`,
+              dateModified: site.contentReviewed,
+              inLanguage: "en-IN",
+              speakable,
+              mainEntity: d.faq.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            },
+          ]),
+        }}
+      />
+      <PageSchema
+        path={cap.href}
+        name={cap.title}
+        description={d.lede}
+      />
     </>
   );
 }

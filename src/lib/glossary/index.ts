@@ -100,3 +100,61 @@ for (const t of terms) {
    the city pages do not have to know about the glossary. */
 export const termsForCity = (citySlug: string) =>
   terms.filter((t) => t.cities?.includes(citySlug));
+
+/* Terms a capability page actually uses in its copy. Declared here
+   rather than on every term, so a new glossary entry does not have to
+   know about /what-we-do, and a dangling slug fails the build. */
+const termsByCapability: Record<string, string[]> = {
+  "outdoor-transit": [
+    "hoarding",
+    "unipole",
+    "gantry",
+    "bus-queue-shelter",
+    "pole-kiosk",
+    "sky-sign",
+    "advertisement-tax",
+    "flexing-and-mounting",
+    "illumination",
+    "monitoring-photographs",
+  ],
+  dooh: ["dooh", "loop", "illumination", "monitoring-photographs", "hoarding"],
+  "retail-hyperlocal": [
+    "pole-kiosk",
+    "illumination",
+    "monitoring-photographs",
+    "advertisement-tax",
+    "sky-sign",
+    "flexing-and-mounting",
+  ],
+  "broadcast-print-cinema": [
+    "monitoring-photographs",
+    "illumination",
+    "advertisement-tax",
+    "hoarding",
+    "sky-sign",
+  ],
+  activations: [
+    "monitoring-photographs",
+    "pole-kiosk",
+    "gantry",
+    "flexing-and-mounting",
+    "media-barter",
+  ],
+};
+
+for (const [cap, list] of Object.entries(termsByCapability)) {
+  for (const s of list) {
+    if (!slugs.has(s)) {
+      throw new Error(
+        `Glossary: capability "${cap}" links to "${s}", which is not a registered term.`,
+      );
+    }
+  }
+}
+
+export const termsForCapability = (capabilitySlug: string) => {
+  const list = termsByCapability[capabilitySlug] ?? [];
+  return list
+    .map((s) => terms.find((t) => t.slug === s))
+    .filter((t): t is Term => Boolean(t));
+};

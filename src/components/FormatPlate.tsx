@@ -153,7 +153,7 @@ export default function FormatPlate({
     tone === "light" ? "text-on-sand/45" : "text-white/40";
 
   return (
-    <div className="flex items-end gap-4" aria-hidden="true">
+    <div data-visual="format-plate" className="flex items-end gap-4" aria-hidden="true">
       {showFigure && (
         <div className="flex shrink-0 flex-col items-center">
           <Figure px={5.75 * pxPerFt} tone={figureTone} />

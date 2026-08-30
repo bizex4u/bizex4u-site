@@ -44,7 +44,7 @@ const legs = [
 
 export default function GstFlow() {
   return (
-    <div className="rounded-(--radius-card) bg-sand-2 p-6 md:p-8">
+    <div data-visual="gst-flow" className="rounded-(--radius-card) bg-sand-2 p-6 md:p-8">
       <Eyebrow muted>How the paperwork actually looks</Eyebrow>
 
       <ol className="mt-7 space-y-4">

@@ -6,6 +6,7 @@ import { capabilities } from "@/lib/site";
 import { capabilityDetail } from "@/lib/capabilityDetail";
 import BriefButton from "@/components/BriefButton";
 import PageSchema from "@/components/PageSchema";
+import PlanAssembly from "@/components/PlanAssembly";
 
 export const metadata: Metadata = {
   title:
@@ -54,7 +55,7 @@ export default function WhatWeDoPage() {
                 </h1>
               </Rise>
               <Rise delay={120}>
-                <p className="mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
+                <p className="speakable-answer mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
                   We plan, negotiate and run campaigns across outdoor, digital,
                   retail, broadcast and ground presence in more than forty
                   Indian cities — and structure the commercial side so the
@@ -69,7 +70,13 @@ export default function WhatWeDoPage() {
             </div>
 
             <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
-              <p className="max-w-[34ch] border-t border-rule-sand pt-5 text-on-sand-dim">
+              <PlanAssembly
+                steps={sequence.map((s, i) => ({
+                  index: String(i + 1).padStart(2, "0"),
+                  title: s.title,
+                }))}
+              />
+              <p className="mt-6 max-w-[34ch] text-body-s text-on-sand-dim">
                 We do not own the sites. We buy them, and being independent of
                 any one owner is exactly why we can argue for the right ones.
               </p>

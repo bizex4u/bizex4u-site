@@ -159,6 +159,20 @@
   --duration-quick: 200ms;
 }
 
+/* Mobile type floor.
+   --text-nano is 10px and --text-micro is 11px. That is the right
+   size for a mono rule label on a 1440-wide drawing; on a phone it
+   is below the WCAG readable floor and reads as noise (IndiaField
+   already hides its labels for the same reason). Raise the two
+   tokens here, not the two hundred call sites. Desktop keeps the
+   designed sizes. Below `sm` both sit on 12px. */
+@media (max-width: 639px) {
+  :root {
+    --text-nano: 0.75rem;
+    --text-micro: 0.75rem;
+  }
+}
+
 /* Base ----------------------------------------------------- */
 
 html {

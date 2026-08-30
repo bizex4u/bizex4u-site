@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
 import IndiaField from "@/components/IndiaField";
 import BriefButton from "@/components/BriefButton";
-import { additionalMarkets, cities } from "@/lib/cities";
+import { additionalMarkets, cities, regions } from "@/lib/cities";
 import { indexNotes } from "@/lib/cities/notes";
 import { site } from "@/lib/site";
 import PageSchema from "@/components/PageSchema";
@@ -24,28 +24,20 @@ export const metadata: Metadata = {
 /* ------------------------------------------------------------------
    The city index.
 
-   This was five columns of plain text links — thirty-nine names, every
-   one the same weight, in the shape of a sitemap. It made the strongest
-   claim on the site (a national footprint, each market understood on
-   its own terms) in the format least able to carry it, and it gave a
-   reader no reason to click any particular row.
+   The field in the hero is the argument — a national footprint, honest
+   about which dots are written pages and which are only planned. The
+   list under it has one job: to support that drawing, not to restate
+   it five times.
 
-   Three changes.
+   It used to. Each region got its own band and the same headline with
+   a different count ("8 markets, written in full", then 5, then 5,
+   then 2, then 2). That read as one list arbitrarily chopped up.
 
-   The field. One picture beats thirty-nine names in a list, and this
-   one is honest about which markets have a written page and which do
-   not. See IndiaField and the note in lib/geo.ts about why there is no
-   national outline under it.
-
-   A line per city. A directory row that carries only a name asks the
-   reader to already know why they would want it. A row that says what
-   is peculiar about that market is the page doing its job.
-
-   Regions as bands rather than columns. Five short columns forced every
-   list to the length of the longest and left three of them half empty.
+   One ruled index now. Region is a column and a jump chip. Written
+   rows still carry a line of their own; planned markets stay names
+   without a link. The field already drew that distinction; the type
+   agrees with it.
 ------------------------------------------------------------------- */
-
-const regions = ["North", "West", "South", "East", "Central"] as const;
 
 /* Which region an unwritten market belongs to, so the index still reads
    as a complete picture of the network rather than as a list of the
@@ -82,6 +74,9 @@ export default function CitiesPage() {
 
   const unplaced = additionalMarkets.filter((m) => !regionOf[m]);
   const total = cities.length + additionalMarkets.length;
+  const firstInRegion = Object.fromEntries(
+    regions.map((r) => [r, cities.find((c) => c.region === r)?.slug]),
+  ) as Record<(typeof regions)[number], string | undefined>;
 
   return (
     <>
@@ -135,69 +130,111 @@ export default function CitiesPage() {
       </section>
 
       {/* THE INDEX ------------------------------------------------
-          One band per region. Written cities are rows with a line of
-          their own; planned markets are named quietly underneath,
-          which is the same distinction the field draws in dots. */}
-      {regions.map((region, ri) => {
-        const written = cities.filter((c) => c.region === region);
-        const planned = plannedByRegion[region] ?? [];
-        if (!written.length && !planned.length) return null;
+          One instrument. The field already said which dots are pages;
+          this is the same distinction as a list — written rows with a
+          line of their own, planned markets named without a link.
+          Region is a column, a chip, and a hairline when the register
+          changes — not five restated headlines. The plum band explains
+          written vs planned; the H2 does not restate it. */}
+      <Band tone="sand2" grain id="index">
+        <div className="grid-12 items-end gap-y-8">
+          <Rise className="col-span-12 lg:col-span-7">
+            <Eyebrow>The index</Eyebrow>
+            <h2 className="mt-5 font-display text-display-l text-balance">
+              {cities.length} markets, written{" "}
+              <span className="em-serif text-violet-deep">in full</span>.
+            </h2>
+          </Rise>
+        </div>
 
-        return (
-          <Band
-            key={region}
-            tone={ri % 2 === 0 ? "sand2" : "sand"}
-            grain
-            id={region.toLowerCase()}
-          >
-            <div className="grid-12 items-end">
-              <Rise className="col-span-12 lg:col-span-6">
-                <Eyebrow>{region}</Eyebrow>
-                <h2 className="mt-5 font-display text-display-l text-balance">
-                  {written.length}{" "}
-                  {written.length === 1 ? "market" : "markets"}, written{" "}
-                  <span className="em-serif text-violet-deep">in full</span>.
-                </h2>
-              </Rise>
-              {planned.length > 0 && (
-                <p className="col-span-12 mt-5 max-w-[38ch] text-body-s text-on-sand-dim lg:col-span-4 lg:col-start-9 lg:mt-0 lg:text-right">
-                  Also planned across {region.toLowerCase()} India —{" "}
-                  {planned.join(", ")}. Pages in progress.
-                </p>
-              )}
-            </div>
-
-            <ul className="mt-11 border-t border-rule-sand">
-              {written.map((c, i) => (
-                <Rise key={c.slug} as="li" delay={Math.min(i, 8) * 40}>
-                  <Link
-                    href={`/cities/${c.slug}`}
-                    className="link-row group grid grid-cols-1 items-baseline gap-x-8 gap-y-1.5 border-b border-rule-sand py-6 md:grid-cols-12"
+        <nav aria-label="Regions" className="mt-10">
+          <ul className="flex flex-wrap gap-2">
+            {regions.map((region) => {
+              const target = firstInRegion[region];
+              if (!target) return null;
+              return (
+                <li key={region}>
+                  <a
+                    href={`#${region.toLowerCase()}`}
+                    className="inline-flex min-h-11 items-center rounded-full border border-on-sand/20 px-4 text-body-s transition-colors duration-200 hover:border-on-sand hover:bg-on-sand/5"
                   >
-                    <span className="md:col-span-3">
-                      <span className="link-underline font-display text-h1">
-                        {c.name}
-                      </span>
-                      <span className="mt-1 block font-mono text-micro tracking-[0.09em] text-on-sand-dim uppercase">
-                        {c.state}
-                      </span>
+                    {region}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <ul className="mt-10">
+          {cities.map((c, i) => {
+            const regionChanged = i === 0 || cities[i - 1].region !== c.region;
+            return (
+              <Rise key={c.slug} as="li" delay={Math.min(i, 8) * 40}>
+                {regionChanged ? (
+                  <div
+                    id={c.region.toLowerCase()}
+                    className={`scroll-mt-28 ${
+                      i === 0
+                        ? "border-t border-rule-sand pt-3 pb-2"
+                        : "pt-8 pb-2"
+                    }`}
+                  >
+                    <p className="font-mono text-micro tracking-[0.09em] text-violet-deep uppercase">
+                      {c.region}
+                    </p>
+                  </div>
+                ) : null}
+                <Link
+                  href={`/cities/${c.slug}`}
+                  className="link-row group grid grid-cols-1 items-baseline gap-x-8 gap-y-1.5 border-b border-rule-sand py-6 md:grid-cols-12"
+                >
+                  <span className="md:col-span-3">
+                    <span className="link-underline font-display text-h1">
+                      {c.name}
                     </span>
-                    <span className="text-body-l text-on-sand-dim md:col-span-8">
-                      {indexNotes[c.slug]}
+                    <span className="mt-1 block font-mono text-micro tracking-[0.09em] text-on-sand-dim uppercase">
+                      {c.state}
                     </span>
-                    <span
-                      aria-hidden
-                      className="link-row__go hidden text-h2 md:col-span-1 md:block md:text-right"
-                    >
-                      &rarr;
-                    </span>
-                  </Link>
-                </Rise>
-              ))}
-            </ul>
-          </Band>
-        );
-      })}
+                  </span>
+                  <span className="font-mono text-micro tracking-[0.09em] text-violet-deep uppercase md:col-span-2">
+                    {c.region}
+                  </span>
+                  <span className="text-body-l text-on-sand-dim md:col-span-6">
+                    {indexNotes[c.slug]}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="link-row__go hidden text-h2 md:col-span-1 md:block md:text-right"
+                  >
+                    &rarr;
+                  </span>
+                </Link>
+              </Rise>
+            );
+          })}
+        </ul>
+
+        <div className="mt-14 border-t border-rule-sand pt-8">
+          <Eyebrow muted>Also planned — pages in progress</Eyebrow>
+          <dl className="mt-6 grid gap-4 md:grid-cols-2">
+            {regions.map((region) => {
+              const planned = plannedByRegion[region] ?? [];
+              if (!planned.length) return null;
+              return (
+                <div key={region} className="flex gap-4">
+                  <dt className="w-20 shrink-0 font-mono text-micro tracking-[0.09em] text-violet-deep uppercase">
+                    {region}
+                  </dt>
+                  <dd className="text-body-s text-on-sand">
+                    {planned.join(", ")}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+        </div>
+      </Band>
 
       {/* WHY SOME ARE ONLY NAMES ---------------------------------
           Kept, and given a section of its own rather than a footnote.

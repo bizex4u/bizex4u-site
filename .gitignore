@@ -43,6 +43,7 @@ next-env.d.ts
 
 # scratch
 /preview
+/.measure
 
 # Scratch and delivery leftovers. These have lived inside the project
 # root before; a duplicate src tree in here gets picked up by the dev
