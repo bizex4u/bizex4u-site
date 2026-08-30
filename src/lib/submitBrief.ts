@@ -1,3 +1,5 @@
+import { track } from "@/lib/analytics";
+
 /**
  * Client-side delivery for both forms.
  *
@@ -7,7 +9,8 @@
  * the row is bad; losing the lead is worse.
  *
  * Returns whether the row was recorded so the UI can be honest about
- * it rather than claiming a delivery that did not happen.
+ * it rather than claiming a delivery that did not happen. The status
+ * code is the only thing that goes to analytics — never the payload.
  */
 
 export type BriefFields = {
@@ -37,8 +40,10 @@ export async function submitBrief(fields: BriefFields): Promise<boolean> {
       }),
       signal: AbortSignal.timeout(9000),
     });
+    track("brief_result", { ok: res.ok, status: res.status });
     return res.ok;
   } catch {
+    track("brief_result", { ok: false, status: 0 });
     return false;
   }
 }

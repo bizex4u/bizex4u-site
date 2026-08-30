@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { site } from "@/lib/site";
 import { submitBrief } from "@/lib/submitBrief";
 import { Eyebrow } from "@/components/UI";
+import { pagePath, scrollPct, useAnalytics } from "@/lib/analytics";
 
 /**
  * "What are you holding?"
@@ -53,6 +54,28 @@ export default function BarterSelector() {
      it, which is not a lead. */
   const [brand, setBrand] = useState("");
   const [person, setPerson] = useState("");
+  const { track } = useAnalytics();
+  const openedAt = useRef(0);
+  const openedRef = useRef(false);
+  const focusedRef = useRef(new Set<string>());
+
+  function openIfNeeded() {
+    if (openedRef.current) return;
+    openedRef.current = true;
+    openedAt.current = Date.now();
+    track("brief_open", {
+      source_location: "start",
+      page: pagePath(),
+      scroll_pct: scrollPct(),
+    });
+  }
+
+  function onFieldFocus(name: string) {
+    openIfNeeded();
+    if (focusedRef.current.has(name)) return;
+    focusedRef.current.add(name);
+    track("brief_field_focus", { field: name });
+  }
 
   const toggleMarket = (m: string) =>
     setMarkets((prev) =>
@@ -155,6 +178,7 @@ export default function BarterSelector() {
               autoComplete="organization"
               required
               className="mt-2 h-12 w-full rounded-xl border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+              onFocus={() => onFieldFocus("brand")}
             />
           </div>
           <div>
@@ -168,6 +192,7 @@ export default function BarterSelector() {
               autoComplete="name"
               required
               className="mt-2 h-12 w-full rounded-xl border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+              onFocus={() => onFieldFocus("person")}
             />
           </div>
         </div>
@@ -180,7 +205,19 @@ export default function BarterSelector() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
+              data-cta="1"
+              data-cta-location="start"
+              data-cta-variant="default"
+              data-cta-label="Send this on WhatsApp"
+              data-whatsapp="1"
               onClick={() => {
+                openIfNeeded();
+                track("brief_submit", {
+                  page: pagePath(),
+                  seconds_to_complete: Math.round(
+                    (Date.now() - openedAt.current) / 1000,
+                  ),
+                });
                 /* Fire and forget, for the same reason as the brief
                    dialog: awaiting the Sheet write would delay the
                    navigation past the user gesture. */

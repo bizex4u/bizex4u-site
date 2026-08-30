@@ -131,6 +131,7 @@ export default function Nav() {
         <div className="flex items-center gap-2">
           <BriefButton
             context="Nav"
+            location="header"
             className="hidden !min-h-11 !px-5 !py-0 !text-body-s sm:inline-flex"
           >
             Send a brief
@@ -189,7 +190,7 @@ export default function Nav() {
               </Link>
             ))}
             <div className="mt-8 grid gap-3">
-              <BriefButton context="Nav" className="w-full">
+              <BriefButton context="Nav" location="header" className="w-full">
                 Send a brief
               </BriefButton>
               <p className="mt-2 text-on-sand-dim">{site.email}</p>

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import localFont from "next/font/local";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Motion from "@/components/Motion";
 import ScrollCraft from "@/components/ScrollCraft";
+import AnalyticsBoot from "@/components/AnalyticsBoot";
 import { site } from "@/lib/site";
 import "./globals.css";
 import { rootGraph } from "@/lib/schema";
@@ -145,6 +147,9 @@ export default function RootLayout({
         <Footer />
         <Motion />
         <ScrollCraft />
+        <Suspense fallback={null}>
+          <AnalyticsBoot />
+        </Suspense>
       </body>
     </html>
   );

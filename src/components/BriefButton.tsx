@@ -4,6 +4,12 @@ import { useId, useRef, useState } from "react";
 import { Eyebrow, btnClass, type BtnVariant } from "@/components/UI";
 import { site } from "@/lib/site";
 import { submitBrief } from "@/lib/submitBrief";
+import {
+  inferCtaLocation,
+  pagePath,
+  scrollPct,
+  useAnalytics,
+} from "@/lib/analytics";
 
 /**
  * The brief form, and the only way into WhatsApp from a call to action.
@@ -40,6 +46,9 @@ export default function BriefButton({
   context,
   /* Prefills the market field on a city page. */
   market,
+  /* Funnel location: header / hero / section id / footer. Inferred
+     from the DOM when omitted. */
+  location,
 }: {
   children: React.ReactNode;
   variant?: BtnVariant;
@@ -47,22 +56,61 @@ export default function BriefButton({
   className?: string;
   context?: string;
   market?: string;
+  location?: string;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
   /* The composed wa.me link, held after submit so the confirmation
      step can offer it manually. */
   const [sent, setSent] = useState<string | null>(null);
   const id = useId();
+  const { track } = useAnalytics();
+  const openedAt = useRef(0);
+  const sourceRef = useRef(location ?? "page");
+  const lastFieldRef = useRef("");
+  const focusedRef = useRef(new Set<string>());
+  const submittedRef = useRef(false);
+  const ctaLabel = typeof children === "string" ? children : "Send a brief";
 
-  const open = () => {
+  const open = (e: React.MouseEvent<HTMLButtonElement>) => {
     setSent(null);
+    submittedRef.current = false;
+    focusedRef.current = new Set();
+    lastFieldRef.current = "";
+    openedAt.current = Date.now();
+    sourceRef.current = location ?? inferCtaLocation(e.currentTarget);
+    track("brief_open", {
+      source_location: sourceRef.current,
+      page: pagePath(),
+      scroll_pct: scrollPct(),
+    });
     ref.current?.showModal();
+  };
+
+  const onFieldFocus = (field: string) => {
+    lastFieldRef.current = field;
+    if (focusedRef.current.has(field)) return;
+    focusedRef.current.add(field);
+    track("brief_field_focus", { field });
+  };
+
+  const onDialogClose = () => {
+    if (submittedRef.current) return;
+    track("brief_abandon", {
+      last_field: lastFieldRef.current || "none",
+      seconds_open: Math.round((Date.now() - openedAt.current) / 1000),
+    });
   };
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     const get = (k: string) => String(f.get(k) ?? "").trim();
+
+    submittedRef.current = true;
+    track("brief_submit", {
+      page: pagePath(),
+      seconds_to_complete: Math.round((Date.now() - openedAt.current) / 1000),
+    });
 
     /* Record the row first, but do not await it. A slow Sheet write
        must never stand between someone pressing the button and
@@ -113,6 +161,10 @@ export default function BriefButton({
     a.click();
     a.remove();
     setSent(href);
+    track("whatsapp_click", {
+      page: pagePath(),
+      source_location: sourceRef.current,
+    });
   };
 
   const field =
@@ -121,7 +173,15 @@ export default function BriefButton({
 
   return (
     <>
-      <button type="button" onClick={open} className={btnClass(variant, size, className)}>
+      <button
+        type="button"
+        onClick={open}
+        className={btnClass(variant, size, className)}
+        data-cta="1"
+        data-cta-location={location}
+        data-cta-variant="default"
+        data-cta-label={ctaLabel}
+      >
         {children}
         <span className="row-arrow">→</span>
       </button>
@@ -129,6 +189,7 @@ export default function BriefButton({
       <dialog
         ref={ref}
         aria-labelledby={`${id}-title`}
+        onClose={onDialogClose}
         className="brief-dialog w-[min(34rem,calc(100vw-2rem))] rounded-(--radius-card) bg-sand-2 p-0 text-on-sand"
       >
         {sent ? (
@@ -150,6 +211,8 @@ export default function BriefButton({
                 target="_blank"
                 rel="noopener noreferrer"
                 className={btnClass("violet", "lg")}
+                data-whatsapp="1"
+                data-cta-location={sourceRef.current}
               >
                 Open WhatsApp again
                 <span className="row-arrow">→</span>
@@ -228,6 +291,7 @@ export default function BriefButton({
                 required
                 autoComplete="organization"
                 className={field}
+                onFocus={() => onFieldFocus("brand")}
               />
             </div>
             <div>
@@ -240,6 +304,7 @@ export default function BriefButton({
                 required
                 autoComplete="name"
                 className={field}
+                onFocus={() => onFieldFocus("person")}
               />
             </div>
             <div>
@@ -251,6 +316,7 @@ export default function BriefButton({
                 name="role"
                 autoComplete="organization-title"
                 className={field}
+                onFocus={() => onFieldFocus("role")}
               />
             </div>
             <div>
@@ -262,6 +328,7 @@ export default function BriefButton({
                 name="market"
                 defaultValue={market ?? ""}
                 className={field}
+                onFocus={() => onFieldFocus("market")}
               />
             </div>
           </div>
@@ -275,6 +342,7 @@ export default function BriefButton({
               name="detail"
               rows={3}
               className="mt-2 w-full rounded-xl border border-rule-sand bg-sand p-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+              onFocus={() => onFieldFocus("detail")}
             />
           </div>
 

@@ -40,7 +40,7 @@ export default function Footer() {
                 appears in the Connect column as a direct contact
                 method — it is no longer the way a lead starts. */}
             <div className="mt-8">
-              <BriefButton context="Footer" size="lg">
+              <BriefButton context="Footer" location="footer" size="lg">
                 Send a brief
               </BriefButton>
             </div>
@@ -58,6 +58,18 @@ export default function Footer() {
                        they must not go through next/link. */
                     const isExternal =
                       "external" in link && link.external === true;
+                    const isWhatsapp = link.label === "WhatsApp";
+                    const isBrief = link.label === "Send a brief";
+                    const ctaAttrs =
+                      isWhatsapp || isBrief
+                        ? {
+                            "data-cta": "1",
+                            "data-cta-location": "footer",
+                            "data-cta-label": link.label,
+                            "data-cta-variant": "default",
+                            ...(isWhatsapp ? { "data-whatsapp": "1" } : {}),
+                          }
+                        : {};
                     return (
                       <li key={link.label}>
                         {isExternal ? (
@@ -66,11 +78,12 @@ export default function Footer() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className={cls}
+                            {...ctaAttrs}
                           >
                             {link.label}
                           </a>
                         ) : (
-                          <Link href={link.href} className={cls}>
+                          <Link href={link.href} className={cls} {...ctaAttrs}>
                             {link.label}
                           </Link>
                         )}
