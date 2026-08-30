@@ -300,7 +300,7 @@ export const lucknow: City = {
     },
     {
       q: "Can you plan Lucknow with other Uttar Pradesh markets?",
-      a: "Yes, and it usually buys better. We plan outdoor across more than forty Indian cities. Lucknow sits naturally with Kanpur, Varanasi, Prayagraj and Gorakhpur, and with the Purvanchal Expressway in place it is the practical launch market for an eastern UP campaign. Negotiating the cluster together rather than city by city changes what is achievable on both price and position.",
+      a: "Yes, and it usually buys better. We plan outdoor across 39 Indian cities. Lucknow sits naturally with Kanpur, Varanasi, Prayagraj and Gorakhpur, and with the Purvanchal Expressway in place it is the practical launch market for an eastern UP campaign. Negotiating the cluster together rather than city by city changes what is achievable on both price and position.",
     },
   ],
 

@@ -293,7 +293,7 @@ export const chandigarh: City = {
     },
     {
       q: "Can you plan Chandigarh alongside other markets?",
-      a: "Yes, and given how constrained the UT is it often makes a plan work better. We plan outdoor across more than forty Indian cities, and Chandigarh sits naturally with Ludhiana, Jalandhar, Ambala and Shimla, with Amritsar and Patiala close behind. Where Chandigarh inventory is short, weight can be redistributed across the Punjab cluster rather than overpaying for a scarce tendered site.",
+      a: "Yes, and given how constrained the UT is it often makes a plan work better. We plan outdoor across 39 Indian cities, and Chandigarh sits naturally with Ludhiana, Jalandhar, Ambala and Shimla, with Amritsar and Patiala close behind. Where Chandigarh inventory is short, weight can be redistributed across the Punjab cluster rather than overpaying for a scarce tendered site.",
     },
   ],
 

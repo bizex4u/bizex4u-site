@@ -289,7 +289,7 @@ export const nagpur: City = {
     },
     {
       q: "Can you plan Nagpur alongside other markets?",
-      a: "Yes. We plan outdoor across more than forty Indian cities, and Nagpur sits naturally with Amravati, Wardha, Chandrapur and Raipur for the Vidarbha and central India belt, and with Pune and Mumbai for a Maharashtra plan. Marathi creative travels across the state without adaptation, and the Hindi belt to the north and east is reachable from the same city — which is part of why Nagpur works as a regional base.",
+      a: "Yes. We plan outdoor across 39 Indian cities, and Nagpur sits naturally with Amravati, Wardha, Chandrapur and Raipur for the Vidarbha and central India belt, and with Pune and Mumbai for a Maharashtra plan. Marathi creative travels across the state without adaptation, and the Hindi belt to the north and east is reachable from the same city — which is part of why Nagpur works as a regional base.",
     },
   ],
 

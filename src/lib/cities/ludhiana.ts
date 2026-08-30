@@ -302,7 +302,7 @@ export const ludhiana: City = {
     },
     {
       q: "Can you plan Ludhiana alongside other Punjab markets?",
-      a: "Yes, and it usually should be. We plan outdoor across more than forty Indian cities, and Ludhiana sits naturally with Jalandhar, Amritsar, Chandigarh and Mohali, with Patiala and Bathinda close behind. Punjabi creative travels across the state without adaptation, and given that Ludhiana has no private FM, a Punjab-wide radio plan needs to be built from the other cities anyway.",
+      a: "Yes, and it usually should be. We plan outdoor across 39 Indian cities, and Ludhiana sits naturally with Jalandhar, Amritsar, Chandigarh and Mohali, with Patiala and Bathinda close behind. Punjabi creative travels across the state without adaptation, and given that Ludhiana has no private FM, a Punjab-wide radio plan needs to be built from the other cities anyway.",
     },
   ],
 

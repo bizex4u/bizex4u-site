@@ -88,5 +88,9 @@ export const additionalMarkets = [
   "Mysuru",
 ];
 
+/* Written city pages plus named markets that do not yet have a page.
+   This is the only market-count figure the site may publish. */
+export const marketCount = cities.length + additionalMarkets.length;
+
 /* Region groupings for the hub page. */
 export const regions = ["North", "West", "South", "East", "Central"] as const;

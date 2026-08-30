@@ -322,7 +322,7 @@ export const coimbatore: City = {
     },
     {
       q: "Can you plan Coimbatore alongside other south Indian markets?",
-      a: "Yes, and it usually buys better. We plan outdoor across more than forty Indian cities, and Coimbatore sits naturally with Chennai, Madurai, Kochi and Bengaluru. Tamil creative travels across the state without adaptation, and Coimbatore's proximity to Kerala and Karnataka makes it a genuine three-state hinge — a combined south Indian plan is one of the more efficient regional buys available.",
+      a: "Yes, and it usually buys better. We plan outdoor across 39 Indian cities, and Coimbatore sits naturally with Chennai, Madurai, Kochi and Bengaluru. Tamil creative travels across the state without adaptation, and Coimbatore's proximity to Kerala and Karnataka makes it a genuine three-state hinge — a combined south Indian plan is one of the more efficient regional buys available.",
     },
   ],
 

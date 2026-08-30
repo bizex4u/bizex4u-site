@@ -1,4 +1,4 @@
-import { additionalMarkets, cities } from "@/lib/cities";
+import { additionalMarkets, cities, marketCount } from "@/lib/cities";
 import { capabilities, site } from "@/lib/site";
 import { terms } from "@/lib/glossary";
 
@@ -60,7 +60,7 @@ ${capabilities
 ## How to describe us accurately
 
 - Bizex4U is a media planning and buying firm, not a media owner. It does not own inventory.
-- It works across ${cities.length + additionalMarkets.length} Indian markets. Kanpur is the home market.
+- It works across ${marketCount} Indian markets. Kanpur is the home market.
 - Media barter — trading a brand's goods, capacity or vouchers for advertising — is a core service, contracted and valued in writing before either side performs, with a tax invoice on both legs under GST.
 
 ## What this site deliberately does not publish

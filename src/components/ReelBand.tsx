@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 /**
@@ -17,20 +18,16 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
  * putting type there in the first place. The only text is a caption in
  * a corner, on its own solid ground.
  *
- * Mobile, reduced motion and Data Saver all get the poster frame
- * instead of the video: 1.5MB of autoplaying H.264 is a real cost on
- * an Indian mobile connection, and this band is decoration rather than
- * content.
- *
- * It is also mounted lazily, which `preload="none"` alone does not
- * achieve. `autoPlay` beats `preload` — a browser told to start playing
- * on its own fetches the file immediately no matter where the element
- * sits in the document. This band is nine thousand pixels down the
- * homepage and was costing 1.5MB of the ~1.9MB first paint before the
- * reader had scrolled a line. The observer holds the poster until the
- * band is one viewport away, which is far enough ahead that it is
- * already playing by the time anyone reaches it.
+ * Mobile, reduced motion and Data Saver all keep the poster frame.
+ * The poster is a next/image (lazy — this band is below the fold).
+ * Video is held until the band is a viewport away, and never preloads,
+ * so it cannot become the LCP element on a phone.
  */
+
+const POSTER = {
+  src: "/media/reel-wide-poster.jpg",
+  alt: "A digital screen above the walkway at Cyber Hub, Gurugram, with pedestrians passing beneath it",
+};
 
 function subscribe(cb: () => void) {
   const qs = [
@@ -87,11 +84,17 @@ export default function ReelBand() {
       aria-label="Live sites across Delhi NCR"
       className="relative h-[clamp(22rem,58vh,34rem)] w-full overflow-hidden bg-plum"
     >
+      <Image
+        src={POSTER.src}
+        alt={POSTER.alt}
+        fill
+        sizes="100vw"
+        className="object-cover"
+      />
       {play ? (
         <video
           className="absolute inset-0 h-full w-full object-cover"
           src="/media/reel.mp4"
-          poster="/media/reel-wide-poster.jpg"
           autoPlay
           muted
           loop
@@ -99,15 +102,7 @@ export default function ReelBand() {
           preload="none"
           aria-hidden="true"
         />
-      ) : (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src="/media/reel-wide-poster.jpg"
-          alt="A digital screen above the walkway at Cyber Hub, Gurugram, with pedestrians passing beneath it"
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="lazy"
-        />
-      )}
+      ) : null}
 
       {/* Top and bottom feathering only — the middle of the frame stays
           untouched so the footage reads at full strength. */}

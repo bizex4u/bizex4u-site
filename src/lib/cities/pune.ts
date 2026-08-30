@@ -292,7 +292,7 @@ export const pune: City = {
     },
     {
       q: "Can you plan Pune alongside Mumbai?",
-      a: "Yes, and Pune is more often planned as part of a Maharashtra buy than as a standalone. We plan outdoor across more than forty Indian cities, and Pune sits naturally with Mumbai, Nashik, Nagpur and Chhatrapati Sambhajinagar. Marathi creative travels across the state without adaptation, and negotiating the cluster together changes what is achievable on both price and position.",
+      a: "Yes, and Pune is more often planned as part of a Maharashtra buy than as a standalone. We plan outdoor across 39 Indian cities, and Pune sits naturally with Mumbai, Nashik, Nagpur and Chhatrapati Sambhajinagar. Marathi creative travels across the state without adaptation, and negotiating the cluster together changes what is achievable on both price and position.",
     },
   ],
 

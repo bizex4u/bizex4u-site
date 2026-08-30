@@ -323,7 +323,7 @@ export const hyderabad: City = {
     },
     {
       q: "Can you plan Hyderabad alongside other southern markets?",
-      a: "Yes. We plan outdoor across more than forty Indian cities, and Hyderabad sits naturally with Vijayawada, Visakhapatnam, Warangal and Bengaluru. Buying a cluster in one negotiation rather than city by city changes what is achievable on both price and position — and for Telugu-language work, planning Hyderabad and coastal Andhra together is almost always more efficient than treating them as separate briefs.",
+      a: "Yes. We plan outdoor across 39 Indian cities, and Hyderabad sits naturally with Vijayawada, Visakhapatnam, Warangal and Bengaluru. Buying a cluster in one negotiation rather than city by city changes what is achievable on both price and position — and for Telugu-language work, planning Hyderabad and coastal Andhra together is almost always more efficient than treating them as separate briefs.",
     },
   ],
 

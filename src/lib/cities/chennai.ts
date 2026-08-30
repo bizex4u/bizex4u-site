@@ -320,7 +320,7 @@ export const chennai: City = {
     },
     {
       q: "Can you plan Chennai alongside other Tamil Nadu markets?",
-      a: "Yes, and it usually buys better. We plan outdoor across more than forty Indian cities, and Chennai sits naturally with Coimbatore, Madurai, Tiruchirappalli and Bengaluru. Tamil creative travels across the state without adaptation, so a multi-city Tamil Nadu plan is one of the more efficient regional buys available in India.",
+      a: "Yes, and it usually buys better. We plan outdoor across 39 Indian cities, and Chennai sits naturally with Coimbatore, Madurai, Tiruchirappalli and Bengaluru. Tamil creative travels across the state without adaptation, so a multi-city Tamil Nadu plan is one of the more efficient regional buys available in India.",
     },
   ],
 

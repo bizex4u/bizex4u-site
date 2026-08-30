@@ -333,7 +333,7 @@ export const patna: City = {
     },
     {
       q: "Can you plan Patna alongside other eastern markets?",
-      a: "Yes, and it usually buys better. We plan outdoor across more than forty Indian cities, and Patna sits naturally with Varanasi, Kolkata, Ranchi and Lucknow. Hindi creative travels across the Bihar–eastern UP–Jharkhand corridor without adaptation, so a multi-city eastern plan is one of the more efficient regional buys available.",
+      a: "Yes, and it usually buys better. We plan outdoor across 39 Indian cities, and Patna sits naturally with Varanasi, Kolkata, Ranchi and Lucknow. Hindi creative travels across the Bihar–eastern UP–Jharkhand corridor without adaptation, so a multi-city eastern plan is one of the more efficient regional buys available.",
     },
   ],
 

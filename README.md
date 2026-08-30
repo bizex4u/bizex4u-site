@@ -101,7 +101,7 @@ is written, and it moves from plain text to a link automatically.
       and the result
 - [ ] `src/app/page.tsx` — replace the `clients` placeholder grid with real
       client marks, same permission rule
-- [ ] Verify the claims in the hero stat row: 17 years, 40+ cities
+- [ ] Verify the claims in the hero stat row: 17 years, 39 cities
 - [ ] `src/lib/site.ts` — set `url` to the live domain (drives canonicals,
       Open Graph and the sitemap)
 - [ ] `src/components/ContactForm.tsx` — wire `handleSubmit` to a real

@@ -303,7 +303,7 @@ export const delhiNcr: City = {
     },
     {
       q: "Can you plan NCR alongside other markets?",
-      a: "Yes, and NCR is usually the anchor rather than the add-on. We plan outdoor across more than forty Indian cities, and it sits naturally with Jaipur, Chandigarh, Lucknow and Agra — the Yamuna Expressway in particular makes Agra a genuine NCR day-trip market. Negotiating the cluster together changes what is achievable on both price and position.",
+      a: "Yes, and NCR is usually the anchor rather than the add-on. We plan outdoor across 39 Indian cities, and it sits naturally with Jaipur, Chandigarh, Lucknow and Agra — the Yamuna Expressway in particular makes Agra a genuine NCR day-trip market. Negotiating the cluster together changes what is achievable on both price and position.",
     },
   ],
 

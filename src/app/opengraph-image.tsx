@@ -3,7 +3,7 @@
 import { ogCard, size, contentType } from "@/lib/ogCard";
 
 export const alt =
-  "Bizex4U — brand activation and outdoor advertising across 40+ Indian cities";
+  "Bizex4U — brand activation and outdoor advertising across 39 Indian cities";
 export { size, contentType };
 
 export default async function Image() {

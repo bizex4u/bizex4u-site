@@ -292,7 +292,7 @@ export const jaipur: City = {
     },
     {
       q: "Can you plan Jaipur alongside other markets?",
-      a: "Yes. We plan outdoor across more than forty Indian cities, and Jaipur sits naturally with Delhi NCR, Jodhpur, Udaipur and Ajmer or Kota — and Delhi is the demand source for a great deal of Jaipur's visitor economy, so planning the two together is often more effective than treating Jaipur as a standalone. Hindi creative travels across Rajasthan without adaptation, which makes a state-wide plan efficient.",
+      a: "Yes. We plan outdoor across 39 Indian cities, and Jaipur sits naturally with Delhi NCR, Jodhpur, Udaipur and Ajmer or Kota — and Delhi is the demand source for a great deal of Jaipur's visitor economy, so planning the two together is often more effective than treating Jaipur as a standalone. Hindi creative travels across Rajasthan without adaptation, which makes a state-wide plan efficient.",
     },
   ],
 

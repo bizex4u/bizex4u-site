@@ -308,7 +308,7 @@ export const kanpur: City = {
     },
     {
       q: "Can you plan Kanpur alongside other Uttar Pradesh markets?",
-      a: "Yes, and it is usually the better way to buy. We plan outdoor across more than forty Indian cities, and Kanpur sits naturally with Lucknow, Prayagraj, Jhansi and Agra in a central-UP plan. Buying the cluster in one negotiation rather than city by city changes what is achievable on both price and position.",
+      a: "Yes, and it is usually the better way to buy. We plan outdoor across 39 Indian cities, and Kanpur sits naturally with Lucknow, Prayagraj, Jhansi and Agra in a central-UP plan. Buying the cluster in one negotiation rather than city by city changes what is achievable on both price and position.",
     },
   ],
 

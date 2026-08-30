@@ -285,7 +285,7 @@ export const ahmedabad: City = {
     },
     {
       q: "Can you plan Ahmedabad alongside other Gujarat markets?",
-      a: "Yes, and it usually buys better. We plan outdoor across more than forty Indian cities, and Ahmedabad sits naturally with Gandhinagar and GIFT City, Vadodara, Rajkot and Surat. Gujarati creative travels across the state without adaptation, which makes a multi-city Gujarat plan one of the more efficient regional buys available in India — though note that radio frequencies differ city by city and cannot be bought as one list.",
+      a: "Yes, and it usually buys better. We plan outdoor across 39 Indian cities, and Ahmedabad sits naturally with Gandhinagar and GIFT City, Vadodara, Rajkot and Surat. Gujarati creative travels across the state without adaptation, which makes a multi-city Gujarat plan one of the more efficient regional buys available in India — though note that radio frequencies differ city by city and cannot be bought as one list.",
     },
   ],
 

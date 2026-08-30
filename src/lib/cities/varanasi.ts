@@ -295,7 +295,7 @@ export const varanasi: City = {
     },
     {
       q: "Can you plan Varanasi with other eastern UP markets?",
-      a: "Yes, and with the Purvanchal Expressway in place it usually makes sense to. We plan outdoor across more than forty Indian cities, and Varanasi sits naturally with Prayagraj, Gorakhpur, Lucknow and — genuinely — Patna, since Purvanchal media planning routinely crosses the Bihar line. Negotiating the cluster together changes what is achievable on price and position.",
+      a: "Yes, and with the Purvanchal Expressway in place it usually makes sense to. We plan outdoor across 39 Indian cities, and Varanasi sits naturally with Prayagraj, Gorakhpur, Lucknow and — genuinely — Patna, since Purvanchal media planning routinely crosses the Bihar line. Negotiating the cluster together changes what is achievable on price and position.",
     },
   ],
 

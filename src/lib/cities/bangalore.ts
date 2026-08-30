@@ -311,7 +311,7 @@ export const bangalore: City = {
     },
     {
       q: "Can you plan Bangalore alongside other southern markets?",
-      a: "Yes, and given the supply constraints here it often makes a plan work better. We plan outdoor across more than forty Indian cities, and Bengaluru sits naturally with Chennai, Hyderabad, Mysuru and Coimbatore. Where Bengaluru large format is short, weight can be redistributed across the cluster rather than overpaying for a scarce local site — which is a decision only someone without inventory to sell will make in your favour.",
+      a: "Yes, and given the supply constraints here it often makes a plan work better. We plan outdoor across 39 Indian cities, and Bengaluru sits naturally with Chennai, Hyderabad, Mysuru and Coimbatore. Where Bengaluru large format is short, weight can be redistributed across the cluster rather than overpaying for a scarce local site — which is a decision only someone without inventory to sell will make in your favour.",
     },
   ],
 

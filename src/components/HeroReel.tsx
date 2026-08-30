@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 /**
@@ -13,6 +14,11 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
  * Five clips of live sites in Delhi NCR. The caption names the location
  * on screen, because the point is that this is real inventory rather
  * than stock footage of somebody else's city.
+ *
+ * The poster is always a next/image, and it is the LCP candidate.
+ * Video mounts only on desktop without reduced-motion or Data Saver,
+ * and never with preload, so a mobile first paint cannot wait on 1.5MB
+ * of H.264.
  */
 
 const SEGMENTS = [
@@ -22,6 +28,11 @@ const SEGMENTS = [
   { at: 9.8, place: "Safdarjung Enclave", city: "New Delhi" },
   { at: 13.0, place: "Ashoka Hotel, Vinay Marg", city: "New Delhi" },
 ];
+
+const POSTER = {
+  src: "/media/reel-poster.jpg",
+  alt: "A Bizex4U digital screen above the walkway at Cyber Hub, Gurugram",
+};
 
 function subscribe(cb: () => void) {
   const qs = [
@@ -66,27 +77,27 @@ export default function HeroReel() {
   return (
     <figure className="relative">
       <div className="relative aspect-square overflow-hidden rounded-(--radius-card) bg-plum">
+        <Image
+          src={POSTER.src}
+          alt={POSTER.alt}
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover"
+          priority
+        />
         {play ? (
           <video
             ref={videoRef}
-            className="h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
             src="/media/reel.mp4"
-            poster="/media/reel-poster.jpg"
             autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
             aria-hidden="true"
           />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src="/media/reel-poster.jpg"
-            alt="A Bizex4U digital screen above the walkway at Cyber Hub, Gurugram"
-            className="h-full w-full object-cover"
-          />
-        )}
+        ) : null}
 
         {/* A light foot only — enough for the caption, not enough to
             dull the footage. The headline is nowhere near it. */}

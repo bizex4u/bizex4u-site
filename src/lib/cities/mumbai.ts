@@ -312,7 +312,7 @@ export const mumbai: City = {
     },
     {
       q: "Can you plan Mumbai alongside other markets?",
-      a: "Yes, and Mumbai is usually the anchor of a western India plan rather than a standalone. We plan outdoor across more than forty Indian cities, and it sits naturally with Pune, Nashik, Surat and Ahmedabad. Marathi creative travels across the state without adaptation, and negotiating the cluster together changes what is achievable on both price and position.",
+      a: "Yes, and Mumbai is usually the anchor of a western India plan rather than a standalone. We plan outdoor across 39 Indian cities, and it sits naturally with Pune, Nashik, Surat and Ahmedabad. Marathi creative travels across the state without adaptation, and negotiating the cluster together changes what is achievable on both price and position.",
     },
   ],
 

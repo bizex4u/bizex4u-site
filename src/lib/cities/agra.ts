@@ -287,7 +287,7 @@ export const agra: City = {
     },
     {
       q: "Can you plan Agra alongside other markets?",
-      a: "Yes, and it usually should be planned that way. We plan outdoor across more than forty Indian cities. Agra sits naturally with Mathura and Vrindavan, Firozabad, Aligarh and Gwalior for the regional Braj belt — and with Delhi NCR, which is the demand source for a great deal of Agra's visitor economy via the Yamuna Expressway. For a tourism campaign, planning Delhi, Agra and Jaipur together as the Golden Triangle is usually more effective than treating Agra as a standalone.",
+      a: "Yes, and it usually should be planned that way. We plan outdoor across 39 Indian cities. Agra sits naturally with Mathura and Vrindavan, Firozabad, Aligarh and Gwalior for the regional Braj belt — and with Delhi NCR, which is the demand source for a great deal of Agra's visitor economy via the Yamuna Expressway. For a tourism campaign, planning Delhi, Agra and Jaipur together as the Golden Triangle is usually more effective than treating Agra as a standalone.",
     },
   ],
 

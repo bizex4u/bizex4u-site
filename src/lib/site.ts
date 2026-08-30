@@ -1,4 +1,4 @@
-import { cities } from "./cities";
+import { cities, marketCount } from "./cities";
 
 export const site = {
   name: "Bizex4U",
@@ -194,11 +194,12 @@ export const footerNav = [
 ------------------------------------------------------------------- */
 
 /* Tenure claims are deliberately absent — Yash asked for the years
-   not to be stated until they are verified. 40+ cities is confirmed. */
+   not to be stated until they are verified. Market count is the
+   register: written pages plus named markets without a page yet. */
 export const proofStats = [
   {
     label: "Cities",
-    value: "40+",
+    value: String(marketCount),
     note: "Metros and tier-2, planned from catchment data.",
   },
   {

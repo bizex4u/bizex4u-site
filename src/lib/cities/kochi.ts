@@ -336,7 +336,7 @@ export const kochi: City = {
     },
     {
       q: "Can you plan Kochi alongside other Kerala or south Indian markets?",
-      a: "Yes, and it usually buys better. We plan outdoor across more than forty Indian cities, and Kochi sits naturally with Thiruvananthapuram, Kozhikode, Coimbatore and Bengaluru. Malayalam creative travels across Kerala without adaptation, and a combined Kerala plan is one of the more efficient regional buys available in south India.",
+      a: "Yes, and it usually buys better. We plan outdoor across 39 Indian cities, and Kochi sits naturally with Thiruvananthapuram, Kozhikode, Coimbatore and Bengaluru. Malayalam creative travels across Kerala without adaptation, and a combined Kerala plan is one of the more efficient regional buys available in south India.",
     },
   ],
 

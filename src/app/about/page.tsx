@@ -7,7 +7,7 @@ import PageSchema from "@/components/PageSchema";
 export const metadata: Metadata = {
   title: "About — An Independent Indian Media Network",
   description:
-    "An independent Indian outdoor and media network working in more than forty cities from Kanpur, Uttar Pradesh. No owner mandate, no inherited rate card.",
+    "An independent Indian outdoor and media network working in 39 cities from Kanpur, Uttar Pradesh. No owner mandate, no inherited rate card.",
   alternates: { canonical: "/about" },
 };
 
@@ -40,7 +40,7 @@ const principles = [
 
 const facts = [
   { label: "Based in", value: "Kanpur", note: "Uttar Pradesh, India" },
-  { label: "Operating in", value: "40+", note: "Metros and tier-2 cities" },
+  { label: "Operating in", value: "39", note: "Metros and tier-2 cities" },
   { label: "Capabilities", value: "Six", note: "Outdoor to barter, on one plan" },
   { label: "Ownership", value: "Independent", note: "No network mandate" },
 ];
@@ -68,7 +68,7 @@ export default function AboutPage() {
               <Rise delay={120}>
                 <p className="speakable-answer mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
                   We plan, negotiate and run outdoor, retail and broadcast
-                  campaigns in more than forty Indian cities — and structure
+                  campaigns in 39 Indian cities — and structure
                   the commercial side so that a capped budget does not have to
                   decide how visible a brand is.
                 </p>
@@ -220,7 +220,7 @@ export default function AboutPage() {
       <PageSchema
         path="/about"
         name={"About Bizex4U"}
-        description={"An independent Indian outdoor and media network working in more than forty cities from Kanpur, Uttar Pradesh. No owner mandate, no inherited rate card."}
+        description={"An independent Indian outdoor and media network working in 39 cities from Kanpur, Uttar Pradesh. No owner mandate, no inherited rate card."}
         type="AboutPage"
       />
     </>

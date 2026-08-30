@@ -42,7 +42,7 @@ const problems = [
 ];
 
 const equation = [
-  { give: "Finished goods", get: "Outdoor across 40+ cities" },
+  { give: "Finished goods", get: "Outdoor across 39 cities" },
   { give: "Unsold or seasonal stock", get: "Broadcast, radio and print" },
   { give: "Manufacturing capacity", get: "Retail and mall presence" },
   { give: "Vouchers and gift cards", get: "Digital out-of-home" },

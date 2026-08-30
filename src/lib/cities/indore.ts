@@ -283,7 +283,7 @@ export const indore: City = {
     },
     {
       q: "Can you plan Indore alongside other Madhya Pradesh markets?",
-      a: "Yes, and it usually buys better. We plan outdoor across more than forty Indian cities, and Indore sits naturally with Bhopal, Ujjain, Dewas and Ratlam. Hindi creative travels across the state without adaptation, the two big cities share the same four radio frequencies, and Dainik Bhaskar covers both — so a Madhya Pradesh cluster is one of the more efficient regional plans available in India.",
+      a: "Yes, and it usually buys better. We plan outdoor across 39 Indian cities, and Indore sits naturally with Bhopal, Ujjain, Dewas and Ratlam. Hindi creative travels across the state without adaptation, the two big cities share the same four radio frequencies, and Dainik Bhaskar covers both — so a Madhya Pradesh cluster is one of the more efficient regional plans available in India.",
     },
   ],
 
