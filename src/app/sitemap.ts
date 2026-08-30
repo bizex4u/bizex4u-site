@@ -3,6 +3,12 @@ import { cities } from "@/lib/cities";
 import { terms } from "@/lib/glossary";
 import { capabilities, site } from "@/lib/site";
 
+if (new URL(site.url).hostname !== "bizex4u.com") {
+  throw new Error(
+    `sitemap.xml must emit apex URLs (bizex4u.com), got ${site.url}`,
+  );
+}
+
 /* lastModified used to be `new Date()` — the build clock. That told
    every crawler that all thirty-four pages changed on every deploy,
    including deploys that changed a colour token. A sitemap whose
