@@ -15,9 +15,9 @@ export const kanpur: City = {
   region: "North",
 
   metaTitle:
-    "Outdoor Advertising in Kanpur — Hoarding, Unipole & Metro",
+    "Outdoor Advertising in Kanpur — Hoardings & Metro",
   metaDescription:
-    "Hoarding, unipole, transit and retail advertising in Kanpur, planned from catchment rather than from a site list. An independent Indian media planning and buying firm, headquartered in Kanpur.",
+    "Hoarding, unipole, transit and retail advertising in Kanpur — the home market of an independent Indian media planning and buying firm.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Kanpur",
@@ -267,11 +267,12 @@ export const kanpur: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Kanpur?",
-      a: "It depends on the corridor, the size, the illumination and the duration, and any single number quoted without those is guesswork. A Mall Road or Parwati Bagla position prices differently from a GT Road one for the same footprint, backlit differently from non-lit, and the wedding and Diwali windows differently from the rest of the year. We do not publish a rate card, because we are not selling our own inventory — we negotiate against several vendors for each plan, and a published rate would only tell you what we would like to charge rather than what the market will actually take. Send us the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card, because we are not selling our own inventory — we negotiate against several vendors for each plan, and a published rate would only tell you what we would like to charge rather than what the market will actually take. It depends on the corridor, the size, the illumination and the duration, and any single number quoted without those is guesswork. A Mall Road or Parwati Bagla position prices differently from a GT Road one for the same footprint, backlit differently from non-lit, and the wedding and Diwali windows differently from the rest of the year. Send us the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Which areas of Kanpur work best for outdoor advertising?",
-      a: "It depends entirely on who you are trying to reach, and this is the question worth spending time on. The Mall Road, Parwati Bagla Road, Civil Lines and Swaroop Nagar belt reaches discretionary spending households. Naveen Market, Nayaganj, Birhana Road and the GT Road corridor reach volume, at a very different income level and with different buying triggers. The metro corridor reaches a defined commuter population repeatedly. We would rather establish the audience first and recommend the corridor second than lead with a location list.",
+      a: "The Mall Road, Parwati Bagla Road, Civil Lines and Swaroop Nagar belt reaches discretionary spending households. Naveen Market, Nayaganj, Birhana Road and the GT Road corridor reach volume, at a very different income level and with different buying triggers. The metro corridor reaches a defined commuter population repeatedly. Which of those is right depends entirely on who you are trying to reach, and that is the question worth spending time on — we would rather establish the audience first and recommend the corridor second.",
     },
     {
       q: "Do you own hoardings in Kanpur?",

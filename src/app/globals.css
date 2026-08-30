@@ -132,12 +132,23 @@
   --text-meta--font-weight: 500;
 
   --text-micro: 0.6875rem; /* 11px — mono eyebrows and rule labels */
+
+  /* 10px. The bottom of the scale, and it earned a token the hard way:
+     `text-nano` appeared in four files as the mono caption size —
+     format specs, month axes, frame credits — with nothing naming it, so
+     each new use was a guess at what the last one had done. */
+  --text-nano: 0.625rem;
   --text-micro--line-height: 1.2;
   --text-micro--letter-spacing: 0.08em;
   --text-micro--font-weight: 500;
 
   --spacing-band: clamp(3.5rem, 6vw, 6.5rem);
   --radius-card: 1.25rem;
+  /* The hairline radius on drawn artefacts — spec plates, season bars.
+     Was hardcoded as both `rounded-(--radius-xs)` and `rounded-(--radius-xs)` in
+     neighbouring components, a difference nobody chose and nobody can
+     see. One value. */
+  --radius-xs: 2px;
 
   /* Motion. The reveal stagger was eight different numbers — 30, 40, 45,
      50, 55, 60, 70, 80 — each picked in the moment. A stagger is a

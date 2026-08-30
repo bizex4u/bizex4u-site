@@ -17,9 +17,10 @@ export const bhopal: City = {
   state: "Madhya Pradesh",
   region: "Central",
 
-  metaTitle: "Outdoor Advertising in Bhopal — Hoardings & Metro Media",
+  metaTitle:
+    "Outdoor Advertising in Bhopal — Hoardings & Metro",
   metaDescription:
-    "Hoarding, unipole, metro and retail advertising in Bhopal, planned around MP Nagar and the coaching economy rather than from a site list. Independent Indian media planning and buying.",
+    "Hoarding, unipole, metro and retail advertising in Bhopal, planned around MP Nagar and the coaching economy rather than from a site list.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Bhopal",
@@ -238,7 +239,8 @@ export const bhopal: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Bhopal?",
-      a: "It depends on whether the position is in MP Nagar or on the outer corridors, plus size, illumination and duration — MP Nagar carries a real premium because offices, coaching and retail compete for the same ground. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on whether the position is in MP Nagar or on the outer corridors, plus size, illumination and duration — MP Nagar carries a real premium because offices, coaching and retail compete for the same ground. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Is Bhopal Metro advertising worth buying?",
@@ -246,7 +248,7 @@ export const bhopal: City = {
     },
     {
       q: "Which areas of Bhopal are best for outdoor advertising?",
-      a: "It depends on the audience. MP Nagar Zones 1 and 2 reach the commercial, office and coaching population in one cluster. New Market in TT Nagar reaches the government-employee catchment. Arera Colony, Shahpura and Hoshangabad Road reach affluent households. Chowk Bazaar and Ibrahimpura reach old-city trading volume. We would rather establish the audience first than lead with a location list.",
+      a: "MP Nagar Zones 1 and 2 reach the commercial, office and coaching population in one cluster. New Market in TT Nagar reaches the government-employee catchment. Arera Colony, Shahpura and Hoshangabad Road reach affluent households. Chowk Bazaar and Ibrahimpura reach old-city trading volume. Which of those is right depends on the audience, and we would rather establish that first than lead with a location list.",
     },
     {
       q: "Is Bhopal a good market for education and coaching brands?",
@@ -270,7 +272,7 @@ export const bhopal: City = {
     },
     {
       q: "When is the best time to advertise in Bhopal?",
-      a: "It depends on the audience, and one window is specific to this city: Eid is a first-order commercial event in Bhopal given the size of the Muslim population, which a calendar built for Indore will not contain. Beyond that, the Navratri-to-Diwali run is the retail peak, the November-to-February wedding season sustains it, and the coaching admission cycle drives its own separate peak on MP Nagar.",
+      a: "The Navratri-to-Diwali run is the retail peak, the November-to-February wedding season sustains it, and the coaching admission cycle drives its own separate peak on MP Nagar. One window is specific to this city: Eid is a first-order commercial event in Bhopal given the size of the Muslim population, and a calendar built for Indore will not contain it.",
     },
     {
       q: "How long should a Bhopal campaign run?",

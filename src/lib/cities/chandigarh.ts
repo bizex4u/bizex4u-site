@@ -21,9 +21,10 @@ export const chandigarh: City = {
   state: "Chandigarh, Punjab & Haryana",
   region: "North",
 
-  metaTitle: "Outdoor Advertising in Chandigarh — Unipoles & Tricity Media",
+  metaTitle:
+    "Outdoor Advertising in Chandigarh — Unipoles",
   metaDescription:
-    "Unipole, panel and transit advertising across Chandigarh, Mohali and Panchkula — three authorities, one market, and a city where advertising is prohibited by default and tendered by exception.",
+    "Unipole, panel and transit advertising across Chandigarh, Mohali and Panchkula — three authorities, one market, advertising tendered by exception.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Chandigarh",
@@ -251,7 +252,8 @@ export const chandigarh: City = {
     },
     {
       q: "How much does outdoor advertising cost in Chandigarh?",
-      a: "It depends on which jurisdiction, whether the position sits in a tendered pool, the format, the illumination and the duration — and in a tendered market, availability moves price more than negotiation does. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on which jurisdiction, whether the position sits in a tendered pool, the format, the illumination and the duration — and in a tendered market, availability moves price more than negotiation does. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Why do Chandigarh, Mohali and Panchkula need separate permissions?",

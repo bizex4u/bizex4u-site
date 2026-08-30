@@ -17,9 +17,9 @@ export const varanasi: City = {
   region: "North",
 
   metaTitle:
-    "Outdoor Advertising in Varanasi & Banaras — Hoardings",
+    "Outdoor Advertising in Varanasi (Banaras)",
   metaDescription:
-    "Hoarding, unipole, transit and retail advertising in Varanasi, planned from catchment rather than from a site list. Honest about which crowds are residents and which are pilgrims.",
+    "Hoarding, unipole, transit and retail advertising in Varanasi, honest about which crowds are residents and which are pilgrims.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Varanasi",
@@ -254,7 +254,8 @@ export const varanasi: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Varanasi?",
-      a: "It depends on the corridor, the size, the illumination and the season — and in Varanasi the season swings it more than in most cities, because Dev Deepawali and Shravan compress a year's demand into a few weeks. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, the size, the illumination and the season — and in Varanasi the season swings it more than in most cities, because Dev Deepawali and Shravan compress a year's demand into a few weeks. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Where does outdoor advertising actually work in Varanasi?",
@@ -278,7 +279,7 @@ export const varanasi: City = {
     },
     {
       q: "When is the best time to run a campaign in Varanasi?",
-      a: "It depends on which audience you want. For visitors, the festival windows — Dev Deepawali at Kartik Purnima, Mahashivratri and the month of Shravan — concentrate more attention than any other weeks in the year. For residents, the November-to-February wedding season is the commercial peak, and Sigra rather than the ghats is where it happens. Varanasi is the market where event-led planning most clearly beats a flat annual presence.",
+      a: "For visitors, the festival windows — Dev Deepawali at Kartik Purnima, Mahashivratri and the month of Shravan — concentrate more attention than any other weeks in the year. For residents, the November-to-February wedding season is the commercial peak, and Sigra rather than the ghats is where it happens. Varanasi is the market where event-led planning most clearly beats a flat annual presence.",
     },
     {
       q: "How long should a Varanasi campaign run?",

@@ -21,9 +21,10 @@ export const agra: City = {
   state: "Uttar Pradesh",
   region: "North",
 
-  metaTitle: "Outdoor Advertising in Agra — Hoardings, Metro & Tourism Media",
+  metaTitle:
+    "Outdoor Advertising in Agra — Hoardings & Metro",
   metaDescription:
-    "Hoarding, unipole, metro and retail advertising in Agra, planned honestly around the split between tourist footfall and the resident market — and current on the Taj Trapezium Zone constraints.",
+    "Hoarding, unipole, metro and retail advertising in Agra, planned around the split between tourist footfall and the resident market.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Agra",
@@ -245,7 +246,8 @@ export const agra: City = {
     },
     {
       q: "How much does hoarding advertising cost in Agra?",
-      a: "It depends on whether you are buying the tourist corridor or the resident city, the format, the illumination, the duration and the season — and Agra's season swings harder than almost any Indian market. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on whether you are buying the tourist corridor or the resident city, the format, the illumination, the duration and the season — and Agra's season swings harder than almost any Indian market. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Should I advertise to tourists or to Agra residents?",
@@ -273,7 +275,7 @@ export const agra: City = {
     },
     {
       q: "When is the best time to advertise in Agra?",
-      a: "It depends which audience. For visitors, October to March, with the Taj Mahotsav in February as a concentrated peak — and May and June are effectively dead, which is worth planning around rather than through. For residents, the November-to-February wedding season is the commercial peak and it runs on an entirely separate rhythm. One practical detail: the Taj is closed on Fridays, which matters for anything on a weekly cycle.",
+      a: "For visitors, October to March, with the Taj Mahotsav in February as a concentrated peak. For residents, the November-to-February wedding season is the commercial peak, running on an entirely separate rhythm. Agra has two calendars and a plan has to pick one. May and June are effectively dead for the visitor plan, which is worth planning around rather than through. One practical detail: the Taj is closed on Fridays, which matters for anything on a weekly cycle.",
     },
     {
       q: "Is there an airport in Agra worth advertising at?",

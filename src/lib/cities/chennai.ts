@@ -17,9 +17,9 @@ export const chennai: City = {
   region: "South",
 
   metaTitle:
-    "Outdoor Advertising in Chennai — Hoardings & Transit",
+    "Outdoor Advertising in Chennai — Hoardings & Metro",
   metaDescription:
-    "Hoarding, unipole, metro, retail and transit advertising in Chennai, planned from catchment rather than from a site list. Independent Indian media planning and buying across 40+ cities.",
+    "Hoarding, unipole, metro, MRTS and bus advertising in Chennai, planned around Anna Salai, OMR and the T. Nagar retail density.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Chennai",
@@ -279,7 +279,8 @@ export const chennai: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Chennai?",
-      a: "It depends on the corridor, the size, the illumination and the duration, and in Chennai it also depends on the season — Aadi and the wedding months move T. Nagar rates in a way no other weeks do. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, the size, the illumination and the duration, and in Chennai it also depends on the season — Aadi and the wedding months move T. Nagar rates in a way no other weeks do. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Are hoardings allowed in Chennai?",
@@ -287,7 +288,7 @@ export const chennai: City = {
     },
     {
       q: "Which areas of Chennai are best for outdoor advertising?",
-      a: "It depends on the audience. OMR reaches a young, salaried IT population. Anna Salai reaches the central office corridor. T. Nagar reaches extraordinary pedestrian retail density. GST Road reaches arriving travel and the southern industrial belt. Adyar, Anna Nagar and Besant Nagar reach settled affluent households. Velachery and Tambaram reach the mass residential middle. We would rather establish the audience first than open with a location list.",
+      a: "OMR reaches a young, salaried IT population. Anna Salai reaches the central office corridor. T. Nagar reaches extraordinary pedestrian retail density. GST Road reaches arriving travel and the southern industrial belt. Adyar, Anna Nagar and Besant Nagar reach settled affluent households. Velachery and Tambaram reach the mass residential middle. Which of those is right depends on the audience, and we would rather establish that first than open with a location list.",
     },
     {
       q: "Do you own hoardings in Chennai?",
@@ -315,7 +316,7 @@ export const chennai: City = {
     },
     {
       q: "Which transit medium works best in Chennai?",
-      a: "It depends on the income band you need. The metro reaches a defined commuter population repeatedly. Suburban rail and the MRTS reach a much larger and generally less affluent daily audience. MTC buses reach across the whole city rather than along one line, at the lowest cost per exposure of the three. Most national plans buy only the metro, and for mid-market categories that is usually the wrong call.",
+      a: "The metro reaches a defined commuter population repeatedly. Suburban rail and the MRTS reach a much larger and generally less affluent daily audience. MTC buses reach across the whole city rather than along one line, at the lowest cost per exposure of the three. Which one is right depends on the income band you need — and most national plans buy only the metro, which for mid-market categories is usually the wrong call.",
     },
     {
       q: "Can you plan Chennai alongside other Tamil Nadu markets?",

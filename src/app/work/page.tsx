@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
+import { Band, Btn, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import { clients, proofFrames, sectorsServed } from "@/lib/site";
 import { reserve, streets } from "@/lib/streets";
 import BriefButton from "@/components/BriefButton";
+import PageSchema from "@/components/PageSchema";
 
 export const metadata: Metadata = {
   title: "Work — Campaigns Planned and Run Across India",
@@ -183,19 +184,15 @@ export default function WorkPage() {
           interchangeable. */}
       <section className="grain relative overflow-hidden bg-plum py-(--spacing-band) text-on-plum">
         <div className="shell relative z-10">
-          <div className="grid-12 items-end">
-            <Rise className="col-span-12 lg:col-span-7">
-              <Eyebrow tone="plum" deva="सड़क पर">Shot on site</Eyebrow>
-              <h2 className="mt-5 font-display text-display-l text-balance">
-                Placements, <span className="em-serif">while they ran</span>.
-              </h2>
-            </Rise>
-            <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-              Agra, Delhi NCR, Kochi, Kozhikode, Kanpur. Photographed by us,
+          <SectionHead
+            eyebrow="Shot on site"
+            tone="plum"
+            deva="सड़क पर"
+            title={<>Placements, <span className="em-serif">while they ran</span>.</>}
+            lede={<>Agra, Delhi NCR, Kochi, Kozhikode, Kanpur. Photographed by us,
               standing in the traffic, on a working day — the only condition
-              under which any of it counts.
-            </p>
-          </div>
+              under which any of it counts.</>}
+          />
 
           <ul className="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {gallery.map((f, i) => (
@@ -233,22 +230,16 @@ export default function WorkPage() {
 
       {/* 02 — PROOF OF DELIVERY ---------------------------------- */}
       <Band tone="plum2" grain>
-        <div className="grid-12 items-end">
-          <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow tone="plum2" deva="डिलीवरी का सबूत">
-              Proof of delivery
-            </Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
-              What the work looks like{" "}
-              <span className="em-serif">when it is documented</span>.
-            </h2>
-          </Rise>
-          <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-            Monitoring frames from live campaigns. Coordinates and dates as
+        <SectionHead
+            eyebrow="Proof of delivery"
+            tone="plum2"
+            deva="डिलीवरी का सबूत"
+            title={<>What the work looks like{" "}
+              <span className="em-serif">when it is documented</span>.</>}
+            lede={<>Monitoring frames from live campaigns. Coordinates and dates as
             recorded on site — the same file a client receives, not a
-            selection made to look good.
-          </p>
-        </div>
+            selection made to look good.</>}
+          />
 
         <ul className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
           {proofFrames.map((f, i) => (
@@ -330,6 +321,11 @@ export default function WorkPage() {
           </Rise>
         </div>
       </Band>
+      <PageSchema
+        path="/work"
+        name={"Bizex4U campaign work"}
+        description={"Campaign photography and how delivery is documented — dated, geotagged proof of every placement."}
+      />
     </>
   );
 }

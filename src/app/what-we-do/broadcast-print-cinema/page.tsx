@@ -3,7 +3,8 @@ import CapabilityPage from "@/components/CapabilityPage";
 
 export const metadata: Metadata = {
   title: "Broadcast, Print & Cinema Advertising in India",
-  description: "Regional news television, radio drive-time, the dailies people actually read and cinema on-screen \u2014 planned market by market rather than on a national average.",
+  description:
+    "Regional news television, radio drive-time, the dailies people actually read and cinema on-screen — planned market by market, not on a national average.",
   alternates: { canonical: "/what-we-do/broadcast-print-cinema" },
 };
 

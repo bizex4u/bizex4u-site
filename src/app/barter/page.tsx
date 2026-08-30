@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
+import { Band, Btn, Card, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import { Faq } from "@/components/Ledger";
 import GstFlow from "@/components/GstFlow";
 import BarterSelector from "@/components/BarterSelector";
@@ -7,11 +7,13 @@ import Image from "next/image";
 import { streets } from "@/lib/streets";
 import { site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
+import PageSchema from "@/components/PageSchema";
 
 export const metadata: Metadata = {
-  title: "Barter Advertising in India — Trade Stock for Media",
+  title:
+    "Barter Advertising in India — Stock for Media",
   description:
-    "Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast media across India. Contracted, valued in advance, GST-compliant on both legs.",
+    "Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast media. Contracted, valued in advance, GST-compliant on both legs.",
   alternates: { canonical: "/barter" },
 };
 
@@ -204,7 +206,7 @@ export default function BarterPage() {
 
             <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
               <Card bg="bg-plum" className="text-on-plum">
-                <p className="eyebrow text-violet-lift">The short version</p>
+                <Eyebrow tone="plum">The short version</Eyebrow>
                 <p className="mt-5 font-display text-h2">
                   Your warehouse is a media budget that hasn&rsquo;t been spent
                   yet.
@@ -233,7 +235,7 @@ export default function BarterPage() {
           {problems.map((p, i) => (
             <Rise key={p.index} as="li" delay={i * 70}>
               <Card tone="sand2" className="h-full">
-                <span className="eyebrow text-violet-deep">{p.index}</span>
+                <Eyebrow as="span">{p.index}</Eyebrow>
                 <h3 className="mt-3 font-display text-h2 text-balance">
                   {p.title}
                 </h3>
@@ -255,8 +257,8 @@ export default function BarterPage() {
 
         <div className="mt-12">
           <div className="grid grid-cols-2 gap-4 border-b border-rule-plum pb-4">
-            <p className="eyebrow text-on-plum-dim">You give</p>
-            <p className="eyebrow text-violet-lift">You get</p>
+            <Eyebrow tone="plum" muted>You give</Eyebrow>
+            <Eyebrow tone="plum">You get</Eyebrow>
           </div>
           <ul>
             {equation.map((row, i) => (
@@ -291,20 +293,15 @@ export default function BarterPage() {
           them, because this is a supporting exhibit and not a gallery. */}
       <section className="grain relative overflow-hidden bg-plum-2 py-(--spacing-band) text-on-plum">
         <div className="shell relative z-10">
-          <div className="grid-12 items-end">
-            <Rise className="col-span-12 lg:col-span-7">
-              <Eyebrow tone="plum">The other half of the trade</Eyebrow>
-              <h2 className="mt-5 font-display text-display-l text-balance">
-                What the stock{" "}
-                <span className="em-serif">turns into</span>.
-              </h2>
-            </Rise>
-            <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-              Not a media schedule on a slide. Placements in the street, in
+          <SectionHead
+            eyebrow="The other half of the trade"
+            tone="plum"
+            title={<>What the stock{" "}
+                <span className="em-serif">turns into</span>.</>}
+            lede={<>Not a media schedule on a slide. Placements in the street, in
               traffic, on a working day — photographed by us, on site, while
-              they were running.
-            </p>
-          </div>
+              they were running.</>}
+          />
 
           <ul className="mt-11 grid gap-4 sm:grid-cols-3">
             {mediaLeg.map((f, i) => (
@@ -414,28 +411,22 @@ export default function BarterPage() {
           argues that barter works. This one addresses why a company
           that agrees with all of it still does nothing. */}
       <Band tone="plum" grain>
-        <div className="grid-12 items-end">
-          <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow tone="plum" deva="कौन तय करता है">
-              Who actually decides
-            </Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
-              This dies in the gap between{" "}
-              <span className="em-serif">two budgets</span>.
-            </h2>
-          </Rise>
-          <p className="col-span-12 mt-5 max-w-[44ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-            Marketing has the mandate and no cash. Finance has the stock and no
+        <SectionHead
+            eyebrow="Who actually decides"
+            tone="plum"
+            deva="कौन तय करता है"
+            title={<>This dies in the gap between{" "}
+              <span className="em-serif">two budgets</span>.</>}
+            lede={<>Marketing has the mandate and no cash. Finance has the stock and no
             way to book media against it. Neither owns the whole decision, so
-            raising it is nobody&rsquo;s job — and it never gets raised.
-          </p>
-        </div>
+            raising it is nobody&rsquo;s job — and it never gets raised.</>}
+          />
 
         <ul className="mt-12 grid gap-4 md:grid-cols-2">
           {room.map((r, i) => (
             <Rise key={r.who} as="li" delay={i * 80}>
               <div className="flex h-full flex-col rounded-(--radius-card) bg-plum-2 p-6 md:p-8">
-                <p className="font-mono text-[0.75rem] tracking-[0.08em] text-violet-lift uppercase">
+                <p className="font-mono text-meta tracking-[0.08em] text-violet-lift uppercase">
                   {r.who}{" "}
                   <span
                     aria-hidden="true"
@@ -595,6 +586,11 @@ export default function BarterPage() {
             },
           ]),
         }}
+      />
+      <PageSchema
+        path="/barter"
+        name={"Barter Advertising in India"}
+        description={"Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast media. Contracted, valued in advance, GST-compliant on both legs."}
       />
     </>
   );

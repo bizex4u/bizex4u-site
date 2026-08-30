@@ -20,9 +20,10 @@ export const nagpur: City = {
   state: "Maharashtra",
   region: "West",
 
-  metaTitle: "Outdoor Advertising in Nagpur — Hoardings, Metro & Bus Media",
+  metaTitle:
+    "Outdoor Advertising in Nagpur — Hoardings & Metro",
   metaDescription:
-    "Sky-sign, hoarding, metro and bus advertising in Nagpur, planned from catchment rather than from a site list — and current on the NMC sky-sign licensing regime.",
+    "Sky-sign, hoarding, metro and bus advertising in Nagpur, planned from catchment — and current on the NMC sky-sign licensing regime.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Nagpur",
@@ -243,7 +244,8 @@ export const nagpur: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Nagpur?",
-      a: "NMC publishes a schedule of rates for sky-sign licences openly, charged per square metre by category — which is more transparency than most Indian cities offer. What that does not tell you is the media owner's price for a specific position, which depends on the corridor, the size, the illumination category and the duration. We do not publish a rate card of our own; we do not sell inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and you will get real numbers.",
+      a:
+        "We do not publish a rate card of our own; we do not sell inventory, so a published rate would tell you what we would like to charge rather than what the market will take. NMC publishes a schedule of rates for sky-sign licences openly, charged per square metre by category — which is more transparency than most Indian cities offer. What that does not tell you is the media owner's price for a specific position, which depends on the corridor, the size, the illumination category and the duration. Send the brief and you will get real numbers.",
     },
     {
       q: "What advertising formats are permitted in Nagpur?",
@@ -251,7 +253,7 @@ export const nagpur: City = {
     },
     {
       q: "Which areas of Nagpur are best for outdoor advertising?",
-      a: "It depends on the audience. Wardha Road towards the airport and MIHAN carries the highest yield and the affluent, vehicular catchment. Sitabuldi Main Road, Central Avenue, Kamptee Road and Itwari carry the volume at a very different income level. Dharampeth, Ramdaspeth and Civil Lines reach the settled affluent household. Sitabuldi is unusual in carrying both retail footfall and the metro interchange in one place.",
+      a: "Wardha Road towards the airport and MIHAN carries the highest yield and the affluent, vehicular catchment. Sitabuldi Main Road, Central Avenue, Kamptee Road and Itwari carry the volume at a very different income level. Dharampeth, Ramdaspeth and Civil Lines reach the settled affluent household. Sitabuldi is unusual in carrying both retail footfall and the metro interchange in one place. Which of those is right depends on the audience.",
     },
     {
       q: "Is Nagpur Metro advertising worth buying?",

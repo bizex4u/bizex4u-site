@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { site } from "@/lib/site";
 import { submitBrief } from "@/lib/submitBrief";
+import { Eyebrow } from "@/components/UI";
 
 /**
  * "What are you holding?"
@@ -86,9 +87,7 @@ export default function BarterSelector() {
   return (
     <div className="rounded-(--radius-card) bg-sand-2 p-6 md:p-8">
       <fieldset>
-        <legend className="eyebrow text-on-sand-dim">
-          01 — What are you holding?
-        </legend>
+        <Eyebrow as="legend" muted>01 — What are you holding?</Eyebrow>
         <div className="mt-4 flex flex-wrap gap-2.5">
           {categories.map((c) => (
             <button
@@ -105,9 +104,7 @@ export default function BarterSelector() {
       </fieldset>
 
       <fieldset className="mt-8">
-        <legend className="eyebrow text-on-sand-dim">
-          02 — Roughly what is it worth to you?
-        </legend>
+        <Eyebrow as="legend" muted>02 — Roughly what is it worth to you?</Eyebrow>
         <div className="mt-4 flex flex-wrap gap-2.5">
           {scales.map((s) => (
             <button
@@ -128,9 +125,7 @@ export default function BarterSelector() {
       </fieldset>
 
       <fieldset className="mt-8">
-        <legend className="eyebrow text-on-sand-dim">
-          03 — Which markets? <span className="normal-case">(optional)</span>
-        </legend>
+        <Eyebrow as="legend" muted>03 — Which markets? <span className="normal-case">(optional)</span></Eyebrow>
         <div className="mt-4 flex flex-wrap gap-2.5">
           {regions.map((r) => (
             <button
@@ -147,17 +142,12 @@ export default function BarterSelector() {
       </fieldset>
 
       <fieldset className="mt-8">
-        <legend className="eyebrow text-on-sand-dim">
-          04 — Who is asking?
-        </legend>
+        <Eyebrow as="legend" muted>04 — Who is asking?</Eyebrow>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
-            <label
-              className="eyebrow block text-on-sand-dim"
-              htmlFor="barter-brand"
-            >
+            <Eyebrow as="label" muted className="block" htmlFor="barter-brand">
               Brand or company <span aria-hidden>*</span>
-            </label>
+            </Eyebrow>
             <input
               id="barter-brand"
               value={brand}
@@ -168,12 +158,9 @@ export default function BarterSelector() {
             />
           </div>
           <div>
-            <label
-              className="eyebrow block text-on-sand-dim"
-              htmlFor="barter-person"
-            >
+            <Eyebrow as="label" muted className="block" htmlFor="barter-person">
               Your name <span aria-hidden>*</span>
-            </label>
+            </Eyebrow>
             <input
               id="barter-person"
               value={person}

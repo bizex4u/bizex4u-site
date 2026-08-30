@@ -5,11 +5,13 @@ import { exchangeLine, formatLines } from "@/lib/formats";
 import { capabilities } from "@/lib/site";
 import { capabilityDetail } from "@/lib/capabilityDetail";
 import BriefButton from "@/components/BriefButton";
+import PageSchema from "@/components/PageSchema";
 
 export const metadata: Metadata = {
-  title: "What We Do — Outdoor, DOOH, Retail, Broadcast & Barter",
+  title:
+    "What We Do — Outdoor, DOOH, Retail & Barter",
   description:
-    "Six capabilities on one plan: outdoor and transit, digital out-of-home, retail and hyperlocal, broadcast, print and cinema, activations, and the barter model that funds them.",
+    "Six capabilities on one plan: outdoor and transit, DOOH, retail, broadcast, print and cinema, activations, and the barter model that funds them.",
   alternates: { canonical: "/what-we-do" },
 };
 
@@ -126,7 +128,7 @@ export default function WhatWeDoPage() {
                         className="flex items-baseline justify-between gap-4 border-t border-white/12 py-2.5"
                       >
                         <dt className="text-body-s">{f.name}</dt>
-                        <dd className="shrink-0 font-mono text-[0.625rem] tracking-[0.06em] text-on-plum-dim uppercase">
+                        <dd className="shrink-0 font-mono text-nano tracking-[0.06em] text-on-plum-dim uppercase">
                           {f.spec}
                         </dd>
                       </div>
@@ -241,6 +243,11 @@ export default function WhatWeDoPage() {
           </Rise>
         </div>
       </Band>
+      <PageSchema
+        path="/what-we-do"
+        name={"What Bizex4U Does"}
+        description={"Six capabilities on one plan: outdoor and transit, DOOH, retail, broadcast, print and cinema, activations, and the barter model that funds them."}
+      />
     </>
   );
 }

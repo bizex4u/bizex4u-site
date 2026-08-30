@@ -1,3 +1,4 @@
+import { Eyebrow } from "@/components/UI";
 /**
  * The two-invoice diagram.
  *
@@ -44,9 +45,7 @@ const legs = [
 export default function GstFlow() {
   return (
     <div className="rounded-(--radius-card) bg-sand-2 p-6 md:p-8">
-      <p className="eyebrow text-on-sand-dim">
-        How the paperwork actually looks
-      </p>
+      <Eyebrow muted>How the paperwork actually looks</Eyebrow>
 
       <ol className="mt-7 space-y-4">
         {legs.map((leg) => (

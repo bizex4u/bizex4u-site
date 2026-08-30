@@ -16,9 +16,9 @@ export const kolkata: City = {
   region: "East",
 
   metaTitle:
-    "Outdoor Advertising in Kolkata — Hoardings & Transit",
+    "Outdoor Advertising in Kolkata — Hoardings & Metro",
   metaDescription:
-    "Hoarding, unipole, metro, retail and transit advertising in Kolkata, planned from catchment rather than from a site list. Independent Indian media planning and buying across 40+ cities.",
+    "Hoarding, unipole, metro, suburban rail and bus advertising in Kolkata, planned for a city with unusually high public-transport dependency.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Kolkata",
@@ -244,11 +244,12 @@ export const kolkata: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Kolkata?",
-      a: "It depends on the corridor, the size, the illumination and the duration — and more than in most Indian cities, on the season, because Durga Puja compresses a large share of annual demand into a few weeks. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors for every plan. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, the size, the illumination and the duration — and more than in most Indian cities, on the season, because Durga Puja compresses a large share of annual demand into a few weeks. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors for every plan. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Which parts of Kolkata work best for outdoor advertising?",
-      a: "It depends entirely on who you are trying to reach. The EM Bypass and the Howrah approach deliver commuter volume; Park Street, Camac Street and Gariahat deliver discretionary retail audiences; Salt Lake Sector V and New Town deliver a working professional population; north and south Kolkata are neighbourhood markets that respond to hyperlocal presence rather than city-wide weight. We would rather establish the audience first and then recommend the corridor than lead with a location list.",
+      a: "The EM Bypass and the Howrah approach deliver commuter volume; Park Street, Camac Street and Gariahat deliver discretionary retail audiences; Salt Lake Sector V and New Town deliver a working professional population; north and south Kolkata are neighbourhood markets that respond to hyperlocal presence rather than city-wide weight. Which of those is right depends entirely on who you are trying to reach, and we would rather establish the audience first and then recommend the corridor.",
     },
     {
       q: "Do you own hoardings in Kolkata?",

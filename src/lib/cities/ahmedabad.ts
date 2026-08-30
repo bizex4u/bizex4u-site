@@ -16,9 +16,10 @@ export const ahmedabad: City = {
   state: "Gujarat",
   region: "West",
 
-  metaTitle: "Outdoor Advertising in Ahmedabad — Hoardings & Metro Media",
+  metaTitle:
+    "Outdoor Advertising in Ahmedabad — Hoardings",
   metaDescription:
-    "Hoarding, unipole, metro, BRTS and retail advertising in Ahmedabad, planned from catchment rather than from a site list. Independent Indian media planning and buying across 40+ cities.",
+    "Hoarding, unipole, metro, BRTS and retail advertising in Ahmedabad, planned from which side of the Sabarmati you need rather than a site list.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Ahmedabad",
@@ -239,11 +240,12 @@ export const ahmedabad: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Ahmedabad?",
-      a: "It depends on which side of the river, the corridor, the size, the illumination and the duration — and heavily on the season, because Navratri compresses a large share of annual demand into a few weeks. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors for each plan. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on which side of the river, the corridor, the size, the illumination and the duration — and heavily on the season, because Navratri compresses a large share of annual demand into a few weeks. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors for each plan. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Which areas of Ahmedabad are best for outdoor advertising?",
-      a: "It depends on the audience, and in this city the answer usually starts with which side of the Sabarmati. SG Highway, Prahladnagar, Bodakdev, Thaltej, Satellite and Vastrapur reach the affluent western belt and the corporate audience. Maninagar, Naroda, Bapunagar, Odhav, Kalupur and Relief Road reach volume at a very different income level. CG Road sits in between as the legacy high street. We would rather establish the audience first than lead with a location list.",
+      a: "SG Highway, Prahladnagar, Bodakdev, Thaltej, Satellite and Vastrapur reach the affluent western belt and the corporate audience. Maninagar, Naroda, Bapunagar, Odhav, Kalupur and Relief Road reach volume at a very different income level. CG Road sits in between as the legacy high street. In this city the question usually resolves to which side of the Sabarmati you need, and we would rather establish the audience first than lead with a location list.",
     },
     {
       q: "How should a brand plan for Navratri in Ahmedabad?",
@@ -255,7 +257,7 @@ export const ahmedabad: City = {
     },
     {
       q: "Do hoardings in Ahmedabad need a safety certificate?",
-      a: "In practice, yes. Following the Ghatkopar collapse in Mumbai, the Gujarat High Court ordered AMC to inspect roughly two thousand hoardings and banners across the city and remove unsafe ones, with a stability report required from the estate officer. Structural certification is the gate on large format here now. We confirm it before recommending a position, because an advertiser's brand on an uncertified structure is an advertiser's exposure.",
+      a: "Yes, in practice. Following the Ghatkopar collapse in Mumbai, the Gujarat High Court ordered AMC to inspect roughly two thousand hoardings and banners across the city and remove unsafe ones, with a stability report required from the estate officer. Structural certification is the gate on large format here now. We confirm it before recommending a position, because an advertiser's brand on an uncertified structure is an advertiser's exposure.",
     },
     {
       q: "Which newspapers matter in Ahmedabad?",

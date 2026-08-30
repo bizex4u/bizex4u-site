@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
-import { btnClass, type BtnVariant } from "@/components/UI";
+import { Eyebrow, btnClass, type BtnVariant } from "@/components/UI";
 import { site } from "@/lib/site";
 import { submitBrief } from "@/lib/submitBrief";
 
@@ -133,7 +133,7 @@ export default function BriefButton({
       >
         {sent ? (
           <div className="p-6 md:p-8">
-            <p className="eyebrow text-violet-deep">Off it goes</p>
+            <Eyebrow>Off it goes</Eyebrow>
             <h2
               id={`${id}-title`}
               className="mt-3 font-display text-h2 text-balance"
@@ -178,7 +178,7 @@ export default function BriefButton({
         <form onSubmit={submit} className="p-6 md:p-8">
           <div className="flex items-start justify-between gap-6">
             <div>
-              <p className="eyebrow text-violet-deep">Tell us who you are</p>
+              <Eyebrow>Tell us who you are</Eyebrow>
               <h2
                 id={`${id}-title`}
                 className="mt-3 font-display text-h2 text-balance"
@@ -192,7 +192,7 @@ export default function BriefButton({
               aria-label="Close"
               className="-mt-1 -mr-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-on-sand-dim transition-colors hover:bg-sand-3 hover:text-on-sand"
             >
-              <span aria-hidden className="text-[1.25rem] leading-none">
+              <span aria-hidden className="text-h3 leading-none">
                 ×
               </span>
             </button>

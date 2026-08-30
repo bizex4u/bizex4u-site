@@ -19,9 +19,10 @@ export const jaipur: City = {
   state: "Rajasthan",
   region: "North",
 
-  metaTitle: "Outdoor Advertising in Jaipur — Hoardings, Unipoles & Transit",
+  metaTitle:
+    "Outdoor Advertising in Jaipur — Hoardings & Gantry",
   metaDescription:
-    "Hoarding, unipole, gantry and transit advertising in Jaipur, planned from catchment rather than from a site list — and current on the Rajasthan advertisement rules and the walled-city heritage constraints.",
+    "Hoarding, unipole, gantry and transit advertising in Jaipur, current on the Rajasthan advertisement rules and the walled-city constraints.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Jaipur",
@@ -246,7 +247,8 @@ export const jaipur: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Jaipur?",
-      a: "It depends on the corridor, size, illumination, duration and — more than in most Indian cities — on the season, because October to March carries the tourist and wedding peaks together while April to June is thin. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, size, illumination, duration and — more than in most Indian cities — on the season, because October to March carries the tourist and wedding peaks together while April to June is thin. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "What size can a hoarding be in Jaipur?",
@@ -262,7 +264,7 @@ export const jaipur: City = {
     },
     {
       q: "Which areas of Jaipur are best for outdoor advertising?",
-      a: "It depends on the audience. C-Scheme, Malviya Nagar, JLN Marg, Vaishali Nagar, Mansarovar and the Tonk Road corridor reach the affluent and corporate market. The walled city bazaars reach both tourists and genuine local volume, which is a rare combination. Sanganer, Jhotwara, Sitapura and Bagru reach the industrial and value catchment. MI Road is the central spine that catches almost everyone. We would rather establish the audience first than lead with a location list.",
+      a: "C-Scheme, Malviya Nagar, JLN Marg, Vaishali Nagar, Mansarovar and the Tonk Road corridor reach the affluent and corporate market. The walled city bazaars reach both tourists and genuine local volume, which is a rare combination. Sanganer, Jhotwara, Sitapura and Bagru reach the industrial and value catchment. MI Road is the central spine that catches almost everyone. Which of those is right depends on the audience, and we would rather establish that first than lead with a location list.",
     },
     {
       q: "Do you own hoardings in Jaipur?",

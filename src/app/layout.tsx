@@ -6,6 +6,7 @@ import Motion from "@/components/Motion";
 import ScrollCraft from "@/components/ScrollCraft";
 import { site } from "@/lib/site";
 import "./globals.css";
+import { rootGraph } from "@/lib/schema";
 
 /* Fonts are self-hosted rather than pulled from Google.
    Faster first paint, no third-party request, no consent question. */
@@ -125,6 +126,14 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${instrumentSans.variable} ${plexMono.variable} ${mukta.variable}`}
     >
       <body>
+        {/* The entity, once, at the root — so every page inherits it and
+            a crawler landing anywhere can resolve who this is. It was
+            only on /contact, which is the page an answer engine is least
+            likely to land on first. See lib/schema.ts. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(rootGraph) }}
+        />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-100 focus:rounded-full focus:bg-plum focus:px-5 focus:py-3 focus:text-on-plum"

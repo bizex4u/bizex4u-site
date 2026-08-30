@@ -230,7 +230,7 @@ export default function SeasonBar({
 
         {/* Month axis */}
         <div
-          className={`relative grid grid-cols-12 border-b ${rule} pb-1.5 font-mono text-[0.625rem] tracking-[0.08em] ${dim}`}
+          className={`relative grid grid-cols-12 border-b ${rule} pb-1.5 font-mono text-nano tracking-[0.08em] ${dim}`}
           aria-hidden="true"
         >
           {SHORT.map((m, i) => (
@@ -255,7 +255,7 @@ export default function SeasonBar({
                   <>
                     <p className={`text-body-s font-medium ${ink}`}>{b.label}</p>
                     <p
-                      className={`font-mono text-[0.625rem] tracking-[0.08em] uppercase ${dim}`}
+                      className={`font-mono text-nano tracking-[0.08em] uppercase ${dim}`}
                     >
                       {rangeLabel(b.runs)}
                       {b.irregular && " · not every year"}
@@ -265,7 +265,7 @@ export default function SeasonBar({
                   /* Unnamed window: the range IS the heading, so it is
                      set once, on the left, where a name would go. */
                   <p
-                    className={`font-mono text-[0.6875rem] tracking-[0.08em] uppercase ${ink}`}
+                    className={`font-mono text-micro tracking-[0.08em] uppercase ${ink}`}
                   >
                     {rangeLabel(b.runs)}
                     {b.irregular && " · not every year"}
@@ -281,8 +281,8 @@ export default function SeasonBar({
                     key={k}
                     className={
                       b.irregular
-                        ? `rounded-[2px] border ${dashed}`
-                        : `${fill} rounded-[2px]`
+                        ? `rounded-(--radius-xs) border ${dashed}`
+                        : `${fill} rounded-(--radius-xs)`
                     }
                     style={{ gridColumn: `${seg.s + 1} / ${seg.e + 2}` }}
                   />
@@ -298,7 +298,7 @@ export default function SeasonBar({
       {movable.length > 0 && (
         <div className={`mt-5 border-t ${rule} pt-3.5`}>
           <p
-            className={`font-mono text-[0.625rem] tracking-[0.09em] uppercase ${dim}`}
+            className={`font-mono text-nano tracking-[0.09em] uppercase ${dim}`}
           >
             Moves each year — plan against the date, not the month
           </p>

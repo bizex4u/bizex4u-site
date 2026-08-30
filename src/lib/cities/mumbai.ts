@@ -20,9 +20,10 @@ export const mumbai: City = {
   state: "Maharashtra",
   region: "West",
 
-  metaTitle: "Outdoor Advertising in Mumbai — Hoardings, Metro & Rail",
+  metaTitle:
+    "Outdoor Advertising in Mumbai — Hoardings & Rail",
   metaDescription:
-    "Hoarding, unipole, metro, suburban rail and transit advertising in Mumbai, planned from catchment rather than from a site list — and current on the 2025 BMC advertising policy.",
+    "Hoarding, unipole, metro, suburban rail and transit advertising in Mumbai, current on the BMC Outdoor Advertisement Policy 2025.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Mumbai",
@@ -266,7 +267,8 @@ export const mumbai: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Mumbai?",
-      a: "It depends on the corridor, the size, the illumination, the duration and — increasingly — on scarcity, because the compliant large-format pool has shrunk under the 2025 policy. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors on every plan. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, the size, the illumination, the duration and — increasingly — on scarcity, because the compliant large-format pool has shrunk under the 2025 policy. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors on every plan. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Are hoardings still allowed on the Western and Eastern Express Highways?",
@@ -282,7 +284,7 @@ export const mumbai: City = {
     },
     {
       q: "Which areas of Mumbai are best for outdoor advertising?",
-      a: "It depends on the audience. BKC, Lower Parel, Worli and Nariman Point reach the highest-value corporate population in India. Bandra's Linking Road and the western suburbs reach young aspirational retail. Dadar, Andheri and the suburban stations reach genuine mass volume. Thane, Navi Mumbai and Kalyan-Dombivli reach the outer residential market at a different price point. We would rather establish the audience first than lead with a location list.",
+      a: "BKC, Lower Parel, Worli and Nariman Point reach the highest-value corporate population in India. Bandra's Linking Road and the western suburbs reach young aspirational retail. Dadar, Andheri and the suburban stations reach genuine mass volume. Thane, Navi Mumbai and Kalyan-Dombivli reach the outer residential market at a different price point. Which of those is right depends on the audience, and we would rather establish that first than lead with a location list.",
     },
     {
       q: "Do you own hoardings in Mumbai?",

@@ -17,9 +17,9 @@ export const delhiNcr: City = {
   region: "North",
 
   metaTitle:
-    "Outdoor Advertising in Delhi NCR — Hoardings, Metro & Unipoles",
+    "Outdoor Advertising in Delhi NCR — Hoardings",
   metaDescription:
-    "Hoarding, unipole, metro and transit advertising across Delhi, Gurugram and Noida — three licensing authorities, planned as one campaign. Independent Indian media planning and buying.",
+    "Hoarding, unipole, metro and transit advertising across Delhi, Gurugram and Noida — three licensing authorities, planned as one campaign.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Delhi NCR",
@@ -258,7 +258,8 @@ export const delhiNcr: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Delhi NCR?",
-      a: "It depends which of the three jurisdictions the site sits in, the corridor, the size, the illumination and the duration — and Gurugram's premium corridors and outer Delhi price nothing like each other. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors on every plan. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends which of the three jurisdictions the site sits in, the corridor, the size, the illumination and the duration — and Gurugram's premium corridors and outer Delhi price nothing like each other. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors on every plan. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Why does Delhi NCR need three separate permissions?",
@@ -270,7 +271,7 @@ export const delhiNcr: City = {
     },
     {
       q: "Which areas of Delhi NCR are best for outdoor advertising?",
-      a: "It depends entirely on the audience. Gurugram's Cyber City and Golf Course Road, Aerocity and south Delhi reach the highest-income and corporate population. West, north and east Delhi plus Noida, Ghaziabad and Faridabad reach volume at a different income level. Connaught Place and Nehru Place reach office and trade audiences. Chandni Chowk and Sarojini Nagar reach very dense pedestrian retail. We would rather establish the audience first than lead with a location list.",
+      a: "Gurugram's Cyber City and Golf Course Road, Aerocity and south Delhi reach the highest-income and corporate population. West, north and east Delhi plus Noida, Ghaziabad and Faridabad reach volume at a different income level. Connaught Place and Nehru Place reach office and trade audiences. Chandni Chowk and Sarojini Nagar reach very dense pedestrian retail. Which of those is right depends entirely on the audience, and we would rather establish that first than lead with a location list.",
     },
     {
       q: "Do you own hoardings in Delhi NCR?",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { footerNav, site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
+import { Eyebrow } from "@/components/UI";
 
 export default function Footer() {
   return (
@@ -48,7 +49,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
             {footerNav.map((col) => (
               <div key={col.heading}>
-                <h2 className="eyebrow text-on-plum-dim">{col.heading}</h2>
+                <Eyebrow as="h2" tone="plum" muted>{col.heading}</Eyebrow>
                 <ul className="mt-4 space-y-1">
                   {col.links.map((link) => {
                     const cls =
@@ -92,10 +93,8 @@ export default function Footer() {
               बिज़ेक्स4यू
             </span>
           </span>
-          <span className="eyebrow text-on-plum-dim">
-            © {new Date().getFullYear()} {site.wordmark} · {site.address.line1},{" "}
-            {site.address.line2}
-          </span>
+          <Eyebrow as="span" tone="plum" muted>© {new Date().getFullYear()} {site.wordmark} · {site.address.line1},{" "}
+            {site.address.line2}</Eyebrow>
           <span className="sr-only">Independent Indian media network.</span>
         </div>
       </div>

@@ -21,9 +21,9 @@ export const coimbatore: City = {
   region: "South",
 
   metaTitle:
-    "Outdoor Advertising in Coimbatore — Hoardings & Transit",
+    "Outdoor Advertising in Coimbatore — Hoardings",
   metaDescription:
-    "Hoarding, unipole, retail and transit advertising in Coimbatore, planned from catchment rather than from a site list. Independent Indian media planning and buying across 40+ cities.",
+    "Hoarding, unipole, retail and bus advertising in Coimbatore, planned around Avinashi Road, Gandhipuram and the Kongu college belt.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Coimbatore",
@@ -277,11 +277,12 @@ export const coimbatore: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Coimbatore?",
-      a: "It depends on the corridor, the size, the illumination and the duration — and in Coimbatore it depends on the season too, because Aadi and the wedding months move DB Road and RS Puram rates in a way no other weeks do. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real, permission-confirmed positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, the size, the illumination and the duration — and in Coimbatore it depends on the season too, because Aadi and the wedding months move DB Road and RS Puram rates in a way no other weeks do. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real, permission-confirmed positions.",
     },
     {
       q: "Which areas of Coimbatore are best for outdoor advertising?",
-      a: "It depends on the audience. Avinashi Road reaches the IT, airport and arriving-Tirupur audience; DB Road and RS Puram reach settled affluent retail; Cross Cut Road in Gandhipuram reaches pedestrian retail density; Race Course and Saibaba Colony reach older established households; the college belts around PSG and Peelamedu reach a student catchment. We would rather establish the audience first than open with a location list.",
+      a: "Avinashi Road reaches the IT, airport and arriving-Tirupur audience; DB Road and RS Puram reach settled affluent retail; Cross Cut Road in Gandhipuram reaches pedestrian retail density; Race Course and Saibaba Colony reach older established households; the college belts around PSG and Peelamedu reach a student catchment. Which of those is right depends on the audience, and we would rather establish that first than open with a location list.",
     },
     {
       q: "Are hoardings allowed in Coimbatore?",

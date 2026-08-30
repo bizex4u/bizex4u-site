@@ -31,9 +31,9 @@ export const kochi: City = {
   region: "South",
 
   metaTitle:
-    "Outdoor Advertising in Kochi — Hoardings & Transit",
+    "Outdoor Advertising in Kochi — Hoardings & Metro",
   metaDescription:
-    "Hoarding, unipole, metro, retail and transit advertising in Kochi, planned from catchment rather than from a site list. Independent Indian media planning and buying across 40+ cities.",
+    "Hoarding, unipole, metro, Water Metro and retail advertising in Kochi, planned across the mainland arterial, Kakkanad and the airport approach.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Kochi",
@@ -291,7 +291,8 @@ export const kochi: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Kochi?",
-      a: "It depends on the corridor, the size, the illumination, the duration and the season — and in Kochi it depends unusually heavily on whether the position's permission is current, because unauthorised structures can be removed mid-campaign here. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real, permission-confirmed positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, the size, the illumination, the duration and the season — and in Kochi it depends unusually heavily on whether the position's permission is current, because unauthorised structures can be removed mid-campaign here. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real, permission-confirmed positions.",
     },
     {
       q: "Are hoardings allowed in Kochi?",
@@ -299,7 +300,7 @@ export const kochi: City = {
     },
     {
       q: "Which areas of Kochi are best for outdoor advertising?",
-      a: "It depends on the audience. NH-544 and MG Road reach the mainland arterial commuter; Kakkanad and the Seaport–Airport Road reach the IT and services professional; Panampilly Nagar and Kadavanthra reach settled affluent households; Edappally around LuLu reaches the family retail crowd; Fort Kochi and Mattancherry reach the tourism audience; the airport approach reaches the returning Gulf traveller. We would rather establish the audience first than open with a location list.",
+      a: "NH-544 and MG Road reach the mainland arterial commuter; Kakkanad and the Seaport–Airport Road reach the IT and services professional; Panampilly Nagar and Kadavanthra reach settled affluent households; Edappally around LuLu reaches the family retail crowd; Fort Kochi and Mattancherry reach the tourism audience; the airport approach reaches the returning Gulf traveller. Which of those is right depends on the audience, and we would rather establish that first than open with a location list.",
     },
     {
       q: "Do you own hoardings in Kochi?",
@@ -331,7 +332,7 @@ export const kochi: City = {
     },
     {
       q: "Which transit medium works best in Kochi?",
-      a: "It depends on the audience. The metro reaches a defined commuter population repeatedly across the mainland. The Water Metro reaches the island commuter and the Fort Kochi tourist that no other format touches. KSRTC buses and the Vyttila hub reach across the whole metropolitan area at the lowest cost per exposure. Most national plans buy only the metro, and for tourism, hospitality and NRI-adjacent categories that is usually the wrong call.",
+      a: "The metro reaches a defined commuter population repeatedly across the mainland. The Water Metro reaches the island commuter and the Fort Kochi tourist that no other format touches. KSRTC buses and the Vyttila hub reach across the whole metropolitan area at the lowest cost per exposure. Which one is right depends on the audience — and most national plans buy only the metro, which for tourism, hospitality and NRI-adjacent categories is usually the wrong call.",
     },
     {
       q: "Can you plan Kochi alongside other Kerala or south Indian markets?",

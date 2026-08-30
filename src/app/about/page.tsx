@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
+import { Band, Btn, Card, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import { clients, sectorsServed, site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
+import PageSchema from "@/components/PageSchema";
 
 export const metadata: Metadata = {
   title: "About — An Independent Indian Media Network",
   description:
-    "Bizex4U is an independent outdoor and media network operating in more than forty Indian cities from Kanpur, Uttar Pradesh. No owner mandate, no inherited rate card.",
+    "An independent Indian outdoor and media network working in more than forty cities from Kanpur, Uttar Pradesh. No owner mandate, no inherited rate card.",
   alternates: { canonical: "/about" },
 };
 
@@ -76,7 +77,7 @@ export default function AboutPage() {
 
             <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
               <Card bg="bg-plum" className="text-on-plum">
-                <p className="eyebrow text-violet-lift">Where we are</p>
+                <Eyebrow tone="plum">Where we are</Eyebrow>
                 <p className="mt-5 font-display text-h2">
                   {site.address.line1}
                   <br />
@@ -98,7 +99,7 @@ export default function AboutPage() {
         <dl className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
           {facts.map((f, i) => (
             <Rise key={f.label} delay={i * 60}>
-              <dt className="eyebrow text-on-sand-dim">{f.label}</dt>
+              <Eyebrow as="dt" muted>{f.label}</Eyebrow>
               <dd className="mt-3 font-display text-[clamp(2rem,4vw,3.25rem)] leading-none">
                 {f.value}
               </dd>
@@ -112,22 +113,16 @@ export default function AboutPage() {
 
       {/* 02 — HOW WE WORK ---------------------------------------- */}
       <Band tone="plum" grain>
-        <div className="grid-12 items-end">
-          <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow tone="plum" deva="हम कैसे काम करते हैं">
-              How we work
-            </Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
-              Independence is the{" "}
-              <span className="em-serif">whole argument</span>.
-            </h2>
-          </Rise>
-          <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-            A media owner sells what it has. A network agency sells what its
+        <SectionHead
+            eyebrow="How we work"
+            tone="plum"
+            deva="हम कैसे काम करते हैं"
+            title={<>Independence is the{" "}
+              <span className="em-serif">whole argument</span>.</>}
+            lede={<>A media owner sells what it has. A network agency sells what its
             group holds. We have neither problem, and everything below is a
-            consequence of that.
-          </p>
-        </div>
+            consequence of that.</>}
+          />
 
         <ol className="mt-12 border-t border-rule-plum">
           {principles.map((p, i) => (
@@ -170,7 +165,7 @@ export default function AboutPage() {
 
           <div className="col-span-12 lg:col-span-6 lg:col-start-7">
             <Rise>
-              <p className="eyebrow text-on-sand-dim">Sectors</p>
+              <Eyebrow muted>Sectors</Eyebrow>
               <ul className="mt-5 flex flex-wrap gap-2">
                 {sectorsServed.map((s) => (
                   <li
@@ -183,9 +178,7 @@ export default function AboutPage() {
               </ul>
             </Rise>
             <Rise delay={100}>
-              <p className="eyebrow mt-10 text-on-sand-dim">
-                Campaigns planned and run for
-              </p>
+              <Eyebrow muted className="mt-10">Campaigns planned and run for</Eyebrow>
               <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2.5">
                 {clients.map((c) => (
                   <li key={c} className="text-h3 text-on-sand-dim">
@@ -224,6 +217,12 @@ export default function AboutPage() {
           </Rise>
         </div>
       </Band>
+      <PageSchema
+        path="/about"
+        name={"About Bizex4U"}
+        description={"An independent Indian outdoor and media network working in more than forty cities from Kanpur, Uttar Pradesh. No owner mandate, no inherited rate card."}
+        type="AboutPage"
+      />
     </>
   );
 }

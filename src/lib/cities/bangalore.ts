@@ -25,9 +25,10 @@ export const bangalore: City = {
   state: "Karnataka",
   region: "South",
 
-  metaTitle: "Outdoor Advertising in Bangalore — Hoardings & Metro Media",
+  metaTitle:
+    "Outdoor Advertising in Bangalore — Hoardings",
   metaDescription:
-    "Hoarding, unipole, metro and transit advertising in Bengaluru, planned from catchment rather than from a site list — and current on the post-ban bye-laws and the GBA transition.",
+    "Hoarding, metro and transit advertising in Bengaluru, planned from catchment — and current on the post-ban bye-laws and the GBA transition.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Bangalore",
@@ -273,7 +274,8 @@ export const bangalore: City = {
     },
     {
       q: "How much does hoarding advertising cost in Bangalore?",
-      a: "It depends on the corridor, the size, the illumination and the duration — and in Bengaluru, unusually, on scarcity, because six years of ban dismantled the physical stock and the spacing rules cap how much can come back. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, the size, the illumination and the duration — and in Bengaluru, unusually, on scarcity, because six years of ban dismantled the physical stock and the spacing rules cap how much can come back. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Why is outdoor inventory so limited in Bangalore?",
@@ -289,7 +291,7 @@ export const bangalore: City = {
     },
     {
       q: "Which areas of Bangalore are best for outdoor advertising?",
-      a: "It depends on the audience. The ORR belt from Marathahalli through Bellandur to Sarjapur, plus Whitefield and Electronic City, reach the highest-income tech population. MG Road, Brigade Road and Commercial Street reach young urban retail. Majestic, Chickpet and KR Market reach vernacular Kannada volume at a different income level. Koramangala, Indiranagar and Jayanagar behave as their own neighbourhood markets. We would rather establish the audience first than lead with a location list.",
+      a: "The ORR belt from Marathahalli through Bellandur to Sarjapur, plus Whitefield and Electronic City, reach the highest-income tech population. MG Road, Brigade Road and Commercial Street reach young urban retail. Majestic, Chickpet and KR Market reach vernacular Kannada volume at a different income level. Koramangala, Indiranagar and Jayanagar behave as their own neighbourhood markets. Which of those is right depends on the audience, and we would rather establish that first than lead with a location list.",
     },
     {
       q: "Is Namma Metro advertising worth buying?",

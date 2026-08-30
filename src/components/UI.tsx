@@ -112,16 +112,36 @@ export function Eyebrow({
   children,
   deva,
   tone = "sand",
+  as: Tag = "p",
+  muted = false,
   className = "",
+  htmlFor,
 }: {
   children: ReactNode;
   deva?: string;
   tone?: Tone;
+  /* The same label does five jobs on this site — a section eyebrow, a
+     fieldset legend, a column heading, a definition term, a form label.
+     They were thirty-two hand-written copies of the same class string,
+     each author picking a colour by eye. That is precisely how the
+     wordmark ended up plum-on-plum: a colour chosen by hand against a
+     ground that later changed. The tone knows which violet and which
+     dim belong to each background; nobody should be choosing. */
+  as?: "p" | "span" | "legend" | "dt" | "h2" | "h3" | "label";
+  /* Only meaningful when `as="label"`. Typed rather than spread so a
+     stray htmlFor on a <dt> is a compile error, not a silent no-op. */
+  htmlFor?: string;
+  /* Accent (violet) is the section eyebrow. Muted (dim) is a label
+     inside something — a card, a fieldset, a table column. */
+  muted?: boolean;
   className?: string;
 }) {
   const t = toneStyles[tone];
   return (
-    <p className={`eyebrow ${t.hl} ${className}`}>
+    <Tag
+      className={`eyebrow ${muted ? t.dim : t.hl} ${className}`}
+      htmlFor={Tag === "label" ? htmlFor : undefined}
+    >
       {children}
       {deva && (
         <>
@@ -153,7 +173,7 @@ export function Eyebrow({
           </span>
         </>
       )}
-    </p>
+    </Tag>
   );
 }
 
@@ -295,6 +315,72 @@ export function Stat({
       </p>
       <p className="mt-3 text-h3">{label}</p>
       {note && <p className={`mt-1.5 max-w-[26ch] text-body-s ${t.dim}`}>{note}</p>}
+    </div>
+  );
+}
+
+/**
+ * The section header: eyebrow, heading, and a lede off to the right.
+ *
+ * Twenty-six near-copies of this shape across nine files. Every one hand
+ * wrote the same grid, the same `mt-5`, the same `max-w-[42ch]`, and
+ * every one chose its own column split — 7/5 here, 6/5 there, 8/3 on the
+ * page nobody had looked at in a while. The variation was not design; it
+ * was twenty-six separate guesses at the same decision.
+ *
+ * What the component fixes is not typing. It is that the next section
+ * anyone adds now inherits the rhythm instead of re-deriving it, and
+ * that changing the rhythm is one edit rather than twenty-six.
+ *
+ * `lede` is optional because eight of the twenty-six carry no second
+ * column, and `children` takes anything that is not a paragraph — a
+ * button, a pause control, a link — so the two-column shape survives
+ * contact with the sections that need more than prose.
+ */
+export function SectionHead({
+  eyebrow,
+  deva,
+  title,
+  lede,
+  tone = "sand",
+  children,
+  className = "",
+}: {
+  eyebrow?: string;
+  deva?: string;
+  title: ReactNode;
+  lede?: ReactNode;
+  tone?: Tone;
+  children?: ReactNode;
+  className?: string;
+}) {
+  const t = toneStyles[tone];
+  const wide = Boolean(lede || children);
+  return (
+    <div className={`grid-12 items-end ${className}`}>
+      <Rise className={wide ? "col-span-12 lg:col-span-7" : "col-span-12"}>
+        {eyebrow && (
+          <Eyebrow tone={tone} deva={deva}>
+            {eyebrow}
+          </Eyebrow>
+        )}
+        <h2
+          className={`font-display text-display-l text-balance ${
+            eyebrow ? "mt-5" : ""
+          }`}
+        >
+          {title}
+        </h2>
+      </Rise>
+
+      {wide && (
+        <div className="col-span-12 mt-5 lg:col-span-5 lg:col-start-8 lg:mt-0">
+          {lede && (
+            <p className={`max-w-[42ch] text-body-l ${t.dim}`}>{lede}</p>
+          )}
+          {children && <div className={lede ? "mt-5" : ""}>{children}</div>}
+        </div>
+      )}
     </div>
   );
 }

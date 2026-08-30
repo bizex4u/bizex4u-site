@@ -1,17 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import DayClock from "@/components/DayClock";
 import ReelBand from "@/components/ReelBand";
 import StreetWall from "@/components/StreetWall";
 import Marquee from "@/components/Marquee";
-import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
+import { Band, Btn, Card, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import {
   capabilities,
   clients,
   objectives,
   proofFrames,
   proofStats,
+  site,
 } from "@/lib/site";
+import { organisationId, speakable } from "@/lib/schema";
 import { additionalMarkets, cities } from "@/lib/cities";
 import { exchangeLine, formatLines } from "@/lib/formats";
 import { heroPlate, statementPlate } from "@/lib/streets";
@@ -32,6 +35,16 @@ import BriefButton from "@/components/BriefButton";
    grid, counting numbers. The old page used the same band-and-cards
    device eight times, which is what made it read as static.
 ------------------------------------------------------------------- */
+
+/* THE HOMEPAGE HAD NO CANONICAL. Every other route declares one; the
+   root inherited nothing, because a canonical is not inherited from a
+   layout the way a title template is. The root URL is the one most
+   likely to be reached through a tracking parameter, a UTM tail or a
+   www/non-www variant, so it is the worst page on the site to leave
+   undeclared. */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const deva: Record<string, string> = {
   Kolkata: "कोलकाता",
@@ -164,7 +177,7 @@ export default function Home() {
               </h1>
 
               <Rise delay={120}>
-                <p className="mt-7 max-w-[46ch] text-body-l text-on-plum-dim">
+                <p className="speakable-answer mt-7 max-w-[46ch] text-body-l text-on-plum-dim">
                   We put brands into the streets, malls, lifts, papers and
                   screens of more than forty Indian cities — and prove every
                   placement went up. If the cash budget is not there, you can
@@ -215,9 +228,7 @@ export default function Home() {
         <div className="shell relative z-10">
           <Rise>
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <p className="eyebrow text-on-sand-dim">
-                Campaigns planned and run for
-              </p>
+              <Eyebrow muted>Campaigns planned and run for</Eyebrow>
               <MarqueeToggle label="the client list" tone="sand" />
             </div>
           </Rise>
@@ -292,22 +303,16 @@ export default function Home() {
           Indian buyers actually type — hoarding, unipole, bus queue
           shelter. See lib/formats.ts. */}
       <Band tone="plum" grain>
-        <div className="grid-12 items-end">
-          <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow tone="plum" deva="हम क्या करते हैं">
-              What activation means here
-            </Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
-              Six ways to be{" "}
-              <span className="em-serif">present</span>.
-            </h2>
-          </Rise>
-          <p className="col-span-12 mt-5 max-w-[44ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-            A hoarding and a lift panel are not the same product and should
+        <SectionHead
+            eyebrow="What activation means here"
+            tone="plum"
+            deva="हम क्या करते हैं"
+            title={<>Six ways to be{" "}
+              <span className="em-serif">present</span>.</>}
+            lede={<>A hoarding and a lift panel are not the same product and should
             not be sold as though they were. These are the formats we plan,
-            named the way this market names them.
-          </p>
-        </div>
+            named the way this market names them.</>}
+          />
 
         {/* Six equal cards was six cards nobody read — card 01 and card
             05 carried identical weight, so nothing led and the eye had
@@ -346,7 +351,7 @@ export default function Home() {
                 >
                   <div className={c.accent ? "md:flex-1" : "contents"}>
                     <p
-                      className={`font-mono text-[0.75rem] tracking-[0.08em] uppercase ${
+                      className={`font-mono text-meta tracking-[0.08em] uppercase ${
                         c.accent ? "text-on-violet-dim" : "text-violet-lift"
                       }`}
                     >
@@ -396,7 +401,7 @@ export default function Home() {
                           className="flex items-baseline justify-between gap-4 border-t border-white/12 py-2.5"
                         >
                           <dt className="text-body-s">{f.name}</dt>
-                          <dd className="shrink-0 font-mono text-[0.625rem] tracking-[0.06em] text-on-plum-dim uppercase">
+                          <dd className="shrink-0 font-mono text-nano tracking-[0.06em] text-on-plum-dim uppercase">
                             {f.spec}
                           </dd>
                         </div>
@@ -485,7 +490,7 @@ export default function Home() {
               className="lg:row-span-4 lg:grid lg:grid-rows-subgrid"
             >
               <Card className="lift flex h-full flex-col lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:gap-0">
-                <span className="eyebrow text-violet-deep">{o.index}</span>
+                <Eyebrow as="span">{o.index}</Eyebrow>
                 <h3 className="mt-3 font-display text-h2 text-balance">
                   {o.title}
                 </h3>
@@ -519,22 +524,16 @@ export default function Home() {
           a much larger size. Small thumbnails undersold the one thing
           on the site nobody else offers. */}
       <Band tone="plum2" grain>
-        <div className="grid-12 items-end">
-          <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow tone="plum2" deva="डिलीवरी का सबूत">
-              Proof of delivery
-            </Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
-              You will know it{" "}
-              <span className="em-serif">actually went up</span>.
-            </h2>
-          </Rise>
-          <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-            Every placement photographed on site, geo-tagged and dated. You
+        <SectionHead
+            eyebrow="Proof of delivery"
+            tone="plum2"
+            deva="डिलीवरी का सबूत"
+            title={<>You will know it{" "}
+              <span className="em-serif">actually went up</span>.</>}
+            lede={<>Every placement photographed on site, geo-tagged and dated. You
             get the file, not a summary. Where a screen is digital we verify
-            the run date against that morning&rsquo;s newspaper in frame.
-          </p>
-        </div>
+            the run date against that morning&rsquo;s newspaper in frame.</>}
+          />
 
         <ul className="mt-12 grid gap-5 sm:grid-cols-2">
           {proofFrames.map((f, i) => (
@@ -643,7 +642,7 @@ export default function Home() {
 
           <Rise delay={100} className="col-span-12 lg:col-span-5 lg:col-start-8">
             <div className="rounded-(--radius-card) bg-white/10 p-6 md:p-7">
-              <p className="eyebrow text-on-violet-dim">What you can trade</p>
+              <Eyebrow tone="violet" muted>What you can trade</Eyebrow>
               <ul className="mt-5 divide-y divide-white/15">
                 {tradeable.map((t) => (
                   <li key={t} className="flex items-start gap-3 py-3.5">
@@ -750,7 +749,7 @@ export default function Home() {
         <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
           {proofStats.map((s, i) => (
             <Rise key={s.label} delay={i * 60}>
-              <dt className="eyebrow text-on-sand-dim">{s.label}</dt>
+              <Eyebrow as="dt" muted>{s.label}</Eyebrow>
               <dd
                 data-count={/\d/.test(s.value) ? s.value : undefined}
                 className="mt-3 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] leading-none"
@@ -764,6 +763,30 @@ export default function Home() {
           ))}
         </dl>
       </Band>
+
+      {/* A WebPage node for the root, carrying speakable and the
+          review date. It lives here rather than in the shared root
+          graph because that graph renders on every route — a WebPage
+          whose url is the homepage would then be asserted on all of
+          them. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": `${site.url}/#webpage`,
+            url: site.url,
+            name: `${site.name} — Independent Indian Media Network`,
+            description: site.description,
+            isPartOf: { "@id": `${site.url}/#website` },
+            about: { "@id": organisationId },
+            inLanguage: "en-IN",
+            dateModified: site.contentReviewed,
+            speakable,
+          }),
+        }}
+      />
     </>
   );
 }

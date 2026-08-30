@@ -3,7 +3,6 @@ import { cities } from "./cities";
 export const site = {
   name: "Bizex4U",
   wordmark: "BIZEX4U",
-  founded: 2008,
   url: "https://www.bizex4u.com",
   description:
     "Bizex4U is an independent Indian media network. We plan, negotiate and run outdoor, retail and broadcast campaigns across India.",
@@ -26,6 +25,35 @@ export const site = {
     line2: "Kanpur, Uttar Pradesh",
     country: "India",
   },
+
+  /* THE DATE THE CONTENT WAS LAST GONE THROUGH.
+     Fed to schema as dateModified on every page. A generative engine
+     with two candidate answers about a 2025 municipal policy will take
+     the one that carries a recent date, and a site with no date at all
+     reads as undated rather than as current.
+
+     This is a claim, so it has to stay true: bump it when the copy,
+     the compliance sections or the station and masthead tables are
+     actually reviewed — not on every deploy that changes a colour. */
+  contentReviewed: "2026-08-30",
+
+  /* `sameAs` — THE SINGLE BIGGEST THING STILL MISSING FROM THIS SITE.
+     Every URL here is a place the same entity is already listed. An
+     answer engine uses them to corroborate that this company exists
+     outside its own website; with an empty list it has one unlinked
+     island and no second source, which is the most common reason a
+     real firm gets described vaguely or skipped entirely.
+
+     Paste them in as they exist. Nothing else needs changing — the
+     schema reads this array directly:
+       LinkedIn company page, Google Business Profile (the "share"
+       URL, not the maps pin), Justdial listing, IndiaMART, Facebook,
+       Instagram, and any ZaubaCorp / Tofler record of the registered
+       entity.
+
+     Only URLs that genuinely resolve to this company. A wrong one is
+     worse than none: it merges this entity with somebody else's. */
+  profiles: [] as string[],
 } as const;
 
 /* ------------------------------------------------------------------
@@ -137,6 +165,7 @@ export const footerNav = [
     links: [
       { label: "About", href: "/about" },
       { label: "Work", href: "/work" },
+      { label: "Glossary", href: "/glossary" },
       { label: "Contact", href: "/contact" },
     ],
   },

@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
+import { Band, Btn, Card, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import Image from "next/image";
 import SeasonBar from "@/components/SeasonBar";
 import { CityLocator } from "@/components/IndiaField";
 import { framesFor } from "@/lib/streets";
 import { Faq } from "@/components/Ledger";
 import { cities, cityBySlug } from "@/lib/cities";
+import { termsForCity } from "@/lib/glossary";
 import { site } from "@/lib/site";
+import { organisationId, speakable } from "@/lib/schema";
 import BriefButton from "@/components/BriefButton";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -66,6 +68,8 @@ export default async function CityPage({ params }: Params) {
   const city = cityBySlug(slug);
   if (!city) notFound();
 
+  const glossaryTerms = termsForCity(city.slug);
+
   const frames = framesFor(city.name);
 
   return (
@@ -74,7 +78,7 @@ export default async function CityPage({ params }: Params) {
       <section className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20">
         <div className="shell relative z-10">
           <nav aria-label="Breadcrumb" className="mb-10">
-            <ol className="flex flex-wrap gap-2 font-mono text-[0.75rem] tracking-[0.08em] text-on-sand-dim uppercase">
+            <ol className="flex flex-wrap gap-2 font-mono text-meta tracking-[0.08em] text-on-sand-dim uppercase">
               <li>
                 <Link
                   href="/"
@@ -142,7 +146,7 @@ export default async function CityPage({ params }: Params) {
               <CityLocator slug={city.slug} name={city.name} />
               <div className="mt-4">
                 <Card>
-                  <p className="eyebrow text-on-sand-dim">Also planned nearby</p>
+                  <Eyebrow muted>Also planned nearby</Eyebrow>
                   <Nearby names={city.nearby} />
                 </Card>
               </div>
@@ -177,22 +181,16 @@ export default async function CityPage({ params }: Params) {
           The section a local reads to decide whether we actually know
           their city. Places and crowds only — never a site we hold. */}
       <Band tone="plum" grain>
-        <div className="grid-12 items-end">
-          <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow tone="plum" deva="भीड़ कहाँ है">
-              Where the crowds are
-            </Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
-              The places {city.name}{" "}
-              <span className="em-serif">actually gathers</span>.
-            </h2>
-          </Rise>
-          <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-            Not a site list. These are the parts of the city where people
+        <SectionHead
+            eyebrow="Where the crowds are"
+            tone="plum"
+            deva="भीड़ कहाँ है"
+            title={<>The places {city.name}{" "}
+              <span className="em-serif">actually gathers</span>.</>}
+            lede={<>Not a site list. These are the parts of the city where people
             concentrate, and why — the starting point for any plan worth
-            arguing about.
-          </p>
-        </div>
+            arguing about.</>}
+          />
 
         {/* Six identical cards in a three-column grid was six cards
             nobody read: every place carried the same weight, so nothing
@@ -210,7 +208,7 @@ export default async function CityPage({ params }: Params) {
               className={i === 0 ? "md:col-span-2" : undefined}
             >
               <div className="flex h-full flex-col rounded-(--radius-card) bg-plum-2 p-6 md:p-7">
-                <span className="font-mono text-[0.75rem] tracking-[0.08em] text-violet-lift">
+                <span className="font-mono text-meta tracking-[0.08em] text-violet-lift">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3
@@ -241,19 +239,14 @@ export default async function CityPage({ params }: Params) {
       {frames.length > 0 && (
         <section className="grain relative overflow-hidden bg-plum-2 py-(--spacing-band) text-on-plum">
           <div className="shell relative z-10">
-            <div className="grid-12 items-end">
-              <Rise className="col-span-12 lg:col-span-7">
-                <Eyebrow tone="plum">On the ground</Eyebrow>
-                <h2 className="mt-5 font-display text-display-l text-balance">
-                  {city.name}, <span className="em-serif">as we found it</span>.
-                </h2>
-              </Rise>
-              <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-plum-dim lg:col-span-5 lg:mt-0">
-                Our own frames, taken standing in front of live placements on a
+            <SectionHead
+            eyebrow="On the ground"
+            tone="plum"
+            title={<>{city.name}, <span className="em-serif">as we found it</span>.</>}
+            lede={<>Our own frames, taken standing in front of live placements on a
                 working day. Not stock, and not a site list — the geo-stamp is
-                cropped off these deliberately.
-              </p>
-            </div>
+                cropped off these deliberately.</>}
+          />
 
             <ul
               className={`mt-11 grid gap-4 ${
@@ -289,20 +282,15 @@ export default async function CityPage({ params }: Params) {
           types, and each body has to be about THIS city — a generic
           paragraph explaining what a unipole is helps nobody. */}
       <Band tone="sand" grain>
-        <div className="grid-12 items-end">
-          <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow deva="माध्यम">The formats</Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
-              What actually works{" "}
-              <span className="em-serif text-violet-deep">in {city.name}</span>.
-            </h2>
-          </Rise>
-          <p className="col-span-12 mt-5 max-w-[44ch] text-body-l text-on-sand-dim lg:col-span-5 lg:mt-0">
-            Every format below exists in this city. Not all of them belong in
+        <SectionHead
+            eyebrow="The formats"
+            deva="माध्यम"
+            title={<>What actually works{" "}
+              <span className="em-serif text-violet-deep">in {city.name}</span>.</>}
+            lede={<>Every format below exists in this city. Not all of them belong in
             your plan — most briefs need two or three, and the useful work is
-            deciding which.
-          </p>
-        </div>
+            deciding which.</>}
+          />
 
         <div className="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-2">
           {city.formatGuide.map((f, i) => (
@@ -328,30 +316,55 @@ export default async function CityPage({ params }: Params) {
             </Rise>
           ))}
         </div>
+
+        {/* The vocabulary rail.
+
+            Every format guide above uses nouns a first-time buyer has
+            to infer from context — unipole, BQS, sky-sign, loop. Until
+            the glossary existed there was nowhere on this site to send
+            them, so the page quietly assumed a reader who already knew.
+            These are the terms that carry a local particularity in this
+            specific market, not a generic list. */}
+        {glossaryTerms.length ? (
+          <Rise>
+            <div className="mt-16 border-t border-rule-sand pt-8">
+              <Eyebrow muted>
+                If a word above was doing work you had to guess at
+              </Eyebrow>
+              <ul className="mt-5 flex flex-wrap gap-2.5">
+                {glossaryTerms.map((t) => (
+                  <li key={t.slug}>
+                    <Link
+                      href={`/glossary/${t.slug}`}
+                      className="inline-flex min-h-11 items-center rounded-full border border-on-sand/20 px-4 text-body-s transition-colors duration-200 hover:border-on-sand hover:bg-on-sand/5"
+                    >
+                      {t.term}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Rise>
+        ) : null}
       </Band>
 
       {/* 04 — PRESS AND RADIO ------------------------------------ */}
       <Band tone="sand2" grain>
-        <div className="grid-12 items-end">
-          <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow deva="अख़बार और रेडियो">The local press and radio</Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
-              What {city.name}{" "}
-              <span className="em-serif text-violet-deep">reads and hears</span>.
-            </h2>
-          </Rise>
-          <p className="col-span-12 mt-5 max-w-[44ch] text-body-l text-on-sand-dim lg:col-span-5 lg:mt-0">
-            The regional titles carry most of the local weight, and being in
+        <SectionHead
+            eyebrow="The local press and radio"
+            deva="अख़बार और रेडियो"
+            title={<>What {city.name}{" "}
+              <span className="em-serif text-violet-deep">reads and hears</span>.</>}
+            lede={<>The regional titles carry most of the local weight, and being in
             the right one transfers some of its standing to you. We publish no
             circulation or listenership figures — those are licensed research
-            numbers, and we will show you the current ones at planning.
-          </p>
-        </div>
+            numbers, and we will show you the current ones at planning.</>}
+          />
 
         <div className="mt-12 grid gap-x-10 gap-y-12 lg:grid-cols-2">
           <div>
             <Rise>
-              <p className="eyebrow text-on-sand-dim">Newspapers</p>
+              <Eyebrow muted>Newspapers</Eyebrow>
             </Rise>
             <ul className="mt-5 border-t border-rule-sand">
               {city.localMedia.press.map((t, i) => (
@@ -374,7 +387,7 @@ export default async function CityPage({ params }: Params) {
 
           <div>
             <Rise>
-              <p className="eyebrow text-on-sand-dim">Radio</p>
+              <Eyebrow muted>Radio</Eyebrow>
             </Rise>
             <ul className="mt-5 border-t border-rule-sand">
               {city.localMedia.radio.map((r, i) => (
@@ -505,20 +518,15 @@ export default async function CityPage({ params }: Params) {
 
       {/* 08 — THE CALENDAR --------------------------------------- */}
       <Band tone="sand2" grain>
-        <div className="grid-12 items-end">
-          <Rise className="col-span-12 lg:col-span-7">
-            <Eyebrow deva="मौसम">The calendar</Eyebrow>
-            <h2 className="mt-5 font-display text-display-l text-balance">
-              When {city.name}{" "}
-              <span className="em-serif text-violet-deep">pays attention</span>.
-            </h2>
-          </Rise>
-          <p className="col-span-12 mt-5 max-w-[42ch] text-body-l text-on-sand-dim lg:col-span-5 lg:mt-0">
-            Timing moves outcomes more than most negotiations do. These are
+        <SectionHead
+            eyebrow="The calendar"
+            deva="मौसम"
+            title={<>When {city.name}{" "}
+              <span className="em-serif text-violet-deep">pays attention</span>.</>}
+            lede={<>Timing moves outcomes more than most negotiations do. These are
             the windows when demand outruns supply — and the ones worth
-            planning around rather than into.
-          </p>
-        </div>
+            planning around rather than into.</>}
+          />
 
         {/* Four cards of prose made the reader assemble the year in
             their head. The question is "when is this market expensive",
@@ -583,13 +591,11 @@ export default async function CityPage({ params }: Params) {
               name: `Outdoor advertising in ${city.name}`,
               serviceType: "Outdoor advertising and media planning",
               description: city.metaDescription,
-              provider: {
-                "@type": "Organization",
-                name: site.name,
-                url: site.url,
-                email: site.email,
-                telephone: site.phone,
-              },
+              /* By reference, not by restatement. A second inline
+                 Organization on twenty-two city pages is twenty-two
+                 copies of the name, phone and address to keep in step,
+                 and they will not stay in step. */
+              provider: { "@id": organisationId },
               areaServed: {
                 "@type": "City",
                 name: city.name,
@@ -643,6 +649,16 @@ export default async function CityPage({ params }: Params) {
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "@id": `${site.url}/cities/${city.slug}#faq`,
+              /* Freshness, declared. These pages carry municipal
+                 policy — the 2025 BMC policy, the Bengaluru bye-laws,
+                 the Jaipur corporation merger — and a page about a
+                 rule that changes has to say when it was last looked
+                 at, or an answer engine has no way to prefer it over
+                 a stale one. Bump site.contentReviewed when the copy
+                 is genuinely reviewed. */
+              dateModified: site.contentReviewed,
+              inLanguage: "en-IN",
+              speakable,
               mainEntity: city.faq.map((f) => ({
                 "@type": "Question",
                 name: f.q,

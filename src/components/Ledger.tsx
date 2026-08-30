@@ -157,7 +157,15 @@ export function PageHero({
         {lede && (
           <div className="grid-12 mt-8">
             <Rise delay={120} className="col-span-12 lg:col-span-6">
-              <p className="text-body-l text-on-sand-dim">{lede}</p>
+              {/* `speakable-answer` is a hook, not a style. It marks the
+                  one paragraph on the page written to stand alone, so
+                  the speakable schema can point a voice assistant at
+                  the answer rather than at whatever sits highest in
+                  the DOM. Do not repurpose it for a second paragraph:
+                  two speakable answers is the same as none. */}
+              <p className="speakable-answer text-body-l text-on-sand-dim">
+                {lede}
+              </p>
               {cta && (
                 <div className="mt-8">
                   <Btn href={cta.href}>{cta.label}</Btn>

@@ -37,7 +37,7 @@ export default function CapabilityPage({
       <section className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20">
         <div className="shell relative z-10">
           <nav aria-label="Breadcrumb" className="mb-10">
-            <ol className="flex flex-wrap gap-2 font-mono text-[0.75rem] tracking-[0.08em] text-on-sand-dim uppercase">
+            <ol className="flex flex-wrap gap-2 font-mono text-meta tracking-[0.08em] text-on-sand-dim uppercase">
               <li>
                 <Link href="/" className="link-underline -my-2 inline-flex min-h-8 items-center py-2">
                   Home
@@ -85,9 +85,7 @@ export default function CapabilityPage({
                 className="col-span-12 lg:col-span-4 lg:col-start-9"
               >
                 <Card>
-                  <p className="eyebrow text-on-sand-dim">
-                    Formats, at true proportion
-                  </p>
+                  <Eyebrow muted>Formats, at true proportion</Eyebrow>
                   <div className="mt-6">
                     <FormatPlate formats={formats} />
                   </div>

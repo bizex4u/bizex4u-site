@@ -6,18 +6,19 @@ import BriefButton from "@/components/BriefButton";
 import { additionalMarkets, cities } from "@/lib/cities";
 import { indexNotes } from "@/lib/cities/notes";
 import { site } from "@/lib/site";
+import PageSchema from "@/components/PageSchema";
 
 export const metadata: Metadata = {
   title: "Outdoor Advertising in India — Cities We Plan",
   description:
-    "Outdoor, hoarding, transit, retail and broadcast media planned across 39 Indian markets. Every city planned from its own catchment, not from a national rate card.",
+    "Outdoor, hoarding, transit, retail and broadcast media planned across 39 Indian markets — every city from its own catchment, not a national rate card.",
   alternates: { canonical: "/cities" },
-  openGraph: {
-    title: "Outdoor Advertising in India — Cities We Plan",
-    description:
-      "Outdoor, hoarding, transit, retail and broadcast media planned across 39 Indian markets.",
-    url: `${site.url}/cities`,
-  },
+  /* NO openGraph BLOCK HERE, deliberately. Declaring one without
+     `images` is what dropped this page's social card: Next merges the
+     title and description into openGraph on its own, and the
+     opengraph-image route supplies the picture. Adding a partial
+     openGraph object overrode both and left the page as the only one
+     on the site sharing without an image. */
 };
 
 /* ------------------------------------------------------------------
@@ -265,6 +266,12 @@ export default function CitiesPage() {
             },
           }),
         }}
+      />
+      <PageSchema
+        path="/cities"
+        name={"Cities Bizex4U plans"}
+        description={"Outdoor, hoarding, transit, retail and broadcast media planned across 39 Indian markets — every city from its own catchment, not a national rate card."}
+        type="CollectionPage"
       />
     </>
   );

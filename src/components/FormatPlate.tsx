@@ -66,11 +66,11 @@ export function ExchangePlate() {
           {i === 1 && (
             <span className="font-mono text-caption text-on-violet-dim">⇄</span>
           )}
-          <div className="rounded-[3px] border border-white/35 bg-white/10 px-3 py-4">
-            <p className="text-[0.75rem] leading-tight font-medium whitespace-nowrap">
+          <div className="rounded-(--radius-xs) border border-white/35 bg-white/10 px-3 py-4">
+            <p className="text-meta leading-tight font-medium whitespace-nowrap">
               {side}
             </p>
-            <p className="mt-1 font-mono text-[0.625rem] tracking-[0.05em] text-on-violet-dim uppercase">
+            <p className="mt-1 font-mono text-nano tracking-[0.05em] text-on-violet-dim uppercase">
               {i === 0 ? "At list value" : "At card rate"}
             </p>
           </div>
@@ -158,7 +158,7 @@ export default function FormatPlate({
         <div className="flex shrink-0 flex-col items-center">
           <Figure px={5.75 * pxPerFt} tone={figureTone} />
           <p
-            className={`mt-2 font-mono text-[0.5625rem] tracking-[0.06em] uppercase ${label}`}
+            className={`mt-2 font-mono text-nano tracking-[0.06em] uppercase ${label}`}
           >
             5&prime;9&Prime;
           </p>
@@ -181,14 +181,14 @@ export default function FormatPlate({
             >
               <div
                 data-plate
-                className={`rounded-[2px] border ${surface}`}
+                className={`rounded-(--radius-xs) border ${surface}`}
                 style={{ width: `${w}px`, height: `${h}px` }}
               />
-              <p className="mt-2 text-[0.6875rem] leading-tight font-medium hyphens-auto">
+              <p className="mt-2 text-micro leading-tight font-medium hyphens-auto">
                 {f.label}
               </p>
               <p
-                className={`font-mono text-[0.625rem] tracking-[0.05em] uppercase ${label}`}
+                className={`font-mono text-nano tracking-[0.05em] uppercase ${label}`}
               >
                 {f.note}
               </p>

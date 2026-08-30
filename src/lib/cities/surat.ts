@@ -15,9 +15,10 @@ export const surat: City = {
   state: "Gujarat",
   region: "West",
 
-  metaTitle: "Outdoor Advertising in Surat — Hoardings, BRTS & Retail",
+  metaTitle:
+    "Outdoor Advertising in Surat — Hoardings & BRTS",
   metaDescription:
-    "Hoarding, unipole, BRTS and retail advertising in Surat, planned around the textile and diamond belts rather than from a site list. Independent Indian media planning and buying.",
+    "Hoarding, unipole, BRTS and retail advertising in Surat, planned around the split between the affluent west and the diamond and textile belts.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Surat",
@@ -243,7 +244,8 @@ export const surat: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Surat?",
-      a: "It depends on the belt, the corridor, the size, the illumination and the duration — and in Surat also on whether you are buying consumer media or trade media, which price differently. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the belt, the corridor, the size, the illumination and the duration — and in Surat also on whether you are buying consumer media or trade media, which price differently. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Is there a metro in Surat?",
@@ -251,7 +253,7 @@ export const surat: City = {
     },
     {
       q: "Which areas of Surat are best for outdoor advertising?",
-      a: "It depends entirely on the audience, and Surat splits more sharply than most cities. Vesu, Piplod, Athwa, City Light and Dumas Road reach the affluent resident market. Varachha, Katargam, Udhna, Limbayat and Pandesara reach the diamond and textile workforce — young, largely male, earning well and value-conscious. The Ring Road market cluster reaches the trade rather than the consumer. Khajod and Dream City reach the new high-value diamond business audience.",
+      a: "Vesu, Piplod, Athwa, City Light and Dumas Road reach the affluent resident market. Varachha, Katargam, Udhna, Limbayat and Pandesara reach the diamond and textile workforce — young, largely male, earning well and value-conscious. The Ring Road market cluster reaches the trade rather than the consumer. Khajod and Dream City reach the new high-value diamond business audience. Surat splits more sharply than most cities, so the audience has to be settled before the location is.",
     },
     {
       q: "Is Surat a good market for consumer brands?",
@@ -271,7 +273,7 @@ export const surat: City = {
     },
     {
       q: "When is the best time to advertise in Surat?",
-      a: "It depends which Surat. For consumers, Navratri and Diwali, as across Gujarat. For the trade, the textile buying seasons ahead of Navratri and the wedding season, which are separate weeks with their own demand. And one thing to plan for explicitly: Diwali and Chhath take a large share of the migrant workforce home, so the worker belts thin out in late October and early November even as the affluent belts peak.",
+      a: "For consumers, Navratri and Diwali, as across Gujarat. For the trade, the textile buying seasons ahead of Navratri and the wedding season, which are separate weeks with their own demand. And one thing to plan for explicitly: Diwali and Chhath take a large share of the migrant workforce home, so the worker belts thin out in late October and early November even as the affluent belts peak.",
     },
     {
       q: "How long should a Surat campaign run?",

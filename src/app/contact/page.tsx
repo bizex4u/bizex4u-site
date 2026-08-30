@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import { PageHero, Rise, Section } from "@/components/Ledger";
+import { organisationId } from "@/lib/schema";
 import { site } from "@/lib/site";
+import { Eyebrow } from "@/components/UI";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -26,7 +28,7 @@ export default function ContactPage() {
 
           <Rise delay={100} className="col-span-12 mt-16 lg:col-span-4 lg:col-start-9 lg:mt-0">
             <div className="border-t border-on-sand pt-4">
-              <p className="eyebrow">Direct</p>
+              <Eyebrow muted>Direct</Eyebrow>
               <div className="mt-4">
                 <a
                   href={`mailto:${site.email}`}
@@ -46,7 +48,7 @@ export default function ContactPage() {
             </div>
 
             <div className="mt-12 border-t border-rule-sand pt-4">
-              <p className="eyebrow">Office</p>
+              <Eyebrow muted>Office</Eyebrow>
               <address className="mt-4 text-on-sand-dim not-italic">
                 {site.address.line1}
                 <br />
@@ -57,7 +59,7 @@ export default function ContactPage() {
             </div>
 
             <div className="mt-12 border-t border-rule-sand pt-4">
-              <p className="eyebrow">For barter enquiries</p>
+              <Eyebrow muted>For barter enquiries</Eyebrow>
               <p className="mt-4 max-w-[34ch] text-on-sand-dim">
                 Include the category and approximate value of the stock you
                 are holding. It saves a round of questions.
@@ -72,13 +74,17 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
-            name: site.name,
-            url: site.url,
-            email: site.email,
-            telephone: site.phone,
-            foundingDate: String(site.founded),
-            description: site.description,
+            /* A ContactPage that REFERENCES the organisation declared at
+               the root, rather than a second Organization node restating
+               it. Two Organization nodes for one company is how the name,
+               phone and address drift apart across a site — and this copy
+               carried `foundingDate: "2008"`, a tenure claim that is not
+               made anywhere on this site and should not have been in the
+               structured data either. */
+            "@type": "ContactPage",
+            url: `${site.url}/contact`,
+            name: `Contact ${site.name}`,
+            mainEntity: { "@id": organisationId },
           }),
         }}
       />

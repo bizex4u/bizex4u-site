@@ -27,9 +27,9 @@ export const patna: City = {
   region: "East",
 
   metaTitle:
-    "Outdoor Advertising in Patna — Hoardings & Transit",
+    "Outdoor Advertising in Patna — Hoardings & Metro",
   metaDescription:
-    "Hoarding, unipole, metro, retail and transit advertising in Patna, planned from catchment rather than from a site list. Independent Indian media planning and buying across 40+ cities.",
+    "Hoarding, unipole, metro and retail advertising in Patna, planned around Bailey Road, Boring Road and the coaching catchment.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Patna",
@@ -288,11 +288,12 @@ export const patna: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Patna?",
-      a: "It depends on the corridor, the size, the illumination and the duration — and in Patna it depends unusually heavily on the season, because Chhath and Sonepur compress demand into weeks rather than distributing it across quarters. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors for every plan. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, the size, the illumination and the duration — and in Patna it depends unusually heavily on the season, because Chhath and Sonepur compress demand into weeks rather than distributing it across quarters. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors for every plan. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Which areas of Patna are best for outdoor advertising?",
-      a: "It depends on the audience. Bailey Road reaches the western institutional corridor; Boring Road reaches the affluent retail heart; Frazer Road and Exhibition Road cluster the hotel and mid-market shopping crowd near Patna Junction; the New Bypass and Kankarbagh reach the eastern residential density; Bhootnath Road and Bazar Samiti reach the coaching catchment. We would rather establish the audience first than open with a location list.",
+      a: "Bailey Road reaches the western institutional corridor; Boring Road reaches the affluent retail heart; Frazer Road and Exhibition Road cluster the hotel and mid-market shopping crowd near Patna Junction; the New Bypass and Kankarbagh reach the eastern residential density; Bhootnath Road and Bazar Samiti reach the coaching catchment. Which of those is right depends on the audience, and we would rather establish that first than open with a location list.",
     },
     {
       q: "Do you own hoardings in Patna?",

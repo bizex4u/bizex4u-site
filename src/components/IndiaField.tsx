@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { cities } from "@/lib/cities";
 import { cityGeo, plannedGeo, project, VIEW_H, VIEW_W } from "@/lib/geo";
+import { Eyebrow } from "@/components/UI";
 
 /**
  * The network, drawn.
@@ -294,7 +295,7 @@ export default function IndiaField({
 export function CityLocator({ slug, name }: { slug: string; name: string }) {
   return (
     <div className="rounded-(--radius-card) border border-rule-sand bg-sand-2 p-6">
-      <p className="eyebrow text-on-sand-dim">{name} in the network</p>
+      <Eyebrow muted>{name} in the network</Eyebrow>
       <IndiaField focus={slug} labels={false} caption={false} className="mt-5" />
       <p className="mt-5 border-t border-rule-sand pt-4 text-body-s text-on-sand-dim">
         Every market we plan, at true position.{" "}

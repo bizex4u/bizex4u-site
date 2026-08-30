@@ -19,9 +19,10 @@ export const ludhiana: City = {
   state: "Punjab",
   region: "North",
 
-  metaTitle: "Outdoor Advertising in Ludhiana — Hoardings & Industrial Media",
+  metaTitle:
+    "Outdoor Advertising in Ludhiana — Hoardings",
   metaDescription:
-    "Hoarding, unipole and transit advertising in Ludhiana, planned around the hosiery, knitwear and auto-component economy rather than from a site list. Independent Indian media planning and buying.",
+    "Hoarding, unipole and transit advertising in Ludhiana, planned around the hosiery, knitwear and auto-component economy, not a site list.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Ludhiana",
@@ -260,7 +261,8 @@ export const ludhiana: City = {
     },
     {
       q: "How much does hoarding advertising cost in Ludhiana?",
-      a: "It depends on the corridor, size, illumination and duration — and, right now, on whether the position sits at grade under the elevated corridor or on a ramp or slip road, because that distinction moved real traffic in 2024. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, size, illumination and duration — and, right now, on whether the position sits at grade under the elevated corridor or on a ramp or slip road, because that distinction moved real traffic in 2024. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "How did the elevated corridor change outdoor advertising in Ludhiana?",
@@ -268,7 +270,7 @@ export const ludhiana: City = {
     },
     {
       q: "Which areas of Ludhiana are best for outdoor advertising?",
-      a: "It depends on the audience. Ferozepur Road, Model Town and Sarabha Nagar reach the affluent household market. Chaura Bazaar, Ghumar Mandi and the old city reach dense pedestrian volume at a different income level. The Focal Points, Gill Road and the Industrial Areas reach a business audience that no consumer format does. And the ramps and approaches on NH-05 now reach through-traffic that at-grade positions on the same road do not.",
+      a: "Ferozepur Road, Model Town and Sarabha Nagar reach the affluent household market. Chaura Bazaar, Ghumar Mandi and the old city reach dense pedestrian volume at a different income level. The Focal Points, Gill Road and the Industrial Areas reach a business audience that no consumer format does. And the ramps and approaches on NH-05 now reach through-traffic that at-grade positions on the same road do not. Which of those is right depends on the audience.",
     },
     {
       q: "Is Ludhiana a good market for B2B advertising?",
@@ -288,7 +290,7 @@ export const ludhiana: City = {
     },
     {
       q: "When is the best time to advertise in Ludhiana?",
-      a: "It depends who you are selling to. For the trade, the hosiery and woollens buying season from August to December. For consumers, the November-to-February wedding season, compounded by the NRI return window from November to January, which genuinely lifts property, automotive, jewellery and financial services here. For anything agricultural, the PAU Kisan Mela in March and September pulls very large rural crowds into the city.",
+      a: "For the trade, the hosiery and woollens buying season from August to December. For consumers, the November-to-February wedding season, compounded by the NRI return window from November to January, which genuinely lifts property, automotive, jewellery and financial services here. For anything agricultural, the PAU Kisan Mela in March and September pulls very large rural crowds into the city. Which window is yours depends on who you are selling to.",
     },
     {
       q: "What about bus advertising in Ludhiana?",

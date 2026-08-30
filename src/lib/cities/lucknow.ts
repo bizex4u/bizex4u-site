@@ -12,9 +12,9 @@ export const lucknow: City = {
   region: "North",
 
   metaTitle:
-    "Outdoor Advertising in Lucknow — Hoardings & Metro Media",
+    "Outdoor Advertising in Lucknow — Hoardings & Metro",
   metaDescription:
-    "Hoarding, unipole, metro, retail and transit advertising in Lucknow, planned from catchment rather than from a site list. Independent Indian media planning and buying across 40+ cities.",
+    "Hoarding, unipole, metro and retail advertising in Lucknow, planned across Hazratganj, Gomti Nagar, Aminabad and Charbagh.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Lucknow",
@@ -259,7 +259,8 @@ export const lucknow: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Lucknow?",
-      a: "It depends on the corridor, size, illumination and duration — and in Lucknow the corridor matters more than in most cities, because the gap between a Shaheed Path position and an Alambagh one is wide. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors for every plan. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, size, illumination and duration — and in Lucknow the corridor matters more than in most cities, because the gap between a Shaheed Path position and an Alambagh one is wide. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors for every plan. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Which areas of Lucknow are best for outdoor advertising?",

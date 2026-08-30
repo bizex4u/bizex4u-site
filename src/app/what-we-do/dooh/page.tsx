@@ -3,7 +3,8 @@ import CapabilityPage from "@/components/CapabilityPage";
 
 export const metadata: Metadata = {
   title: "Digital Out-of-Home (DOOH) Advertising in India",
-  description: "LED screens and digital billboards bought by daypart and location rather than by the month, with loop composition confirmed in writing and play-out logs reconciled against the booking.",
+  description:
+    "LED screens and digital billboards bought by daypart and location, with loop composition confirmed in writing and play-out logs reconciled against the booking.",
   alternates: { canonical: "/what-we-do/dooh" },
 };
 

@@ -21,9 +21,10 @@ export const indore: City = {
   state: "Madhya Pradesh",
   region: "Central",
 
-  metaTitle: "Outdoor Advertising in Indore — Hoardings, AB Road & Bus Media",
+  metaTitle:
+    "Outdoor Advertising in Indore — Hoardings & Bus",
   metaDescription:
-    "Hoarding, unipole and bus advertising in Indore, planned from catchment rather than from a site list — and honest about what the metro does and does not yet reach.",
+    "Hoarding, unipole and bus advertising in Indore, planned from catchment — and honest about what the metro does and does not yet reach.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Indore",
@@ -237,7 +238,8 @@ export const indore: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Indore?",
-      a: "It depends on whether the position is on AB Road or elsewhere, plus the size, illumination and duration — and AB Road carries a genuine premium because it is the most contested corridor in the city. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on whether the position is on AB Road or elsewhere, plus the size, illumination and duration — and AB Road carries a genuine premium because it is the most contested corridor in the city. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Is Indore Metro advertising worth buying?",
@@ -245,7 +247,7 @@ export const indore: City = {
     },
     {
       q: "Which areas of Indore are best for outdoor advertising?",
-      a: "It depends on the audience. Vijay Nagar, Scheme 54, South Tukoganj and the Super Corridor reach the affluent and white-collar market. Rajwada, MG Road, Chhawni and Ranipura reach dense old-city volume at a different income level — and unusually for an Indian city, both halves are genuinely commercial. Palasia and the AB Road stretch catch almost everyone and price accordingly.",
+      a: "Vijay Nagar, Scheme 54, South Tukoganj and the Super Corridor reach the affluent and white-collar market. Rajwada, MG Road, Chhawni and Ranipura reach dense old-city volume at a different income level — and unusually for an Indian city, both halves are genuinely commercial. Palasia and the AB Road stretch catch almost everyone and price accordingly. Which of those is right depends on the audience.",
     },
     {
       q: "Who licenses outdoor advertising in Indore?",

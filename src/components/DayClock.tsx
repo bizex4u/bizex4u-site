@@ -139,7 +139,7 @@ export default function DayClock() {
 
             {/* Closing panel — the argument the track was making. */}
             <article className="flex w-[80vw] max-w-[25rem] flex-col justify-center overflow-y-auto rounded-(--radius-card) border border-white/20 p-6 sm:w-[56vw] md:w-[25rem]">
-              <p className="eyebrow text-violet-lift">And that is the point</p>
+              <Eyebrow tone="plum">And that is the point</Eyebrow>
               <p className="mt-5 font-display text-h2 text-balance">
                 Nobody needs all six. Everybody gets sold all six.
               </p>

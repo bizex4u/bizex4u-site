@@ -15,9 +15,9 @@ export const hyderabad: City = {
   region: "South",
 
   metaTitle:
-    "Outdoor Advertising in Hyderabad — Hoardings & DOOH",
+    "Outdoor Advertising in Hyderabad — Hoardings",
   metaDescription:
-    "Hoarding, unipole, metro, retail and transit advertising in Hyderabad, planned from catchment rather than from a site list. Independent Indian media planning and buying across 40+ cities.",
+    "Hoarding, unipole, metro and retail advertising in Hyderabad, planned across the Old City, the IT corridor and the ORR rather than a site list.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Hyderabad",
@@ -282,11 +282,12 @@ export const hyderabad: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Hyderabad?",
-      a: "It depends on the corridor, the size, the illumination and the duration — and in Hyderabad the corridor swings it hard, because a Gachibowli or Madhapur position and an Uppal one are not the same product. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors on every plan. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on the corridor, the size, the illumination and the duration — and in Hyderabad the corridor swings it hard, because a Gachibowli or Madhapur position and an Uppal one are not the same product. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take; we negotiate against several vendors on every plan. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Which areas of Hyderabad are best for outdoor advertising?",
-      a: "It depends entirely on the audience. HITEC City, Madhapur, Kondapur, Gachibowli and the Financial District reach the highest-income, IT and corporate population. Ameerpet, Secunderabad, Abids, Koti, Uppal and LB Nagar reach volume at a different income level. The Old City around Charminar is its own market with its own language and calendar. The ORR and the airport axis reach premium and business travel. We would rather establish the audience first than lead with a location list.",
+      a: "HITEC City, Madhapur, Kondapur, Gachibowli and the Financial District reach the highest-income, IT and corporate population. Ameerpet, Secunderabad, Abids, Koti, Uppal and LB Nagar reach volume at a different income level. The Old City around Charminar is its own market with its own language and calendar. The ORR and the airport axis reach premium and business travel. Which of those is right depends entirely on the audience, and we would rather establish that first than lead with a location list.",
     },
     {
       q: "Are hoardings allowed in Hyderabad right now?",

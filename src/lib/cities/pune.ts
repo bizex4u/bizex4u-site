@@ -21,7 +21,7 @@ export const pune: City = {
   metaTitle:
     "Outdoor Advertising in Pune & Pimpri-Chinchwad",
   metaDescription:
-    "Hoarding, unipole, metro, retail and transit advertising across Pune and Pimpri-Chinchwad, planned from catchment rather than from a site list. Independent Indian media planning and buying.",
+    "Hoarding, unipole, metro and bus advertising across Pune and Pimpri-Chinchwad — two municipal corporations, permissioned separately.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Pune",
@@ -251,7 +251,8 @@ export const pune: City = {
   faq: [
     {
       q: "How much does hoarding advertising cost in Pune?",
-      a: "It depends on which part of the agglomeration, the size, the illumination and the duration — and in Pune it also depends on whether the position sits under PMC or PCMC, which are separate markets with separate permissions. We do not publish a rate card. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
+      a:
+        "We do not publish a rate card. It depends on which part of the agglomeration, the size, the illumination and the duration — and in Pune it also depends on whether the position sits under PMC or PCMC, which are separate markets with separate permissions. We are not selling our own inventory, so a published rate would tell you what we would like to charge rather than what the market will take. Send the brief and the budget and you will get real numbers against real positions.",
     },
     {
       q: "Do hoardings in Pune need a QR code?",
@@ -263,7 +264,7 @@ export const pune: City = {
     },
     {
       q: "Which areas of Pune are best for outdoor advertising?",
-      a: "It depends on the audience. Hinjewadi, Baner, Balewadi and Wakad reach the western IT population. Kharadi, Magarpatta, Viman Nagar and Koregaon Park reach the eastern one. Laxmi Road, the Peths and Camp reach traditional Marathi retail volume. FC Road and the university belt reach students. Nigdi, Pimpri and Chinchwad reach the industrial catchment. We would rather establish the audience first than lead with a location list.",
+      a: "Hinjewadi, Baner, Balewadi and Wakad reach the western IT population. Kharadi, Magarpatta, Viman Nagar and Koregaon Park reach the eastern one. Laxmi Road, the Peths and Camp reach traditional Marathi retail volume. FC Road and the university belt reach students. Nigdi, Pimpri and Chinchwad reach the industrial catchment. Which of those is right depends on the audience, and we would rather establish that first than lead with a location list.",
     },
     {
       q: "Do you own hoardings in Pune?",

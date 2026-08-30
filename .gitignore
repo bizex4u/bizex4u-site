@@ -51,3 +51,7 @@ next-env.d.ts
 /_bizex4u_new
 /_incoming
 /_incoming.tar.gz
+
+# Deliverables written for the client but not part of the site.
+# The escalation matrix is a report about this repo, not a page in it.
+/escalation-matrix.html
