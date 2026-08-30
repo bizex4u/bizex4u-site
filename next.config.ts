@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import cutover from "./cutover-redirects.json";
 
 /**
  * Canonical host is the apex. Live production already 302s www → apex;
@@ -40,7 +41,14 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
-    return [wwwToApex];
+    return [
+      wwwToApex,
+      ...cutover.paths.map((r) => ({
+        source: r.source,
+        destination: r.destination,
+        permanent: true as const,
+      })),
+    ];
   },
 };
 

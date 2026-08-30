@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "fresh": "node scripts/free-port.mjs && rm -rf .next && next build && next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "assert:cutover": "node scripts/assert-cutover.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
