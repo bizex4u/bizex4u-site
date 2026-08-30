@@ -285,195 +285,90 @@ export default function Home() {
         </div>
       </Band>
 
-      {/* 04 — THE SIX, AS VERBS -----------------------------------
-          Six product names read as a menu to choose from. Six verbs
-          read as one system with an order to it.
-
-          The drawings are gone. Each card used to carry a small
-          FormatPlate — rectangles at their real dimensions — and they
-          failed twice over. On plum, at card width, they rendered as
-          flat grey blocks at a few percent contrast and read as images
-          that had not loaded. And the line above them claimed "drawn at
-          true proportion" while the component scaled every set
-          independently, so a 40 ft hoarding in one card and a 45 ft
-          cinema screen in another sat at different pixels-per-foot. The
-          section's whole argument was contradicted by its own code.
-
-          The same information is a list now: format name, typical spec.
-          Legible at any size, indexable, and it carries the vocabulary
-          Indian buyers actually type — hoarding, unipole, bus queue
-          shelter. See lib/formats.ts. */}
+      {/* 04 — THE SIX, AS A LEDGER --------------------------------
+          Six poster-cards plus a scale plate plus a full-width barter
+          slab was a brochure. The verbs are the argument; they do not
+          need a room of their own. A ruled index keeps the order, the
+          vocabulary and the one drawing that matters — a hoarding next
+          to a lift panel — and sends the spec lists to the pages that
+          can hold them. */}
       <Band tone="plum" grain>
-        <SectionHead
-            eyebrow="What activation means here"
-            tone="plum"
-            deva="हम क्या करते हैं"
-            title={<>Six ways to be{" "}
-              <span className="em-serif">present</span>.</>}
-            lede={<>A hoarding and a lift panel are not the same product and should
-            not be sold as though they were. These are the formats we plan,
-            named the way this market names them.</>}
-          />
-
-        <Rise>
-          <div className="mt-10 rounded-(--radius-card) bg-plum-2 p-5 md:p-6">
-            <p className="font-mono text-micro tracking-[0.08em] text-violet-lift uppercase">
-              Drawn at one scale
+        <div className="grid-12 items-end gap-y-8">
+          <Rise className="col-span-12 lg:col-span-6">
+            <Eyebrow tone="plum" deva="हम क्या करते हैं">
+              What activation means here
+            </Eyebrow>
+            <h2 className="mt-3 font-display text-h1 text-balance">
+              Six ways to be <span className="em-serif">present</span>.
+            </h2>
+            <p className="mt-3 max-w-[46ch] text-body-s text-on-plum-dim">
+              A hoarding and a lift panel are not the same product and
+              should not be sold as though they were. These are the
+              formats we plan, named the way this market names them.
             </p>
-            <p className="mt-2 max-w-[52ch] text-body-s text-on-plum-dim">
-              A 40 ft hoarding next to a 2 ft lift panel. The person is
-              5&prime;9&Prime;. This is why a format list is not a menu.
-            </p>
-            <div className="mt-5 overflow-x-auto">
+          </Rise>
+          <Rise delay={80} className="col-span-12 lg:col-span-5 lg:col-start-8">
+            <div className="overflow-x-auto">
               <FormatPlate
                 formats={cityScaleFormats}
                 tone="dark"
-                base={72}
-                maxWidth={420}
+                base={48}
+                maxWidth={340}
               />
             </div>
-          </div>
-        </Rise>
+          </Rise>
+        </div>
 
-        {/* Six equal cards was six cards nobody read — card 01 and card
-            05 carried identical weight, so nothing led and the eye had
-            no route through. The grid states an argument instead: the
-            core product takes double width, four sit at normal weight
-            beneath it, and barter runs full width because it is the
-            thing no competitor offers.
-
-            The 01–06 counter is gone with it. Numbering implies an
-            order the reader needs, and there is no reason "be seen"
-            precedes "be heard". */}
-        <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 border-t border-white/12">
           {capabilities.map((c, i) => {
-            const lines = formatLines[c.index];
-            const lead = i === 0;
+            const preview = formatLines[c.index]
+              ?.slice(0, 3)
+              .map((f) => f.name)
+              .join(" · ");
             return (
-              <Rise
-                key={c.href}
-                as="li"
-                delay={i * 55}
-                className={
-                  c.accent
-                    ? "md:col-span-2 lg:col-span-3"
-                    : lead
-                      ? "md:col-span-2"
-                      : undefined
-                }
-              >
+              <Rise key={c.href} as="li" delay={Math.min(i, 5) * 40}>
                 <Link
                   href={c.href}
-                  className={`lift group flex h-full flex-col rounded-(--radius-card) p-6 md:p-7 ${
+                  className={`group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 border-b border-white/12 py-3.5 md:grid-cols-[11rem_minmax(0,1fr)_auto] md:gap-x-8 ${
                     c.accent
-                      ? "bg-violet-deep text-white hover:bg-violet md:flex-row md:items-center md:gap-12"
-                      : "bg-plum-2 hover:bg-plum-3"
+                      ? "-mx-3 mt-1 rounded-(--radius-card) border-b-0 bg-violet-deep px-3 py-4 text-white hover:bg-violet md:-mx-4 md:px-4"
+                      : "hover:bg-white/4"
                   }`}
                 >
-                  <div className={c.accent ? "md:flex-1" : "contents"}>
-                    <p
-                      className={`font-mono text-meta tracking-[0.08em] uppercase ${
-                        c.accent ? "text-on-violet-dim" : "text-violet-lift"
+                  <span className="font-display text-h3 text-balance">
+                    {c.verb}
+                  </span>
+                  <span className="col-span-2 md:col-span-1">
+                    <span className="text-body-s">{c.title}</span>
+                    <span
+                      className={`mt-0.5 block text-caption ${
+                        c.accent ? "text-on-violet-dim" : "text-on-plum-dim"
                       }`}
                     >
-                      {c.title}
-                    </p>
-
-                    {/* The verb leads. The product name is the kicker. */}
-                    <h3
-                      className={`mt-3 font-display text-balance ${
-                        lead || c.accent ? "text-display-l" : "text-h2"
-                      }`}
-                    >
-                      {c.verb}
-                    </h3>
-                    <p
-                      className={`mt-4 ${
-                        lead || c.accent
-                          ? "max-w-[46ch] text-body-l"
-                          : "max-w-[34ch]"
-                      } ${c.accent ? "text-on-violet-dim" : "text-on-plum-dim"}`}
-                    >
-                      {lead ? c.long : c.short}
-                    </p>
-
-                    {c.accent && (
-                      <span className="mt-7 inline-flex items-center gap-1.5 text-body-s font-medium">
-                        {c.linkLabel ?? "Explore"}{" "}
-                        <span className="row-arrow">→</span>
-                      </span>
-                    )}
-                  </div>
-
-                  {/* The spec list. `mt-auto` pins it to the bottom of
-                      the card so five cards of unequal copy length still
-                      line their lists up along one edge — the thing the
-                      old plates never managed, because each one started
-                      wherever its paragraph happened to end. */}
-                  {lines && (
-                    <dl
-                      className={`mt-auto grid gap-x-8 pt-8 ${
-                        lead ? "sm:grid-cols-2" : ""
-                      }`}
-                    >
-                      {lines.map((f) => (
-                        <div
-                          key={f.name}
-                          className="flex items-baseline justify-between gap-4 border-t border-white/12 py-2.5"
-                        >
-                          <dt className="text-body-s">{f.name}</dt>
-                          <dd className="shrink-0 font-mono text-nano tracking-[0.06em] text-on-plum-dim uppercase">
-                            {f.spec}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  )}
-
-                  {/* Barter is not a medium, so it has no format list.
-                      The two legs of the swap, set as type rather than
-                      as the pair of bordered boxes that used to sit
-                      here. */}
-                  {c.accent && (
-                    <div className="mt-8 shrink-0 md:mt-0 md:text-right">
-                      <p className="font-display text-h2 text-balance">
-                        {exchangeLine.give}
-                      </p>
-                      {/* Left-aligned, this glyph sat off on its own at
-                          the far edge of two long right-running lines
-                          and read as a stray character. It belongs on
-                          the same axis as the things it joins. */}
-                      <p
-                        aria-hidden
-                        className="my-1.5 text-h3 text-on-violet-dim"
-                      >
-                        ⇄
-                      </p>
-                      <p className="font-display text-h2 text-balance">
-                        {exchangeLine.get}
-                      </p>
-                    </div>
-                  )}
-
-                  {!c.accent && (
-                    <span className="inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
-                      {c.linkLabel ?? "Explore"}{" "}
-                      <span className="row-arrow">→</span>
+                      {c.accent
+                        ? `${exchangeLine.give} ⇄ ${exchangeLine.get}`
+                        : (preview ?? c.short)}
                     </span>
-                  )}
+                  </span>
+                  <span
+                    className={`inline-flex items-center gap-1.5 pt-1 text-caption font-medium md:pt-0 ${
+                      c.accent ? "text-white" : "text-violet-lift"
+                    }`}
+                  >
+                    {c.linkLabel ?? "Explore"}{" "}
+                    <span className="row-arrow">→</span>
+                  </span>
                 </Link>
               </Rise>
             );
           })}
         </ul>
 
-        <Rise delay={340}>
-          <p className="mt-8 max-w-[74ch] text-body-s text-on-plum-dim">
-            Sizes above are the standard dimensions of each format, not a
-            list of what we hold — actual structures vary by site, and
-            availability is a conversation rather than a page.
-          </p>
-        </Rise>
+        <p className="mt-5 max-w-[74ch] text-caption text-on-plum-dim">
+          Sizes above are the standard dimensions of each format, not a
+          list of what we hold — actual structures vary by site, and
+          availability is a conversation rather than a page.
+        </p>
       </Band>
 
       {/* 05 — THE DAY ---------------------------------------------
