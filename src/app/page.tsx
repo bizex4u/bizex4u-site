@@ -511,12 +511,15 @@ export default function Home() {
         </ul>
       </Band>
 
-      {/* 07 — THE REEL, FULL BLEED -------------------------------
+      {/* 07 — FULL-BLEED STREET ---------------------------------
           The one band that ignores the grid. Everything else on this
           page sits inside the shell, in a card, with padding, and that
           containment is a large part of why the site read as careful
           rather than confident. No type over it — that was the
-          original complaint about the hero and it was right. */}
+          original complaint about the hero and it was right.
+
+          Own photography, not the old Delhi reel: that file carried
+          licensed talent. */}
       <ReelBand />
 
       {/* 08 — PROOF ------------------------------------------------

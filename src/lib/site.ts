@@ -287,12 +287,6 @@ export const objectives = [
    well as a geo-tagged photograph does. */
 export const proofFrames = [
   {
-    src: "/media/proof-safdarjung.jpg",
-    place: "Safdarjung Enclave, New Delhi",
-    stamp: "28.5694° N, 77.2061° E · 30 Aug 2024",
-    alt: "Backlit panel above a market row in Safdarjung Enclave, photographed with a geo-tagged timestamp",
-  },
-  {
     src: "/media/proof-kanpur.jpg",
     place: "Green Park, Kanpur",
     stamp: "26.4819° N, 80.3454° E · 03 Dec 2025",
@@ -327,36 +321,4 @@ export const sectorsServed = [
   "Jewellery",
 ];
 
-/* ------------------------------------------------------------------
-   PLACEHOLDERS — Yash to replace before launch.
-   Deliberately unnamed and unquantified: do not publish client names
-   or results without written permission from the client.
-------------------------------------------------------------------- */
-
-export const selectedWork = [
-  {
-    index: "01",
-    client: "Client name",
-    sector: "Beverages",
-    markets: "UP · Bihar · MP",
-    result: "Seasonal stock converted into a multi-state outdoor campaign.",
-    href: "/work",
-  },
-  {
-    index: "02",
-    client: "Client name",
-    sector: "Consumer electronics retail",
-    markets: "Uttar Pradesh",
-    result: "Store-catchment media planned across a state retail footprint.",
-    href: "/work",
-  },
-  {
-    index: "03",
-    client: "Client name",
-    sector: "Footwear",
-    markets: "North India",
-    result: "Regional launch weight delivered without cash media spend.",
-    href: "/work",
-  },
-];
 

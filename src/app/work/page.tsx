@@ -251,7 +251,7 @@ export default function WorkPage() {
             selection made to look good.</>}
           />
 
-        <ul className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <ul className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-3">
           {proofFrames.map((f, i) => (
             <Rise key={f.src} as="li" delay={i * 60}>
               <div className="overflow-hidden rounded-(--radius-card) bg-plum">
