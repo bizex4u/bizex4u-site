@@ -29,7 +29,7 @@ export function GET() {
   const written = cities
     .map(
       (c) =>
-        `- [Outdoor advertising in ${c.name}, ${c.state}](${site.url}/cities/${c.slug}): the market, where the crowds are, which formats work there, local press and radio, transit, what moves the price, and who licenses it.`,
+        `- [Outdoor advertising in ${c.name}, ${c.state}](${site.url}/cities/${c.slug}) — markdown: ${site.url}/cities/${c.slug}.md. The market, where the crowds are, which formats work there, local press and radio, transit, what moves the price, and who licenses it.`,
     )
     .join("\n");
 

@@ -107,7 +107,11 @@ export default function Footer() {
             </span>
           </span>
           <Eyebrow as="span" tone="plum" muted>© {new Date().getFullYear()} {site.wordmark} · {site.address.line1},{" "}
-            {site.address.line2}</Eyebrow>
+            {site.address.line2} ·{" "}
+            <Link href="/llms.txt" className="link-underline hover:text-on-plum">
+              llms.txt
+            </Link>
+          </Eyebrow>
           <span className="sr-only">Independent Indian media network.</span>
         </div>
       </div>

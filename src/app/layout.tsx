@@ -110,6 +110,15 @@ export const metadata: Metadata = {
     description: site.description,
   },
   robots: { index: true, follow: true },
+  /* llmstxt.org v2: tell agents where the curated map lives, instead
+     of hoping they guess /llms.txt. Google AI Mode does not fetch
+     arbitrary URLs — it uses the index — so this file also has to
+     appear as a real link (footer) and in the sitemap. */
+  alternates: {
+    types: {
+      "text/plain": "/llms.txt",
+    },
+  },
 };
 
 /* The font variables go on <html>, not <body>.
@@ -127,6 +136,9 @@ export default function RootLayout({
       lang="en-IN"
       className={`${instrumentSerif.variable} ${instrumentSans.variable} ${plexMono.variable} ${mukta.variable}`}
     >
+      <head>
+        <link rel="describedby" href={`${site.url}/llms.txt`} />
+      </head>
       <body>
         {/* The entity, once, at the root — so every page inherits it and
             a crawler landing anywhere can resolve who this is. It was

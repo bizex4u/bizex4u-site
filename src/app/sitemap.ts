@@ -24,6 +24,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return [
+    {
+      url: `${site.url}/llms.txt`,
+      lastModified: now,
+      priority: 0.6,
+    },
     ...staticRoutes.map((r) => ({
       url: `${site.url}${r.path}`,
       lastModified: now,

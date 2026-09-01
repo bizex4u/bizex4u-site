@@ -28,7 +28,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: city.metaTitle,
     description: city.metaDescription,
-    alternates: { canonical: `/cities/${city.slug}` },
+    alternates: {
+      canonical: `/cities/${city.slug}`,
+      types: {
+        "text/markdown": `/cities/${city.slug}.md`,
+      },
+    },
     openGraph: {
       title: city.metaTitle,
       description: city.metaDescription,
