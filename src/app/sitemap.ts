@@ -10,7 +10,11 @@ import { capabilities, site } from "@/lib/site";
    which is worse than not sending one. It now carries the date the
    content was actually reviewed. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date(site.contentReviewed);
+  /* Date-only lastmod. Next.js serialises a Date to ISO with
+     milliseconds (`…T00:00:00.000Z`). Some GSC parsers treat that as
+     invalid W3C datetime. A calendar date is what the protocol lists
+     first and what Google’s examples use. */
+  const now = site.contentReviewed;
 
   const staticRoutes = [
     { path: "", priority: 1 },

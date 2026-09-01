@@ -3,7 +3,7 @@ import { cities } from "./cities";
 export const site = {
   name: "Bizex4U",
   wordmark: "BIZEX4U",
-  url: "https://www.bizex4u.com",
+  url: "https://bizex4u.com",
   description:
     "Bizex4U is an independent Indian media network. We plan, negotiate and run outdoor, retail and broadcast campaigns across India.",
   email: "yash@bizex4u.com",
