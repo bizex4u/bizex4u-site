@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { externalAnchorProps, isExternalHref } from "@/lib/href";
 
 /* ------------------------------------------------------------------
-   v4 primitives — purple and beige.
+   v4 primitives — paper, ink, violet.
 
    Everything is tone-aware. A Band declares its ground and children
-   ask it what colour to be, so a section can move from beige to plum
+   ask it what colour to be, so a section can move from paper to ink
    without touching its contents.
 ------------------------------------------------------------------- */
 
@@ -85,6 +86,7 @@ export function Band({
   id,
   grain = false,
   flush = false,
+  compact = false,
 }: {
   tone?: Tone;
   children: ReactNode;
@@ -92,10 +94,19 @@ export function Band({
   id?: string;
   grain?: boolean;
   flush?: boolean;
+  /* City and market pages: the default band padding was leaving a
+     screen of sand between every section. Compact keeps the same
+     type system with less empty ground. */
+  compact?: boolean;
 }) {
   const t = toneStyles[tone];
   const grainClass =
     tone === "sand" || tone === "sand2" ? "grain" : "grain grain-light";
+  const pad = flush
+    ? ""
+    : compact
+      ? "py-10 md:py-12"
+      : "py-(--spacing-band)";
   return (
     <section
       id={id}
@@ -103,9 +114,7 @@ export function Band({
          floating pill over the content, so an untreated anchor drops
          the section heading underneath it — the reader jumps and lands
          looking at the second paragraph. */
-      className={`relative ${id ? "scroll-mt-28" : ""} ${t.bg} ${t.text} ${
-        flush ? "" : "py-(--spacing-band)"
-      } ${grain ? grainClass : ""} ${className}`}
+      className={`relative ${id ? "scroll-mt-28" : ""} ${t.bg} ${t.text} ${pad} ${grain ? grainClass : ""} ${className}`}
     >
       <div className="shell relative z-10">{children}</div>
     </section>
@@ -228,7 +237,7 @@ export function btnClass(
   className = "",
 ) {
   const styles = {
-    violet: "bg-violet-deep text-white hover:bg-violet",
+    violet: "bg-violet-deep text-white hover:bg-plum",
     plum: "bg-plum text-on-plum hover:bg-plum-2",
     sand: "bg-sand text-on-sand hover:bg-white",
     "outline-plum":
@@ -242,7 +251,7 @@ export function btnClass(
       ? "min-h-14 px-7 text-body"
       : "min-h-12 px-6 text-body-s";
 
-  return `group inline-flex items-center justify-center gap-2.5 rounded-full py-3 font-medium transition-colors duration-200 ${dims} ${styles} ${className}`;
+  return `group inline-flex items-center justify-center gap-2.5 rounded-sm py-3 font-medium transition-colors duration-200 ${dims} ${styles} ${className}`;
 }
 
 export function Btn({
@@ -262,9 +271,9 @@ export function Btn({
 }) {
   const cls = btnClass(variant, size, className);
 
-  if (external) {
+  if (external || isExternalHref(href)) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+      <a {...externalAnchorProps(href)} className={cls}>
         {children}
         <span className="row-arrow">→</span>
       </a>
@@ -290,11 +299,16 @@ export function ArrowLink({
   className?: string;
 }) {
   const t = toneStyles[tone];
+  const cls = `link-underline group -my-3 inline-flex min-h-11 items-center py-3 text-body-s font-medium ${t.hl} ${className}`;
+  if (isExternalHref(href)) {
+    return (
+      <a {...externalAnchorProps(href)} className={cls}>
+        {children} <span className="row-arrow ml-1.5">→</span>
+      </a>
+    );
+  }
   return (
-    <Link
-      href={href}
-      className={`link-underline group -my-3 inline-flex min-h-11 items-center py-3 text-body-s font-medium ${t.hl} ${className}`}
-    >
+    <Link href={href} className={cls}>
       {children} <span className="row-arrow ml-1.5">→</span>
     </Link>
   );
@@ -349,6 +363,7 @@ export function SectionHead({
   tone = "sand",
   children,
   className = "",
+  compact = false,
 }: {
   eyebrow?: string;
   deva?: string;
@@ -357,6 +372,7 @@ export function SectionHead({
   tone?: Tone;
   children?: ReactNode;
   className?: string;
+  compact?: boolean;
 }) {
   const t = toneStyles[tone];
   const wide = Boolean(lede || children);
@@ -369,18 +385,20 @@ export function SectionHead({
           </Eyebrow>
         )}
         <h2
-          className={`font-display text-display-l text-balance ${
-            eyebrow ? "mt-5" : ""
-          }`}
+          className={`font-display text-balance ${
+            compact ? "text-h1" : "text-display-l"
+          } ${eyebrow ? (compact ? "mt-3" : "mt-5") : ""}`}
         >
           {title}
         </h2>
       </Rise>
 
       {wide && (
-        <div className="col-span-12 mt-5 lg:col-span-5 lg:col-start-8 lg:mt-0">
+        <div className="col-span-12 mt-4 lg:col-span-5 lg:col-start-8 lg:mt-0">
           {lede && (
-            <p className={`max-w-[42ch] text-body-l ${t.dim}`}>{lede}</p>
+            <p className={`max-w-[42ch] ${compact ? "text-body-s" : "text-body-l"} ${t.dim}`}>
+              {lede}
+            </p>
           )}
           {children && <div className={lede ? "mt-5" : ""}>{children}</div>}
         </div>

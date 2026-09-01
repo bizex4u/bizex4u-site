@@ -23,7 +23,7 @@
       sees that stylesheet. If the brand colours change, they change
       in two places. That is a real cost and it is written down here
       so the next person finds out from a comment rather than from a
-      card that is the wrong purple.
+      card that is the wrong colour.
 ------------------------------------------------------------------- */
 
 import { ImageResponse } from "next/og";
@@ -34,11 +34,11 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /* Literals, mirroring globals.css. See constraint 3 above. */
-const PLUM = "#1b1030";
-const PLUM_2 = "#271741";
-const SAND = "#f3eee5";
-const VIOLET_LIFT = "#9b84ff";
-const ON_PLUM_DIM = "#b9aecd";
+const PLUM = "#1a1424";
+const PLUM_2 = "#241c33";
+const SAND = "#f4f1f8";
+const VIOLET_LIFT = "#ddd0f6";
+const ON_PLUM_DIM = "#c9c0d8";
 
 const loadFonts = async () => [
   {

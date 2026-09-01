@@ -21,50 +21,52 @@
 @import "../vendor/scrollcraft/scrollcraft.css" layer(base);
 
 /* ============================================================
-   BIZEX4U — v4
+   BIZEX4U — paper, ink, violet
 
-   Direction: purple and beige. Structure and density from the
-   Savee board; the confidence of Laqshya without copying its
-   black-and-vermillion.
+   Paper is a cool off-white with a violet cast. Ink is plum,
+   not warm asphalt. Accent is actually violet — the class names
+   already were; the hexes now match.
 
    Typography: Instrument Serif for display against Instrument
    Sans for text. A serif display is the single fastest way out
-   of the all-grotesk look that every AI-built site shares, and
-   it carries warmth that a beige palette needs.
+   of the all-grotesk look that every AI-built site shares.
 
    Every text pair is measured. Ratios noted inline.
    ============================================================ */
 
 @theme {
-  /* Beige — the primary canvas ----------------------------- */
-  --color-sand: #f3eee5;
-  --color-sand-2: #e9e2d5; /* recessed band / card on beige */
-  --color-sand-3: #ded5c3; /* hover on beige */
-  --color-on-sand: #1b1030; /*        15.6:1 */
-  --color-on-sand-dim: #4a3f5e; /*     8.4:1 — secondary on beige */
+  /* Paper — the primary canvas ----------------------------- */
+  --color-sand: #f4f1f8;
+  --color-sand-2: #ebe6f3; /* recessed band / card on paper */
+  --color-sand-3: #ddd4ea; /* hover on paper */
+  --color-on-sand: #1a1424; /*        13.6:1 */
+  --color-on-sand-dim: #534d64; /*     7.2:1 — secondary on paper */
 
-  /* Plum — the dark counterweight -------------------------- */
-  --color-plum: #1b1030;
-  --color-plum-2: #271741; /* raised card on plum */
-  --color-plum-3: #34205a; /* hover on plum */
-  --color-on-plum: #ffffff; /*        18.1:1 */
-  --color-on-plum-dim: #b9aecd; /*     8.59:1 — secondary on plum */
+  /* Ink — the dark counterweight --------------------------- */
+  --color-plum: #1a1424;
+  --color-plum-2: #241c33; /* raised card on ink */
+  --color-plum-3: #322844; /* hover on ink */
+  --color-on-plum: #ffffff; /*        18.4:1 */
+  --color-on-plum-dim: #c9c0d8; /*     8.4:1 — secondary on ink */
 
-  /* Violet — brand accent -----------------------------------
-     Three values because one cannot serve every ground:
-     · violet       highlight on plum            (4.14 — large type only)
-     · violet-lift  readable highlight on plum   (6.14:1)
-     · violet-deep  readable text/fill on beige  (7.26:1)
-     A filled violet band uses violet-deep with white (8.4:1). */
-  --color-violet: #7b5cff;
-  --color-violet-lift: #9b84ff;
-  --color-violet-deep: #5327c9;
+  /* Violet ---------------------------------------------------
+     · violet       highlight on ink             (large type)
+     · violet-lift  readable highlight on ink
+     · violet-deep  readable text/fill on paper
+     A filled band uses violet-deep with white. */
+  --color-violet: #c9b4f0;
+  --color-violet-lift: #ddd0f6;
+  --color-violet-deep: #5b2d91;
   --color-on-violet: #ffffff;
-  --color-on-violet-dim: #dcd2ff; /*   5.88:1 on violet-deep */
+  --color-on-violet-dim: #eadcff;
 
   /* Hairlines ---------------------------------------------- */
-  --color-rule-plum: #38295a;
-  --color-rule-sand: #d8cfbd;
+  --color-rule-plum: #3a3150;
+  --color-rule-sand: #d6cde4;
+
+  /* Brand strip — warm paper, not the violet-cast sand. Dark
+     wordmarks and saturated marks both sit on it without a grey wash. */
+  --color-brand-strip: #f3f1ec;
 
   /* Type --------------------------------------------------- */
   --font-display: var(--font-instrument-serif), Georgia, serif;
@@ -75,13 +77,13 @@
   /* Serif display runs larger and looser than a grotesk would.
      Weight stays 400 — Instrument Serif has one weight and does
      not need more. */
-  --text-display-xl: clamp(3rem, 7vw, 6.5rem);
-  --text-display-xl--line-height: 0.96;
-  --text-display-xl--letter-spacing: -0.022em;
+  --text-display-xl: clamp(2.15rem, 4.2vw, 3.5rem);
+  --text-display-xl--line-height: 1.08;
+  --text-display-xl--letter-spacing: -0.02em;
   --text-display-xl--font-weight: 400;
 
-  --text-display-l: clamp(2.25rem, 4.4vw, 4rem);
-  --text-display-l--line-height: 1;
+  --text-display-l: clamp(1.85rem, 3.2vw, 2.75rem);
+  --text-display-l--line-height: 1.12;
   --text-display-l--letter-spacing: -0.018em;
   --text-display-l--font-weight: 400;
 
@@ -143,7 +145,7 @@
   --text-micro--font-weight: 500;
 
   --spacing-band: clamp(3.5rem, 6vw, 6.5rem);
-  --radius-card: 1.25rem;
+  --radius-card: 0.125rem;
   /* The hairline radius on drawn artefacts — spec plates, season bars.
      Was hardcoded as both `rounded-(--radius-xs)` and `rounded-(--radius-xs)` in
      neighbouring components, a difference nobody chose and nobody can
@@ -275,7 +277,7 @@ summary,
    271 frames still late). It is the blending, not the texture.
 
    So: greyscale noise painted normally at low opacity. Grey over beige
-   darkens slightly, grey over plum lightens slightly, which is roughly
+   darkens slightly,   grey over asphalt lightens slightly, which is roughly
    what multiply and overlay were doing anyway — at no compositing cost.
    stitchTiles keeps the 140px tile seamless where it repeats. */
 
@@ -289,14 +291,14 @@ summary,
 }
 
 /* Dark bands need less of it — the same speckle reads much louder
-   against plum than against beige. */
+   against asphalt than against paper. */
 .grain-light::after {
   opacity: 0.055;
 }
 
 /* Format plates --------------------------------------------
-   Empty bordered boxes on plum read as images that failed to
-   load. These surfaces make each plate a physical object —
+   Empty bordered boxes on asphalt read as images that failed
+   to load. These surfaces make each plate a physical object —
    vinyl print, LED face, backlit retail, cinema, built
    structure — without photographs or mix-blend-mode. */
 
@@ -308,58 +310,58 @@ summary,
 }
 
 [data-plate="print"] {
-  border-color: #c9b89a;
+  border-color: #c4b8d8;
   border-width: 2px;
   background:
     linear-gradient(90deg, var(--color-violet-deep) 0 24%, transparent 24%),
-    linear-gradient(180deg, #f6f0e4 0%, #e2d2b4 100%);
+    linear-gradient(180deg, #f4f0fa 0%, #dcd2ee 100%);
   box-shadow:
-    inset 0 0 0 1px rgb(27 16 48 / 0.1),
+    inset 0 0 0 1px rgb(26 20 36 / 0.1),
     0 10px 20px rgb(0 0 0 / 0.32);
 }
 
 [data-tone="light"] [data-plate="print"] {
-  border-color: #8a7a62;
+  border-color: #7a6a92;
   box-shadow:
-    inset 0 0 0 1px rgb(27 16 48 / 0.08),
-    0 6px 14px rgb(27 16 48 / 0.14);
+    inset 0 0 0 1px rgb(26 20 36 / 0.08),
+    0 6px 14px rgb(26 20 36 / 0.14);
 }
 
 [data-plate="led"] {
-  border-color: rgb(155 132 255 / 0.5);
+  border-color: rgb(201 180 240 / 0.45);
   background:
     repeating-linear-gradient(
       0deg,
       transparent,
       transparent 2px,
-      rgb(123 92 255 / 0.07) 2px,
-      rgb(123 92 255 / 0.07) 3px
+      rgb(201 180 240 / 0.08) 2px,
+      rgb(201 180 240 / 0.08) 3px
     ),
-    radial-gradient(ellipse at 50% 28%, rgb(123 92 255 / 0.42), transparent 58%),
-    #0d0818;
+    radial-gradient(ellipse at 50% 28%, rgb(201 180 240 / 0.38), transparent 58%),
+    #120e1a;
   box-shadow:
-    inset 0 0 16px rgb(123 92 255 / 0.45),
-    0 0 18px rgb(123 92 255 / 0.2);
+    inset 0 0 16px rgb(201 180 240 / 0.4),
+    0 0 18px rgb(201 180 240 / 0.18);
 }
 
 [data-plate="backlit"] {
-  border-color: rgb(232 196 140 / 0.55);
-  background: linear-gradient(180deg, #f4e6c4 0%, #d4a85a 50%, #b88840 100%);
+  border-color: rgb(201 180 240 / 0.55);
+  background: linear-gradient(180deg, #e8dff6 0%, #b894e0 50%, #7a4cb8 100%);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.5),
-    0 0 16px rgb(212 168 90 / 0.28);
+    0 0 16px rgb(122 76 184 / 0.28);
 }
 
 [data-tone="light"] [data-plate="backlit"] {
-  border-color: rgb(160 120 50 / 0.4);
+  border-color: rgb(91 45 145 / 0.4);
 }
 
 [data-plate="cinema"] {
   border-color: rgb(255 255 255 / 0.14);
   background: radial-gradient(
     ellipse at 50% 42%,
-    #6a4020 0%,
-    #1a1010 62%,
+    #5b2d91 0%,
+    #1a1424 62%,
     #0c0810 100%
   );
   box-shadow:
@@ -369,15 +371,15 @@ summary,
 
 [data-plate="build"] {
   border-color: rgb(255 255 255 / 0.24);
-  background: linear-gradient(180deg, #e4d6b8 0%, #c4b089 100%);
+  background: linear-gradient(180deg, #e4d8f4 0%, #c4b0d8 100%);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.5),
-    0 3px 0 #8a7a58,
+    0 3px 0 #7a6a92,
     0 8px 14px rgb(0 0 0 / 0.2);
 }
 
 [data-tone="light"] [data-plate="build"] {
-  border-color: rgb(27 16 48 / 0.22);
+  border-color: rgb(26 20 36 / 0.22);
 }
 
 /* Reveal --------------------------------------------------- */
@@ -415,6 +417,25 @@ summary,
   display: inline-block;
 }
 
+/* City-page masthead / station names. Colour + underline only on hover. */
+.media-name-link {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition:
+    color 200ms var(--ease-reveal),
+    background-size 220ms var(--ease-reveal);
+}
+
+.media-name-link:hover,
+.media-name-link:focus-visible {
+  color: var(--color-violet-deep);
+  background-size: 100% 1px;
+}
+
 .link-underline::after {
   content: "";
   position: absolute;
@@ -450,6 +471,7 @@ summary,
 
 @media (prefers-reduced-motion: reduce) {
   .link-underline::after,
+  .media-name-link,
   .row-arrow {
     transition: none;
   }
@@ -537,6 +559,32 @@ summary,
       transparent
     );
   }
+}
+
+@keyframes brand-strip-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.brand-strip-track {
+  animation: brand-strip-marquee 40s linear infinite;
+  animation-play-state: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-strip-track {
+    animation: none;
+  }
+}
+
+/* Full colour, always. Nothing in the rest of the sheet — grain,
+   a parent filter, a leftover utility — is allowed to grey these. */
+.brand-strip img {
+  filter: none;
+  -webkit-filter: none;
+  opacity: 1;
+  mix-blend-mode: normal;
 }
 
 /* Line-by-line headline reveal ------------------------------------
@@ -749,10 +797,21 @@ html:has(dialog[open]) {
   }
 }
 
+/* DayClock hour tick — restarts when the active chip remounts. */
+@keyframes dayclock-tick {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .corridor-pulse,
   .corridor-node,
-  .kenburns {
+  .kenburns,
+  .dayclock-tick {
     animation: none;
   }
   .corridor-pulse {
@@ -804,12 +863,9 @@ html:has(dialog[open]) {
    was dead code that never ran once. The effect the comment promised
    has simply never existed on the site.
 
-   It is four lines of position:sticky now that nothing re-parents the
-   DOM. The hero is 833px against a 900px viewport, so it is shorter
-   than the screen and top:0 holds it cleanly rather than clipping its
-   base. The section after it is raised one z-index and carries its own
-   opaque ground, so it slides up and covers the hero rather than
-   pushing it down the document.
+   The hero fills the viewport (`min-h-dvh`) so the first screen is
+   the opening, not a short plate sitting on beige. Sticky still
+   holds it on wide, tall windows; the next section climbs over it.
 
    No scrollcraft act on the hero. A flow act with data-sc-parallax on
    the copy drifted it correctly and also ramped its opacity to zero by

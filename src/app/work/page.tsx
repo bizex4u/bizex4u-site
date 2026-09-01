@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Band, Btn, Eyebrow, Rise, SectionHead } from "@/components/UI";
-import { clients, proofFrames, sectorsServed } from "@/lib/site";
+import { proofFrames, sectorsServed, selectedWork } from "@/lib/site";
 import { reserve, streets } from "@/lib/streets";
 import BriefButton from "@/components/BriefButton";
+import BrandStrip from "@/components/BrandStrip";
 import PageSchema from "@/components/PageSchema";
 
 export const metadata: Metadata = {
-  title: "Work — Campaigns Planned and Run Across India",
+  title: "Work — Campaigns planned and run",
   description:
-    "Brands Bizex4U has planned and run outdoor, retail and broadcast campaigns for, and the geo-tagged monitoring frames that document delivery.",
+    "Brands Bizex4U has planned and run outdoor campaigns for, and the on-site photographs that document delivery.",
   alternates: { canonical: "/work" },
 };
 
@@ -107,30 +108,19 @@ export default function WorkPage() {
           <div className="grid-12 items-end gap-y-10">
             <div className="col-span-12 lg:col-span-7">
               <Rise>
-                <Eyebrow tone="plum" deva="हमारा काम">Work</Eyebrow>
+                <Eyebrow tone="plum">Work</Eyebrow>
               </Rise>
               <Rise delay={60}>
                 <h1 className="mt-6 font-display text-display-xl text-balance">
                   Campaigns planned{" "}
-                  {/* violet-LIFT, not violet-deep. This hero is white text
-                      on a plum gradient over a photograph, and every other
-                      element in it takes a plum-tone colour — the accent was
-                      the one hand-picked value and it was picked for a sand
-                      ground. Measured against the pixels actually behind it
-                      the deep violet came out at 1.70:1 while the white
-                      words beside it were 14.9:1, so the two words carrying
-                      the emphasis were the two hardest to read on the page.
-                      violet-lift on plum is 6.14:1. The tone system already
-                      knew this: toneStyles.plum.hl IS violet-lift. */}
                   <span className="em-serif text-violet-lift">and run</span>.
                 </h1>
               </Rise>
               <Rise delay={120}>
                 <p className="speakable-answer mt-7 max-w-[50ch] text-body-l text-on-plum-dim">
-                  Outdoor, retail, broadcast and barter-funded campaigns across
-                  Indian metros and tier-2 markets, for brands in categories
-                  where being seen in the physical world still decides whether
-                  a person trusts you.
+                  Outdoor, retail and broadcast campaigns across Indian metros
+                  and tier-2 markets. We publish names and placements we can
+                  stand behind. We do not invent results.
                 </p>
               </Rise>
             </div>
@@ -142,44 +132,102 @@ export default function WorkPage() {
               <p className="font-mono text-micro leading-relaxed tracking-[0.09em] text-on-plum-dim uppercase">
                 {workPlate.city}
                 <span className="mx-2 text-violet-lift">/</span>
-                <span className="whitespace-nowrap">our own frame</span>
+                <span className="whitespace-nowrap">photographed on site</span>
               </p>
             </Rise>
           </div>
         </div>
       </section>
 
-      {/* 01 — CLIENTS -------------------------------------------- */}
-      <Band tone="sand2" grain>
+      {/* 01 — CAMPAIGN NOTES ------------------------------------- */}
+      <Band tone="sand" grain id="notes">
         <Rise>
-          <Eyebrow>Campaigns planned and run for</Eyebrow>
-          <h2 className="mt-5 max-w-[22ch] font-display text-display-l text-balance">
-            Names, without the{" "}
-            <span className="em-serif text-violet-deep">invented numbers</span>.
+          <Eyebrow>Campaign notes</Eyebrow>
+          <h2 className="mt-5 max-w-[24ch] font-display text-display-l text-balance">
+            What a Media Director can{" "}
+            <span className="em-serif text-violet-deep">forward</span>.
           </h2>
+          <p className="mt-5 max-w-[54ch] text-on-sand-dim">
+            Market, format, duration, what was compared. No invented reach
+            or ROI. Names wait on written permission; the work does not.
+          </p>
         </Rise>
-        <Rise delay={80}>
-          <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-4">
-            {clients.map((c) => (
-              <li key={c} className="font-display text-h2 text-on-sand">
-                {c}
-              </li>
-            ))}
-          </ul>
-        </Rise>
-        <Rise delay={140}>
-          <ul className="mt-12 flex flex-wrap gap-2 border-t border-rule-sand pt-8">
-            {sectorsServed.map((s) => (
-              <li
-                key={s}
-                className="rounded-full border border-rule-sand px-4 py-2 text-body-s text-on-sand-dim"
-              >
-                {s}
-              </li>
-            ))}
-          </ul>
-        </Rise>
+        <ol className="mt-10 border-t border-rule-sand">
+          {selectedWork.map((w, i) => (
+            <Rise key={w.index} as="li" delay={i * 60}>
+              <article className="grid-12 gap-y-4 border-b border-rule-sand py-8 md:py-10">
+                <p className="col-span-12 font-mono text-micro tracking-[0.1em] text-violet-deep uppercase md:col-span-1">
+                  {w.index}
+                </p>
+                <div className="col-span-12 md:col-span-4">
+                  <h3 className="font-display text-h2 text-balance">
+                    {w.client}
+                  </h3>
+                  <p className="mt-2 font-mono text-micro tracking-[0.08em] text-on-sand-dim uppercase">
+                    {w.sector}
+                    <span className="mx-2">/</span>
+                    {w.markets}
+                  </p>
+                </div>
+                <dl className="col-span-12 grid gap-4 md:col-span-7">
+                  <div>
+                    <dt className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                      Formats
+                    </dt>
+                    <dd className="mt-1 text-body-s">{w.formats}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                      Duration
+                    </dt>
+                    <dd className="mt-1 text-body-s">{w.duration}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                      Compared
+                    </dt>
+                    <dd className="mt-1 text-body-s">{w.compared}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                      Delivery
+                    </dt>
+                    <dd className="mt-1 text-body-s">{w.delivery}</dd>
+                  </div>
+                </dl>
+              </article>
+            </Rise>
+          ))}
+        </ol>
       </Band>
+
+      {/* 02 — CLIENTS -------------------------------------------- */}
+      <section className="brand-strip isolate border-b border-rule-sand bg-brand-strip py-(--spacing-band) text-on-sand">
+        <div className="shell">
+          <Rise>
+            <Eyebrow>Clients</Eyebrow>
+            <h2 className="mt-5 max-w-[20ch] font-display text-display-l text-balance">
+              Brands we have planned{" "}
+              <span className="em-serif text-violet-deep">and run</span> for.
+            </h2>
+          </Rise>
+          <Rise delay={80} className="mt-10">
+            <BrandStrip framed={false} eyebrow={false} />
+          </Rise>
+          <Rise delay={140}>
+            <ul className="mt-12 flex flex-wrap gap-2 border-t border-rule-sand pt-8">
+              {sectorsServed.map((s) => (
+                <li
+                  key={s}
+                  className="rounded-sm border border-rule-sand px-4 py-2 text-body-s text-on-sand-dim"
+                >
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </Rise>
+        </div>
+      </section>
 
       {/* 01b — THE WORK, PHOTOGRAPHED -----------------------------
           The page went client names, then proof thumbnails, then four
@@ -195,13 +243,12 @@ export default function WorkPage() {
       <section className="grain relative overflow-hidden bg-plum py-(--spacing-band) text-on-plum">
         <div className="shell relative z-10">
           <SectionHead
-            eyebrow="Shot on site"
+            eyebrow="Execution"
             tone="plum"
-            deva="सड़क पर"
             title={<>Placements, <span className="em-serif">while they ran</span>.</>}
-            lede={<>Agra, Delhi NCR, Kochi, Kozhikode, Kanpur. Photographed by us,
-              standing in the traffic, on a working day — the only condition
-              under which any of it counts.</>}
+            lede={<>Agra, Delhi NCR, Kochi, Kozhikode, Kanpur. Photographed by us
+              on a working day. These are campaigns we ran — not a catalogue of
+              sites we hold.</>}
           />
 
           <ul className="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -241,9 +288,8 @@ export default function WorkPage() {
       {/* 02 — PROOF OF DELIVERY ---------------------------------- */}
       <Band tone="plum2" grain>
         <SectionHead
-            eyebrow="Proof of delivery"
+            eyebrow="Measurement"
             tone="plum2"
-            deva="डिलीवरी का सबूत"
             title={<>What the work looks like{" "}
               <span className="em-serif">when it is documented</span>.</>}
             lede={<>Monitoring frames from live campaigns. Coordinates and dates as

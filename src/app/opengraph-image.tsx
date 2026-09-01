@@ -3,14 +3,14 @@
 import { ogCard, size, contentType } from "@/lib/ogCard";
 
 export const alt =
-  "Bizex4U — brand activation and outdoor advertising across 39 Indian cities";
+  "Bizex4U — independent OOH planning and buying across 39 Indian markets";
 export { size, contentType };
 
 export default async function Image() {
   return ogCard({
-    eyebrow: "Brand activation across India",
-    title: "The brands India trusts are the ones it",
-    accent: "keeps seeing.",
-    footnote: "Outdoor · Transit · Retail · Barter",
+    eyebrow: "Independent OOH planning and buying",
+    title: "We help brands make better",
+    accent: "OOH decisions.",
+    footnote: "We do not own inventory · We plan across owners",
   });
 }

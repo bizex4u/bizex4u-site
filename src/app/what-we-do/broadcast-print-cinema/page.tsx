@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <CapabilityPage slug="broadcast-print-cinema" plate="broadcast" />;
+  return <CapabilityPage slug="broadcast-print-cinema" />;
 }

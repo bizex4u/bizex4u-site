@@ -51,7 +51,6 @@ export default function GlossaryPage() {
         <SectionHead
           tone="sand2"
           eyebrow="A to Z"
-          deva="शब्दकोश"
           title={
             <>
               {terms.length} terms,{" "}

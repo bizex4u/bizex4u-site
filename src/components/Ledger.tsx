@@ -182,11 +182,9 @@ export function PageHero({
 
 export function ContactLedger({
   email,
-  phone,
   address,
 }: {
   email: string;
-  phone: string;
   address: { line1: string; line2: string; country: string };
   tone?: "light" | "dark";
 }) {
@@ -200,14 +198,6 @@ export function ContactLedger({
             className="link-underline -my-2 inline-flex min-h-11 items-center py-2 text-h3"
           >
             {email}
-          </a>
-        </div>
-        <div className="mt-1">
-          <a
-            href={`tel:${phone.replace(/\s/g, "")}`}
-            className="link-underline -my-2 inline-flex min-h-11 items-center py-2 text-h3"
-          >
-            {phone}
           </a>
         </div>
       </div>
@@ -230,14 +220,14 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
     <div className="grid gap-3">
       {items.map((item, i) => (
         <Rise key={item.q} delay={Math.min(i, 8) * 60}>
-          <details className="group rounded-(--radius-card) bg-sand-2 px-6 py-1 md:px-7">
-            <summary className="flex list-none items-baseline justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
+          <details className="group rounded-(--radius-card) bg-sand-2 px-5 py-0.5 md:px-6">
+            <summary className="flex list-none items-baseline justify-between gap-6 py-3.5 [&::-webkit-details-marker]:hidden">
               <h3 className="max-w-[46ch] text-h3">{item.q}</h3>
               <span className="font-mono text-lg leading-none text-violet-deep transition-transform duration-200 group-open:rotate-45">
                 +
               </span>
             </summary>
-            <p className="max-w-[68ch] pb-6 text-on-sand-dim">{item.a}</p>
+            <p className="max-w-[68ch] pb-4 text-on-sand-dim">{item.a}</p>
           </details>
         </Rise>
       ))}

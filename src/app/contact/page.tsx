@@ -7,7 +7,7 @@ import { Eyebrow } from "@/components/UI";
 
 export const metadata: Metadata = {
   title: "Contact Bizex4U — OOH planning, Kanpur",
-  description: `Talk to Bizex4U about outdoor, retail and broadcast media planning in India. Write to ${site.email} or call ${site.phone}.`,
+  description: `Talk to Bizex4U about outdoor, retail and broadcast media planning in India. Write to ${site.email}.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -17,7 +17,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Start a conversation."
-        lede="Tell us the market, the objective and the constraint. We will tell you plainly whether we are the right people for it."
+        lede={`${site.sla.acknowledge} ${site.sla.plan} Tell us the market, the objective and the constraint.`}
       />
 
       <Section index="01" label="Enquiries">
@@ -35,14 +35,6 @@ export default function ContactPage() {
                   className="link-underline -my-2 inline-flex min-h-11 items-center py-2 text-h3"
                 >
                   {site.email}
-                </a>
-              </div>
-              <div className="mt-2">
-                <a
-                  href={`tel:${site.phoneHref}`}
-                  className="link-underline -my-2 inline-flex min-h-11 items-center py-2 text-h3"
-                >
-                  {site.phone}
                 </a>
               </div>
             </div>
@@ -85,7 +77,7 @@ export default function ContactPage() {
             "@id": `${site.url}/contact#webpage`,
             url: `${site.url}/contact`,
             name: `Contact ${site.name}`,
-            description: `Talk to Bizex4U about outdoor, retail and broadcast media planning in India. Write to ${site.email} or call ${site.phone}.`,
+            description: `Talk to Bizex4U about outdoor, retail and broadcast media planning in India. Write to ${site.email}.`,
             isPartOf: { "@id": `${site.url}/#website` },
             about: { "@id": organisationId },
             mainEntity: { "@id": organisationId },

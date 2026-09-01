@@ -70,16 +70,17 @@ export const streets: Street[] = [
    makes that class of mistake impossible: a different photograph is a
    different path. */
 export const heroPlate = {
-  src: "/media/streets/plate-hero-kozhikode.webp",
-  w: 1800,
-  h: 911,
-  city: "Kozhikode, Kerala",
-  /* First pass used a Kochi flyover. Composed well and argued nothing:
-     the half of the frame the scrim leaves visible was a concrete pier,
-     a U-turn sign and some grey glazing — not one piece of advertising
-     in a hero for an advertising company. This frame puts the medium on
-     the exposed side, which is the only test that mattered. */
-  alt: "A dense commercial street in Kozhikode at midday, hoardings and shop signage stacked above the traffic on both sides",
+  src: "/media/streets/plate-hero-agra.webp",
+  w: 900,
+  h: 580,
+  city: "Agra, Uttar Pradesh",
+  /* Kozhikode shop-sign street and the Kochi flyover both failed the
+     same test: the half of the frame the left plum scrim leaves visible
+     was clutter, or a concrete pier with no advertising in it. This
+     Agra arterial puts one hoarding on the exposed right, against road
+     and sky. Copied from agra-6.webp under a new filename so Next's
+     optimiser cannot serve the old Kozhikode bytes. */
+  alt: "A highway hoarding beside an Agra arterial road, traffic on the carriageway under open sky",
 };
 
 export const statementPlate = {

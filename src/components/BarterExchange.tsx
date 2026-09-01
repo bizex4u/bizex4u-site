@@ -7,9 +7,8 @@ import { Eyebrow } from "@/components/UI";
  * not draw anything until the street photographs — more than two
  * thousand pixels down. The argument of the page is the swap: stock
  * you already hold for media you would otherwise buy in cash. This is
- * that swap as a compact two-column instrument, in the same register
- * as PlanAssembly. The full five-row equation stays further down; this
- * is the preview that belongs in the hero.
+ * that swap as a compact two-column instrument. The full five-row
+ * equation stays further down; this is the preview that belongs in the hero.
  *
  * Categories only. No city counts, no rates, no implied inventory.
  */

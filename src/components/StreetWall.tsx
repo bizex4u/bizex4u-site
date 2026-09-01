@@ -94,7 +94,7 @@ export default function StreetWall() {
       <div className="shell relative z-10">
         <div className="grid-12 items-end">
           <div className="col-span-12 lg:col-span-7">
-            <Eyebrow tone="plum" deva="सड़क पर">
+            <Eyebrow tone="plum">
               Shot on site, while it was running
             </Eyebrow>
             <h2 className="mt-5 font-display text-display-l text-balance">

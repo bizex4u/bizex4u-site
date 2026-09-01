@@ -2,17 +2,17 @@
 
 import { useRef, useState } from "react";
 import { site } from "@/lib/site";
-import { submitBrief } from "@/lib/submitBrief";
-import { Eyebrow } from "@/components/UI";
+import { submitBrief, briefErrorCopy } from "@/lib/submitBrief";
+import { Eyebrow, btnClass } from "@/components/UI";
 import { pagePath, scrollPct, useAnalytics } from "@/lib/analytics";
+import BriefSuccess from "@/components/BriefSuccess";
 
 /**
  * "What are you holding?"
  *
  * The highest-intent thing on the barter page. Barter is abstract
  * until someone names their own stock out loud, and this makes them
- * do it in three taps before handing the answers to WhatsApp
- * pre-filled.
+ * do it in three taps before handing the answers to email.
  *
  * IT COLLECTS, IT NEVER QUOTES. There is deliberately no output that
  * says "this buys you X" — that would be a rate card by implication,
@@ -21,8 +21,8 @@ import { pagePath, scrollPct, useAnalytics } from "@/lib/analytics";
  * calculated by a widget. The reward for filling it in is a faster,
  * better-informed first conversation, and that is the honest promise.
  *
- * Nothing is transmitted from this component. The selections only ever
- * become text in a WhatsApp draft that the user sends themselves.
+ * Posts to /api/brief. The chips collect the holding; they never
+ * imply a media rate.
  */
 
 const categories = [
@@ -49,11 +49,17 @@ export default function BarterSelector() {
   const [category, setCategory] = useState<string | null>(null);
   const [scale, setScale] = useState<string | null>(null);
   const [markets, setMarkets] = useState<string[]>([]);
-  /* Brand and name are mandatory before this reaches WhatsApp. The
+  /* Brand and name are mandatory before this reaches email. The
      chips on their own describe an opportunity with nobody attached to
      it, which is not a lead. */
   const [brand, setBrand] = useState("");
   const [person, setPerson] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [note, setNote] = useState("");
+  const [sent, setSent] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState("");
   const { track } = useAnalytics();
   const openedAt = useRef(0);
   const openedRef = useRef(false);
@@ -82,26 +88,68 @@ export default function BarterSelector() {
       prev.includes(m) ? prev.filter((x) => x !== m) : [...prev, m],
     );
 
-  const named = brand.trim().length > 0 && person.trim().length > 0;
+  const named =
+    brand.trim().length > 0 &&
+    person.trim().length > 0 &&
+    email.trim().length > 0 &&
+    phone.replace(/\D/g, "").length >= 8;
   const chosen = Boolean(category && scale);
   const ready = chosen && named;
 
   const message = [
     "Hi Bizex4U — I'd like to look at a barter structure.",
     "",
-    `Brand: ${brand.trim()}`,
+    `Company: ${brand.trim()}`,
     `Name: ${person.trim()}`,
+    `Email: ${email.trim()}`,
+    `Phone: ${phone.trim()}`,
     category && `What we hold: ${category}`,
     scale && `Rough value: ${scale}`,
     markets.length > 0 && `Markets of interest: ${markets.join(", ")}`,
+    note.trim() && "",
+    note.trim(),
   ]
     .filter(Boolean)
     .join("\n");
 
-  const href = `${site.whatsappBase}?text=${encodeURIComponent(message)}`;
+  const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
+    `Barter enquiry — ${brand.trim()}`,
+  )}&body=${encodeURIComponent(message)}`;
+
+  const send = async () => {
+    if (pending) return;
+    openIfNeeded();
+    track("brief_submit", {
+      page: pagePath(),
+      seconds_to_complete: Math.round(
+        (Date.now() - openedAt.current) / 1000,
+      ),
+    });
+    setError("");
+    setPending(true);
+    const result = await submitBrief({
+      brand: brand.trim(),
+      person: person.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      holding: category ?? "",
+      value: scale ?? "",
+      markets: markets.join(", "),
+      context: "Barter advertising",
+      detail: note.trim(),
+      source: "barter",
+    });
+    setPending(false);
+
+    if (result.ok) {
+      setSent(true);
+      return;
+    }
+    setError(briefErrorCopy(result.error));
+  };
 
   const chip = (active: boolean) =>
-    `min-h-11 rounded-full border px-4 py-2.5 text-body-s transition-colors duration-200 ${
+    `min-h-11 rounded-sm border px-4 py-2.5 text-body-s transition-colors duration-200 ${
       active
         ? "border-violet-deep bg-violet-deep text-white"
         : "border-rule-sand bg-sand text-on-sand-dim hover:border-on-sand/40 hover:text-on-sand"
@@ -109,6 +157,10 @@ export default function BarterSelector() {
 
   return (
     <div className="rounded-(--radius-card) bg-sand-2 p-6 md:p-8">
+      {sent ? (
+        <BriefSuccess recorded />
+      ) : (
+      <>
       <fieldset>
         <Eyebrow as="legend" muted>01 — What are you holding?</Eyebrow>
         <div className="mt-4 flex flex-wrap gap-2.5">
@@ -169,7 +221,7 @@ export default function BarterSelector() {
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
             <Eyebrow as="label" muted className="block" htmlFor="barter-brand">
-              Brand or company <span aria-hidden>*</span>
+              Company name <span aria-hidden>*</span>
             </Eyebrow>
             <input
               id="barter-brand"
@@ -177,7 +229,7 @@ export default function BarterSelector() {
               onChange={(e) => setBrand(e.target.value)}
               autoComplete="organization"
               required
-              className="mt-2 h-12 w-full rounded-xl border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+              className="mt-2 h-12 w-full rounded-sm border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
               onFocus={() => onFieldFocus("brand")}
             />
           </div>
@@ -191,8 +243,54 @@ export default function BarterSelector() {
               onChange={(e) => setPerson(e.target.value)}
               autoComplete="name"
               required
-              className="mt-2 h-12 w-full rounded-xl border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+              className="mt-2 h-12 w-full rounded-sm border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
               onFocus={() => onFieldFocus("person")}
+            />
+          </div>
+          <div>
+            <Eyebrow as="label" muted className="block" htmlFor="barter-email">
+              Email <span aria-hidden>*</span>
+            </Eyebrow>
+            <input
+              id="barter-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              spellCheck={false}
+              required
+              className="mt-2 h-12 w-full rounded-sm border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+              onFocus={() => onFieldFocus("email")}
+            />
+          </div>
+          <div>
+            <Eyebrow as="label" muted className="block" htmlFor="barter-phone">
+              Phone <span aria-hidden>*</span>
+            </Eyebrow>
+            <input
+              id="barter-phone"
+              type="tel"
+              inputMode="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              autoComplete="tel"
+              required
+              minLength={8}
+              className="mt-2 h-12 w-full rounded-sm border border-rule-sand bg-sand px-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+              onFocus={() => onFieldFocus("phone")}
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <Eyebrow as="label" muted className="block" htmlFor="barter-note">
+              Note
+            </Eyebrow>
+            <textarea
+              id="barter-note"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              rows={3}
+              className="mt-2 w-full rounded-sm border border-rule-sand bg-sand p-4 text-body text-on-sand outline-none transition-colors focus:border-violet-deep"
+              onFocus={() => onFieldFocus("note")}
             />
           </div>
         </div>
@@ -201,51 +299,36 @@ export default function BarterSelector() {
       <div className="mt-9 border-t border-rule-sand pt-6">
         {ready ? (
           <>
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
               data-cta="1"
               data-cta-location="start"
               data-cta-variant="default"
-              data-cta-label="Send this on WhatsApp"
-              data-whatsapp="1"
-              onClick={() => {
-                openIfNeeded();
-                track("brief_submit", {
-                  page: pagePath(),
-                  seconds_to_complete: Math.round(
-                    (Date.now() - openedAt.current) / 1000,
-                  ),
-                });
-                /* Fire and forget, for the same reason as the brief
-                   dialog: awaiting the Sheet write would delay the
-                   navigation past the user gesture. */
-                void submitBrief({
-                  brand: brand.trim(),
-                  person: person.trim(),
-                  holding: category ?? "",
-                  value: scale ?? "",
-                  markets: markets.join(", "),
-                  context: "Barter advertising",
-                  source: "barter",
-                });
-              }}
-              className="group inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-violet-deep px-7 py-3 font-medium text-white transition-colors duration-200 hover:bg-violet"
+              data-cta-label="Request a plan"
+              disabled={pending}
+              onClick={() => void send()}
+              className={`${btnClass("violet", "lg")} disabled:opacity-60`}
             >
-              Send this on WhatsApp
-              <span className="row-arrow">→</span>
-            </a>
+              {pending ? "Sending…" : "Request a plan"}
+              {pending ? null : <span className="row-arrow">→</span>}
+            </button>
+            {error ? (
+              <p className="mt-4 text-body-s text-violet-deep" role="alert">
+                {error}{" "}
+                <a href={mailto} className="link-underline">
+                  {site.email}
+                </a>
+              </p>
+            ) : null}
             <p className="mt-4 max-w-[52ch] text-body-s text-on-sand-dim">
-              Opens WhatsApp with your answers written in. Nothing is sent
-              until you press send, and nothing is stored here.
+              {site.sla.acknowledge} {site.sla.plan}
             </p>
           </>
         ) : (
           <p className="text-body-s text-on-sand-dim">
             {!chosen
               ? "Pick a category and a rough value, then tell us who is asking."
-              : "Add your brand and your name and this turns into a message you can send."}
+              : "Add your company, your name, email and phone."}
           </p>
         )}
 
@@ -255,6 +338,8 @@ export default function BarterSelector() {
           you better.
         </p>
       </div>
+      </>
+      )}
     </div>
   );
 }

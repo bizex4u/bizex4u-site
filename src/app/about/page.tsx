@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { Band, Btn, Card, Eyebrow, Rise, SectionHead } from "@/components/UI";
-import { clients, sectorsServed, site } from "@/lib/site";
+import { sectorsServed, site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
+import BrandStrip from "@/components/BrandStrip";
 import PageSchema from "@/components/PageSchema";
 
 export const metadata: Metadata = {
-  title: "About — An Independent Indian Media Network",
+  title: "About — Independent OOH planning and buying",
   description:
-    "An independent Indian outdoor and media network working in 39 cities from Kanpur, Uttar Pradesh. No owner mandate, no inherited rate card.",
+    "Bizex4U is an independent OOH planning and buying desk. We do not own inventory. Planning is led from Kanpur across 39 Indian markets.",
   alternates: { canonical: "/about" },
 };
 
@@ -39,10 +40,10 @@ const principles = [
 ];
 
 const facts = [
-  { label: "Based in", value: "Kanpur", note: "Uttar Pradesh, India" },
-  { label: "Operating in", value: "39", note: "Metros and tier-2 cities" },
-  { label: "Capabilities", value: "Six", note: "Outdoor to barter, on one plan" },
-  { label: "Ownership", value: "Independent", note: "No network mandate" },
+  { label: "Desk", value: "Kanpur", note: "Uttar Pradesh — a tier-2 planning base, not a franchise." },
+  { label: "Markets", value: "39", note: "Metros and tier-2, planned city by city." },
+  { label: "Role", value: "Independent", note: "We plan and buy. We do not own inventory." },
+  { label: "Structure", value: "One desk", note: "You deal with the planning desk, not a franchise list." },
 ];
 
 export default function AboutPage() {
@@ -54,39 +55,48 @@ export default function AboutPage() {
           <div className="grid-12 items-end gap-y-10">
             <div className="col-span-12 lg:col-span-7">
               <Rise>
-                <Eyebrow deva="हमारे बारे में">About Bizex4U</Eyebrow>
+                <Eyebrow>About</Eyebrow>
               </Rise>
               <Rise delay={60}>
                 <h1 className="mt-6 font-display text-display-xl text-balance">
-                  An independent Indian{" "}
+                  Independent OOH planning{" "}
                   <span className="em-serif text-violet-deep">
-                    media network
+                    and buying
                   </span>
                   .
                 </h1>
               </Rise>
               <Rise delay={120}>
                 <p className="speakable-answer mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
-                  We plan, negotiate and run outdoor, retail and broadcast
-                  campaigns in 39 Indian cities — and structure
-                  the commercial side so that a capped budget does not have to
-                  decide how visible a brand is.
+                  We do not own hoardings, screens or airtime. We plan the
+                  buy across media owners, negotiate in the open, run the
+                  campaign and document delivery — from a desk in Kanpur,
+                  across 39 Indian markets.
                 </p>
               </Rise>
             </div>
 
             <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
               <Card bg="bg-plum" className="text-on-plum">
-                <Eyebrow tone="plum">Where we are</Eyebrow>
+                <Eyebrow tone="plum">Planning desk</Eyebrow>
                 <p className="mt-5 font-display text-h2">
+                  Kanpur
+                  <br />
+                  <span className="text-h3 text-on-plum-dim">
+                    Uttar Pradesh
+                  </span>
+                </p>
+                <p className="mt-5 text-on-plum-dim">
                   {site.address.line1}
                   <br />
                   {site.address.line2}
                 </p>
                 <p className="mt-5 text-on-plum-dim">
-                  A UP base is not incidental. Most of the growth in Indian
-                  outdoor is happening in tier-2 markets, and they are planned
-                  best by people who live in one.
+                  Planning is led from this desk. Local supervisors and
+                  owner operations run mounting and mid-flight checks. You
+                  deal with one team, not a franchise list. A UP base is not
+                  incidental: most of the growth in Indian outdoor is happening
+                  in tier-2 markets, and they are planned best from one.
                 </p>
               </Card>
             </Rise>
@@ -116,7 +126,6 @@ export default function AboutPage() {
         <SectionHead
             eyebrow="How we work"
             tone="plum"
-            deva="हम कैसे काम करते हैं"
             title={<>Independence is the{" "}
               <span className="em-serif">whole argument</span>.</>}
             lede={<>A media owner sells what it has. A network agency sells what its
@@ -147,13 +156,10 @@ export default function AboutPage() {
       <Band tone="sand" grain>
         <div className="grid-12 gap-y-10">
           <Rise className="col-span-12 lg:col-span-5">
-            <Eyebrow deva="किनके साथ">Who we work with</Eyebrow>
+            <Eyebrow>Who we work with</Eyebrow>
             <h2 className="mt-5 max-w-[18ch] font-display text-display-l text-balance">
-              Categories where{" "}
-              <span className="em-serif text-violet-deep">
-                presence still decides
-              </span>
-              .
+              Work that has to be{" "}
+              <span className="em-serif text-violet-deep">seen</span>.
             </h2>
             <p className="mt-6 max-w-[42ch] text-on-sand-dim">
               Electronics, footwear, beverages, cement, commercial vehicles,
@@ -177,19 +183,11 @@ export default function AboutPage() {
                 ))}
               </ul>
             </Rise>
-            <Rise delay={100}>
-              <Eyebrow muted className="mt-10">Campaigns planned and run for</Eyebrow>
-              <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2.5">
-                {clients.map((c) => (
-                  <li key={c} className="text-h3 text-on-sand-dim">
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </Rise>
           </div>
         </div>
       </Band>
+
+      <BrandStrip eyebrow="Campaigns planned and run for" />
 
       {/* 04 — CTA ------------------------------------------------- */}
       <Band tone="violet" grain>
@@ -202,13 +200,13 @@ export default function AboutPage() {
             </h2>
             <p className="mt-6 max-w-[46ch] text-body-l">
               A market, a corridor, a category, a budget that does not stretch.
-              You will get a direct answer rather than a credentials deck.
+              {` ${site.sla.acknowledge} ${site.sla.plan}`}
             </p>
           </Rise>
           <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
             <div className="flex flex-wrap gap-3">
               <BriefButton variant="sand" size="lg" context="About Bizex4U">
-                Send a brief
+                Request a plan
               </BriefButton>
               <Btn href="/contact" variant="outline-sand" size="lg">
                 Contact
@@ -220,7 +218,9 @@ export default function AboutPage() {
       <PageSchema
         path="/about"
         name={"About Bizex4U"}
-        description={"An independent Indian outdoor and media network working in 39 cities from Kanpur, Uttar Pradesh. No owner mandate, no inherited rate card."}
+        description={
+          "Independent OOH planning and buying desk. We do not own inventory. Planning is led from Kanpur across 39 Indian markets."
+        }
         type="AboutPage"
       />
     </>

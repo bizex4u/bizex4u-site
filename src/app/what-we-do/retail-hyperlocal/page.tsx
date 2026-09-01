@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <CapabilityPage slug="retail-hyperlocal" plate="retail" />;
+  return <CapabilityPage slug="retail-hyperlocal" />;
 }

@@ -42,11 +42,10 @@ export const organisation = {
   "@type": "Organization",
   "@id": organisationId,
   name: site.name,
-  legalName: "BIZEX 4 U NETWORK PRIVATE LIMITED",
+  legalName: site.legalName,
   url: site.url,
   description: site.description,
   email: site.email,
-  telephone: site.phone.replace(/ /g, " "),
   logo: {
     "@type": "ImageObject",
     url: `${site.url}/logo.png`,
@@ -54,9 +53,6 @@ export const organisation = {
     width: 512,
     height: 512,
   },
-  description: site.description,
-  email: site.email,
-  telephone: site.phone.replace(/ /g, " "),
   address: {
     "@type": "PostalAddress",
     streetAddress: site.address.line1,

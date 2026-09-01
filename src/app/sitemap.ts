@@ -20,13 +20,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     { path: "", priority: 1 },
-    { path: "/barter", priority: 0.9 },
+    { path: "/barter", priority: 0.7 },
     { path: "/what-we-do", priority: 0.8 },
     { path: "/cities", priority: 0.8 },
     { path: "/work", priority: 0.7 },
     { path: "/about", priority: 0.6 },
     { path: "/contact", priority: 0.7 },
     { path: "/glossary", priority: 0.7 },
+    { path: "/privacy", priority: 0.3 },
+    { path: "/terms", priority: 0.3 },
   ];
 
   return [

@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <CapabilityPage slug="activations" plate="activation" />;
+  return <CapabilityPage slug="activations" />;
 }

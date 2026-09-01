@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Motion from "@/components/Motion";
 import ScrollCraft from "@/components/ScrollCraft";
 import AnalyticsBoot from "@/components/AnalyticsBoot";
+import ExternalNavGuard from "@/components/ExternalNavGuard";
 import { site } from "@/lib/site";
 import "./globals.css";
 import { rootGraph } from "@/lib/schema";
@@ -53,11 +54,9 @@ const instrumentSans = localFont({
    wins every resolution and Inter only ever loaded to sit unused. A
    fallback that cannot fire is not a fallback, it is a download. */
 
-/* Devanagari. The site is an Indian media network selling Indian
-   streets — city names, formats and section labels carry their Hindi
-   setting alongside the Latin. Mukta is by Ek Type, a Mumbai foundry,
-   and is open licensed. It is the cheapest way to make the page read
-   as Indian rather than as a London template with rupee prices. */
+/* Devanagari. City names may still carry Hindi. Section eyebrows on
+   the enterprise pages do not — dual script on every band read as
+   vernacular when the buyer is a national brand. */
 const mukta = localFont({
   variable: "--font-mukta",
   display: "swap",
@@ -90,7 +89,7 @@ const plexMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Bizex4U — Independent Indian Media Network",
+    default: "Bizex4U — Independent OOH planning and buying",
     template: "%s | Bizex4U",
   },
   description: site.description,
@@ -106,7 +105,7 @@ export const metadata: Metadata = {
      doing the work when the link lands in a WhatsApp group. */
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Independent Indian Media Network`,
+    title: `${site.name} — Independent OOH planning and buying`,
     description: site.description,
   },
   robots: { index: true, follow: true },
@@ -150,6 +149,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <AnalyticsBoot />
         </Suspense>
+        <ExternalNavGuard />
       </body>
     </html>
   );

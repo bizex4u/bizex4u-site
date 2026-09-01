@@ -1,53 +1,43 @@
 import Link from "next/link";
-import { Band, Card, Eyebrow, Rise } from "@/components/UI";
-import FormatPlate, { formatSets, type Format } from "@/components/FormatPlate";
-import { capabilityVisual } from "@/components/CapabilityVisuals";
+import Image from "next/image";
+import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
 import { Faq } from "@/components/Ledger";
 import PageSchema from "@/components/PageSchema";
 import { capabilityDetail } from "@/lib/capabilityDetail";
+import { formatLines } from "@/lib/formats";
 import { termsForCapability } from "@/lib/glossary";
 import { capabilities, site } from "@/lib/site";
 import { speakable } from "@/lib/schema";
+import AskAssistants from "@/components/AskAssistants";
 import BriefButton from "@/components/BriefButton";
 
 /**
- * One template, five pages. The capability pages differ in content and
- * not in argument structure, and inventing a different rhythm for each
+ * One template, five pages. The pages differ in content and photograph,
+ * not in argument structure — inventing a different rhythm for each
  * would make the site feel assembled rather than designed.
  *
- * The order is deliberate and follows how the buyer reads:
- *   why this medium is worth planning  →  the drawing of that argument
- *   →  how we plan it  →  when it works  →  what lands on your desk
- *   →  the questions  →  when to spend elsewhere  →  what next.
- *
- * The "when to spend elsewhere" band is the one most agencies omit.
- * It is the cheapest credibility on the site: a page that names the
- * cases where its own product is the wrong answer is read as the work
- * of people who have opinions rather than a rate card.
+ * Photographs carry the environment. Type carries the judgement.
+ * There is no format drawing and no schematic: those asked the reader
+ * to decode a diagram before they had the argument.
  */
-export default function CapabilityPage({
-  slug,
-  plate,
-}: {
-  slug: string;
-  plate?: keyof typeof formatSets;
-}) {
+export default function CapabilityPage({ slug }: { slug: string }) {
   const cap = capabilities.find((c) => c.href === `/what-we-do/${slug}`)!;
   const d = capabilityDetail[slug];
   const others = capabilities.filter((c) => c.href !== cap.href);
-  const formats: Format[] | undefined = plate ? formatSets[plate] : undefined;
-  const Visual = capabilityVisual[slug as keyof typeof capabilityVisual];
   const glossaryTerms = termsForCapability(slug);
+  const formats = formatLines[cap.index];
 
   return (
     <>
-      {/* HERO ---------------------------------------------------- */}
-      <section className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20">
-        <div className="shell relative z-10">
-          <nav aria-label="Breadcrumb" className="mb-10">
+      <section className="relative bg-sand pt-14 text-on-sand md:pt-16">
+        <div className="shell">
+          <nav aria-label="Breadcrumb" className="py-5">
             <ol className="flex flex-wrap gap-2 font-mono text-meta tracking-[0.08em] text-on-sand-dim uppercase">
               <li>
-                <Link href="/" className="link-underline -my-2 inline-flex min-h-8 items-center py-2">
+                <Link
+                  href="/"
+                  className="link-underline -my-2 inline-flex min-h-8 items-center py-2"
+                >
                   Home
                 </Link>
               </li>
@@ -57,7 +47,7 @@ export default function CapabilityPage({
                   href="/what-we-do"
                   className="link-underline -my-2 inline-flex min-h-8 items-center py-2"
                 >
-                  What we do
+                  How we work
                 </Link>
               </li>
               <li aria-hidden>/</li>
@@ -65,46 +55,71 @@ export default function CapabilityPage({
             </ol>
           </nav>
 
-          <div className="grid-12 items-end gap-y-10">
-            <div className="col-span-12 lg:col-span-7">
-              <Rise>
-                <Eyebrow>{cap.index} — What we do</Eyebrow>
-              </Rise>
-              <Rise delay={60}>
-                <h1 className="mt-6 font-display text-display-xl text-balance">
-                  {cap.title}.
-                </h1>
-              </Rise>
-              <Rise delay={120}>
-                <p className="speakable-answer mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
-                  {d.lede}
+          <div className="grid-12 items-stretch gap-y-0">
+            <div className="col-span-12 order-2 flex flex-col justify-center gap-8 py-10 lg:order-1 lg:col-span-6 lg:py-12 lg:pr-10">
+              <div>
+                <Rise>
+                  <Eyebrow>
+                    {cap.index} — How we work
+                  </Eyebrow>
+                </Rise>
+                <Rise delay={40}>
+                  <h1 className="mt-5 max-w-[16ch] font-display text-display-xl text-balance">
+                    {cap.title}.
+                  </h1>
+                </Rise>
+                <Rise delay={80}>
+                  <p className="speakable-answer mt-6 max-w-[44ch] text-body-l text-on-sand-dim">
+                    {d.lede}
+                  </p>
+                  <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+                    <BriefButton size="lg" context={cap.title}>
+                      Request a plan
+                    </BriefButton>
+                    <Btn href="/what-we-do" variant="outline-plum" size="lg">
+                      The full sequence
+                    </Btn>
+                  </div>
+                </Rise>
+              </div>
+
+              <Rise delay={140} className="border-t border-rule-sand pt-6">
+                <p className="font-mono text-micro tracking-[0.1em] text-violet-deep uppercase">
+                  The decision
                 </p>
-                <div className="mt-9">
-                  <BriefButton size="lg" context={cap.title}>
-                    Get a plan for your market
-                  </BriefButton>
-                </div>
+                <p className="mt-2 max-w-[40ch] font-display text-h3 text-balance">
+                  {d.thesis}
+                </p>
               </Rise>
             </div>
 
-            {formats && (
-              <Rise
-                delay={180}
-                className="col-span-12 lg:col-span-4 lg:col-start-9"
-              >
-                <Card>
-                  <Eyebrow muted>Formats, at true proportion</Eyebrow>
-                  <div className="mt-6">
-                    <FormatPlate formats={formats} />
-                  </div>
-                </Card>
-              </Rise>
-            )}
+            <Rise
+              delay={60}
+              className="relative col-span-12 order-1 min-h-[18rem] bg-plum sm:min-h-[24rem] lg:order-2 lg:col-span-6 lg:h-auto lg:min-h-full"
+            >
+              <figure className="absolute inset-0 m-0">
+                <Image
+                  src={d.frame.src}
+                  alt={d.frame.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                  className="object-cover object-[50%_42%]"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-plum from-20% to-transparent p-5 text-on-plum md:p-7">
+                  <span className="block font-mono text-micro tracking-[0.1em] text-violet-lift uppercase">
+                    {d.frame.city}
+                  </span>
+                  <span className="mt-1.5 block max-w-[36ch] text-body-s text-on-plum-dim">
+                    {d.frame.caption}
+                  </span>
+                </figcaption>
+              </figure>
+            </Rise>
           </div>
         </div>
       </section>
 
-      {/* 01 — THE ARGUMENT --------------------------------------- */}
       <Band tone="sand2" grain>
         <div className="grid-12 gap-y-8">
           <Rise className="col-span-12 lg:col-span-4">
@@ -126,14 +141,39 @@ export default function CapabilityPage({
         </div>
       </Band>
 
-      {/* 02 — THE DRAWING ---------------------------------------- */}
-      {Visual && (
+      {formats ? (
         <Band tone="sand" grain>
-          <Visual />
+          <div className="grid-12 gap-y-10">
+            <Rise className="col-span-12 lg:col-span-5">
+              <Eyebrow>What we plan</Eyebrow>
+              <h2 className="mt-5 max-w-[16ch] font-display text-display-l text-balance">
+                Categories,{" "}
+                <span className="em-serif text-violet-deep">not a holding</span>.
+              </h2>
+              <p className="mt-6 max-w-[40ch] text-on-sand-dim">
+                Typical sizes and how the market buys them. None of this
+                is a site we hold.
+              </p>
+            </Rise>
+            <Rise delay={80} className="col-span-12 lg:col-span-6 lg:col-start-7">
+              <dl className="border-t border-rule-sand">
+                {formats.map((f) => (
+                  <div
+                    key={f.name}
+                    className="flex items-baseline justify-between gap-6 border-b border-rule-sand py-4"
+                  >
+                    <dt className="text-h3">{f.name}</dt>
+                    <dd className="shrink-0 font-mono text-micro tracking-[0.06em] text-on-sand-dim uppercase">
+                      {f.spec}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </Rise>
+          </div>
         </Band>
-      )}
+      ) : null}
 
-      {/* 03 — METHOD --------------------------------------------- */}
       <Band tone="plum" grain>
         <Rise>
           <Eyebrow tone="plum">How the buy is made</Eyebrow>
@@ -172,7 +212,7 @@ export default function CapabilityPage({
                   <li key={t.slug}>
                     <Link
                       href={`/glossary/${t.slug}`}
-                      className="inline-flex min-h-11 items-center rounded-full border border-white/20 px-4 text-body-s transition-colors duration-200 hover:border-white hover:bg-white/8"
+                      className="inline-flex min-h-11 items-center rounded-sm border border-white/20 px-4 text-body-s transition-colors duration-200 hover:border-white hover:bg-white/8"
                     >
                       {t.term}
                     </Link>
@@ -184,34 +224,45 @@ export default function CapabilityPage({
         ) : null}
       </Band>
 
-      {/* 04 — WHEN IT WORKS -------------------------------------- */}
       <Band tone="sand" grain>
-        <Rise>
-          <Eyebrow>When it earns its place</Eyebrow>
-          <h2 className="mt-5 max-w-[20ch] font-display text-display-l text-balance">
-            Concrete situations,{" "}
-            <span className="em-serif text-violet-deep">not a menu</span>.
-          </h2>
-        </Rise>
-        <ul className="mt-12 border-t border-rule-sand">
-          {d.whenItWorks.map((item, i) => (
-            <Rise key={item} as="li" delay={i * 45}>
-              <div className="flex gap-4 border-b border-rule-sand py-5">
-                <span className="font-mono text-micro tracking-[0.08em] text-violet-deep">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="max-w-[62ch] text-on-sand-dim">{item}</span>
-              </div>
-            </Rise>
-          ))}
-        </ul>
+        <div className="grid-12 gap-y-12">
+          <Rise className="col-span-12 lg:col-span-6 lg:pr-10">
+            <Eyebrow>When it earns its place</Eyebrow>
+            <h2 className="mt-5 max-w-[16ch] font-display text-display-l text-balance">
+              Concrete situations,{" "}
+              <span className="em-serif text-violet-deep">not a menu</span>.
+            </h2>
+            <ul className="mt-10 border-t border-rule-sand">
+              {d.whenItWorks.map((item, i) => (
+                <li key={item} className="flex gap-4 border-b border-rule-sand py-5">
+                  <span className="font-mono text-micro tracking-[0.08em] text-violet-deep">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="max-w-[52ch] text-on-sand-dim">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Rise>
+          <Rise delay={80} className="col-span-12 lg:col-span-6 lg:border-l lg:border-rule-sand lg:pl-10">
+            <Eyebrow>When to spend it elsewhere</Eyebrow>
+            <h2 className="mt-5 max-w-[16ch] font-display text-display-l text-balance">
+              We would rather{" "}
+              <span className="em-serif text-violet-deep">say so early</span>.
+            </h2>
+            <p className="mt-8 max-w-[46ch] text-body-l">{d.notFor}</p>
+            <div className="mt-8">
+              <BriefButton size="lg" context={cap.title}>
+                Tell us the objective
+              </BriefButton>
+            </div>
+          </Rise>
+        </div>
       </Band>
 
-      {/* 05 — DELIVERABLES --------------------------------------- */}
       <Band tone="sand2" grain>
         <div className="grid-12 gap-y-10">
           <Rise className="col-span-12 lg:col-span-5">
-            <Eyebrow deva="आपको क्या मिलता है">What lands on your desk</Eyebrow>
+            <Eyebrow>What lands on your desk</Eyebrow>
             <h2 className="mt-5 max-w-[16ch] font-display text-display-l text-balance">
               Documented,{" "}
               <span className="em-serif text-violet-deep">not described</span>.
@@ -224,8 +275,8 @@ export default function CapabilityPage({
 
           <div className="col-span-12 lg:col-span-6 lg:col-start-7">
             <ul className="border-t border-rule-sand">
-              {d.deliverables.map((item, i) => (
-                <Rise key={item} as="li" delay={i * 45}>
+              {d.deliverables.map((item) => (
+                <Rise key={item} as="li">
                   <div className="flex gap-4 border-b border-rule-sand py-4">
                     <span aria-hidden className="text-violet-deep">
                       —
@@ -239,8 +290,6 @@ export default function CapabilityPage({
         </div>
       </Band>
 
-      {/* 06 — FAQ ------------------------------------------------
-          Band is sand so the shared Faq cards (sand-2) still read. */}
       <Band tone="sand" grain>
         <Rise>
           <Eyebrow>Questions that actually get asked</Eyebrow>
@@ -252,70 +301,33 @@ export default function CapabilityPage({
         <div className="mt-12">
           <Faq items={d.faq} />
         </div>
+        <AskAssistants tone="sand" variant="page" />
       </Band>
 
-      {/* 07 — WHEN NOT TO ---------------------------------------- */}
-      <Band tone="violet" grain>
-        <div className="grid-12 gap-y-8">
-          <Rise className="col-span-12 lg:col-span-5">
-            <Eyebrow tone="violet">When to spend it elsewhere</Eyebrow>
-            <h2 className="mt-5 max-w-[18ch] font-display text-display-l text-balance">
-              We would rather{" "}
-              <span className="em-serif">say so early</span>.
-            </h2>
-          </Rise>
-          <Rise delay={80} className="col-span-12 lg:col-span-6 lg:col-start-7">
-            <p className="max-w-[58ch] text-body-l">{d.notFor}</p>
-            <div className="mt-9">
-              <BriefButton variant="sand" size="lg" context={cap.title}>
-                Tell us the objective
-              </BriefButton>
-            </div>
-          </Rise>
-        </div>
-      </Band>
-
-      {/* 08 — THE REST OF THE NETWORK ---------------------------- */}
-      <Band tone="sand" grain>
+      <Band tone="plum" grain>
         <Rise>
-          <Eyebrow>The rest of the network</Eyebrow>
+          <Eyebrow tone="plum">The rest of the plan</Eyebrow>
           <h2 className="mt-5 max-w-[24ch] font-display text-display-l text-balance">
             Most plans use{" "}
-            <span className="em-serif text-violet-deep">more than one</span>.
+            <span className="em-serif">more than one</span>.
           </h2>
-          <p className="mt-6 max-w-[58ch] text-on-sand-dim">{d.sitsInPlan}</p>
+          <p className="mt-6 max-w-[58ch] text-on-plum-dim">{d.sitsInPlan}</p>
         </Rise>
 
-        <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid gap-px bg-rule-plum sm:grid-cols-2">
           {others.map((c, i) => (
-            <Rise key={c.href} as="li" delay={i * 50}>
+            <Rise key={c.href} as="li" delay={i * 40}>
               <Link
                 href={c.href}
-                className={`group flex h-full flex-col rounded-(--radius-card) p-6 transition-colors duration-200 md:p-7 ${
-                  c.accent
-                    ? "bg-violet-deep text-white hover:bg-violet"
-                    : "bg-sand-2 hover:bg-sand-3"
-                }`}
+                className="group flex h-full flex-col bg-plum p-6 transition-colors duration-200 hover:bg-plum-2 md:p-7"
               >
-                <span
-                  className={`eyebrow ${
-                    c.accent ? "text-on-violet-dim" : "text-violet-deep"
-                  }`}
-                >
-                  {c.index}
-                </span>
+                <span className="eyebrow text-violet-lift">{c.index}</span>
                 <h3 className="mt-3 font-display text-h2 text-balance">
                   {c.title}
                 </h3>
-                <p
-                  className={`mt-3 ${
-                    c.accent ? "text-on-violet-dim" : "text-on-sand-dim"
-                  }`}
-                >
-                  {c.short}
-                </p>
+                <p className="mt-3 text-on-plum-dim">{c.short}</p>
                 <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
-                  {c.linkLabel ?? "Explore"} <span className="row-arrow">→</span>
+                  {c.linkLabel ?? "Read"} <span className="row-arrow">→</span>
                 </span>
               </Link>
             </Rise>
@@ -335,7 +347,7 @@ export default function CapabilityPage({
                 {
                   "@type": "ListItem",
                   position: 2,
-                  name: "What we do",
+                  name: "How we work",
                   item: `${site.url}/what-we-do`,
                 },
                 {

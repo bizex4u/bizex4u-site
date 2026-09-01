@@ -49,15 +49,14 @@ export default function PageIndex({
       {/* Desktop: stated once, under the hero. */}
       <nav
         aria-label="On this page"
-        className="hidden border-t border-rule-sand pt-6 lg:block"
+        className="hidden border-t border-rule-sand pt-5 lg:block"
       >
-        <p className="eyebrow text-on-sand-dim">On this page</p>
-        <ul className="mt-4 grid grid-cols-4 gap-x-6 gap-y-2.5">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2">
           {items.map((it, i) => (
             <li key={it.id}>
               <a
                 href={`#${it.id}`}
-                className="link-underline -my-1.5 inline-flex min-h-6 items-baseline gap-2.5 py-1.5 text-body-s"
+                className="link-underline -my-1 inline-flex min-h-8 items-baseline gap-2 py-1 text-body-s"
               >
                 <span className="font-mono text-micro tracking-[0.08em] text-violet-deep">
                   {String(i + 1).padStart(2, "0")}

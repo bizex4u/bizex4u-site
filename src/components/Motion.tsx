@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -29,13 +30,24 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
  * content still works, not that the page half-renders.
  *
  * Scrolling is native. See the note in section 1.
+ *
+ * This component lives in the root layout, so it does not remount on
+ * soft navigation. `.reveal` starts at opacity 0; if the triggers are
+ * not rebuilt for the new tree, the next page stays blank until a
+ * hard refresh. Pathname is the dependency; two rAFs wait until the
+ * new `<main>` has been committed and laid out.
  */
 export default function Motion() {
+  const pathname = usePathname();
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    const mm = gsap.matchMedia();
-
-    mm.add(
+    let mm: ReturnType<typeof gsap.matchMedia> | undefined;
+    let inner = 0;
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => {
+        mm = gsap.matchMedia();
+        mm.add(
       {
         motion: "(prefers-reduced-motion: no-preference)",
         calm: "(prefers-reduced-motion: reduce)",
@@ -436,14 +448,37 @@ export default function Motion() {
 
         ScrollTrigger.refresh();
 
+        /* Soft navigation can leave the previous page's scroll
+           position for a frame. Anything already in the viewport
+           that is still at opacity 0 was missed by batch-onEnter. */
+        document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.bottom > 0 && r.top < window.innerHeight) {
+            gsap.to(el, {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              ease: "power2.out",
+              overwrite: true,
+            });
+            el.setAttribute("data-shown", "true");
+          }
+        });
+
         /* ScrollTrigger instances created inside a matchMedia context
            are reverted by mm.revert() below, so there is nothing to
            tear down here by hand. */
       },
-    );
+        );
+      });
+    });
 
-    return () => mm.revert();
-  }, []);
+    return () => {
+      cancelAnimationFrame(outer);
+      cancelAnimationFrame(inner);
+      mm?.revert();
+    };
+  }, [pathname]);
 
   return null;
 }

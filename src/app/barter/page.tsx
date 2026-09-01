@@ -98,14 +98,12 @@ const steps = [
 const room = [
   {
     who: "If you run marketing",
-    deva: "मार्केटिंग",
     gets: "Reach you were not budgeted for, planned and bought at the same rate you would have paid in cash.",
     needs:
       "Finance to agree what the stock is worth and to authorise it moving. Bring them the media plan, not the barter idea.",
   },
   {
     who: "If you run finance",
-    deva: "वित्त",
     gets: "Ageing inventory off the books at a defensible value, through channels you name, with a tax invoice on both legs.",
     needs:
       "Marketing to want the plan on its own merits. If they would not buy it for cash, the trade is not a saving.",
@@ -169,15 +167,14 @@ export default function BarterPage() {
   return (
     <>
       {/* HERO ----------------------------------------------------
-          The exchange is the argument, so it sits in the hero — same
-          move as IndiaField on /cities and PlanAssembly on /what-we-do.
+          The exchange is the argument, so it sits in the hero.
           The plum card that used to live here restated the lede. */}
       <section className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20">
         <div className="shell relative z-10">
           <div className="grid-12 items-center gap-y-10">
             <div className="col-span-12 lg:col-span-7">
               <Rise>
-                <Eyebrow deva="बार्टर विज्ञापन">Barter advertising</Eyebrow>
+                <Eyebrow>Barter advertising</Eyebrow>
               </Rise>
               <Rise delay={60}>
                 <h1 className="mt-6 font-display text-display-xl text-balance">
@@ -328,7 +325,7 @@ export default function BarterPage() {
       {/* 03 — HOW IT WORKS --------------------------------------- */}
       <Band tone="sand" id="how" grain>
         <Rise>
-          <Eyebrow deva="यह कैसे काम करता है">How it works</Eyebrow>
+          <Eyebrow>How it works</Eyebrow>
           <h2 className="mt-5 max-w-[20ch] font-display text-display-l text-balance">
             Five steps. <span className="em-serif text-violet-deep">No surprises.</span>
           </h2>
@@ -417,7 +414,6 @@ export default function BarterPage() {
         <SectionHead
             eyebrow="Who actually decides"
             tone="plum"
-            deva="कौन तय करता है"
             title={<>This dies in the gap between{" "}
               <span className="em-serif">two budgets</span>.</>}
             lede={<>Marketing has the mandate and no cash. Finance has the stock and no
@@ -430,14 +426,7 @@ export default function BarterPage() {
             <Rise key={r.who} as="li" delay={i * 80}>
               <div className="flex h-full flex-col rounded-(--radius-card) bg-plum-2 p-6 md:p-8">
                 <p className="font-mono text-meta tracking-[0.08em] text-violet-lift uppercase">
-                  {r.who}{" "}
-                  <span
-                    aria-hidden="true"
-                    className="mx-2.5 inline-block h-[0.85em] w-px translate-y-[0.06em] bg-current opacity-35"
-                  />{" "}
-                  <span lang="hi" className="deva normal-case not-italic">
-                    {r.deva}
-                  </span>
+                  {r.who}
                 </p>
 
                 <p className="mt-6 eyebrow text-on-plum-dim">What you get</p>
@@ -469,7 +458,7 @@ export default function BarterPage() {
       <Band tone="sand" grain>
         <div className="grid-12 items-start gap-y-10">
           <Rise className="col-span-12 lg:col-span-4">
-            <Eyebrow deva="जीएसटी">For your finance team</Eyebrow>
+            <Eyebrow>For your finance team</Eyebrow>
             <h2 className="mt-5 max-w-[14ch] font-display text-display-l text-balance">
               Two invoices.{" "}
               <span className="em-serif text-violet-deep">
@@ -517,7 +506,7 @@ export default function BarterPage() {
       {/* 08 — FAQ ------------------------------------------------ */}
       <Band tone="sand" grain>
         <Rise>
-          <Eyebrow deva="सवाल">Questions</Eyebrow>
+          <Eyebrow>Questions</Eyebrow>
           <h2 className="mt-5 font-display text-display-l text-balance">
             The ones people{" "}
             <span className="em-serif text-violet-deep">actually ask</span>.
@@ -553,7 +542,7 @@ export default function BarterPage() {
                 Tell us what you hold
               </BriefButton>
               <Btn href="/contact" variant="outline-sand" size="lg">
-                Or just call us
+                Or write to us
               </Btn>
             </div>
           </Rise>
@@ -573,7 +562,6 @@ export default function BarterPage() {
                 name: site.name,
                 url: site.url,
                 email: site.email,
-                telephone: site.phone,
               },
               areaServed: { "@type": "Country", name: "India" },
               url: `${site.url}/barter`,

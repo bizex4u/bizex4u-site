@@ -1,193 +1,245 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
-import { exchangeLine, formatLines } from "@/lib/formats";
-import { capabilities } from "@/lib/site";
+import { formatLines } from "@/lib/formats";
+import { capabilities, process, buyingPractice, scaleNote, site } from "@/lib/site";
 import { capabilityDetail } from "@/lib/capabilityDetail";
+import { statementPlate } from "@/lib/streets";
 import BriefButton from "@/components/BriefButton";
 import PageSchema from "@/components/PageSchema";
-import PlanAssembly from "@/components/PlanAssembly";
 
 export const metadata: Metadata = {
-  title:
-    "What We Do — Outdoor, DOOH, Retail & Barter",
+  title: "How we work — Independent OOH planning and buying",
   description:
-    "Six capabilities on one plan: outdoor and transit, DOOH, retail, broadcast, print and cinema, activations, and the barter model that funds them.",
+    "How Bizex4U plans an outdoor buy: objective, catchment, comparison, negotiation, execution and measurement. We do not own inventory.",
   alternates: { canonical: "/what-we-do" },
 };
 
-/* The order a plan is actually assembled in. Worth stating plainly,
-   because the common failure is starting at step four. */
-const sequence = [
-  {
-    title: "The objective",
-    body: "Launch, defend, drive footfall, or hold presence on a capped budget. Everything downstream changes depending on which one it is, so it is settled first and in your words rather than ours.",
-  },
-  {
-    title: "The market",
-    body: "Which cities, and inside them which corridors and catchments. A national plan that has not been argued at city level is a budget split, not a media plan.",
-  },
-  {
-    title: "The mix",
-    body: "Which of the six capabilities carry the weight and which support. Most plans use two or three. A plan that uses all six is usually a plan that has not made a decision.",
-  },
-  {
-    title: "The commercial model",
-    body: "Cash, part-barter, or barter. This is a question about your balance sheet rather than your media plan, and it is answered last because it does not change what good media looks like.",
-  },
-];
+const core = capabilities.filter((c) => c.href.startsWith("/what-we-do/")).slice(0, 4);
+const supporting = capabilities.filter(
+  (c) => c.href.includes("activations") || c.href === "/barter",
+);
 
 export default function WhatWeDoPage() {
   return (
     <>
-      {/* HERO ---------------------------------------------------- */}
-      <section className="grain relative overflow-hidden bg-sand pt-28 pb-14 md:pt-36 md:pb-20">
-        <div className="shell relative z-10">
-          <div className="grid-12 items-end gap-y-10">
-            <div className="col-span-12 lg:col-span-7">
-              <Rise>
-                <Eyebrow deva="हम क्या करते हैं">What we do</Eyebrow>
-              </Rise>
-              <Rise delay={60}>
-                <h1 className="mt-6 font-display text-display-xl text-balance">
-                  Six capabilities.{" "}
-                  <span className="em-serif text-violet-deep">One plan.</span>
-                </h1>
-              </Rise>
-              <Rise delay={120}>
-                <p className="speakable-answer mt-7 max-w-[50ch] text-body-l text-on-sand-dim">
-                  We plan, negotiate and run campaigns across outdoor, digital,
-                  retail, broadcast and ground presence in more than forty
-                  Indian cities — and structure the commercial side so the
-                  budget is not always the constraint.
+      <section className="relative bg-sand pt-14 text-on-sand md:pt-16">
+        <div className="shell">
+          <div className="grid-12 items-stretch gap-y-0 lg:min-h-[calc(100svh-10.5rem)]">
+            <div className="col-span-12 order-2 flex flex-col justify-center gap-8 py-10 lg:order-1 lg:col-span-6 lg:py-10 lg:pr-10">
+              <div>
+                <Rise>
+                  <Eyebrow>How we work</Eyebrow>
+                </Rise>
+                <Rise delay={40}>
+                  <h1 className="mt-5 max-w-[16ch] font-display text-display-xl text-balance">
+                    How an OOH buy{" "}
+                    <span className="em-serif text-violet-deep">is decided.</span>
+                  </h1>
+                </Rise>
+                <Rise delay={80}>
+                  <p className="speakable-answer mt-6 max-w-[44ch] text-body-l text-on-sand-dim">
+                    We do not own the sites. We plan the outdoor buy across
+                    owners — objective, catchment, comparison, negotiation —
+                    then run and document it. Outdoor first; the rest only
+                    when the objective needs it.
+                  </p>
+                  <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+                    <BriefButton size="lg" context="A plan for my market">
+                      Request a plan
+                    </BriefButton>
+                    <Btn href="#sequence" variant="outline-plum" size="lg">
+                      The ten steps
+                    </Btn>
+                  </div>
+                </Rise>
+              </div>
+
+              <Rise delay={140} className="border-t border-rule-sand pt-6">
+                <p className="font-mono text-micro tracking-[0.1em] text-violet-deep uppercase">
+                  Independence
                 </p>
-                <div className="mt-9">
-                  <BriefButton size="lg" context="A plan for my market">
-                    Get a plan for your market
-                  </BriefButton>
-                </div>
+                <p className="mt-2 max-w-[44ch] text-body-s text-on-sand-dim">
+                  A media owner sells what it holds. We have nothing to fill,
+                  which is why we can argue against a site as easily as for
+                  one. Starting at the commercial model is how a budget gets
+                  spent before a plan exists.
+                </p>
               </Rise>
             </div>
 
-            <Rise delay={180} className="col-span-12 lg:col-span-4 lg:col-start-9">
-              <PlanAssembly
-                steps={sequence.map((s, i) => ({
-                  index: String(i + 1).padStart(2, "0"),
-                  title: s.title,
-                }))}
-              />
-              <p className="mt-6 max-w-[34ch] text-body-s text-on-sand-dim">
-                We do not own the sites. We buy them, and being independent of
-                any one owner is exactly why we can argue for the right ones.
-              </p>
+            <Rise
+              delay={60}
+              className="relative col-span-12 order-1 min-h-[18rem] bg-plum sm:min-h-[24rem] lg:order-2 lg:col-span-6 lg:h-auto lg:min-h-full"
+            >
+              <Link href="/work" className="group absolute inset-0 block">
+                <Image
+                  src={statementPlate.src}
+                  alt={statementPlate.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 52vw, 100vw"
+                  className="object-cover object-[50%_42%] transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+                <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-linear-to-t from-plum from-20% to-transparent p-5 text-on-plum md:p-7">
+                  <span>
+                    <span className="block font-mono text-micro tracking-[0.1em] text-violet-lift uppercase">
+                      Selected work
+                    </span>
+                    <span className="mt-1.5 block text-h3">
+                      {statementPlate.city}
+                    </span>
+                    <span className="mt-1 block text-body-s text-on-plum-dim">
+                      Photographed on site while it ran.
+                    </span>
+                  </span>
+                  <span className="shrink-0 font-mono text-micro tracking-[0.08em] text-violet-lift uppercase">
+                    See the work →
+                  </span>
+                </span>
+              </Link>
             </Rise>
           </div>
         </div>
       </section>
 
-      {/* 01 — THE INDEX ------------------------------------------ */}
-      <Band tone="plum" grain>
+      <Band tone="sand2" grain>
         <Rise>
-          <Eyebrow tone="plum">The index</Eyebrow>
-          {/* Was "Drawn at true proportion" — a claim about a drawing
-              that no longer exists, and which the drawing never
-              honoured anyway. See lib/formats.ts. */}
-          <h2 className="mt-5 max-w-[26ch] font-display text-display-l text-balance">
-            Six products, and they are{" "}
-            <span className="em-serif">not interchangeable</span>.
+          <Eyebrow>Outdoor first</Eyebrow>
+          <h2 className="mt-5 max-w-[24ch] font-display text-display-l text-balance">
+            Four ways a plan actually{" "}
+            <span className="em-serif text-violet-deep">spends money</span>.
           </h2>
+          <p className="mt-6 max-w-[54ch] text-on-sand-dim">
+            Activations and barter sit after these. A plan that uses every
+            capability is usually a plan that has not made a decision.
+          </p>
         </Rise>
 
-        <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {capabilities.map((c, i) => (
-            <Rise key={c.href} as="li" delay={i * 55}>
-              <Link
-                href={c.href}
-                className={`group flex h-full flex-col rounded-(--radius-card) p-6 transition-colors duration-200 md:p-7 ${
-                  c.accent
-                    ? "bg-violet-deep text-white hover:bg-violet"
-                    : "bg-plum-2 hover:bg-plum-3"
-                }`}
-              >
-                <span
-                  className={`eyebrow ${
-                    c.accent ? "text-on-violet-dim" : "text-violet-lift"
-                  }`}
-                >
-                  {c.index}
-                </span>
-                <h3 className="mt-3 font-display text-h2 text-balance">
-                  {c.title}
-                </h3>
-                <p
-                  className={`mt-3 max-w-[38ch] ${
-                    c.accent ? "text-on-violet-dim" : "text-on-plum-dim"
-                  }`}
-                >
-                  {c.long}
-                </p>
-
-                {formatLines[c.index] && (
-                  <dl className="mt-auto grid pt-8">
-                    {formatLines[c.index].map((f) => (
-                      <div
-                        key={f.name}
-                        className="flex items-baseline justify-between gap-4 border-t border-white/12 py-2.5"
+        <ul className="mt-12 border-t border-rule-sand">
+          {core.map((c, i) => {
+            const d = capabilityDetail[c.href.split("/").pop()!];
+            const formats = formatLines[c.index];
+            const photoLeft = i % 2 === 0;
+            return (
+              <Rise key={c.href} as="li" delay={Math.min(i, 4) * 40}>
+                <article className="grid-12 items-stretch gap-y-6 border-b border-rule-sand py-10 md:py-14">
+                  <div
+                    className={`relative col-span-12 min-h-[14rem] bg-plum sm:min-h-[18rem] lg:col-span-5 ${
+                      photoLeft ? "" : "lg:col-start-8"
+                    }`}
+                  >
+                    <Link href={c.href} className="absolute inset-0 block">
+                      <Image
+                        src={d.frame.src}
+                        alt={d.frame.alt}
+                        fill
+                        sizes="(min-width: 1024px) 40vw, 100vw"
+                        className="object-cover"
+                      />
+                    </Link>
+                  </div>
+                  <div
+                    className={`col-span-12 flex flex-col justify-center lg:col-span-6 ${
+                      photoLeft ? "lg:col-start-7" : "lg:col-start-1 lg:row-start-1"
+                    }`}
+                  >
+                    <p className="font-mono text-micro tracking-[0.1em] text-violet-deep uppercase">
+                      {c.index} · {c.verb}
+                    </p>
+                    <h3 className="mt-3 font-display text-h1 text-balance">
+                      {c.title}
+                    </h3>
+                    <p className="mt-4 max-w-[46ch] text-body-l text-on-sand-dim">
+                      {c.long}
+                    </p>
+                    <p className="mt-4 max-w-[42ch] font-display text-h3 text-balance">
+                      {d.thesis}
+                    </p>
+                    {formats ? (
+                      <p className="mt-5 max-w-[46ch] text-body-s text-on-sand-dim">
+                        {formats.map((f) => f.name).join(" · ")}
+                      </p>
+                    ) : null}
+                    <p className="mt-6">
+                      <Link
+                        href={c.href}
+                        className="link-underline text-body-s font-medium"
                       >
-                        <dt className="text-body-s">{f.name}</dt>
-                        <dd className="shrink-0 font-mono text-nano tracking-[0.06em] text-on-plum-dim uppercase">
-                          {f.spec}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                )}
-
-                {c.accent && (
-                  <div className="mt-auto pt-8">
-                    <p className="font-display text-h2 text-balance">
-                      {exchangeLine.give}
-                    </p>
-                    <p aria-hidden className="my-1.5 text-h3 text-on-violet-dim">
-                      ⇄
-                    </p>
-                    <p className="font-display text-h2 text-balance">
-                      {exchangeLine.get}
+                        How we plan {c.title.toLowerCase()}
+                      </Link>
                     </p>
                   </div>
-                )}
-
-                <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-body-s font-medium">
-                  {c.linkLabel ?? "Explore"} <span className="row-arrow">→</span>
-                </span>
-              </Link>
-            </Rise>
-          ))}
+                </article>
+              </Rise>
+            );
+          })}
         </ul>
       </Band>
 
-      {/* 02 — HOW A PLAN GETS BUILT ------------------------------ */}
-      <Band tone="sand" grain>
-        <Rise>
-          <Eyebrow deva="योजना कैसे बनती है">How a plan gets built</Eyebrow>
-          <h2 className="mt-5 max-w-[22ch] font-display text-display-l text-balance">
-            In that order,{" "}
-            <span className="em-serif text-violet-deep">every time</span>.
-          </h2>
-        </Rise>
+      <Band tone="plum" grain id="sequence">
+        <div className="grid-12 items-end gap-y-8">
+          <Rise className="col-span-12 lg:col-span-7">
+            <Eyebrow tone="plum">The sequence</Eyebrow>
+            <h2 className="mt-4 max-w-[22ch] font-display text-h1 text-balance">
+              Ten steps between the brief and a board that actually ran.
+            </h2>
+          </Rise>
+          <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
+            <p className="max-w-[42ch] text-body-s text-on-plum-dim">
+              We do not own inventory. Each step is a decision we can argue —
+              which is the only reason a brand should let us spend its money.
+            </p>
+          </Rise>
+        </div>
 
-        <ol className="mt-12 border-t border-rule-sand">
-          {sequence.map((s, i) => (
-            <Rise key={s.title} as="li" delay={i * 55}>
-              <div className="grid grid-cols-12 gap-x-6 gap-y-3 border-b border-rule-sand py-7 md:py-9">
-                <span className="col-span-12 font-mono text-caption tracking-[0.08em] text-violet-deep md:col-span-1">
-                  {String(i + 1).padStart(2, "0")}
+        <ol className="mt-10 grid border-t border-rule-plum md:grid-cols-2">
+          {process.map((step, i) => (
+            <Rise key={step.index} as="li" delay={Math.min(i, 8) * 30}>
+              <div
+                className={`grid grid-cols-12 gap-x-4 gap-y-1 border-b border-rule-plum py-4 md:py-5 ${
+                  i % 2 === 0 ? "md:pr-8" : "md:border-l md:pl-8"
+                }`}
+              >
+                <span className="col-span-2 font-mono text-micro tracking-[0.1em] text-violet-lift uppercase">
+                  {step.index}
                 </span>
-                <h3 className="col-span-12 font-display text-h2 text-balance md:col-span-5">
-                  {s.title}
+                <div className="col-span-10">
+                  <h3 className="font-sans text-h3">{step.title}</h3>
+                  <p className="mt-1.5 text-body-s text-on-plum-dim">
+                    {step.body}
+                  </p>
+                </div>
+              </div>
+            </Rise>
+          ))}
+        </ol>
+      </Band>
+
+      <Band tone="sand2" grain id="how-we-buy">
+        <div className="grid-12 items-end gap-y-8">
+          <Rise className="col-span-12 lg:col-span-7">
+            <Eyebrow>How we buy</Eyebrow>
+            <h2 className="mt-4 max-w-[22ch] font-display text-h1 text-balance">
+              What a Media Director can diligence before the brief.
+            </h2>
+          </Rise>
+          <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
+            <p className="max-w-[42ch] text-body-s text-on-sand-dim">
+              {scaleNote}
+            </p>
+          </Rise>
+        </div>
+        <ol className="mt-10 border-t border-rule-sand">
+          {buyingPractice.map((row, i) => (
+            <Rise key={row.title} as="li" delay={Math.min(i, 5) * 40}>
+              <div className="grid-12 gap-y-2 border-b border-rule-sand py-6 md:py-8">
+                <h3 className="col-span-12 font-display text-h3 md:col-span-4">
+                  {row.title}
                 </h3>
-                <p className="col-span-12 max-w-[62ch] text-on-sand-dim md:col-span-6">
-                  {s.body}
+                <p className="col-span-12 max-w-[62ch] text-body-s text-on-sand-dim md:col-span-7 md:col-start-6">
+                  {row.body}
                 </p>
               </div>
             </Rise>
@@ -195,8 +247,7 @@ export default function WhatWeDoPage() {
         </ol>
       </Band>
 
-      {/* 03 — WHEN TO SPEND ELSEWHERE ---------------------------- */}
-      <Band tone="sand2" grain>
+      <Band tone="sand" grain>
         <div className="grid-12 gap-y-8">
           <Rise className="col-span-12 lg:col-span-4">
             <Eyebrow>When to spend it elsewhere</Eyebrow>
@@ -207,24 +258,49 @@ export default function WhatWeDoPage() {
           </Rise>
           <div className="col-span-12 lg:col-span-7 lg:col-start-6">
             <ul className="border-t border-rule-sand">
-              {capabilities
-                .filter((c) => capabilityDetail[c.href.split("/").pop()!])
-                .map((c, i) => (
-                  <Rise key={c.href} as="li" delay={i * 50}>
-                    <div className="border-b border-rule-sand py-5">
-                      <h3 className="text-h3">{c.title}</h3>
-                      <p className="mt-2 max-w-[60ch] text-body-s text-on-sand-dim">
-                        {capabilityDetail[c.href.split("/").pop()!].notFor}
-                      </p>
-                    </div>
-                  </Rise>
-                ))}
+              {core.map((c, i) => (
+                <Rise key={c.href} as="li" delay={i * 50}>
+                  <div className="border-b border-rule-sand py-5">
+                    <h3 className="text-h3">{c.title}</h3>
+                    <p className="mt-2 max-w-[60ch] text-body-s text-on-sand-dim">
+                      {capabilityDetail[c.href.split("/").pop()!].notFor}
+                    </p>
+                  </div>
+                </Rise>
+              ))}
             </ul>
           </div>
         </div>
       </Band>
 
-      {/* 04 — CTA ------------------------------------------------- */}
+      <Band tone="sand2" grain>
+        <Rise>
+          <Eyebrow>When the objective needs it</Eyebrow>
+          <h2 className="mt-5 max-w-[20ch] font-display text-display-l text-balance">
+            Supporting, not{" "}
+            <span className="em-serif text-violet-deep">a menu</span>.
+          </h2>
+        </Rise>
+        <ul className="mt-10 grid gap-px bg-rule-sand sm:grid-cols-2">
+          {supporting.map((c) => (
+            <li key={c.href}>
+              <Link
+                href={c.href}
+                className="group flex h-full flex-col bg-sand-2 p-6 transition-colors duration-200 hover:bg-sand md:p-8"
+              >
+                <p className="font-mono text-micro tracking-[0.1em] text-violet-deep uppercase">
+                  {c.title}
+                </p>
+                <p className="mt-3 max-w-[42ch] text-body-l">{c.long}</p>
+                <span className="mt-6 text-body-s font-medium">
+                  {c.linkLabel ?? "Read"} →
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Band>
+
       <Band tone="violet" grain>
         <div className="grid-12 items-end gap-y-8">
           <Rise className="col-span-12 lg:col-span-7">
@@ -234,14 +310,14 @@ export default function WhatWeDoPage() {
               <span className="em-serif">objective</span>.
             </h2>
             <p className="mt-6 max-w-[46ch] text-body-l">
-              We will tell you which of the six actually apply, and which do
-              not. Usually answered the same working day.
+              We will tell you which of these actually apply, and which do
+              not. {site.sla.acknowledge} {site.sla.plan}
             </p>
           </Rise>
           <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
             <div className="flex flex-wrap gap-3">
               <BriefButton variant="sand" size="lg" context="What we do">
-                Send a brief
+                Request a plan
               </BriefButton>
               <Btn href="/contact" variant="outline-sand" size="lg">
                 Contact
@@ -252,8 +328,10 @@ export default function WhatWeDoPage() {
       </Band>
       <PageSchema
         path="/what-we-do"
-        name={"What Bizex4U Does"}
-        description={"Six capabilities on one plan: outdoor and transit, DOOH, retail, broadcast, print and cinema, activations, and the barter model that funds them."}
+        name={"How Bizex4U works"}
+        description={
+          "Independent OOH planning and buying: outdoor and transit, DOOH, retail, broadcast, print and cinema. We do not own inventory."
+        }
       />
     </>
   );

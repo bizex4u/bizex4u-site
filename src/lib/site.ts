@@ -4,27 +4,28 @@ export const site = {
   name: "Bizex4U",
   wordmark: "BIZEX4U",
   url: "https://bizex4u.com",
+  tagline: "We help brands make better OOH media decisions.",
   description:
-    "Bizex4U is an independent Indian media network. We plan, negotiate and run outdoor, retail and broadcast campaigns across India.",
+    "Independent OOH media planning and buying in India. We do not own inventory. We plan across owners, negotiate, run the campaign and document delivery.",
   email: "yash@bizex4u.com",
-  phone: "+91\u00a08090500009", /* nbsp: the number must not break across lines */
-  phoneHref: "+918090500009",
-  /* Indian B2B closes on WhatsApp. This is the highest-intent action on
-     the site — treat it as the primary CTA, not a footer afterthought.
-     whatsappBase is exported separately so components that compose
-     their own prefilled message (the barter selector) do not have to
-     rebuild the deep link and get the number wrong. */
-  whatsappBase: "https://wa.me/918090500009",
-  whatsapp:
-    "https://wa.me/918090500009?text=" +
-    encodeURIComponent(
-      "Hi Bizex4U — I'd like to talk about a campaign.",
-    ),
+  /* Desk notification list. Used only by /api/brief (server). Not a
+     public byline — replies still come from `email` above. */
+  notifyEmails: ["yash@bizex4u.com", "vansh@bizex4u.com"] as const,
+  legalName: "BIZEX 4 U NETWORK PRIVATE LIMITED",
   address: {
     line1: "Mona Enclave",
     line2: "Kanpur, Uttar Pradesh",
     country: "India",
   },
+  sla: {
+    acknowledge: "We acknowledge a brief within one working day.",
+    plan: "A first plan follows within five working days of a complete brief.",
+  },
+  /* Paste this onto the LinkedIn company About. The live page still
+     says Delhi HQ, 17 years, and “India’s #1 barter platform” — that
+     is a different firm from this site, and a buyer will notice. */
+  linkedinAbout:
+    "Independent OOH media planning and buying in India. We do not own hoardings, screens or airtime. We plan the outdoor buy across media owners — audience, comparison, negotiation, execution — then prove that it ran.\n\nPlanning desk: Kanpur, Uttar Pradesh. Markets across metros and tier-2 India. Barter (goods-for-media) is a commercial route when cash is the constraint. It is not the default product.",
 
   /* THE DATE THE CONTENT WAS LAST GONE THROUGH.
      Fed to schema as dateModified on every page. A generative engine
@@ -57,7 +58,7 @@ export const site = {
 } as const;
 
 /* ------------------------------------------------------------------
-   Capabilities — the six rows of the network ledger.
+   Capabilities — outdoor first. Barter is a commercial route, not a peer product.
    NOTE: descriptions name categories only. Never inventory, counts,
    site lists, availability or rates. That rule holds site-wide.
 ------------------------------------------------------------------- */
@@ -79,24 +80,24 @@ export type Capability = {
 export const capabilities: Capability[] = [
   {
     index: "01",
-    verb: "Be seen",
+    verb: "Plan the outdoor buy",
     title: "Outdoor & Transit",
     short:
-      "Hoardings, billboards, bus and cab media across metros and tier-2 cities.",
+      "Hoardings, transit and street furniture, compared and bought across owners.",
     long: "Large-format and transit media planned around how a city actually moves — arterial corridors, commuter routes and the approaches to retail catchments.",
     href: "/what-we-do/outdoor-transit",
   },
   {
     index: "02",
-    verb: "Be timed",
+    verb: "Time the screens",
     title: "Digital Out-of-Home",
-    short: "LED screens, digital billboards and programmatic DOOH.",
+    short: "LED and programmatic DOOH, bought by daypart and location.",
     long: "Digital screens bought by daypart and location rather than by month, so weight lands when the audience is present.",
     href: "/what-we-do/dooh",
   },
   {
     index: "03",
-    verb: "Be seen where they decide",
+    verb: "Plan the catchment",
     title: "Retail & Hyperlocal",
     short: "Mall, multiplex, society lift and store-catchment media.",
     long: "Media placed inside the trade area of a specific store or cluster, planned from catchment data rather than city-level reach.",
@@ -104,7 +105,7 @@ export const capabilities: Capability[] = [
   },
   {
     index: "04",
-    verb: "Be heard",
+    verb: "Add traditional weight",
     title: "Broadcast, Print & Cinema",
     short: "News television, radio, national dailies and on-screen.",
     long: "Traditional weight where it still carries a market — regional news, radio drive-time, dailies and cinema on-screen.",
@@ -112,41 +113,94 @@ export const capabilities: Capability[] = [
   },
   {
     index: "05",
-    verb: "Be there in person",
+    verb: "Ground presence",
     title: "Activations & Corporate Gifting",
-    short: "Ground presence and distributor engagement.",
+    short: "When the plan needs a person in the place, not only a board.",
     long: "Physical presence in the places a brand needs to be seen, and the channel programmes that keep distribution engaged.",
     href: "/what-we-do/activations",
   },
   {
     index: "06",
-    verb: "Be affordable",
+    verb: "Structure the commercial",
     title: "Barter & Trade Structuring",
-    short: "The commercial model that funds all of the above.",
+    short: "When the media plan is right and cash is the constraint.",
     long: "Converting what a business already owns into media, contracted and valued in advance.",
     href: "/barter",
-    accent: true,
-    linkLabel: "Read how it works",
+    linkLabel: "How barter works",
+  },
+];
+
+/* The buy, in the order it is actually made. This is the product. */
+export const process = [
+  {
+    index: "01",
+    title: "Brand objective",
+    body: "Launch, defend, footfall or presence. The buy is an output of this, not a site list.",
+  },
+  {
+    index: "02",
+    title: "Audience and catchment",
+    body: "Who must see it, and on which movements. Corridor before site.",
+  },
+  {
+    index: "03",
+    title: "Market intelligence",
+    body: "How this city moves — owners, permissions, seasonality — not a national rate card.",
+  },
+  {
+    index: "04",
+    title: "Access to owners",
+    body: "We buy across media owners. There is no mandate to fill anyone’s unsold.",
+  },
+  {
+    index: "05",
+    title: "Comparison",
+    body: "The same brief, more than one owner, argued on position and dwell.",
+  },
+  {
+    index: "06",
+    title: "Negotiation",
+    body: "Rates disclosed to you. Independence is the reason we can walk away.",
+  },
+  {
+    index: "07",
+    title: "The plan",
+    body: "Site-by-site reasoning you can interrogate. You approve before it is booked.",
+  },
+  {
+    index: "08",
+    title: "Optimisation",
+    body: "Weight moves if the audience does. Digital by daypart; static by corridor hold.",
+  },
+  {
+    index: "09",
+    title: "Execution",
+    body: "Printing, mounting, permissions. The plan is not the campaign until it is up.",
+  },
+  {
+    index: "10",
+    title: "Measurement",
+    body: "Geo-tagged photographs, mid-flight checks, a file you can forward.",
   },
 ];
 
 /* Navigation ------------------------------------------------------ */
 
 export const primaryNav = [
-  { label: "What We Do", href: "/what-we-do", mega: true },
+  { label: "How we work", href: "/what-we-do", mega: true },
   { label: "Work", href: "/work" },
-  { label: "Cities", href: "/cities" },
-  { label: "Barter", href: "/barter" },
+  { label: "Markets", href: "/cities" },
   { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const footerNav = [
   {
-    heading: "What We Do",
+    heading: "How we work",
     links: capabilities.map((c) => ({ label: c.title, href: c.href })),
   },
   {
-    heading: "Cities",
+    heading: "Markets",
     /* Only cities with a written page are linked, and the list is
        derived rather than typed — the previous version claimed to do
        this in a comment while hardcoding Kolkata, which is how a footer
@@ -157,7 +211,7 @@ export const footerNav = [
         label: c.name,
         href: `/cities/${c.slug}`,
       })),
-      { label: "All cities", href: "/cities" },
+      { label: "All markets", href: "/cities" },
     ],
   },
   {
@@ -167,19 +221,15 @@ export const footerNav = [
       { label: "Work", href: "/work" },
       { label: "Glossary", href: "/glossary" },
       { label: "Contact", href: "/contact" },
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
     ],
   },
   {
     heading: "Connect",
-    /* WhatsApp lives here as a direct contact method, not as a call to
-       action. Leads start from the brief form so they arrive with a
-       brand and a name attached; this is for someone who already knows
-       who they want to talk to. */
     links: [
       { label: site.email, href: `mailto:${site.email}` },
-      { label: site.phone, href: `tel:${site.phoneHref}` },
-      { label: "WhatsApp", href: site.whatsappBase, external: true },
-      { label: "Send a brief", href: "/contact" },
+      { label: "Request a plan", href: "/contact" },
     ],
   },
 ];
@@ -198,24 +248,24 @@ export const footerNav = [
    register: written pages plus named markets without a page yet. */
 export const proofStats = [
   {
-    label: "Cities",
-    value: String(marketCount),
-    note: "Metros and tier-2, planned from catchment data.",
-  },
-  {
-    label: "Capabilities",
-    value: "Six",
-    note: "Outdoor, digital, retail, broadcast, activations, barter.",
-  },
-  {
-    label: "Categories",
-    value: "10+",
-    note: "From consumer electronics to cement.",
-  },
-  {
-    label: "Ownership",
+    label: "Role",
     value: "Independent",
-    note: "No network mandate. No inherited rate card.",
+    note: "We plan and buy. We do not own the sites.",
+  },
+  {
+    label: "Markets",
+    value: String(marketCount),
+    note: "Metros and tier-2, planned city by city.",
+  },
+  {
+    label: "Base",
+    value: "Kanpur",
+    note: "A North and tier-2 planning desk, not a metro franchise.",
+  },
+  {
+    label: "Measurement",
+    value: "On site",
+    note: "Every placement photographed, dated and geo-tagged.",
   },
 ];
 
@@ -224,24 +274,23 @@ export const proofStats = [
    name (a logo mark, a campaign photo, a result) still needs that
    client's written permission. */
 export const clients = [
-  "Zebronics",
+  "Safilo",
   "Sharp",
+  "Zebronics",
   "Portronics",
   "Carrera",
-  "Safilo",
-  "Nisara",
+  "Giva",
+  "Bangur Cement",
+  "Goldmedal",
+  "Timezone",
+  "Wingreens World",
+  "Aditya Vision",
   "Bodycraft",
   "Naturoz",
+  "Nisara",
   "Mishrambu",
-  "Aditya Vision",
   "Asian Footwears",
-  "Wingreens World",
-  "Bangur Cement",
-  "BharatBenz",
-  "Goldmedal",
-  "Giva",
   "Mars Cosmetics",
-  "Timezone",
 ];
 
 /* The Runway move — segment by what the buyer is trying to do, not
@@ -257,6 +306,8 @@ export const objectives = [
       "Local press and radio planned alongside outdoor",
       "Documented delivery so the head office can see it ran",
     ],
+    href: "/cities",
+    linkLabel: "Markets we plan",
   },
   {
     index: "02",
@@ -267,6 +318,8 @@ export const objectives = [
       "Sustained presence over short high-reach bursts",
       "Store-catchment and hyperlocal formats",
     ],
+    href: "/what-we-do",
+    linkLabel: "How we buy",
   },
   {
     index: "03",
@@ -277,6 +330,8 @@ export const objectives = [
       "GST-compliant invoicing on both legs",
       "Goods placed through controlled channels",
     ],
+    href: "/barter",
+    linkLabel: "How barter works",
   },
 ];
 
@@ -337,27 +392,71 @@ export const sectorsServed = [
 export const selectedWork = [
   {
     index: "01",
-    client: "Client name",
-    sector: "Beverages",
-    markets: "UP · Bihar · MP",
-    result: "Seasonal stock converted into a multi-state outdoor campaign.",
-    href: "/work",
+    client: "Consumer electronics retailer",
+    sector: "Consumer electronics",
+    markets: "Uttar Pradesh",
+    formats: "Store-catchment hoardings and mall media, bought across owners",
+    duration: "Held through a state retail calendar, not a two-week burst",
+    compared:
+      "Arterial reach against density around the stores. The catchment won.",
+    delivery:
+      "Every placement photographed, geo-tagged and dated. One file at the end.",
   },
   {
     index: "02",
-    client: "Client name",
-    sector: "Consumer electronics retail",
-    markets: "Uttar Pradesh",
-    result: "Store-catchment media planned across a state retail footprint.",
-    href: "/work",
+    client: "Regional beverage brand",
+    sector: "Beverages",
+    markets: "Uttar Pradesh · Bihar · Madhya Pradesh",
+    formats: "Hoardings and transit on the corridors that move the stock",
+    duration: "A seasonal window, booked before the peak rather than during it",
+    compared:
+      "A national rate-card list against city-by-city movement. The cities won.",
+    delivery:
+      "Mid-flight checks and a consolidated report the head office could forward.",
   },
   {
     index: "03",
-    client: "Client name",
+    client: "Footwear brand, North India launch",
     sector: "Footwear",
     markets: "North India",
-    result: "Regional launch weight delivered without cash media spend.",
-    href: "/work",
+    formats: "Outdoor and retail media, structured against goods not cash",
+    duration: "Launch weight across the opening markets, then a hold",
+    compared:
+      "Paying for presence the budget could not fund, versus sitting dark. Presence won.",
+    delivery:
+      "Documented on site. The commercial was a reciprocal trade, valued in writing first.",
   },
 ];
+
+/* How a Media Director diligences the desk. Philosophy is in `process`;
+   this is operating detail — owners, rates, time, permissions, people. */
+export const buyingPractice = [
+  {
+    title: "Owners are RFPd, not inherited",
+    body: "The same brief goes to more than one owner. There is no mandate to fill anyone’s unsold. We buy DMRC in Delhi, BEST buses in Mumbai, CMRL in Chennai from the operators and concessionaires who hold them — as access, not as inventory we list.",
+  },
+  {
+    title: "Rates are disclosed to you",
+    body: "You see what we are being quoted. Independence is the reason we can walk away from a site, and the reason the number on the plan is the number that was negotiated, not a mark-up on unsold.",
+  },
+  {
+    title: "Lead times are named in the plan",
+    body: "Static outdoor needs printing and mounting windows. Digital can go live once creative is approved. Transit and mall media follow the concessionaire’s calendar. We write the real window, not a generic SLA for every format.",
+  },
+  {
+    title: "Permissions sit in the plan",
+    body: "Municipal sky-sign, police NOC for illumination, transit concessionaire terms. The city pages name the authority. The plan names who files, and quotes compliance separately rather than burying it.",
+  },
+  {
+    title: "Production is not a surprise invoice",
+    body: "Printing, flexing and mounting are in the plan before sites are booked. A cheaper proposal that omits them is not cheaper.",
+  },
+  {
+    title: "Staffing a multi-city buy",
+    body: "Planning is led from Kanpur. Local supervisors and owner operations run mounting and mid-flight checks. You deal with one desk, not a franchise list.",
+  },
+];
+
+export const scaleNote =
+  "The desk is built for market-by-market and corridor plans. A two-lakh local flex is usually better served locally. An eight-crore national AOR pitch is not this room. We will say so.";
 

@@ -59,7 +59,7 @@ export function Disclosure({
           room to spare, since this is the primary way through the
           section on a phone. list-none plus the webkit rule removes the
           native triangle in both engines. */}
-      <summary className="flex min-h-14 cursor-pointer list-none items-baseline gap-4 py-4 md:py-5 [&::-webkit-details-marker]:hidden">
+      <summary className="flex min-h-12 cursor-pointer list-none items-baseline gap-4 py-3 md:py-3.5 [&::-webkit-details-marker]:hidden">
         {index !== undefined && (
           <span
             className={`font-mono text-micro tracking-[0.08em] ${accent} shrink-0 pt-1.5`}
@@ -84,7 +84,7 @@ export function Disclosure({
           +
         </span>
       </summary>
-      <div className={`max-w-[68ch] pb-6 ${dim}`}>{children}</div>
+      <div className={`max-w-[68ch] pb-4 ${dim}`}>{children}</div>
     </details>
   );
 }

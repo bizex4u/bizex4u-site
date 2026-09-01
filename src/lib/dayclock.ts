@@ -32,9 +32,12 @@ export type Hour = {
   formats: string[];
   /* Real streets that behave this way, as illustration. */
   examples: string;
-  /* The card face. Own frames where we have the hour; designed
-     photographs for the interiors we do not shoot — mall, office
-     floor, cinema. None of these is a site we hold. */
+  /* One-line label on the hour dialer. Shorter than the card title
+     so six rows stay scannable. */
+  scene: string;
+  /* The card face. Own streets for the hours we shoot from the
+     road; designed photographs for the interiors we do not —
+     mall atrium, cinema. None of these is a site we hold. */
   image: string;
   imageAlt: string;
 };
@@ -48,8 +51,9 @@ export const dayClock: Hour[] = [
     plate: "outdoor",
     formats: ["Hoardings", "Unipoles", "Bus exteriors"],
     examples: "EM Bypass, Kolkata · Gomti Nagar flyover, Lucknow · Sankey Road, Bengaluru",
-    image: "/media/streets/agra-1.webp",
-    imageAlt: "An elevated carriageway with hoardings along the approach, early in the day",
+    scene: "The commute",
+    image: "/media/hours/commute-agra.webp",
+    imageAlt: "An Agra arterial at commute hour, a roadside hoarding and traffic on the carriageway",
   },
   {
     time: "09:20",
@@ -59,8 +63,9 @@ export const dayClock: Hour[] = [
     plate: "dooh",
     formats: ["LED façades", "Transit", "Ribbon screens"],
     examples: "Cyber Hub, Gurugram · Salt Lake Sector V, Kolkata",
-    image: "/media/hours/office.jpg",
-    imageAlt: "A glass office corridor at the hour the districts fill",
+    scene: "Office districts",
+    image: "/media/hours/office-cyberhub.jpg",
+    imageAlt: "A glass office tower above a pedestrian plaza at an Indian commercial hub",
   },
   {
     time: "12:15",
@@ -70,8 +75,9 @@ export const dayClock: Hour[] = [
     plate: "retail",
     formats: ["Atrium", "Fascia", "Lift panels"],
     examples: "Fun Mall, Lucknow · Khan Market, New Delhi",
-    image: "/media/hours/mall.jpg",
-    imageAlt: "A mall atrium with shoppers already in the space",
+    scene: "The mall opens",
+    image: "/media/hours/mall-atrium.jpg",
+    imageAlt: "A mall atrium with a hanging light installation and shoppers already in the space",
   },
   {
     time: "16:30",
@@ -81,8 +87,9 @@ export const dayClock: Hour[] = [
     plate: "activation",
     formats: ["Store catchment", "Society media", "Activations"],
     examples: "Naveen Market, Kanpur · Gariahat, Kolkata",
-    image: "/media/streets/agra-9.webp",
-    imageAlt: "A market street with shopfronts and parked vehicles",
+    scene: "School run",
+    image: "/media/hours/sunrise-market.jpg",
+    imageAlt: "A local market street in warm light, shoppers walking between stalls",
   },
   {
     time: "19:45",
@@ -92,8 +99,9 @@ export const dayClock: Hour[] = [
     plate: "dooh",
     formats: ["Digital screens", "Street retail", "Activations"],
     examples: "Park Street, Kolkata · MG Road, Bengaluru",
-    image: "/media/streets/kozhikode-6.webp",
-    imageAlt: "A high street of stacked retail frontage as the evening crowd arrives",
+    scene: "High street",
+    image: "/media/hours/evening.jpg",
+    imageAlt: "An Indian high street at dusk, headlights and stall lights against the sky",
   },
   {
     time: "22:10",
@@ -103,7 +111,8 @@ export const dayClock: Hour[] = [
     plate: "broadcast",
     formats: ["Cinema on-screen", "Broadcast", "Lift panels"],
     examples: "Multiplex circuits · Residential towers",
-    image: "/media/hours/cinema.jpg",
-    imageAlt: "An empty cinema, seats toward a dark screen",
+    scene: "Last screen",
+    image: "/media/hours/cinema-screen.jpg",
+    imageAlt: "An empty cinema, red seats facing a dark screen",
   },
 ];

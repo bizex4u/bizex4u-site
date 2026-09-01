@@ -92,10 +92,15 @@ export type City = {
   formatGuide: { title: string; kicker: string; body: string }[];
 
   /* 04 — The local press and radio that carry the market.
-     Mastheads and stations by name. See rule 2 and rule 5. */
+     Mastheads and stations by name. See rule 2 and rule 5.
+
+     `url` is an optional per-entry override. Official homepages for
+     shared brands live in mediaUrls.ts so Jagran, Mirchi and the rest
+     are not pasted into twenty-two city files. Leave `url` unset unless
+     this row is a one-off that the registry should not own. */
   localMedia: {
-    press: { title: string; language: string; note: string }[];
-    radio: { station: string; frequency: string; note: string }[];
+    press: { title: string; language: string; note: string; url?: string }[];
+    radio: { station: string; frequency: string; note: string; url?: string }[];
     radioNote: string;
   };
 

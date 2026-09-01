@@ -7,75 +7,26 @@ import { Eyebrow } from "@/components/UI";
 import { dayClock } from "@/lib/dayclock";
 
 /**
- * One Indian day, as a chip wheel and a stacked card.
+ * One Indian day, as a dialer and a stacked card.
  *
- * The motion is the feature-carousel pattern: a vertical list of hours
- * that springs past the active one, and a card stack that scales the
- * neighbours. Each card is a designed face — own street frames where
- * we have the hour, interiors for mall, office and cinema. Places in
- * the copy stay examples, never inventory. Reduced motion swaps
- * instantly and does not autoplay.
+ * The left rail is the control — six hours always visible, so the
+ * section reads as something you turn, not a caption you watch. The
+ * right stack springs the neighbours. Photos stay photographs: a
+ * gradient only where the type sits. Places in the copy stay examples,
+ * never inventory. Reduced motion swaps instantly and does not autoplay.
  */
 
 const AUTO_PLAY_INTERVAL = 4500;
-const ITEM_HEIGHT = 58;
 const hours = dayClock.length;
 
 const tint = [
-  {
-    bg: "bg-plum-2",
-    dim: "text-on-plum-dim",
-    rule: "border-white/15",
-    plate: "dark" as const,
-    sky: "from-[#e8a04a]/50 via-[#e8a04a]/12 to-transparent",
-    hour: "text-[#f0c48a]",
-  },
-  {
-    bg: "bg-plum-2",
-    dim: "text-on-plum-dim",
-    rule: "border-white/15",
-    plate: "dark" as const,
-    sky: "from-[#f0d080]/36 via-transparent to-transparent",
-    hour: "text-[#f5e6c8]",
-  },
-  {
-    bg: "bg-plum-3",
-    dim: "text-on-plum-dim",
-    rule: "border-white/15",
-    plate: "dark" as const,
-    sky: "from-[#f7ecd0]/18 via-transparent to-transparent",
-    hour: "text-white",
-  },
-  {
-    bg: "bg-plum-3",
-    dim: "text-on-plum-dim",
-    rule: "border-white/15",
-    plate: "dark" as const,
-    sky: "from-[#e07040]/38 via-[#e07040]/10 to-transparent",
-    hour: "text-[#f0c4a0]",
-  },
-  {
-    bg: "bg-violet-deep",
-    dim: "text-on-violet-dim",
-    rule: "border-white/25",
-    plate: "violet" as const,
-    sky: "from-[#120530]/45 via-transparent to-transparent",
-    hour: "text-white",
-  },
-  {
-    bg: "bg-plum-2",
-    dim: "text-on-plum-dim",
-    rule: "border-white/15",
-    plate: "dark" as const,
-    sky: "from-[#06040c]/70 via-[#1b1030]/20 to-transparent",
-    hour: "text-[#c4b8e0]",
-  },
+  { rule: "border-white/20", hour: "text-violet-lift" },
+  { rule: "border-white/20", hour: "text-violet" },
+  { rule: "border-white/20", hour: "text-white" },
+  { rule: "border-white/20", hour: "text-violet-lift" },
+  { rule: "border-white/25", hour: "text-white" },
+  { rule: "border-white/20", hour: "text-on-plum-dim" },
 ];
-
-const wrap = (min: number, max: number, v: number) => {
-  const range = max - min;
-  return ((((v - min) % range) + range) % range) + min;
-};
 
 function subscribeMotion(cb: () => void) {
   const q = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -137,7 +88,7 @@ export default function DayClock() {
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
           <div>
-            <Eyebrow tone="plum" deva="दिन भर">
+            <Eyebrow tone="plum">
               The day a brand has to survive
             </Eyebrow>
             <h2
@@ -159,69 +110,43 @@ export default function DayClock() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          {/* Hour chips — a swipe row on a phone, the spring wheel on a
-              wide screen. Same buttons, two layouts, so a tap still
-              lands on the hour it names. */}
-          <div className="relative flex shrink-0 flex-col justify-center overflow-hidden bg-plum-2 px-4 py-4 lg:w-[38%] lg:px-8 lg:py-8">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 z-10 h-10 bg-linear-to-b from-plum-2 to-transparent lg:h-16"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 bg-linear-to-t from-plum-2 to-transparent lg:h-16"
-            />
+          <div className="relative z-20 flex shrink-0 flex-col bg-plum-2 px-4 py-4 lg:w-[40%] lg:px-6 lg:py-6">
+            <p className="font-mono text-nano tracking-[0.14em] text-violet-lift uppercase">
+              Turn the hour
+            </p>
+            <p className="mt-1 text-caption text-on-plum-dim">
+              Six moments. Tap one — or let it run.
+            </p>
 
             <div
               role="tablist"
               aria-label="Hour of the day"
-              className="flex gap-2 overflow-x-auto pb-1 lg:hidden"
+              className="mt-4 flex flex-col gap-1.5"
             >
               {dayClock.map((h, i) => (
                 <Chip
                   key={h.time}
                   hour={h}
                   active={i === current}
+                  paused={paused}
+                  reduceMotion={reduceMotion}
                   onSelect={() => goTo(i)}
                 />
               ))}
             </div>
 
-            <div
-              role="tablist"
-              aria-label="Hour of the day"
-              className="relative hidden h-[20.5rem] items-center justify-start lg:flex"
+            <p
+              className="mt-4 font-mono text-nano tracking-[0.08em] text-on-plum-dim uppercase"
+              aria-live="polite"
             >
-              {dayClock.map((h, i) => {
-                const distance = wrap(-(hours / 2), hours / 2, i - current);
-                return (
-                  <div
-                    key={h.time}
-                    className={`absolute left-0 flex items-center ${
-                      reduceMotion
-                        ? ""
-                        : "transition-[transform,opacity] duration-500 ease-out"
-                    }`}
-                    style={{
-                      height: ITEM_HEIGHT,
-                      top: "50%",
-                      transform: `translateY(${distance * ITEM_HEIGHT - ITEM_HEIGHT / 2}px)`,
-                      opacity: 1 - Math.abs(distance) * 0.28,
-                    }}
-                  >
-                    <Chip
-                      hour={h}
-                      active={i === current}
-                      onSelect={() => goTo(i)}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+              {reduceMotion ? "Manual" : paused ? "Paused" : "Playing"}
+              <span aria-hidden> · </span>
+              {String(current + 1).padStart(2, "0")} of {String(hours).padStart(2, "0")}
+            </p>
           </div>
 
-          <div className="relative min-h-[26rem] flex-1 overflow-hidden border-t border-white/12 bg-plum lg:min-h-[28rem] lg:border-t-0 lg:border-l">
-            <div className="relative mx-auto flex h-full min-h-[26rem] w-full max-w-[30rem] items-center justify-center p-4 md:p-7 lg:min-h-[28rem]">
+          <div className="relative min-h-[26rem] flex-1 overflow-hidden border-t border-white/12 bg-plum lg:min-h-[32rem] lg:border-t-0 lg:border-l">
+            <div className="relative mx-auto flex h-full min-h-[26rem] w-full max-w-[32rem] items-center justify-center p-4 md:p-7 lg:min-h-[32rem]">
               {dayClock.map((h, i) => {
                 const status = cardStatus(i, current);
                 const active = status === "active";
@@ -236,7 +161,7 @@ export default function DayClock() {
                     animate={{
                       x: active ? 0 : prev ? -72 : nextCard ? 72 : 0,
                       scale: active ? 1 : prev || nextCard ? 0.88 : 0.74,
-                      opacity: active ? 1 : prev || nextCard ? 0.4 : 0,
+                      opacity: active ? 1 : prev || nextCard ? 0.45 : 0,
                       rotate: reduceMotion ? 0 : prev ? -2 : nextCard ? 2 : 0,
                       zIndex: active ? 20 : prev || nextCard ? 10 : 0,
                     }}
@@ -251,19 +176,11 @@ export default function DayClock() {
                       alt={h.imageAlt}
                       fill
                       sizes="(min-width: 1024px) 30vw, 90vw"
-                      className={`object-cover transition-[filter] duration-700 ${
-                        active
-                          ? "grayscale-0 blur-0"
-                          : "grayscale blur-[2px] brightness-75"
-                      }`}
+                      className="object-cover saturate-[1.2] contrast-[1.08]"
                     />
                     <div
                       aria-hidden
-                      className={`pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b ${t.sky}`}
-                    />
-                    <div
-                      aria-hidden
-                      className="absolute inset-0 bg-linear-to-t from-plum via-plum/55 to-transparent"
+                      className="absolute inset-0 bg-linear-to-t from-plum/95 from-[18%] via-plum/45 via-[50%] to-transparent"
                     />
                     <div className="relative flex h-full flex-col justify-end p-5">
                       <div className="flex items-baseline justify-between gap-3">
@@ -272,7 +189,7 @@ export default function DayClock() {
                         >
                           {h.time}
                         </p>
-                        <p className={`deva text-caption text-white/80`}>
+                        <p className="deva text-caption text-white/85">
                           {h.deva}
                         </p>
                       </div>
@@ -282,21 +199,21 @@ export default function DayClock() {
                       >
                         {h.title}
                       </h3>
-                      <p className="mt-2 text-caption text-white/80">
+                      <p className="mt-2 text-caption text-white/88">
                         {h.body}
                       </p>
                       <ul className="mt-3 flex flex-wrap gap-1.5">
                         {h.formats.map((f) => (
                           <li
                             key={f}
-                            className="rounded-full border border-white/25 bg-plum/40 px-2.5 py-1 font-mono text-nano tracking-[0.06em] text-white/85 uppercase"
+                            className="rounded-full border border-white/30 bg-plum/50 px-2.5 py-1 font-mono text-nano tracking-[0.06em] text-white/90 uppercase"
                           >
                             {f}
                           </li>
                         ))}
                       </ul>
                       <p
-                        className={`mt-3 border-t pt-2 font-mono text-nano leading-relaxed tracking-[0.04em] uppercase ${t.rule} text-white/65`}
+                        className={`mt-3 border-t pt-2 font-mono text-nano leading-relaxed tracking-[0.04em] uppercase ${t.rule} text-white/70`}
                       >
                         {h.examples}
                       </p>
@@ -331,10 +248,14 @@ export default function DayClock() {
 function Chip({
   hour,
   active,
+  paused,
+  reduceMotion,
   onSelect,
 }: {
   hour: (typeof dayClock)[number];
   active: boolean;
+  paused: boolean;
+  reduceMotion: boolean;
   onSelect: () => void;
 }) {
   return (
@@ -343,16 +264,39 @@ function Chip({
       role="tab"
       aria-selected={active}
       onClick={onSelect}
-      className={`flex shrink-0 items-baseline gap-3 rounded-full border px-4 py-2.5 text-left transition-colors duration-300 ${
+      className={`relative flex w-full min-h-11 items-baseline overflow-hidden rounded-lg border px-3 py-2 text-left transition-colors duration-200 lg:px-3.5 lg:py-2.5 ${
         active
-          ? "z-10 border-sand bg-sand text-plum"
-          : "border-white/20 bg-transparent text-on-plum-dim hover:border-white/40 hover:text-on-plum"
+          ? "z-10 border-sand bg-sand text-plum shadow-[0_8px_24px_-12px_rgba(18,17,15,0.55)]"
+          : "border-white/40 bg-white/18 text-white hover:border-white/70 hover:bg-white/28"
       }`}
     >
-      <span className="font-display text-h3 leading-none">{hour.time}</span>
-      <span lang="hi" className="deva text-caption">
-        {hour.deva}
+      <span className="w-[5.1rem] shrink-0 font-display text-[1.35rem] leading-none tabular-nums">
+        {hour.time}
       </span>
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-caption font-medium leading-tight">
+          {hour.scene}
+        </span>
+        <span
+          lang="hi"
+          className={`deva mt-0.5 block text-nano leading-none ${
+            active ? "text-plum/70" : "text-on-plum-dim"
+          }`}
+        >
+          {hour.deva}
+        </span>
+      </span>
+      {active && !reduceMotion ? (
+        <span
+          key={hour.time}
+          aria-hidden
+          className="dayclock-tick pointer-events-none absolute inset-x-0 bottom-0 h-[3px] origin-left bg-plum"
+          style={{
+            animation: `dayclock-tick ${AUTO_PLAY_INTERVAL}ms linear`,
+            animationPlayState: paused ? "paused" : "running",
+          }}
+        />
+      ) : null}
     </button>
   );
 }

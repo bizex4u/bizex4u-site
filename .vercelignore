@@ -1,0 +1,12 @@
+.cursor
+.playwright-mcp
+.tmp-inspect
+.tmp-verify
+tmp-verify-*.png
+tmp-logo-preview
+public/.tmp-inspect
+preview
+/_to_delete
+/_bizex4u_new
+/_incoming
+apps-script

@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <CapabilityPage slug="dooh" plate="dooh" />;
+  return <CapabilityPage slug="dooh" />;
 }

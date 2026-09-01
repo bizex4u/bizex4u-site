@@ -17,11 +17,24 @@
    website is being concrete about method.
 ------------------------------------------------------------------- */
 
+export type CapabilityFrame = {
+  src: string;
+  city: string;
+  alt: string;
+  caption: string;
+};
+
 export type CapabilityDetail = {
   slug: string;
   /* Sits under the H1. One sentence, no adjectives that cannot be
      defended in a meeting. */
   lede: string;
+  /* The sentence the old drawings were trying to carry. Lives as type
+     next to a photograph, not as a schematic. */
+  thesis: string;
+  /* Own photography of the environment this medium actually lives in.
+     Caption names the kind of place, never a site we hold. */
+  frame: CapabilityFrame;
   /* The argument for planning this medium properly. */
   argument: string[];
   /* How the buy is actually made. This is the section a client reads
@@ -45,6 +58,13 @@ export const capabilityDetail: Record<string, CapabilityDetail> = {
   "outdoor-transit": {
     slug: "outdoor-transit",
     lede: "Large-format and transit media, planned around how a city actually moves rather than around what happens to be free this month.",
+    thesis: "Three times on one commute beats once across a city.",
+    frame: {
+      src: "/media/hours/commute-agra.webp",
+      city: "Agra",
+      alt: "An Agra arterial at commute hour, a roadside hoarding and traffic on the carriageway",
+      caption: "Photographed on site · Agra arterial · commute hour",
+    },
     argument: [
       "Outdoor is the only medium a person cannot close, skip or scroll past. That is its whole advantage, and it is squandered the moment a plan is built from an availability list instead of from a route. Two hoardings can carry identical rate cards and identical claimed impressions while one sits on a corridor a million people commit to every morning and the other sits on a road they take when the first is blocked.",
       "So the first question is never which sites are free. It is which movements the brand needs to intercept — the commute, the school run, the weekend retail trip, the approach to a dealership — and which structures sit on those movements at the moment attention is available rather than at the moment traffic is heaviest. A site at a signal where vehicles stop for ninety seconds is a different product from a site on a flyover taken at speed, and it should not be bought as though it were the same thing.",
@@ -118,6 +138,13 @@ export const capabilityDetail: Record<string, CapabilityDetail> = {
   dooh: {
     slug: "dooh",
     lede: "Digital screens bought by daypart and location rather than by the month, so weight lands when the audience is actually in front of them.",
+    thesis: "The same screen is a different product at nine and at four.",
+    frame: {
+      src: "/media/hours/office-cyberhub.jpg",
+      city: "Gurugram",
+      alt: "A glass office tower above a pedestrian plaza at an Indian commercial hub",
+      caption: "Office-district hour. Weight belongs here, not in a flat monthly rate.",
+    },
     argument: [
       "The reason to buy a digital screen is not that it is digital. It is that the same structure can carry a different message at eight in the morning than it carries at nine at night, and that a campaign can be changed after it launches without reprinting anything. A brand that buys DOOH and runs one static creative for four weeks has bought an expensive hoarding.",
       "The trap is the loop. A screen sold as a share of a rotation is only worth what the rotation gives it — how many other advertisers, how long each slot, and whether your slot lands when footfall peaks or when the corridor is empty. Those are the questions that decide value, and they are the ones least often asked at the point of purchase.",
@@ -190,6 +217,13 @@ export const capabilityDetail: Record<string, CapabilityDetail> = {
   "retail-hyperlocal": {
     slug: "retail-hyperlocal",
     lede: "Media placed inside the trade area of a specific store or cluster, planned from catchment behaviour rather than city-level reach.",
+    thesis: "Draw the catchment first. The panel is what you go and get.",
+    frame: {
+      src: "/media/hours/mall-atrium.jpg",
+      city: "Mall atrium",
+      alt: "A mall atrium with a hanging light installation and shoppers already in the space",
+      caption: "Close-range, already in spending mode — a different product from a roadside face.",
+    },
     argument: [
       "Most purchase decisions are made within a few kilometres of where the purchase happens. A city-wide plan spends most of its weight on people who will never travel to the store, which looks efficient on a reach number and is not efficient at all on a footfall one. Hyperlocal inverts the arithmetic: fewer people, far more of whom can act.",
       "It is also the layer where India's residential density does unusual work. A society lift panel is seen twice a day by the same household, in a confined space, with nothing else to look at. That is a frequency profile no mass medium can buy, and it is available at a fraction of the cost — provided the catchment has been chosen on evidence rather than on which societies a vendor happens to hold.",
@@ -262,6 +296,13 @@ export const capabilityDetail: Record<string, CapabilityDetail> = {
   "broadcast-print-cinema": {
     slug: "broadcast-print-cinema",
     lede: "Traditional weight where it still carries a market — regional news, radio drive-time, the dailies people actually read, and cinema on-screen.",
+    thesis: "The right title in Kanpur is not the right one in Kochi.",
+    frame: {
+      src: "/media/hours/cinema-screen.jpg",
+      city: "Cinema",
+      alt: "An empty cinema, red seats facing a dark screen",
+      caption: "Comprehension, not reach — a dark room and no second device.",
+    },
     argument: [
       "It has become fashionable to write off print and radio nationally, and in several markets that is simply wrong. A regional daily still sets the morning agenda in large parts of India, and a masthead that carries local credibility transfers some of it to what appears in it. Radio owns the drive-time hour in cities where the commute is long and the vehicle is private. Neither is a mass medium any more; both are still a concentrated one.",
       "Cinema is the opposite argument. Its audience is small relative to television and its attention is close to total — a dark room, a captive screen and no second device in hand. For a launch that needs the message understood rather than merely seen, that trade is often worth making.",
@@ -334,6 +375,13 @@ export const capabilityDetail: Record<string, CapabilityDetail> = {
   activations: {
     slug: "activations",
     lede: "Physical presence in the places a brand needs to be seen, and the channel programmes that keep distribution engaged.",
+    thesis: "The venue is the campaign. Media pointed at the window is what fills it.",
+    frame: {
+      src: "/media/hours/sunrise-market.jpg",
+      city: "Local market",
+      alt: "A local market street in warm light, shoppers walking between stalls",
+      caption: "Catchment hour — people already within walking distance of a decision.",
+    },
     argument: [
       "Media buys attention. An activation buys a few minutes of it, plus something a person carries away — a demonstration they watched, a sample they tried, a conversation with someone who could answer their question. In categories where the product has to be experienced before it is trusted, that is not a supporting tactic; it is the campaign, and the media around it exists to drive footfall to it.",
       "Corporate gifting and distributor programmes are the same instinct pointed at the trade rather than the consumer. In Indian distribution, the relationship with the channel partner frequently decides shelf position, push and priority. A gifting programme that reaches those people at the right moment does work that no amount of consumer advertising replaces.",

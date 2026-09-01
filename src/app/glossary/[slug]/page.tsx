@@ -180,7 +180,7 @@ export default async function GlossaryTermPage({ params }: Params) {
         <div className="grid-12 gap-y-12">
           <div className="col-span-12 lg:col-span-6">
             <Rise>
-              <Eyebrow tone="plum" deva="कब सही है">
+              <Eyebrow tone="plum">
                 Where it earns its place
               </Eyebrow>
             </Rise>
