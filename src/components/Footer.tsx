@@ -111,6 +111,10 @@ export default function Footer() {
             <Link href="/llms.txt" className="link-underline hover:text-on-plum">
               llms.txt
             </Link>
+            {" · "}
+            <Link href="/for-claude" className="link-underline hover:text-on-plum">
+              Claude brief
+            </Link>
           </Eyebrow>
           <span className="sr-only">Independent Indian media network.</span>
         </div>

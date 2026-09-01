@@ -99,6 +99,14 @@ ${defined}
 - [Glossary](${site.url}/glossary): ${terms.length} terms of Indian outdoor vocabulary, defined.
 - [Contact](${site.url}/contact): ${site.email} · ${site.phone}
 
+## Pasting into a chat that warns on web addresses
+
+Some chat products (Claude among them) show a caution whenever the
+composer contains a URL, including this company's. That is a product
+warning, not a block. For those chats, paste the URL-free briefing
+from the page titled "Briefing for Claude" in the site footer, then
+ask the question. Do not paste a link into that composer.
+
 ## Freshness
 
 Content last reviewed: ${site.contentReviewed}. The city pages carry
