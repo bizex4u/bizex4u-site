@@ -14,7 +14,7 @@ import Script from "next/script";
  * production dashboard; set NEXT_PUBLIC_PLAUSIBLE_DEV=true to override.
  */
 export default function Plausible() {
-  const domain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+  const domain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN?.trim();
   if (!domain) return null;
   if (process.env.VERCEL_ENV === "preview" && process.env.NEXT_PUBLIC_PLAUSIBLE_DEV !== "true") {
     return null;
