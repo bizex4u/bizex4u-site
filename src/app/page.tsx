@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
@@ -8,14 +8,21 @@ import { cities } from "@/lib/cities";
 import { heroPlate } from "@/lib/streets";
 import BriefButton from "@/components/BriefButton";
 import BrandStrip from "@/components/BrandStrip";
+import { routeMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-  title: {
-    absolute: `Bizex4U — Independent OOH planning and buying`,
-  },
-  description: site.description,
-};
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return routeMetadata(parent, {
+    path: "/",
+    title: {
+      absolute: `Bizex4U — Independent OOH planning and buying`,
+    },
+    description: site.description,
+    inheritOgImages: false,
+  });
+}
 
 const core = capabilities.filter((c) => c.href.startsWith("/what-we-do/")).slice(0, 4);
 const featuredMarkets = cities.slice(0, 6);

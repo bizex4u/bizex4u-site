@@ -1,16 +1,22 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { Band, Btn, Card, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import { sectorsServed, site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
 import BrandStrip from "@/components/BrandStrip";
 import PageSchema from "@/components/PageSchema";
+import { routeMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "About — Independent OOH planning and buying",
-  description:
-    "Bizex4U is an independent OOH planning and buying desk. We do not own inventory. Planning is led from Kanpur across 39 Indian markets.",
-  alternates: { canonical: "/about" },
-};
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return routeMetadata(parent, {
+    path: "/about",
+    title: "About — Independent OOH planning and buying",
+    description:
+      "Bizex4U is an independent OOH planning and buying desk. We do not own inventory. Planning is led from Kanpur across 39 Indian markets.",
+  });
+}
 
 /* Independence is the only genuinely defensible position a mid-size
    Indian media company has against a network agency. Everything on

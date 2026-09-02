@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { Band, Btn, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import { Faq } from "@/components/Ledger";
 import GstFlow from "@/components/GstFlow";
@@ -9,14 +9,19 @@ import { streets } from "@/lib/streets";
 import { site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
 import PageSchema from "@/components/PageSchema";
+import { routeMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title:
-    "Barter Advertising in India — Stock for Media",
-  description:
-    "Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast media. Contracted, valued in advance, GST-compliant on both legs.",
-  alternates: { canonical: "/barter" },
-};
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return routeMetadata(parent, {
+    path: "/barter",
+    title: "Barter Advertising in India — Stock for Media",
+    description:
+      "Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast media. Contracted, valued in advance, GST-compliant on both legs.",
+  });
+}
 
 /* Framing note: this page is built around the three objections that
    actually stop the first call — will my pricing be destroyed, will

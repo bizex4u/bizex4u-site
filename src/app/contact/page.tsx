@@ -1,15 +1,21 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import { PageHero, Rise, Section } from "@/components/Ledger";
 import { organisationId, speakable } from "@/lib/schema";
 import { site } from "@/lib/site";
 import { Eyebrow } from "@/components/UI";
+import { routeMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Contact Bizex4U — OOH planning, Kanpur",
-  description: `Talk to Bizex4U about outdoor, retail and broadcast media planning in India. Write to ${site.email}.`,
-  alternates: { canonical: "/contact" },
-};
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return routeMetadata(parent, {
+    path: "/contact",
+    title: "Contact Bizex4U — OOH planning, Kanpur",
+    description: `Talk to Bizex4U about outdoor, retail and broadcast media planning in India. Write to ${site.email}.`,
+  });
+}
 
 export default function ContactPage() {
   return (

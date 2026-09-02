@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Band, Btn, Card, Eyebrow, Rise } from "@/components/UI";
@@ -8,6 +8,7 @@ import { cityBySlug } from "@/lib/cities";
 import { organisationId, speakable } from "@/lib/schema";
 import { site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
+import { routeMetadata } from "@/lib/metadata";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -15,24 +16,20 @@ export function generateStaticParams() {
   return terms.map((t) => ({ slug: t.slug }));
 }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Params,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { slug } = await params;
   const t = termBySlug(slug);
   if (!t) return {};
-  return {
+  return routeMetadata(parent, {
+    path: `/glossary/${t.slug}`,
     title: t.metaTitle,
     description: t.metaDescription,
-    alternates: { canonical: `/glossary/${t.slug}` },
-    /* openGraph carries no `images` key on purpose — and note that a
-       PARTIAL openGraph object here would suppress the per-term
-       opengraph-image route entirely, which is exactly how /cities
-       ended up as the one page on the site sharing without a card.
-       Next composes the rest from the title and description above. */
-    openGraph: {
-      url: `${site.url}/glossary/${t.slug}`,
-      type: "article",
-    },
-  };
+    ogType: "article",
+    inheritOgImages: false,
+  });
 }
 
 /**

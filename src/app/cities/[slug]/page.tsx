@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Band, Btn, Eyebrow, Rise, SectionHead } from "@/components/UI";
@@ -14,6 +14,7 @@ import BriefForm from "@/components/BriefForm";
 import PageIndex from "@/components/PageIndex";
 import { Disclosure } from "@/components/Disclosure";
 import { MediaName } from "@/components/MediaName";
+import { routeMetadata } from "@/lib/metadata";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -21,21 +22,20 @@ export function generateStaticParams() {
   return cities.map((c) => ({ slug: c.slug }));
 }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Params,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { slug } = await params;
   const city = cityBySlug(slug);
   if (!city) return {};
-  return {
+  return routeMetadata(parent, {
+    path: `/cities/${city.slug}`,
     title: city.metaTitle,
     description: city.metaDescription,
-    alternates: { canonical: `/cities/${city.slug}` },
-    openGraph: {
-      title: city.metaTitle,
-      description: city.metaDescription,
-      url: `${site.url}/cities/${city.slug}`,
-      type: "article",
-    },
-  };
+    ogType: "website",
+    inheritOgImages: false,
+  });
 }
 
 /* A nearby market that has its own page becomes a link; one that does

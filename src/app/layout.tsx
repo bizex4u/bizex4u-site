@@ -8,6 +8,7 @@ import ScrollCraft from "@/components/ScrollCraft";
 import AnalyticsBoot from "@/components/AnalyticsBoot";
 import ExternalNavGuard from "@/components/ExternalNavGuard";
 import { site } from "@/lib/site";
+import { siteOrigin } from "@/lib/metadata";
 import "./globals.css";
 import { rootGraph } from "@/lib/schema";
 
@@ -87,17 +88,20 @@ const plexMono = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(siteOrigin()),
   title: {
     default: "Bizex4U — Independent OOH planning and buying",
     template: "%s | Bizex4U",
   },
   description: site.description,
+  /* url / twitter title / description are NOT set here. Next shallow-
+     replaces nested `openGraph` and `twitter` objects: a homepage url
+     or tagline on the root is what every interior page would inherit.
+     Each route sets those fields via `routeMetadata`. */
   openGraph: {
     type: "website",
     locale: "en_IN",
     siteName: site.name,
-    url: site.url,
   },
   /* summary_large_image, not the default `summary`. With a 1200x630
      card generated per route, `summary` would crop it to a small
@@ -105,8 +109,6 @@ export const metadata: Metadata = {
      doing the work when the link lands in a WhatsApp group. */
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Independent OOH planning and buying`,
-    description: site.description,
   },
   robots: { index: true, follow: true },
 };

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
@@ -8,13 +8,19 @@ import { capabilityDetail } from "@/lib/capabilityDetail";
 import { statementPlate } from "@/lib/streets";
 import BriefButton from "@/components/BriefButton";
 import PageSchema from "@/components/PageSchema";
+import { routeMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "How we work — Independent OOH planning and buying",
-  description:
-    "How Bizex4U plans an outdoor buy: objective, catchment, comparison, negotiation, execution and measurement. We do not own inventory.",
-  alternates: { canonical: "/what-we-do" },
-};
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return routeMetadata(parent, {
+    path: "/what-we-do",
+    title: "How we work — Independent OOH planning and buying",
+    description:
+      "How Bizex4U plans an outdoor buy: objective, catchment, comparison, negotiation, execution and measurement. We do not own inventory.",
+  });
+}
 
 const core = capabilities.filter((c) => c.href.startsWith("/what-we-do/")).slice(0, 4);
 const supporting = capabilities.filter(

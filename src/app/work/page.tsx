@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import { Band, Btn, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import { proofFrames, sectorsServed, selectedWork } from "@/lib/site";
@@ -6,13 +6,19 @@ import { reserve, streets } from "@/lib/streets";
 import BriefButton from "@/components/BriefButton";
 import BrandStrip from "@/components/BrandStrip";
 import PageSchema from "@/components/PageSchema";
+import { routeMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Work — Campaigns planned and run",
-  description:
-    "Brands Bizex4U has planned and run outdoor campaigns for, and the on-site photographs that document delivery.",
-  alternates: { canonical: "/work" },
-};
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return routeMetadata(parent, {
+    path: "/work",
+    title: "Work — Campaigns planned and run",
+    description:
+      "Brands Bizex4U has planned and run outdoor campaigns for, and the on-site photographs that document delivery.",
+  });
+}
 
 /* Deliberately not a case-study page.
 

@@ -1,13 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { Band, Eyebrow, Rise } from "@/components/UI";
 import PageSchema from "@/components/PageSchema";
 import { site } from "@/lib/site";
+import { routeMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Terms",
-  description: `Terms for using ${site.name}. We plan and buy outdoor media. We do not own inventory.`,
-  alternates: { canonical: "/terms" },
-};
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return routeMetadata(parent, {
+    path: "/terms",
+    title: "Terms",
+    description: `Terms for using ${site.name}. We plan and buy outdoor media. We do not own inventory.`,
+  });
+}
 
 const sections = [
   {

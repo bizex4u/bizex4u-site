@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
 import BriefForm from "@/components/BriefForm";
@@ -6,19 +6,19 @@ import { additionalMarkets, cities, regions } from "@/lib/cities";
 import { indexNotes } from "@/lib/cities/notes";
 import { site } from "@/lib/site";
 import PageSchema from "@/components/PageSchema";
+import { routeMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Outdoor Advertising in India — Cities We Plan",
-  description:
-    "Outdoor, hoarding, transit, retail and broadcast media planned across 39 Indian markets — every city from its own catchment, not a national rate card.",
-  alternates: { canonical: "/cities" },
-  /* NO openGraph BLOCK HERE, deliberately. Declaring one without
-     `images` is what dropped this page's social card: Next merges the
-     title and description into openGraph on its own, and the
-     opengraph-image route supplies the picture. Adding a partial
-     openGraph object overrode both and left the page as the only one
-     on the site sharing without an image. */
-};
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return routeMetadata(parent, {
+    path: "/cities",
+    title: "Outdoor Advertising in India — Cities We Plan",
+    description:
+      "Outdoor, hoarding, transit, retail and broadcast media planned across 39 Indian markets — every city from its own catchment, not a national rate card.",
+  });
+}
 
 /* ------------------------------------------------------------------
    The city index.

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { Band, Btn, Eyebrow, Rise, SectionHead } from "@/components/UI";
 import { PageHero } from "@/components/Ledger";
@@ -6,13 +6,19 @@ import PageSchema from "@/components/PageSchema";
 import { categories, terms, termsByLetter, termsInCategory } from "@/lib/glossary";
 import { organisationId } from "@/lib/schema";
 import { site } from "@/lib/site";
+import { routeMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Indian Outdoor Advertising Glossary",
-  description:
-    "Hoarding, unipole, BQS, pole kiosk, sky-sign, DOOH loop, flexing, barter — the vocabulary of Indian outdoor advertising, defined by people who buy it.",
-  alternates: { canonical: "/glossary" },
-};
+export async function generateMetadata(
+  _props: unknown,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return routeMetadata(parent, {
+    path: "/glossary",
+    title: "Indian Outdoor Advertising Glossary",
+    description:
+      "Hoarding, unipole, BQS, pole kiosk, sky-sign, DOOH loop, flexing, barter — the vocabulary of Indian outdoor advertising, defined by people who buy it.",
+  });
+}
 
 /**
  * The glossary hub.
