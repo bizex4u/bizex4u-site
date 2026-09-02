@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
  * The per-page node, in one place.
  *
  * WHY A COMPONENT AND NOT A COPY ON EACH PAGE. The root graph in the
- * layout declares the Organization and the WebSite, and it renders on
+ * layout declares the LocalBusiness and the WebSite, and it renders on
  * every route — which is correct for those two, and wrong for anything
  * page-specific. A WebPage node whose `url` is the barter page cannot
  * live in a graph that also renders on /contact.
@@ -17,7 +17,7 @@ import { site } from "@/lib/site";
  * WHAT IT ADDS OVER THE TITLE TAG:
  *
  *  - `isPartOf` and `about` tie the page to the WebSite and the
- *    Organization by @id, so an answer engine resolves "who publishes
+ *    Organization / LocalBusiness by @id, so an answer engine resolves "who publishes
  *    this" without re-reading the company off the page.
  *  - `dateModified` gives the freshness signal these pages otherwise
  *    have nowhere to state. See site.contentReviewed.

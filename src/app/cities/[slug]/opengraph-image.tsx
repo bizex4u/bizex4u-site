@@ -9,6 +9,7 @@ import { ogCard, size, contentType } from "@/lib/ogCard";
 
 export const alt = "Outdoor advertising planned from catchment data";
 export { size, contentType };
+export const revalidate = 604800;
 
 export function generateStaticParams() {
   return cities.map((c) => ({ slug: c.slug }));

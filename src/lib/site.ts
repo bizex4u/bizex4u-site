@@ -1,5 +1,7 @@
 import { cities, marketCount } from "./cities";
 
+const linkedinCompany = "https://www.linkedin.com/company/bizex4u";
+
 export const site = {
   name: "Bizex4U",
   wordmark: "BIZEX4U",
@@ -16,6 +18,12 @@ export const site = {
     line1: "Mona Enclave",
     line2: "Kanpur, Uttar Pradesh",
     country: "India",
+  },
+  linkedin: linkedinCompany,
+  phone: {
+    e164: "+917080382224",
+    display: "+91 70803 82224",
+    whatsappDigits: "917080382224",
   },
   sla: {
     acknowledge: "We acknowledge a brief within one working day.",
@@ -53,9 +61,20 @@ export const site = {
        entity.
 
      Only URLs that genuinely resolve to this company. A wrong one is
-     worse than none: it merges this entity with somebody else's. */
-  profiles: ["https://www.linkedin.com/company/bizex4u"],
+     worse than none: it merges this entity with somebody else's.
+
+     Company LinkedIn ships. Founder Person, foundingDate, and extra
+     profile URLs stay off the graph until they are real. */
+  profiles: [linkedinCompany],
 } as const;
+
+export function telHref(e164: string): string {
+  return `tel:${e164}`;
+}
+
+export function whatsappHref(digits: string): string {
+  return `https://wa.me/${digits.replace(/\D/g, "")}`;
+}
 
 /* ------------------------------------------------------------------
    Capabilities — outdoor first. Barter is a commercial route, not a peer product.
@@ -229,6 +248,11 @@ export const footerNav = [
     heading: "Connect",
     links: [
       { label: site.email, href: `mailto:${site.email}` },
+      {
+        label: `${site.phone.display} · WhatsApp`,
+        href: whatsappHref(site.phone.whatsappDigits),
+      },
+      { label: "LinkedIn", href: site.linkedin },
       { label: "Request a plan", href: "/contact" },
     ],
   },

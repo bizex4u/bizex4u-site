@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
 /**
@@ -8,6 +9,10 @@ import { motion, useReducedMotion } from "motion/react";
  *
  * variant="marquee" — lots of names, they drift past.
  * variant="grid"    — look at each one; names carry weight.
+ *
+ * Rasters go through next/image (WebP, sized, lazy). SVGs stay native
+ * img so fills are untouched. Both are lazy so React 19 does not
+ * preload them into the document head against the hero.
  */
 
 export type BrandStripVariant = "marquee" | "grid";
@@ -20,13 +25,13 @@ type Brand = {
 };
 
 const brands: Brand[] = [
-  { name: "Sharp", src: "/logos/sharp.png", scale: 1.02 },
-  { name: "Hicks", src: "/logos/hicks.png", scale: 0.92 },
-  { name: "Mishrambu", src: "/logos/mishrambu.png", scale: 0.86 },
-  { name: "Zebronics", src: "/logos/zebronics.png", scale: 0.98 },
-  { name: "Portronics", src: "/logos/portronics.png", scale: 0.94 },
-  { name: "Wingreens Farms", src: "/logos/wingreens-farms.png", scale: 0.78 },
-  { name: "Raw Pressery", src: "/logos/raw-pressery.png", scale: 0.72 },
+  { name: "Sharp", src: "/logos/sharp.webp", scale: 1.02 },
+  { name: "Hicks", src: "/logos/hicks.webp", scale: 0.92 },
+  { name: "Mishrambu", src: "/logos/mishrambu.webp", scale: 0.86 },
+  { name: "Zebronics", src: "/logos/zebronics.webp", scale: 0.98 },
+  { name: "Portronics", src: "/logos/portronics.webp", scale: 0.94 },
+  { name: "Wingreens Farms", src: "/logos/wingreens-farms.webp", scale: 0.78 },
+  { name: "Raw Pressery", src: "/logos/raw-pressery.webp", scale: 0.72 },
   { name: "Safilo", src: "/logos/safilo.svg", scale: 0.96 },
   { name: "Carrera", src: "/logos/carrera.svg", scale: 1 },
 ];
@@ -46,18 +51,36 @@ const gridItem = {
 };
 
 function LogoMark({ brand }: { brand: Brand }) {
+  const className =
+    "h-[calc(40px*var(--s))] w-auto max-w-[10.5rem] object-contain object-center md:h-[calc(56px*var(--s))]";
+  const style = { ["--s" as string]: String(brand.scale) };
+  const isSvg = brand.src.endsWith(".svg");
+
   return (
     <div className="flex h-14 w-[8.5rem] shrink-0 items-center justify-center md:h-[4.5rem] md:w-[11.5rem]">
-      {/* Mixed PNG/SVG lockups — native img keeps SVG fills intact. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={brand.src}
-        alt={`${brand.name} logo`}
-        width={184}
-        height={56}
-        className="h-[calc(40px*var(--s))] w-auto max-w-[10.5rem] object-contain object-center md:h-[calc(56px*var(--s))]"
-        style={{ ["--s" as string]: String(brand.scale) }}
-      />
+      {isSvg ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={brand.src}
+          alt={`${brand.name} logo`}
+          width={184}
+          height={56}
+          loading="lazy"
+          decoding="async"
+          className={className}
+          style={style}
+        />
+      ) : (
+        <Image
+          src={brand.src}
+          alt={`${brand.name} logo`}
+          width={184}
+          height={56}
+          sizes="184px"
+          className={className}
+          style={style}
+        />
+      )}
     </div>
   );
 }

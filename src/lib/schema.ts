@@ -12,18 +12,18 @@ import { capabilities, site } from "./site";
  * answer engine that cannot resolve the entity will describe the company
  * from whatever it can infer, or decline to name it at all.
  *
- * NO foundingDate. It was published as 2008, which is a tenure claim,
- * and tenure claims are not made on this site. A schema field is still a
- * published claim even though no page renders it — arguably a worse one,
- * because nobody proof-reads structured data.
+ * TYPE. LocalBusiness (with ProfessionalService) rather than a bare
+ * Organization: there is a Kanpur desk, a service area, and a phone.
+ * Schema.org has no MarketingAgency type. ProfessionalService is the
+ * LocalBusiness subtype for an agency. @id stays /#organization so
+ * every page that already points here does not have to move.
  *
- * `sameAs` IS THE BIGGEST THING STILL MISSING, and it cannot be written
- * from here. It is the list of URLs that prove this entity is the same
- * entity elsewhere — LinkedIn company page, Google Business Profile,
- * Justdial, IndiaMART, a Crunchbase or ZaubaCorp record. Without it, a
- * generative engine has one unlinked island and no corroboration, which
- * is the single most common reason a real company gets described
- * vaguely or skipped. Fill the array the moment those URLs exist.
+ * NO foundingDate. A schema field is still a published claim, and this
+ * site does not publish a tenure year. NO Person/founder node until
+ * name, title, bio and photo are real.
+ *
+ * `sameAs` is the company LinkedIn only, until other corroborating
+ * URLs exist. A wrong one merges this entity with somebody else's.
  */
 
 export const organisationId = `${site.url}/#organization`;
@@ -39,13 +39,14 @@ const areaServed = [
 ].map((name) => ({ "@type": "City", name, addressCountry: "IN" }));
 
 export const organisation = {
-  "@type": "Organization",
+  "@type": ["LocalBusiness", "ProfessionalService"],
   "@id": organisationId,
   name: site.name,
   legalName: site.legalName,
   url: site.url,
   description: site.description,
   email: site.email,
+  telephone: site.phone.e164,
   logo: {
     "@type": "ImageObject",
     url: `${site.url}/logo.png`,
@@ -59,6 +60,13 @@ export const organisation = {
     addressLocality: "Kanpur",
     addressRegion: "Uttar Pradesh",
     addressCountry: "IN",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: site.phone.e164,
+    email: site.email,
+    contactType: "sales",
+    availableLanguage: ["English", "Hindi"],
   },
   areaServed,
   /* What this entity is authoritative on. Uses the market's own
@@ -80,10 +88,6 @@ export const organisation = {
     itemOffered: { "@type": "Service", name: c.title, description: c.short },
     url: `${site.url}${c.href}`,
   })),
-  /* Read from site.profiles so filling the gap is one edit in one
-     place rather than a hunt through the schema file. Left rendering
-     as [] rather than omitted, so the gap stays visible in the
-     output instead of silently absent. See the note above. */
   sameAs: [...site.profiles],
 };
 

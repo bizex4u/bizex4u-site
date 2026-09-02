@@ -10,6 +10,7 @@ import { ogCard, size, contentType } from "@/lib/ogCard";
 
 export const alt = "A term from the Indian outdoor advertising glossary";
 export { size, contentType };
+export const revalidate = 604800;
 
 export function generateStaticParams() {
   return terms.map((t) => ({ slug: t.slug }));

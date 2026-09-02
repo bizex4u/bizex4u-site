@@ -31,12 +31,47 @@ const securityHeaders = [
   },
 ];
 
+const longLivedCache = [
+  {
+    key: "Cache-Control",
+    value: "public, max-age=31536000, immutable",
+  },
+];
+
+const ogImageCache = [
+  {
+    key: "Cache-Control",
+    value:
+      "public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400",
+  },
+];
+
 const nextConfig: NextConfig = {
   async headers() {
     return [
       {
         source: "/:path*",
         headers: securityHeaders,
+      },
+      {
+        source: "/logos/:path*",
+        headers: longLivedCache,
+      },
+      {
+        source: "/opengraph-image",
+        headers: ogImageCache,
+      },
+      {
+        source: "/opengraph-image.png",
+        headers: ogImageCache,
+      },
+      {
+        source: "/:path+/opengraph-image",
+        headers: ogImageCache,
+      },
+      {
+        source: "/:path+/opengraph-image.png",
+        headers: ogImageCache,
       },
     ];
   },

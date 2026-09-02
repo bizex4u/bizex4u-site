@@ -98,6 +98,7 @@ export default function WorkPage() {
             alt={workPlate.alt}
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-[50%_54%]"
           />

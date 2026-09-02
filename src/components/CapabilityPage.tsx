@@ -103,6 +103,7 @@ export default function CapabilityPage({ slug }: { slug: string }) {
                   alt={d.frame.alt}
                   fill
                   priority
+                  fetchPriority="high"
                   sizes="(min-width: 1024px) 52vw, 100vw"
                   className="object-cover object-[50%_42%]"
                 />

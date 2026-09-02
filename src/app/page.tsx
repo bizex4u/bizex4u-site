@@ -69,6 +69,7 @@ export default function Home() {
                     alt={heroPlate.alt}
                     fill
                     priority
+                    fetchPriority="high"
                     sizes="(min-width: 1024px) 44vw, 92vw"
                     className="object-cover object-[72%_48%] saturate-[0.82]"
                   />

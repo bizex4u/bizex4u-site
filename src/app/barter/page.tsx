@@ -9,6 +9,7 @@ import { streets } from "@/lib/streets";
 import { site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
 import PageSchema from "@/components/PageSchema";
+import { organisationId } from "@/lib/schema";
 import { routeMetadata } from "@/lib/metadata";
 
 export async function generateMetadata(
@@ -562,12 +563,7 @@ export default function BarterPage() {
               "@context": "https://schema.org",
               "@type": "Service",
               serviceType: "Barter advertising and media trade structuring",
-              provider: {
-                "@type": "Organization",
-                name: site.name,
-                url: site.url,
-                email: site.email,
-              },
+              provider: { "@id": organisationId },
               areaServed: { "@type": "Country", name: "India" },
               url: `${site.url}/barter`,
             },

@@ -5,6 +5,7 @@ import { ogCard, size, contentType } from "@/lib/ogCard";
 export const alt =
   "Bizex4U — independent OOH planning and buying across 39 Indian markets";
 export { size, contentType };
+export const revalidate = 604800;
 
 export default async function Image() {
   return ogCard({

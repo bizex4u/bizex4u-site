@@ -85,6 +85,7 @@ export default function WhatWeDoPage() {
                   alt={statementPlate.alt}
                   fill
                   priority
+                  fetchPriority="high"
                   sizes="(min-width: 1024px) 52vw, 100vw"
                   className="object-cover object-[50%_42%] transition-transform duration-700 group-hover:scale-[1.03]"
                 />

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { footerNav, site } from "@/lib/site";
+import { footerNav, site, telHref } from "@/lib/site";
 import { externalAnchorProps, isExternalHref } from "@/lib/href";
 import AskAssistants from "@/components/AskAssistants";
 import BriefButton from "@/components/BriefButton";
@@ -78,6 +78,13 @@ export default function Footer() {
           <Eyebrow as="span" tone="plum" muted>
             © {new Date().getFullYear()} {site.wordmark} · {site.address.line1},{" "}
             {site.address.line2}
+            {" · "}
+            <a
+              href={telHref(site.phone.e164)}
+              className="text-on-plum-dim hover:text-on-plum"
+            >
+              {site.phone.display}
+            </a>
           </Eyebrow>
           <AskAssistants tone="plum" variant="footer" />
           <span className="sr-only">
