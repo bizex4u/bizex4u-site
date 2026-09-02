@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Motion from "@/components/Motion";
 import ScrollCraft from "@/components/ScrollCraft";
+import Plausible from "@/components/Plausible";
 import AnalyticsBoot from "@/components/AnalyticsBoot";
 import ExternalNavGuard from "@/components/ExternalNavGuard";
 import { site } from "@/lib/site";
@@ -148,6 +149,7 @@ export default function RootLayout({
         <Footer />
         <Motion />
         <ScrollCraft />
+        <Plausible />
         <Suspense fallback={null}>
           <AnalyticsBoot />
         </Suspense>

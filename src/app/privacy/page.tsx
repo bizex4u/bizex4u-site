@@ -30,7 +30,7 @@ const sections = [
   },
   {
     title: "Analytics",
-    body: "We record page views and whether a brief was opened, completed or abandoned. We do not send names, emails or message text to analytics. If your browser sends Do Not Track or Global Privacy Control, we do not load PostHog.",
+    body: "Page views are recorded with Plausible, which does not use cookies and does not collect personal data. We also record whether a brief was opened, completed or abandoned. We do not send names, emails or message text to analytics. If your browser sends Do Not Track or Global Privacy Control, we do not send those named events.",
   },
   {
     title: "How long",

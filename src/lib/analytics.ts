@@ -1,8 +1,8 @@
 /**
- * The only place this site talks to PostHog or Vercel Analytics.
+ * The only place this site talks to Plausible, PostHog or Vercel Analytics.
  *
- * Named funnel events, no personal data, nothing on the critical path.
- * `posthog-js` is imported inside `boot()`, which runs from
+ * Pageviews are Plausible (root layout). Named funnel events fan out
+ * here. `posthog-js` is imported inside `boot()`, which runs from
  * `next/script strategy="afterInteractive"` — the same reason the
  * unused Inter file was dropped. A static import here would put the
  * analytics bundle back on first paint.
@@ -132,6 +132,11 @@ function sanitize(
   return out;
 }
 
+type PlausibleFn = ((
+  event: string,
+  options?: { props?: Record<string, string | number | boolean> },
+) => void) & { q?: unknown[] };
+
 function flush(
   event: AnalyticsEvent,
   props: Record<string, string | number | boolean>,
@@ -144,8 +149,19 @@ function flush(
   client?.capture(event, props);
   if (typeof window !== "undefined") {
     const w = window as Window & {
+      plausible?: PlausibleFn;
       __funnelEvents?: Array<{ event: string; props: typeof props }>;
     };
+    if (process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && w.plausible) {
+      try {
+        w.plausible(
+          event,
+          Object.keys(props).length > 0 ? { props } : undefined,
+        );
+      } catch {
+        /* Script queued; the snippet buffer holds the call. */
+      }
+    }
     w.__funnelEvents = w.__funnelEvents ?? [];
     w.__funnelEvents.push({ event, props });
     if (w.__funnelEvents.length > 80) w.__funnelEvents.shift();
