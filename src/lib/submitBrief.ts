@@ -69,6 +69,12 @@ export async function submitBrief(fields: BriefFields): Promise<BriefResult> {
 
   const access_key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
   if (!access_key) {
+    /* TEMP diagnostic — remove after one test cycle. If this prints in
+       production, the key was absent at BUILD time (NEXT_PUBLIC_ vars
+       are inlined) — set it in Vercel env and redeploy. */
+    console.error(
+      "submitBrief: NEXT_PUBLIC_WEB3FORMS_KEY missing from this build",
+    );
     track("brief_result", { ok: false, status: 0 });
     return { ok: false, error: "not_configured" };
   }
@@ -96,6 +102,10 @@ export async function submitBrief(fields: BriefFields): Promise<BriefResult> {
       success?: boolean;
     };
     const ok = res.ok && json.success === true;
+    if (!ok) {
+      /* TEMP diagnostic — remove after one test cycle. */
+      console.error("submitBrief: web3forms rejected", res.status, json);
+    }
     track("brief_result", { ok, status: res.status });
     if (ok) {
       /* GA4 conversion, fired once for every surface that submits a
@@ -114,7 +124,9 @@ export async function submitBrief(fields: BriefFields): Promise<BriefResult> {
       return { ok: true };
     }
     return { ok: false, error: "delivery_failed" };
-  } catch {
+  } catch (err) {
+    /* TEMP diagnostic — remove after one test cycle. */
+    console.error("submitBrief: fetch threw (network/timeout)", err);
     track("brief_result", { ok: false, status: 0 });
     return { ok: false, error: "delivery_failed" };
   }
