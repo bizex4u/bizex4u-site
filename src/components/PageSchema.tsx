@@ -25,15 +25,18 @@ import { site } from "@/lib/site";
  *    single `.speakable-answer` paragraph in the hero — rather than
  *    letting an extractor take whatever sits highest in the DOM.
  *
- * `primaryTopic` is optional and takes a schema.org node; pass one
- * where the page is genuinely about a thing (a Service, an Offer) and
- * leave it off where the page is about the company.
+ * `mainEntity` is optional and takes a schema.org node; pass one where
+ * the page is genuinely about a thing (an ItemList on an index) and
+ * leave it off where the page is about the company. It belongs here
+ * rather than in a second script tag on the page: two nodes describing
+ * one URL is two entities to an engine, not one described twice.
  */
 export default function PageSchema({
   path,
   name,
   description,
   type = "WebPage",
+  mainEntity,
 }: {
   /* Leading slash, no trailing slash. Resolved against site.url so the
      absolute URL cannot drift from the canonical. */
@@ -41,6 +44,7 @@ export default function PageSchema({
   name: string;
   description: string;
   type?: "WebPage" | "AboutPage" | "CollectionPage";
+  mainEntity?: Record<string, unknown>;
 }) {
   return (
     <script
@@ -58,6 +62,7 @@ export default function PageSchema({
           inLanguage: "en-IN",
           dateModified: site.contentReviewed,
           speakable,
+          ...(mainEntity ? { mainEntity } : {}),
         }),
       }}
     />

@@ -14,9 +14,11 @@ import { capabilities, site } from "./site";
  *
  * TYPE. LocalBusiness (with ProfessionalService) rather than a bare
  * Organization: there is a Kanpur desk, a service area, and a phone.
- * Schema.org has no MarketingAgency type. ProfessionalService is the
- * LocalBusiness subtype for an agency. @id stays /#organization so
- * every page that already points here does not have to move.
+ * Schema.org has no MarketingAgency type; AdvertisingAgency is the
+ * closest exact match and ProfessionalService is the LocalBusiness
+ * subtype for an agency, so all three are declared rather than picking
+ * one and losing the other two. @id stays /#organization so every page
+ * that already points here does not have to move.
  *
  * NO foundingDate. A schema field is still a published claim, and this
  * site does not publish a tenure year. NO Person/founder node until
@@ -39,7 +41,7 @@ const websiteId = `${site.url}/#website`;
 const areaServed = [...cities.map((c) => c.name), ...additionalMarkets];
 
 export const organisation = {
-  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@type": ["LocalBusiness", "ProfessionalService", "AdvertisingAgency"],
   "@id": organisationId,
   name: site.name,
   legalName: site.legalName,
@@ -67,6 +69,7 @@ export const organisation = {
     email: site.email,
     contactType: "sales",
     availableLanguage: ["English", "Hindi"],
+    areaServed: "IN",
   },
   areaServed,
   /* What this entity is authoritative on. Uses the market's own

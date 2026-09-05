@@ -7,7 +7,7 @@ import { capabilityDetail } from "@/lib/capabilityDetail";
 import { formatLines } from "@/lib/formats";
 import { termsForCapability } from "@/lib/glossary";
 import { capabilities, site } from "@/lib/site";
-import { speakable } from "@/lib/schema";
+import { organisationId, speakable } from "@/lib/schema";
 import AskAssistants from "@/components/AskAssistants";
 import BriefButton from "@/components/BriefButton";
 
@@ -340,6 +340,21 @@ export default function CapabilityPage({ slug }: { slug: string }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              /* Same shape as the /barter Service node. `name` and
+                 `description` are the visible h1 and hero lede, not a
+                 second version of them written for crawlers — the day
+                 the copy changes, the schema changes with it. */
+              "@type": "Service",
+              "@id": `${site.url}${cap.href}#service`,
+              name: cap.title,
+              description: d.lede,
+              serviceType: cap.title,
+              provider: { "@id": organisationId },
+              areaServed: { "@type": "Country", name: "India" },
+              url: `${site.url}${cap.href}`,
+            },
             {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",

@@ -246,34 +246,25 @@ export default function CitiesPage() {
         </div>
       </Band>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            "@id": `${site.url}/cities#collection`,
-            name: "Outdoor advertising in India — cities we plan",
-            description: `Markets planned and bought by ${site.name} across India — ${total} listed.`,
-            url: `${site.url}/cities`,
-            mainEntity: {
-              "@type": "ItemList",
-              numberOfItems: cities.length,
-              itemListElement: cities.map((c, i) => ({
-                "@type": "ListItem",
-                position: i + 1,
-                name: `Outdoor advertising in ${c.name}`,
-                url: `${site.url}/cities/${c.slug}`,
-              })),
-            },
-          }),
-        }}
-      />
+      {/* One CollectionPage for one URL. The city ItemList rides on
+          this node rather than on a second CollectionPage of its own —
+          the listing is what this page collects, not a separate thing
+          that happens to share the address. */}
       <PageSchema
         path="/cities"
         name={"Cities Bizex4U plans"}
         description={"Outdoor, hoarding, transit, retail and broadcast media planned across 39 Indian markets — every city from its own catchment, not a national rate card."}
         type="CollectionPage"
+        mainEntity={{
+          "@type": "ItemList",
+          numberOfItems: cities.length,
+          itemListElement: cities.map((c, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: `Outdoor advertising in ${c.name}`,
+            url: `${site.url}/cities/${c.slug}`,
+          })),
+        }}
       />
     </>
   );
