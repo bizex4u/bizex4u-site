@@ -123,7 +123,7 @@ export default function ReelBand() {
               Cyber Hub · Chanakyapuri · Safdarjung · Vinay Marg
             </span>
           </p>
-          <p className="font-mono text-micro tracking-[0.08em] text-on-plum-dim uppercase">
+          <p className="mono-kicker text-on-plum-dim">
             Not stock footage
           </p>
         </div>

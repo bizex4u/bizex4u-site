@@ -46,7 +46,7 @@ export default function HeroCycle() {
       aria-live="polite"
     >
       <span className="em-serif">{hour.scene}</span>
-      <span className="mx-2.5 font-mono text-micro tracking-[0.1em] text-on-plum-dim uppercase">
+      <span className="mx-2.5 mono-kicker text-on-plum-dim">
         {hour.time}
       </span>
     </p>

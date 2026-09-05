@@ -55,7 +55,7 @@ function Row({
                 under a moving strip is unreadable — it slides out from
                 under the eye before it is finished being read. */}
             <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-plum/85 to-transparent p-3.5 pt-10">
-              <span className="font-mono text-micro tracking-[0.09em] text-white/85 uppercase">
+              <span className="mono-kicker text-white/85">
                 {f.city}
               </span>
             </figcaption>

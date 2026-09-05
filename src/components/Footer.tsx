@@ -33,8 +33,7 @@ export default function Footer() {
                 </Eyebrow>
                 <ul className="mt-4 space-y-1">
                   {col.links.map((link) => {
-                    const cls =
-                      "link-underline -my-1.5 inline-flex min-h-10 items-center py-1.5 text-body-s text-balance text-on-plum-dim hover:text-on-plum";
+                    const cls = "footer-nav-link link-underline";
                     const isExternal =
                       isExternalHref(link.href) ||
                       ("external" in link && link.external === true);

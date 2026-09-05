@@ -72,7 +72,13 @@ export function Rise({
   return (
     <Tag
       className={`reveal ${className}`}
-      style={{ ["--reveal-delay" as string]: `${Math.min(delay, 480)}ms` }}
+      {...(delay
+        ? {
+            style: {
+              ["--reveal-delay" as string]: `${Math.min(delay, 480)}ms`,
+            },
+          }
+        : {})}
     >
       {children}
     </Tag>

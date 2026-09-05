@@ -144,7 +144,7 @@ export default function Nav() {
             <div className="grid grid-cols-2 gap-8 border-t border-rule-sand py-5">
               {supportCaps.map((c) => (
                 <Link key={c.href} href={c.href} className="group block">
-                  <p className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                  <p className="mono-kicker text-on-sand-dim">
                     {c.title}
                   </p>
                   <p className="mt-1.5 text-body-s text-on-sand-dim">

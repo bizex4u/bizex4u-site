@@ -54,7 +54,7 @@ export default function GstFlow() {
             className="rounded-xl border border-rule-sand bg-sand p-5 md:p-6"
           >
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="font-mono text-micro tracking-[0.08em] text-violet-deep uppercase">
+              <span className="mono-kicker text-violet-deep">
                 {leg.index}
               </span>
               <span className="text-h3">{leg.from}</span>
@@ -69,7 +69,7 @@ export default function GstFlow() {
 
             <p className="mt-4 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
               <span className="font-display text-h2">{leg.invoice}</span>
-              <span className="font-mono text-micro tracking-[0.08em] text-on-sand-dim uppercase">
+              <span className="mono-kicker text-on-sand-dim">
                 GST charged
               </span>
             </p>

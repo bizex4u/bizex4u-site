@@ -94,7 +94,7 @@ export default async function CityPage({ params }: Params) {
       <section className="relative bg-sand pt-14 text-on-sand md:pt-16">
         <div className="shell">
           <nav aria-label="Breadcrumb" className="py-4">
-            <ol className="flex flex-wrap gap-2 font-mono text-meta tracking-[0.08em] text-on-sand-dim uppercase">
+            <ol className="flex flex-wrap gap-2 eyebrow text-on-sand-dim">
               <li>
                 <Link
                   href="/"
@@ -141,7 +141,7 @@ export default async function CityPage({ params }: Params) {
                 </p>
               </Rise>
               <Rise delay={120}>
-                <p className="mt-5 font-mono text-micro tracking-[0.08em] text-on-sand-dim uppercase">
+                <p className="mt-5 mono-kicker text-on-sand-dim">
                   Also planned nearby
                 </p>
                 <Nearby names={city.nearby} />
@@ -377,7 +377,7 @@ export default async function CityPage({ params }: Params) {
                     <h3 className="text-h3">
                       <MediaName name={t.title} url={t.url} />
                     </h3>
-                    <span className="font-mono text-micro tracking-[0.08em] text-violet-deep uppercase">
+                    <span className="mono-kicker text-violet-deep">
                       {t.language}
                     </span>
                   </div>
@@ -398,7 +398,7 @@ export default async function CityPage({ params }: Params) {
                     <h3 className="text-h3">
                       <MediaName name={r.station} url={r.url} />
                     </h3>
-                    <span className="font-mono text-micro tracking-[0.08em] text-violet-deep">
+                    <span className="mono-kicker text-violet-deep">
                       {r.frequency}
                     </span>
                   </div>
@@ -638,7 +638,6 @@ export default async function CityPage({ params }: Params) {
                   itemOffered: {
                     "@type": "Service",
                     name: f.title,
-                    description: f.body,
                   },
                 })),
               },

@@ -63,7 +63,7 @@ export default function WhatWeDoPage() {
               </div>
 
               <Rise delay={140} className="border-t border-rule-sand pt-6">
-                <p className="font-mono text-micro tracking-[0.1em] text-violet-deep uppercase">
+                <p className="mono-kicker text-violet-deep">
                   Independence
                 </p>
                 <p className="mt-2 max-w-[44ch] text-body-s text-on-sand-dim">
@@ -91,7 +91,7 @@ export default function WhatWeDoPage() {
                 />
                 <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-linear-to-t from-plum from-20% to-transparent p-5 text-on-plum md:p-7">
                   <span>
-                    <span className="block font-mono text-micro tracking-[0.1em] text-violet-lift uppercase">
+                    <span className="block mono-kicker text-violet-lift">
                       Selected work
                     </span>
                     <span className="mt-1.5 block text-h3">
@@ -101,7 +101,7 @@ export default function WhatWeDoPage() {
                       Photographed on site while it ran.
                     </span>
                   </span>
-                  <span className="shrink-0 font-mono text-micro tracking-[0.08em] text-violet-lift uppercase">
+                  <span className="shrink-0 mono-kicker text-violet-lift">
                     See the work →
                   </span>
                 </span>
@@ -152,7 +152,7 @@ export default function WhatWeDoPage() {
                       photoLeft ? "lg:col-start-7" : "lg:col-start-1 lg:row-start-1"
                     }`}
                   >
-                    <p className="font-mono text-micro tracking-[0.1em] text-violet-deep uppercase">
+                    <p className="mono-kicker text-violet-deep">
                       {c.index} · {c.verb}
                     </p>
                     <h3 className="mt-3 font-display text-h1 text-balance">
@@ -209,7 +209,7 @@ export default function WhatWeDoPage() {
                   i % 2 === 0 ? "md:pr-8" : "md:border-l md:pl-8"
                 }`}
               >
-                <span className="col-span-2 font-mono text-micro tracking-[0.1em] text-violet-lift uppercase">
+                <span className="col-span-2 mono-kicker text-violet-lift">
                   {step.index}
                 </span>
                 <div className="col-span-10">
@@ -295,7 +295,7 @@ export default function WhatWeDoPage() {
                 href={c.href}
                 className="group flex h-full flex-col bg-sand-2 p-6 transition-colors duration-200 hover:bg-sand md:p-8"
               >
-                <p className="font-mono text-micro tracking-[0.1em] text-violet-deep uppercase">
+                <p className="mono-kicker text-violet-deep">
                   {c.title}
                 </p>
                 <p className="mt-3 max-w-[42ch] text-body-l">{c.long}</p>

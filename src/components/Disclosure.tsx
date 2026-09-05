@@ -62,7 +62,7 @@ export function Disclosure({
       <summary className="flex min-h-12 cursor-pointer list-none items-baseline gap-4 py-3 md:py-3.5 [&::-webkit-details-marker]:hidden">
         {index !== undefined && (
           <span
-            className={`font-mono text-micro tracking-[0.08em] ${accent} shrink-0 pt-1.5`}
+            className={`mono-kicker ${accent} shrink-0 pt-1.5`}
           >
             {String(index).padStart(2, "0")}
           </span>
@@ -71,7 +71,7 @@ export function Disclosure({
           <span className="font-display text-h2 text-balance">{title}</span>
           {kicker && (
             <span
-              className={`mt-1 block font-mono text-micro tracking-[0.08em] uppercase ${dim}`}
+              className={`mt-1 block mono-kicker ${dim}`}
             >
               {kicker}
             </span>

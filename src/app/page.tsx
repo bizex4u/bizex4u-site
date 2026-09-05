@@ -79,7 +79,7 @@ export default function Home() {
                   />
                 </div>
                 <figcaption className="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <p className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                  <p className="mono-kicker text-on-sand-dim">
                     {heroPlate.city}
                   </p>
                   <p className="text-caption text-on-sand-dim">
@@ -128,7 +128,7 @@ export default function Home() {
                 href={c.href}
                 className="group grid grid-cols-12 items-baseline gap-x-6 border-b border-rule-plum py-5"
               >
-                <span className="col-span-2 font-mono text-micro tracking-[0.1em] text-violet-lift uppercase md:col-span-1">
+                <span className="col-span-2 mono-kicker text-violet-lift md:col-span-1">
                   {c.index}
                 </span>
                 <span className="col-span-10 font-sans text-h3 md:col-span-5">
@@ -178,7 +178,7 @@ export default function Home() {
                 className="group flex items-baseline justify-between gap-4 border-b border-rule-sand py-4"
               >
                 <span className="link-underline text-h3">{c.name}</span>
-                <span className="font-mono text-micro tracking-[0.08em] text-on-sand-dim uppercase">
+                <span className="mono-kicker text-on-sand-dim">
                   {c.state}
                 </span>
               </Link>

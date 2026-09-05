@@ -318,7 +318,7 @@ export default function BarterPage() {
                       className="object-cover"
                     />
                   </div>
-                  <figcaption className="p-4 font-mono text-micro tracking-[0.09em] text-on-plum-dim uppercase">
+                  <figcaption className="p-4 mono-kicker text-on-plum-dim">
                     {f.city}
                   </figcaption>
                 </figure>

@@ -32,7 +32,7 @@ export default function CapabilityPage({ slug }: { slug: string }) {
       <section className="relative bg-sand pt-14 text-on-sand md:pt-16">
         <div className="shell">
           <nav aria-label="Breadcrumb" className="py-5">
-            <ol className="flex flex-wrap gap-2 font-mono text-meta tracking-[0.08em] text-on-sand-dim uppercase">
+            <ol className="flex flex-wrap gap-2 eyebrow text-on-sand-dim">
               <li>
                 <Link
                   href="/"
@@ -84,7 +84,7 @@ export default function CapabilityPage({ slug }: { slug: string }) {
               </div>
 
               <Rise delay={140} className="border-t border-rule-sand pt-6">
-                <p className="font-mono text-micro tracking-[0.1em] text-violet-deep uppercase">
+                <p className="mono-kicker text-violet-deep">
                   The decision
                 </p>
                 <p className="mt-2 max-w-[40ch] font-display text-h3 text-balance">
@@ -108,7 +108,7 @@ export default function CapabilityPage({ slug }: { slug: string }) {
                   className="object-cover object-[50%_42%]"
                 />
                 <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-plum from-20% to-transparent p-5 text-on-plum md:p-7">
-                  <span className="block font-mono text-micro tracking-[0.1em] text-violet-lift uppercase">
+                  <span className="block mono-kicker text-violet-lift">
                     {d.frame.city}
                   </span>
                   <span className="mt-1.5 block max-w-[36ch] text-body-s text-on-plum-dim">
@@ -164,7 +164,7 @@ export default function CapabilityPage({ slug }: { slug: string }) {
                     className="flex items-baseline justify-between gap-6 border-b border-rule-sand py-4"
                   >
                     <dt className="text-h3">{f.name}</dt>
-                    <dd className="shrink-0 font-mono text-micro tracking-[0.06em] text-on-sand-dim uppercase">
+                    <dd className="shrink-0 mono-kicker text-on-sand-dim">
                       {f.spec}
                     </dd>
                   </div>
@@ -236,7 +236,7 @@ export default function CapabilityPage({ slug }: { slug: string }) {
             <ul className="mt-10 border-t border-rule-sand">
               {d.whenItWorks.map((item, i) => (
                 <li key={item} className="flex gap-4 border-b border-rule-sand py-5">
-                  <span className="font-mono text-micro tracking-[0.08em] text-violet-deep">
+                  <span className="mono-kicker text-violet-deep">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="max-w-[52ch] text-on-sand-dim">{item}</span>

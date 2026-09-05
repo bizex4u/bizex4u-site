@@ -1,21 +1,12 @@
-"use client";
-
-import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
-
 /**
  * Client logos in original colour, always. Cohesion comes from
  * optical sizing and even cells — not from greying them to match.
  *
- * variant="marquee" — lots of names, they drift past.
- * variant="grid"    — look at each one; names carry weight.
- *
- * Rasters go through next/image (WebP, sized, lazy). SVGs stay native
- * img so fills are untouched. Both are lazy so React 19 does not
- * preload them into the document head against the hero.
+ * Server component: the track is a CSS marquee (see .brand-strip-track).
+ * Native lazy images so React 19 does not preload nine logos into the
+ * document head against the hero — that used to add a preload link per
+ * mark on every page that rendered this strip.
  */
-
-export type BrandStripVariant = "marquee" | "grid";
 
 type Brand = {
   name: string;
@@ -36,61 +27,27 @@ const brands: Brand[] = [
   { name: "Carrera", src: "/logos/carrera.svg", scale: 1 },
 ];
 
-const gridEnter = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
-
-const gridItem = {
-  hidden: { opacity: 0, y: 16 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
 function LogoMark({ brand }: { brand: Brand }) {
-  const className =
-    "h-[calc(40px*var(--s))] w-auto max-w-[10.5rem] object-contain object-center md:h-[calc(56px*var(--s))]";
-  const style = { ["--s" as string]: String(brand.scale) };
-  const isSvg = brand.src.endsWith(".svg");
-
   return (
-    <div className="flex h-14 w-[8.5rem] shrink-0 items-center justify-center md:h-[4.5rem] md:w-[11.5rem]">
-      {isSvg ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={brand.src}
-          alt={`${brand.name} logo`}
-          width={184}
-          height={56}
-          loading="lazy"
-          decoding="async"
-          className={className}
-          style={style}
-        />
-      ) : (
-        <Image
-          src={brand.src}
-          alt={`${brand.name} logo`}
-          width={184}
-          height={56}
-          sizes="184px"
-          className={className}
-          style={style}
-        />
-      )}
+    <div className="brand-logo">
+      {/* Native img: next/image was preloading every mark into <head>. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={brand.src}
+        alt={`${brand.name} logo`}
+        width={184}
+        height={56}
+        loading="lazy"
+        decoding="async"
+        style={{ ["--s" as string]: String(brand.scale) }}
+      />
     </div>
   );
 }
 
 function LogoRow({ hidden }: { hidden: boolean }) {
   return (
-    <ul
-      aria-hidden={hidden || undefined}
-      className="flex shrink-0 items-center gap-x-7 pr-7 md:gap-x-12 md:pr-12"
-    >
+    <ul aria-hidden={hidden || undefined} className="brand-logo-row">
       {brands.map((brand) => (
         <li key={`${hidden ? "dup-" : ""}${brand.name}`}>
           <LogoMark brand={brand} />
@@ -100,86 +57,26 @@ function LogoRow({ hidden }: { hidden: boolean }) {
   );
 }
 
-function MarqueeStrip({ reduce }: { reduce: boolean | null }) {
-  if (reduce) {
-    return (
-      <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-5 md:gap-x-10">
-        {brands.map((brand) => (
-          <li key={brand.name}>
-            <LogoMark brand={brand} />
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
-  return (
+export default function BrandStrip({
+  framed = true,
+  eyebrow = "Brands that trust us",
+}: {
+  /** When false, just the track — the page owns the heading and ground. */
+  framed?: boolean;
+  eyebrow?: string | false;
+}) {
+  const track = (
     <div className="marquee-mask overflow-hidden">
-      <div className="brand-strip-track flex w-max">
+      <div className="brand-strip-track">
         <LogoRow hidden={false} />
         <LogoRow hidden />
       </div>
     </div>
   );
-}
-
-function GridStrip({ reduce }: { reduce: boolean | null }) {
-  if (reduce) {
-    return (
-      <ul className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
-        {brands.map((brand) => (
-          <li key={brand.name} className="flex justify-center">
-            <LogoMark brand={brand} />
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
-  return (
-    <motion.ul
-      variants={gridEnter}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.35 }}
-      className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5"
-    >
-      {brands.map((brand) => (
-        <motion.li
-          key={brand.name}
-          variants={gridItem}
-          className="flex justify-center"
-        >
-          <LogoMark brand={brand} />
-        </motion.li>
-      ))}
-    </motion.ul>
-  );
-}
-
-export default function BrandStrip({
-  variant = "marquee",
-  framed = true,
-  eyebrow = "Brands that trust us",
-}: {
-  variant?: BrandStripVariant;
-  /** When false, just the track — the page owns the heading and ground. */
-  framed?: boolean;
-  eyebrow?: string | false;
-}) {
-  const reduce = useReducedMotion();
-  const track =
-    variant === "grid" ? (
-      <GridStrip reduce={reduce} />
-    ) : (
-      <MarqueeStrip reduce={reduce} />
-    );
 
   const inner = (
     <>
-      {eyebrow ? (
-        <p className="eyebrow text-on-sand-dim">{eyebrow}</p>
-      ) : null}
+      {eyebrow ? <p className="eyebrow text-on-sand-dim">{eyebrow}</p> : null}
       <div className={eyebrow ? "mt-7 md:mt-8" : undefined}>{track}</div>
     </>
   );

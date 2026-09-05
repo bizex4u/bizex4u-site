@@ -85,7 +85,7 @@ export default function MarqueeToggle({
       type="button"
       onClick={toggle}
       aria-pressed={paused}
-      className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 font-mono text-micro tracking-[0.09em] uppercase transition-colors duration-200 ${skin}`}
+      className={`inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 mono-kicker transition-colors duration-200 ${skin}`}
     >
       <span aria-hidden="true" className="text-[0.7em] leading-none">
         {paused ? "▶" : "❚❚"}

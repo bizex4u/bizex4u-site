@@ -153,7 +153,7 @@ export default function CitiesPage() {
                         : "pt-8 pb-2"
                     }`}
                   >
-                    <p className="font-mono text-micro tracking-[0.09em] text-violet-deep uppercase">
+                    <p className="mono-kicker text-violet-deep">
                       {c.region}
                     </p>
                   </div>
@@ -166,11 +166,11 @@ export default function CitiesPage() {
                     <span className="link-underline font-display text-h2">
                       {c.name}
                     </span>
-                    <span className="mt-1 block font-mono text-micro tracking-[0.09em] text-on-sand-dim uppercase">
+                    <span className="mt-1 block mono-kicker text-on-sand-dim">
                       {c.state}
                     </span>
                   </span>
-                  <span className="font-mono text-micro tracking-[0.09em] text-violet-deep uppercase md:col-span-2">
+                  <span className="mono-kicker text-violet-deep md:col-span-2">
                     {c.region}
                   </span>
                   <span className="text-body-s text-on-sand-dim md:col-span-6">
@@ -196,7 +196,7 @@ export default function CitiesPage() {
               if (!planned.length) return null;
               return (
                 <div key={region} className="flex gap-4">
-                  <dt className="w-20 shrink-0 font-mono text-micro tracking-[0.09em] text-violet-deep uppercase">
+                  <dt className="w-20 shrink-0 mono-kicker text-violet-deep">
                     {region}
                   </dt>
                   <dd className="text-body-s text-on-sand">

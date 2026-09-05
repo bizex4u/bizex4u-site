@@ -163,14 +163,14 @@ export default function WorkPage() {
           {selectedWork.map((w, i) => (
             <Rise key={w.index} as="li" delay={i * 60}>
               <article className="grid-12 gap-y-4 border-b border-rule-sand py-8 md:py-10">
-                <p className="col-span-12 font-mono text-micro tracking-[0.1em] text-violet-deep uppercase md:col-span-1">
+                <p className="col-span-12 mono-kicker text-violet-deep md:col-span-1">
                   {w.index}
                 </p>
                 <div className="col-span-12 md:col-span-4">
                   <h3 className="font-display text-h2 text-balance">
                     {w.client}
                   </h3>
-                  <p className="mt-2 font-mono text-micro tracking-[0.08em] text-on-sand-dim uppercase">
+                  <p className="mt-2 mono-kicker text-on-sand-dim">
                     {w.sector}
                     <span className="mx-2">/</span>
                     {w.markets}
@@ -178,25 +178,25 @@ export default function WorkPage() {
                 </div>
                 <dl className="col-span-12 grid gap-4 md:col-span-7">
                   <div>
-                    <dt className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                    <dt className="mono-kicker text-on-sand-dim">
                       Formats
                     </dt>
                     <dd className="mt-1 text-body-s">{w.formats}</dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                    <dt className="mono-kicker text-on-sand-dim">
                       Duration
                     </dt>
                     <dd className="mt-1 text-body-s">{w.duration}</dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                    <dt className="mono-kicker text-on-sand-dim">
                       Compared
                     </dt>
                     <dd className="mt-1 text-body-s">{w.compared}</dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-micro tracking-[0.1em] text-on-sand-dim uppercase">
+                    <dt className="mono-kicker text-on-sand-dim">
                       Delivery
                     </dt>
                     <dd className="mt-1 text-body-s">{w.delivery}</dd>
@@ -282,7 +282,7 @@ export default function WorkPage() {
                       className="object-cover"
                     />
                   </div>
-                  <figcaption className="px-4 py-3.5 font-mono text-micro tracking-[0.09em] text-on-plum-dim uppercase">
+                  <figcaption className="px-4 py-3.5 mono-kicker text-on-plum-dim">
                     {f.city}
                   </figcaption>
                 </figure>

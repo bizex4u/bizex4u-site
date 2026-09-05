@@ -33,10 +33,10 @@ const websiteId = `${site.url}/#website`;
    "outdoor advertising in Indore" to this entity rather than inferring
    it from prose — and unlike a page of city links, it survives being
    chunked, because each name sits in a field rather than in a sentence. */
-const areaServed = [
-  ...cities.map((c) => c.name),
-  ...additionalMarkets,
-].map((name) => ({ "@type": "City", name, addressCountry: "IN" }));
+/* Names, not 39 City objects. Schema.org accepts Text on areaServed;
+   the cities stay machine-readable and the root graph stops repeating
+   the same three-field object on every page. */
+const areaServed = [...cities.map((c) => c.name), ...additionalMarkets];
 
 export const organisation = {
   "@type": ["LocalBusiness", "ProfessionalService"],
