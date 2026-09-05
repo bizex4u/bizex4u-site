@@ -138,6 +138,7 @@ export default function BarterSelector() {
       context: "Barter advertising",
       detail: note.trim(),
       source: "barter",
+      location: "start",
     });
     setPending(false);
 

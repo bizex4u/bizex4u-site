@@ -60,6 +60,7 @@ export default function ContactForm() {
       detail: get("message"),
       source: "contact",
       company_website: get("company_website"),
+      location: "contact-form",
     });
     setPending(false);
 

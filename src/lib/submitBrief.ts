@@ -21,6 +21,10 @@ export type BriefFields = {
   markets?: string;
   source?: "brief" | "barter" | "contact";
   company_website?: string;
+  /* Where the form sits or was opened from — the same identifier the
+     surface already uses for its brief_open tracking. Carried into the
+     GA4 generate_lead event as form_location. */
+  location?: string;
 };
 
 export type BriefResult =
@@ -93,7 +97,22 @@ export async function submitBrief(fields: BriefFields): Promise<BriefResult> {
     };
     const ok = res.ok && json.success === true;
     track("brief_result", { ok, status: res.status });
-    if (ok) return { ok: true };
+    if (ok) {
+      /* GA4 conversion, fired once for every surface that submits a
+         brief — here at the single point where success is confirmed,
+         never on open, validation failure or a failed response. The
+         honeypot early-return above deliberately does not reach this:
+         a bot's fake success is not a lead. Optional chaining because
+         gtag may be blocked or unloaded; that must stay a silent no-op. */
+      if (typeof window !== "undefined") {
+        (window as Window & { gtag?: (...args: unknown[]) => void }).gtag?.(
+          "event",
+          "generate_lead",
+          fields.location ? { form_location: fields.location } : {},
+        );
+      }
+      return { ok: true };
+    }
     return { ok: false, error: "delivery_failed" };
   } catch {
     track("brief_result", { ok: false, status: 0 });

@@ -97,6 +97,7 @@ export default function BriefForm({
       detail: get("detail"),
       source: "brief",
       company_website: get("company_website"),
+      location,
     });
     setPending(false);
 

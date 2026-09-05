@@ -108,6 +108,8 @@ export default function BriefButton({
       detail: get("detail"),
       source: "brief",
       company_website: get("company_website"),
+      /* Carried into GA4 generate_lead by submitBrief on success. */
+      location: sourceRef.current,
     });
     setPending(false);
 
