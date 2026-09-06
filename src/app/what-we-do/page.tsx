@@ -305,6 +305,43 @@ export default function WhatWeDoPage() {
               </Link>
             </li>
           ))}
+          {/* Audience and environment pages. Beside the capabilities,
+              not among them — the nav argues the six; these answer the
+              two briefs that arrive already named. */}
+          <li>
+            <Link
+              href="/what-we-do/airport-advertising"
+              className="group flex h-full flex-col bg-sand-2 p-6 transition-colors duration-200 hover:bg-sand md:p-8"
+            >
+              <p className="mono-kicker text-violet-deep">
+                Airport advertising
+              </p>
+              <p className="mt-3 max-w-[42ch] text-body-l">
+                Terminal media, approach corridors and airport DOOH,
+                priced against each other rather than sold as one.
+              </p>
+              <span className="mt-6 text-body-s font-medium">
+                The airport buy →
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/what-we-do/fmcg-advertising"
+              className="group flex h-full flex-col bg-sand-2 p-6 transition-colors duration-200 hover:bg-sand md:p-8"
+            >
+              <p className="mono-kicker text-violet-deep">
+                FMCG advertising
+              </p>
+              <p className="mt-3 max-w-[42ch] text-body-l">
+                Frequency formats planned along distribution, with barter
+                when the balance sheet is stock rather than cash.
+              </p>
+              <span className="mt-6 text-body-s font-medium">
+                The FMCG playbook →
+              </span>
+            </Link>
+          </li>
         </ul>
       </Band>
 

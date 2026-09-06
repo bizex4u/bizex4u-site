@@ -94,6 +94,8 @@ ${defined}
 ## Key pages
 
 - [How we work](${site.url}/what-we-do): how an OOH buy is planned, compared and run, including how owners are RFPd.
+- [Airport advertising](${site.url}/what-we-do/airport-advertising): terminal media, approach corridors and airport DOOH, and what the cost depends on.
+- [FMCG advertising](${site.url}/what-we-do/fmcg-advertising): frequency formats along distribution, retail catchments and the barter route for stock-heavy brands.
 - [Barter](${site.url}/barter): how a goods-for-media trade is valued, contracted and settled.
 - [Markets](${site.url}/cities): market intelligence by city — not a site list.
 - [Work](${site.url}/work): campaign notes (market, format, duration) and how delivery is documented.

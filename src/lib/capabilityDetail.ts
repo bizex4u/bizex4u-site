@@ -57,7 +57,7 @@ export type CapabilityDetail = {
 export const capabilityDetail: Record<string, CapabilityDetail> = {
   "outdoor-transit": {
     slug: "outdoor-transit",
-    lede: "Large-format and transit media, planned around how a city actually moves rather than around what happens to be free this month.",
+    lede: "Large-format and transit media across 39 Indian markets, planned around how a city actually moves rather than around what happens to be free this month.",
     thesis: "Three times on one commute beats once across a city.",
     frame: {
       src: "/media/hours/commute-agra.webp",
@@ -137,7 +137,7 @@ export const capabilityDetail: Record<string, CapabilityDetail> = {
 
   dooh: {
     slug: "dooh",
-    lede: "Digital screens bought by daypart and location rather than by the month, so weight lands when the audience is actually in front of them.",
+    lede: "Digital screens in 39 Indian markets, bought by daypart and location rather than by the month, so weight lands when the audience is actually in front of them.",
     thesis: "The same screen is a different product at nine and at four.",
     frame: {
       src: "/media/hours/office-cyberhub.jpg",
@@ -295,7 +295,7 @@ export const capabilityDetail: Record<string, CapabilityDetail> = {
 
   "broadcast-print-cinema": {
     slug: "broadcast-print-cinema",
-    lede: "Traditional weight where it still carries a market — regional news, radio drive-time, the dailies people actually read, and cinema on-screen.",
+    lede: "Traditional weight where it still carries a market — cinema on-screen, regional news, radio drive-time and the dailies people actually read, verified city by city.",
     thesis: "The right title in Kanpur is not the right one in Kochi.",
     frame: {
       src: "/media/hours/cinema-screen.jpg",

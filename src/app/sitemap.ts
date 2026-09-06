@@ -27,6 +27,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.6 },
     { path: "/contact", priority: 0.7 },
     { path: "/glossary", priority: 0.7 },
+    /* Audience and format pages that sit beside the six capabilities.
+       Not in the capabilities register because they are not part of the
+       nav's argument structure — but they are first-class routes. */
+    { path: "/what-we-do/airport-advertising", priority: 0.7 },
+    { path: "/what-we-do/fmcg-advertising", priority: 0.7 },
     { path: "/privacy", priority: 0.3 },
     { path: "/terms", priority: 0.3 },
   ];
