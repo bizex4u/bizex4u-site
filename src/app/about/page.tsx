@@ -211,7 +211,7 @@ export default function AboutPage() {
           </Rise>
           <Rise delay={80} className="col-span-12 lg:col-span-4 lg:col-start-9">
             <div className="flex flex-wrap gap-3">
-              <BriefButton variant="sand" size="lg" context="About Bizex4U">
+              <BriefButton variant="sand" size="lg" context="Bizex4U">
                 Request a plan
               </BriefButton>
               <Btn href="/contact" variant="outline-sand" size="lg">

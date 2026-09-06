@@ -19,7 +19,7 @@ export default function Footer() {
               we are the right people for the buy — including when we are not.
             </p>
             <div className="mt-8">
-              <BriefButton context="Footer" location="footer" size="lg">
+              <BriefButton location="footer" size="lg">
                 Request a plan
               </BriefButton>
             </div>

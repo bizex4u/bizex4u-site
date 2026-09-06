@@ -98,7 +98,6 @@ export default function CitiesPage() {
               className="col-span-12 rounded-(--radius-card) bg-sand-2 p-5 md:p-7 lg:col-span-6"
             >
               <BriefForm
-                context="Cities index"
                 location="cities-hero"
                 heading="Ask about a market"
                 lede="Name the city. We will write back."
@@ -236,7 +235,6 @@ export default function CitiesPage() {
           </Rise>
           <div className="col-span-12 rounded-(--radius-card) bg-plum-2 p-5 md:p-7 lg:col-span-6 lg:col-start-7">
             <BriefForm
-              context="Market not listed"
               location="cities-unlisted"
               surface="plum"
               heading="A market that is not listed"

@@ -101,8 +101,10 @@ export default function Nav() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* No `context` here: it renders as visible "About {context}."
+              copy in the modal, and "About Nav." is UI plumbing shown to
+              a person. Placement already travels via `location`. */}
           <BriefButton
-            context="Nav"
             location="header"
             className="hidden !min-h-10 !px-4 !py-0 !text-body-s sm:inline-flex"
           >
@@ -173,7 +175,7 @@ export default function Nav() {
               </Link>
             ))}
             <div className="mt-8 grid gap-3">
-              <BriefButton context="Nav" location="header" className="w-full">
+              <BriefButton location="header" className="w-full">
                 Request a plan
               </BriefButton>
               <p className="mt-2 text-body-s text-on-sand-dim">{site.email}</p>
