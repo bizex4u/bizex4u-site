@@ -16,10 +16,9 @@ export const delhiNcr: City = {
   state: "Delhi, Haryana & Uttar Pradesh",
   region: "North",
 
-  metaTitle:
-    "Outdoor Advertising in Delhi NCR — Hoardings",
+  metaTitle: "Outdoor Advertising in Delhi NCR",
   metaDescription:
-    "Hoarding, unipole, metro and transit advertising across Delhi, Gurugram and Noida — three licensing authorities, planned as one campaign.",
+    "Outdoor advertising in Delhi NCR: hoardings and metro across Delhi, Gurugram and Noida — three licence regimes, one plan.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Delhi NCR",

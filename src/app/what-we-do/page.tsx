@@ -24,7 +24,7 @@ export async function generateMetadata(
 
 const core = capabilities.filter((c) => c.href.startsWith("/what-we-do/")).slice(0, 4);
 const supporting = capabilities.filter(
-  (c) => c.href.includes("activations") || c.href === "/barter",
+  (c) => c.href.includes("activations") || c.href === "/barter-advertising",
 );
 
 export default function WhatWeDoPage() {

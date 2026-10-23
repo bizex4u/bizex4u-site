@@ -96,7 +96,11 @@ ${defined}
 - [How we work](${site.url}/what-we-do): how an OOH buy is planned, compared and run, including how owners are RFPd.
 - [Airport advertising](${site.url}/what-we-do/airport-advertising): terminal media, approach corridors and airport DOOH, and what the cost depends on.
 - [FMCG advertising](${site.url}/what-we-do/fmcg-advertising): frequency formats along distribution, retail catchments and the barter route for stock-heavy brands.
-- [Barter](${site.url}/barter): how a goods-for-media trade is valued, contracted and settled.
+- [Barter advertising](${site.url}/barter-advertising): how a goods-for-media trade is valued, contracted and settled.
+- [ATL vs BTL](${site.url}/blog/atl-vs-btl-advertising-india): above-the-line and below-the-line advertising in India, and when a plan needs both.
+- [DOOH guide](${site.url}/blog/dooh-advertising-india-guide): digital out-of-home formats, dayparting and how a screen buy is planned.
+- [Airport advertising cost](${site.url}/blog/airport-advertising-cost-india-2026): what airport cost depends on, without a rate card.
+- [Airport advertising ROI](${site.url}/blog/airport-advertising-roi): how to judge airport return — audience, dwell and brand lift.
 - [Markets](${site.url}/cities): market intelligence by city — not a site list.
 - [Work](${site.url}/work): campaign notes (market, format, duration) and how delivery is documented.
 - [Glossary](${site.url}/glossary): ${terms.length} terms of Indian outdoor vocabulary, defined.

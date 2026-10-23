@@ -18,7 +18,16 @@ const cutover = JSON.parse(
 );
 
 /** Pages that exist on both IAs — no redirect required. */
-const CURRENT_PAGES = new Set(["/", "/about", "/contact"]);
+const CURRENT_PAGES = new Set([
+  "/",
+  "/about",
+  "/contact",
+  "/barter-advertising",
+  "/blog/atl-vs-btl-advertising-india",
+  "/blog/dooh-advertising-india-guide",
+  "/blog/airport-advertising-cost-india-2026",
+  "/blog/airport-advertising-roi",
+]);
 
 /**
  * Live sitemap paths as fetched 30 Aug 2026.

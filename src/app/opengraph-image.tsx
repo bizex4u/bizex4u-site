@@ -3,15 +3,15 @@
 import { ogCard, size, contentType } from "@/lib/ogCard";
 
 export const alt =
-  "Bizex4U — independent OOH planning and buying across 39 Indian markets";
+  "Bizex4U — barter advertising in India for outdoor, newspaper, radio, cinema and OTT";
 export { size, contentType };
 export const revalidate = 604800;
 
 export default async function Image() {
   return ogCard({
-    eyebrow: "Independent OOH planning and buying",
-    title: "We help brands make better",
-    accent: "OOH decisions.",
-    footnote: "We do not own inventory · We plan across owners",
+    eyebrow: "Barter advertising in India",
+    title: "Trade goods for",
+    accent: "media.",
+    footnote: "Outdoor, newspaper, FM radio, cinema and OTT",
   });
 }
