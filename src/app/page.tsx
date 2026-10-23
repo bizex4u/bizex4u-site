@@ -17,7 +17,7 @@ export async function generateMetadata(
   return routeMetadata(parent, {
     path: "/",
     title: {
-      absolute: `Bizex4U — Independent OOH planning and buying`,
+      absolute: "Barter Advertising Agency in India | Bizex4U",
     },
     description: site.description,
     inheritOgImages: false,
@@ -195,7 +195,7 @@ export default function Home() {
             "@type": "WebPage",
             "@id": `${site.url}/#webpage`,
             url: site.url,
-            name: `Bizex4U — Independent OOH planning and buying`,
+            name: "Barter Advertising Agency in India | Bizex4U",
             description: site.description,
             isPartOf: { "@id": `${site.url}/#website` },
             about: { "@id": organisationId },

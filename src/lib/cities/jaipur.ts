@@ -19,10 +19,9 @@ export const jaipur: City = {
   state: "Rajasthan",
   region: "North",
 
-  metaTitle:
-    "Outdoor Advertising in Jaipur — Hoardings & Gantry",
+  metaTitle: "Outdoor Advertising in Jaipur",
   metaDescription:
-    "Hoarding, unipole, gantry and transit advertising in Jaipur, current on the Rajasthan advertisement rules and the walled-city constraints.",
+    "Outdoor advertising in Jaipur: hoardings, unipoles and gantries outside the walled city, timed to wedding and tourist season.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Jaipur",

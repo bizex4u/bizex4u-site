@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { posts } from "@/lib/blog/posts";
 import { cities } from "@/lib/cities";
 import { terms } from "@/lib/glossary";
 import { capabilities, site } from "@/lib/site";
@@ -20,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     { path: "", priority: 1 },
-    { path: "/barter", priority: 0.7 },
+    { path: "/barter-advertising", priority: 0.9 },
     { path: "/what-we-do", priority: 0.8 },
     { path: "/cities", priority: 0.8 },
     { path: "/work", priority: 0.7 },
@@ -61,6 +62,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${site.url}/glossary/${t.slug}`,
       lastModified: now,
       priority: 0.6,
+    })),
+    ...posts.map((p) => ({
+      url: `${site.url}/blog/${p.slug}`,
+      lastModified: now,
+      priority: 0.8,
     })),
   ];
 }

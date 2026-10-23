@@ -1,7 +1,7 @@
 {
   "comment": "Permanent path redirects from the live Lovable IA. Host www→apex lives in next.config.ts. Every source has permanent: true when loaded.",
   "paths": [
-    { "source": "/barter-advertising", "destination": "/barter" },
+    { "source": "/barter", "destination": "/barter-advertising" },
     { "source": "/outdoor-advertising", "destination": "/what-we-do/outdoor-transit" },
     { "source": "/dooh-advertising", "destination": "/what-we-do/dooh" },
     { "source": "/metro-branding", "destination": "/what-we-do/outdoor-transit" },
@@ -26,24 +26,20 @@
 
     { "source": "/resources/airport-advertising-media-kit", "destination": "/what-we-do/airport-advertising" },
     { "source": "/resources/metro-branding-media-kit", "destination": "/what-we-do/outdoor-transit" },
-    { "source": "/resources/barter-advertising-playbook", "destination": "/barter" },
+    { "source": "/resources/barter-advertising-playbook", "destination": "/barter-advertising" },
     { "source": "/resources/dooh-advertising-media-kit", "destination": "/what-we-do/dooh" },
 
     { "source": "/blog", "destination": "/what-we-do" },
     { "source": "/blog/welcome-to-bizex4u", "destination": "/about" },
-    { "source": "/blog/atl-vs-btl-advertising-india", "destination": "/glossary/media-barter" },
-    { "source": "/blog/how-brands-save-costs-using-inventory-barter", "destination": "/barter" },
+    { "source": "/blog/how-brands-save-costs-using-inventory-barter", "destination": "/barter-advertising" },
     { "source": "/blog/cash-vs-barter-explained", "destination": "/glossary/media-barter" },
     { "source": "/blog/mumbai-airport-advertising-guide", "destination": "/cities/mumbai" },
-    { "source": "/blog/airport-advertising-cost-india-2026", "destination": "/what-we-do/airport-advertising" },
     { "source": "/blog/delhi-metro-advertising-cost", "destination": "/cities/delhi-ncr" },
     { "source": "/blog/ooh-vs-dooh", "destination": "/glossary/dooh" },
-    { "source": "/blog/barter-advertising-india-guide", "destination": "/barter" },
-    { "source": "/blog/how-fmcg-brands-use-barter", "destination": "/barter" },
+    { "source": "/blog/barter-advertising-india-guide", "destination": "/barter-advertising" },
+    { "source": "/blog/how-fmcg-brands-use-barter", "destination": "/barter-advertising" },
     { "source": "/blog/outdoor-advertising-india-buyers-playbook", "destination": "/what-we-do/outdoor-transit" },
-    { "source": "/blog/dooh-advertising-india-guide", "destination": "/what-we-do/dooh" },
     { "source": "/blog/media-buying-agency-india", "destination": "/about" },
-    { "source": "/blog/airport-advertising-roi", "destination": "/what-we-do/airport-advertising" },
     { "source": "/blog/transit-advertising-india", "destination": "/what-we-do/outdoor-transit" },
     { "source": "/blog/mall-branding-india", "destination": "/what-we-do/retail-hyperlocal" },
     { "source": "/blog/cinema-advertising-india", "destination": "/what-we-do/broadcast-print-cinema" }

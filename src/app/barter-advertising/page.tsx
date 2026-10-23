@@ -17,7 +17,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   return routeMetadata(parent, {
-    path: "/barter",
+    path: "/barter-advertising",
     title: "Barter Advertising in India — Stock for Media",
     description:
       "Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast media. Contracted, valued in advance, GST-compliant on both legs.",
@@ -565,7 +565,7 @@ export default function BarterPage() {
               serviceType: "Barter advertising and media trade structuring",
               provider: { "@id": organisationId },
               areaServed: { "@type": "Country", name: "India" },
-              url: `${site.url}/barter`,
+              url: `${site.url}/barter-advertising`,
             },
             {
               "@context": "https://schema.org",
@@ -580,7 +580,7 @@ export default function BarterPage() {
         }}
       />
       <PageSchema
-        path="/barter"
+        path="/barter-advertising"
         name={"Barter Advertising in India"}
         description={"Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast media. Contracted, valued in advance, GST-compliant on both legs."}
       />

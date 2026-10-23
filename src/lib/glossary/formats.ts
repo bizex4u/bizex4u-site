@@ -8,9 +8,9 @@ export const hoarding: Term = {
   term: "Hoarding",
   alsoCalled: ["Billboard", "Large-format outdoor"],
   category: "Formats",
-  metaTitle: "What Is a Hoarding? Outdoor Advertising Term",
+  metaTitle: "Hoarding Meaning in Indian Outdoor",
   metaDescription:
-    "A hoarding is the Indian term for a large outdoor advertising panel mounted on a structure beside a road. What it is, how it is licensed, when it works.",
+    "Hoarding meaning in India: a large outdoor panel, also called a billboard. How it is licensed, and when a smaller format wins.",
   definition:
     "A hoarding is the Indian term for a large-format outdoor advertising panel — a printed or digital display mounted on a fixed structure beside a road, on a rooftop or on a boundary wall, sold for a defined period rather than by the number of people who pass it.",
   body: [
@@ -84,9 +84,9 @@ export const unipole: Term = {
   term: "Unipole",
   alsoCalled: ["Monopole", "Single-pole hoarding"],
   category: "Formats",
-  metaTitle: "What Is a Unipole in Outdoor Advertising?",
+  metaTitle: "Unipole Meaning in Outdoor Ads",
   metaDescription:
-    "A unipole is a hoarding carried on one vertical column rather than a lattice frame. Why the structure matters, where it works, and what moves its price.",
+    "Unipole meaning: one column and a clear sightline over traffic. Where unipoles work on Indian roads, and what moves the price.",
   definition:
     "A unipole is an outdoor advertising display carried on a single vertical column, so the panel stands clear above the traffic with nothing supporting it from the sides — as distinct from a hoarding on a lattice frame or one fixed to a wall or roof.",
   body: [

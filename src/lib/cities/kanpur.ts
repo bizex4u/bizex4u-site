@@ -14,10 +14,9 @@ export const kanpur: City = {
   state: "Uttar Pradesh",
   region: "North",
 
-  metaTitle:
-    "Outdoor Advertising in Kanpur — Hoardings & Metro",
+  metaTitle: "Outdoor Advertising in Kanpur",
   metaDescription:
-    "Hoarding, unipole, transit and retail advertising in Kanpur — the home market of an independent Indian media planning and buying firm.",
+    "Outdoor advertising in Kanpur: hoardings, unipoles and metro. The old market core and Civil Lines need different plans.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Kanpur",

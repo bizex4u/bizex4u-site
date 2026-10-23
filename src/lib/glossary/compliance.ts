@@ -88,9 +88,9 @@ export const advertisementTax: Term = {
   term: "Advertisement Tax",
   alsoCalled: ["Hoarding tax", "Advertisement fee", "Licence fee", "Permission fee"],
   category: "Compliance",
-  metaTitle: "Advertisement Tax on Hoardings in India, Explained",
+  metaTitle: "Advertisement Tax in India",
   metaDescription:
-    "What Indian municipal bodies charge for outdoor advertising, how GST changed the position, and what to confirm before you contract.",
+    "Advertisement tax in India is usually a municipal licence fee, separate from GST. What to confirm on a hoarding contract.",
   definition:
     "Advertisement tax is the charge levied by an Indian urban local body on the display of an outdoor advertisement within its limits — now more often framed as a licence or permission fee than as a tax, because the constitutional basis for a separate advertisement tax changed when GST was introduced.",
   body: [
