@@ -37,6 +37,7 @@ export default function PageSchema({
   description,
   type = "WebPage",
   mainEntity,
+  dateModified = site.contentReviewed,
 }: {
   /* Leading slash, no trailing slash. Resolved against site.url so the
      absolute URL cannot drift from the canonical. */
@@ -45,6 +46,8 @@ export default function PageSchema({
   description: string;
   type?: "WebPage" | "AboutPage" | "CollectionPage";
   mainEntity?: Record<string, unknown>;
+  /** ISO date. Defaults to the site-wide review date. */
+  dateModified?: string;
 }) {
   return (
     <script
@@ -60,7 +63,7 @@ export default function PageSchema({
           isPartOf: { "@id": `${site.url}/#website` },
           about: { "@id": organisationId },
           inLanguage: "en-IN",
-          dateModified: site.contentReviewed,
+          dateModified,
           speakable,
           ...(mainEntity ? { mainEntity } : {}),
         }),

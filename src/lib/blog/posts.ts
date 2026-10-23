@@ -2,6 +2,8 @@ export type BlogPost = {
   slug: string;
   title: string;
   description: string;
+  /** Original publish date of the guide. */
+  published: string;
   h1: string;
   lede: string;
   parent: { href: string; label: string };
@@ -19,6 +21,7 @@ export type BlogPost = {
 export const posts: BlogPost[] = [
   {
     slug: "atl-vs-btl-advertising-india",
+    published: "2026-06-18",
     title: "ATL vs BTL Advertising in India",
     description:
       "ATL vs BTL in India: mass media builds reach; sampling and trade drive trial. When to use each, and how a launch uses both.",
@@ -86,6 +89,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "dooh-advertising-india-guide",
+    published: "2026-05-20",
     title: "DOOH Advertising in India Guide",
     description:
       "DOOH advertising in India: roadside LED, malls, metro, airports and dayparting. How to plan a screen buy without a rate card.",
@@ -142,6 +146,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "airport-advertising-cost-india-2026",
+    published: "2026-06-10",
     title: "Airport Advertising Cost in India",
     description:
       "Airport advertising cost in India depends on the airport, the zone, the format and dwell. What to compare before you buy — no rate card.",
@@ -184,6 +189,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "airport-advertising-roi",
+    published: "2026-05-10",
     title: "Airport Advertising ROI in India",
     description:
       "How to measure airport advertising ROI in India: audience quality, dwell and brand lift, and which categories the premium suits.",

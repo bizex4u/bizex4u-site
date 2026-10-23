@@ -6,6 +6,8 @@ import BriefButton from "@/components/BriefButton";
 import PageSchema from "@/components/PageSchema";
 import { postBySlug, posts } from "@/lib/blog/posts";
 import { routeMetadata } from "@/lib/metadata";
+import { organisationId } from "@/lib/schema";
+import { site } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -140,6 +142,18 @@ export default async function BlogPostPage({ params }: Params) {
         path={`/blog/${post.slug}`}
         name={post.title}
         description={post.description}
+        dateModified="2026-10-23"
+        mainEntity={{
+          "@type": "BlogPosting",
+          headline: post.h1,
+          description: post.description,
+          datePublished: post.published,
+          dateModified: "2026-10-23",
+          author: { "@id": organisationId },
+          publisher: { "@id": organisationId },
+          mainEntityOfPage: `${site.url}/blog/${post.slug}`,
+          image: `${site.url}/opengraph-image`,
+        }}
       />
     </>
   );
