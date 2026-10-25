@@ -1,0 +1,237 @@
+{
+  "note": "Exact substrings of published page text, after whitespace is collapsed. A numeric claim is allowed only when one of these strings covers it. Prices, commission percentages, AKAI, Aditya Vision, and a Gurugram or Gurgaon office address are not waiveable and are not listed here.",
+  "claims": [
+    {
+      "text": "39 Indian markets",
+      "source": "Count of markets published from src/lib/cities (city guides plus named markets)."
+    },
+    {
+      "text": "39 cities",
+      "source": "Count of markets published from src/lib/cities (city guides plus named markets)."
+    },
+    {
+      "text": "The Yellow Line priority section opened in March 2024 — roughly six kilometres and six stations from Taj East Gate to Mankameshwar, three underground and three elevated — running directly through the tourism spine.",
+      "source": "Yellow Line"
+    },
+    {
+      "text": "The Yellow Line priority section runs six stations from Taj East Gate to Mankameshwar, directly through the tourism spine, which means metro media reaches visitor footfall inside a controlled environment rather than fighting signage rules on the street.",
+      "source": "Agra Metro"
+    },
+    {
+      "text": "Agra Metro The Yellow Line priority section — roughly six kilometres and six stations from Taj East Gate to Mankameshwar, three underground and three elevated, operational since March 2024 and running through the tourism spine.",
+      "source": "Agra Metro"
+    },
+    {
+      "text": "The Yellow Line runs six stations from Taj East Gate to Mankameshwar, straight through the tourism spine, which lets you reach visitor footfall inside a controlled environment rather than fighting monument-zone signage rules.",
+      "source": "Agra Metro"
+    },
+    {
+      "text": "39 Indian cities",
+      "source": "Count of markets published from src/lib/cities (city guides plus named markets)."
+    },
+    {
+      "text": "Around all of it runs the Sardar Patel Ring Road, a seventy-six kilometre orbital built by AUDA, crossing the Sabarmati twice and intersecting the Ahmedabad–Vadodara Expressway.",
+      "source": "AUDA"
+    },
+    {
+      "text": "Roughly sixty kilometres are operational across three sections — the Blue Line from Vastral Gam to Thaltej Gam, the Red Line from APMC up to Gandhinagar Sector 1, and the GIFT City spur — which pulled corridor value northwards towards Motera and Gandhinagar and made GIFT City reachable as a defined audience rather than an aspiration.",
+      "source": "AUDA"
+    },
+    {
+      "text": "06 Ahmedabad Metro advertising Transit + Roughly sixty kilometres and around thirty-nine stations operational across the Blue Line, the Red Line up to Gandhinagar and the GIFT City spur.",
+      "source": "Ahmedabad"
+    },
+    {
+      "text": "Ahmedabad–Gandhinagar Metro Roughly sixty kilometres and around thirty-nine stations across the Blue Line, the Red Line to Gandhinagar and the GIFT City spur.",
+      "source": "Ahmedabad"
+    },
+    {
+      "text": "Around sixty kilometres and thirty-nine stations across three sections, reaching Gandhinagar and GIFT City as defined audiences rather than aspirations.",
+      "source": "Ahmedabad"
+    },
+    {
+      "text": "Namma Metro now runs roughly 96 kilometres across 83 stations.",
+      "source": "Namma Metro"
+    },
+    {
+      "text": "Roughly 96 kilometres and 83 stations across the Purple, Green and Yellow lines, with the Yellow Line finally connecting Electronic City.",
+      "source": "Namma Metro"
+    },
+    {
+      "text": "Namma Metro Roughly 96 kilometres and 83 stations across the Purple, Green and Yellow lines, with the Yellow Line connecting Electronic City since August 2025.",
+      "source": "Namma Metro"
+    },
+    {
+      "text": "Roughly 96 kilometres and 83 stations, with the Yellow Line now reaching Electronic City.",
+      "source": "Namma Metro"
+    },
+    {
+      "text": "Bhoj Metro's Orange Line began commercial operations in December 2025 — roughly six kilometres elevated across eight stations, including MP Nagar and Rani Kamalapati.",
+      "source": "Bhoj Metro"
+    },
+    {
+      "text": "The Orange Line opened commercially in December 2025 — around six kilometres elevated, eight stations, including MP Nagar and Rani Kamalapati.",
+      "source": "Bhoj Metro"
+    },
+    {
+      "text": "Bhoj Metro — Orange Line Commercial operations since December 2025: around six kilometres elevated across eight stations, including MP Nagar and Rani Kamalapati.",
+      "source": "Bhoj Metro"
+    },
+    {
+      "text": "The Orange Line opened commercially in December 2025 — around six kilometres and eight stations, but routed through MP Nagar and Rani Kamalapati, which is the commercial core and the premium railway station.",
+      "source": "Metro"
+    },
+    {
+      "text": "CMRL has awarded station advertising for non-fare revenue, a major international operator holds a Chennai Metro concession, and the operator has been tendering Phase 2 inventory including pier and portal rights and in-station advertising with semi-naming rights at a set of Corridor 4 stations.",
+      "source": "CMRL"
+    },
+    {
+      "text": "The Delhi–Meerut Namo Bharat RRTS corridor became fully operational in February 2026, running 82 kilometres from Sarai Kale Khan to Modipuram across 39 stations — a genuinely new, controlled, high-income commuter environment.",
+      "source": "Namo Bharat"
+    },
+    {
+      "text": "Delhi Metro has meanwhile grown to ten lines and 271 stations.",
+      "source": "Delhi Metro, named in the sentence."
+    },
+    {
+      "text": "04 Delhi Metro advertising Transit + The largest controlled advertising environment in India — ten lines, 271 stations, roughly 374 kilometres, plus the Airport Express.",
+      "source": "Delhi Metro"
+    },
+    {
+      "text": "DMRC's co-branding framework has been expanded to 141 stations across eight lines, with licences running ten years on a two-year lock-in and extendable by five, and requiring structural drawings and stability certification.",
+      "source": "Delhi Metro"
+    },
+    {
+      "text": "The Delhi–Meerut corridor runs 82 kilometres and 39 stations from Sarai Kale Khan to Modipuram, end to end in under an hour, and it reaches a commuter who was previously on a road.",
+      "source": "Delhi–Meerut Namo Bharat RRTS, named earlier in the same market section."
+    },
+    {
+      "text": "Delhi Metro Ten lines, 271 stations, roughly 374 kilometres including the Airport Express.",
+      "source": "Delhi Metro"
+    },
+    {
+      "text": "DMRC's co-branding framework covers 141 stations across eight lines, on ten-year licences with a two-year lock-in, requiring structural drawings and stability certification.",
+      "source": "Delhi Metro"
+    },
+    {
+      "text": "Namo Bharat RRTS Sarai Kale Khan to Modipuram, 82 kilometres and 39 stations, fully operational since February 2026.",
+      "source": "Delhi Metro"
+    },
+    {
+      "text": "prohibited within municipal limits; luminance must drop to 0.5 candela after eleven at night on an automatic timer; and variable message LED and LCD d",
+      "source": "Advertisement Policy"
+    },
+    {
+      "text": "Enforcement is genuinely aggressive: several hundred illegal unipoles removed in a single year, penalties set at three times the permission fee, penalty collections up by orders of magnitude year on year, and a stated intention to penalise property owners alongside advertisers.",
+      "source": "Haryana Municipal Corporation Advertisement Bye-laws, 2022, named in the previous sentence of the same Gurugram compliance paragraph (MCG)."
+    },
+    {
+      "text": "Only a six-kilometre priority stretch is operational, opened in May 2025, and the remaining twenty-seven kilometres of the Yellow Line have a completion horizon around 2030.",
+      "source": "Yellow Line"
+    },
+    {
+      "text": "Only a six-kilometre priority stretch is operational, opened in May 2025, and it runs through the low-density Super Corridor rather than the retail core; the remaining twenty-seven kilometres of the Yellow Line have a completion horizon around 2030.",
+      "source": "Metro"
+    },
+    {
+      "text": "Indore Metro — operational stub only Six kilometres opened in May 2025, running through the low-density Super Corridor rather than the retail core, with the remaining twenty-seven kilometres of the Yellow Line due around 2030.",
+      "source": "Metro"
+    },
+    {
+      "text": "Only a six-kilometre priority stretch is operational, opened in May 2025, and it runs through the low-density Super Corridor rather than the retail core — the remaining twenty-seven kilometres of the Yellow Line have a horizon around 2030.",
+      "source": "Metro"
+    },
+    {
+      "text": "07 Jaipur Metro and bus advertising Transit + The Pink Line is the only operating corridor — roughly twelve kilometres and eleven stations from Mansarovar to Badi Chaupar, with extensions under construction and an Orange Line approved for the longer term.",
+      "source": "Metro"
+    },
+    {
+      "text": "Jaipur Metro The Pink Line only — roughly twelve kilometres and eleven stations from Mansarovar to Badi Chaupar, with short extensions under construction and an approved Orange Line for the longer term.",
+      "source": "Metro"
+    },
+    {
+      "text": "Only the Pink Line operates, roughly twelve kilometres and eleven stations from Mansarovar to Badi Chaupar.",
+      "source": "Metro"
+    },
+    {
+      "text": "07 Kochi Water Metro — the format no other Indian city offers Transit + The Water Metro, operational since April 2023 under KMRL, is the only functioning urban water transport network of its scale in the country — a planned 78 km network connecting ten islands to the mainland through air-conditioned battery-powered boats.",
+      "source": "Kochi Water Metro"
+    },
+    {
+      "text": "Line 3 — the fully underground Aqua line from Cuffe Parade to Aarey, 33.5 kilometres and 27 stations — became fully operational in October 2025 and serves BKC and the southern business core directly, which makes it the single most valuable corporate-audience transit corridor in the city.",
+      "source": "Mumbai Metro Line 3 (Aqua line), named in the sentence."
+    },
+    {
+      "text": "The metro has been running since December 2022 and covers more of the city than most people outside Nagpur assume — roughly thirty-eight kilometres across two lines.",
+      "source": "Orange Line"
+    },
+    {
+      "text": "The Orange Line runs the Wardha Road axis from Automotive Square to Khapri across twenty-two stations; the Aqua Line runs from Lokmanya Nagar to Prajapati Nagar across twenty; they interchange at Sitabuldi, which makes that node the single most valuable transit position in the city.",
+      "source": "Orange Line"
+    },
+    {
+      "text": "04 Nagpur Metro advertising Transit + Roughly thirty-eight kilometres across two operational lines and forty-two stations, running since December 2022.",
+      "source": "NMC"
+    },
+    {
+      "text": "Nagpur Metro Roughly thirty-eight kilometres, two lines and forty-two stations, running since December 2022.",
+      "source": "Nagpur Metro"
+    },
+    {
+      "text": "Is Nagpur Metro advertising worth buying? + For a frequency objective, yes, and it is better developed than most people outside the city expect — roughly thirty-eight kilometres, two lines and forty-two stations running since December 2022.",
+      "source": "Nagpur Metro"
+    },
+    {
+      "text": "eveloped than most people outside the city expect — roughly thirty-eight kilometres, two lines and forty-two stations running since December 2022. The Sitabuldi in",
+      "source": "Nagpur Metro"
+    },
+    {
+      "text": "ity expect — roughly thirty-eight kilometres, two lines and forty-two stations running since December 2022. The Sitabuldi interchange sits directly on the mai",
+      "source": "Nagpur Metro"
+    },
+    {
+      "text": "The Priority Corridor of the Blue Line — Bhootnath, Zero Mile and Patliputra Bus Terminal (New ISBT), a 3.6 km elevated stretch — opened to the public on 7 October 2025, and the Malahipakri extension came into service in mid-2026.",
+      "source": "Metro"
+    },
+    {
+      "text": "Patna Metro (PMRCL) The Blue Line's Priority Corridor — Bhootnath, Zero Mile and Patliputra Bus Terminal, 3.6 km elevated — opened on 7 October 2025, and the Malahipakri extension came into service in mid-2026.",
+      "source": "Metro"
+    },
+    {
+      "text": "04 Bus queue shelter and BRTS media Street level + Surat runs its BRTS and city bus as a single integrated system under Sitilink, with two BRTS corridors covering roughly thirty kilometres — Udhana Darwaja to Sachin GIDC, and ONGC Colony through Canal Road to Sarthana — and further corridors largely complete.",
+      "source": "Sitilink"
+    },
+    {
+      "text": "Two lines totalling roughly forty-two kilometres and thirty-seven stations are under construction, trial runs began in 2026 on a short stretch between Dream City and Althan, and commercial opening is tracking to around 2027.",
+      "source": "Surat Metro"
+    },
+    {
+      "text": "Phase 1 covers roughly thirty kilometres over two corridors — Udhana Darwaja to Sachin GIDC, and ONGC Colony through Canal Road to Sarthana — with further corridors largely complete.",
+      "source": "Ministry"
+    },
+    {
+      "text": "Surat Metro — under construction Two lines, roughly forty-two kilometres and thirty-seven stations, with trial running started in 2026 and commercial opening tracking to around 2027.",
+      "source": "Surat Metro, named in the heading. Under construction, not a rate."
+    },
+    {
+      "text": "39 markets",
+      "source": "Count of markets published from src/lib/cities (city guides plus named markets)."
+    },
+    {
+      "text": "Under the 2017 policy, flashing and non-static illuminated devices are prohibited within municipal limits; luminance must drop to 0.5 candela after eleven at night via an automatic timer",
+      "source": "Delhi Outdoor Advertisement Policy 2017, cited on the Delhi NCR page as the 2017 policy."
+    },
+    {
+      "text": "Luminance must drop to 0.5 candela after eleven at night via an automatic timer",
+      "source": "Delhi Outdoor Advertisement Policy 2017 luminance limit, restated beside the 2017 policy."
+    },
+    {
+      "text": "in Delhi the 0.5 candela post-eleven luminance requirement",
+      "source": "Delhi Outdoor Advertisement Policy 2017 luminance limit."
+    },
+    {
+      "text": "Two lines totalling roughly forty-two kilometres and thirty-seven stations are under construction, trial running began in 2026",
+      "source": "Surat Metro, named in the same section: the lines are under construction."
+    }
+  ]
+}

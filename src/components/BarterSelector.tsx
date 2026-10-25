@@ -34,12 +34,13 @@ const categories = [
   "Something else",
 ];
 
-/* Bands, not a value. What they hold, never what media costs. */
+/* Size of the holding, never a rupee band and never a media rate.
+   Deal sizes vary by category and stock. */
 const scales = [
-  "Under ₹25 lakh",
-  "₹25 lakh – ₹1 crore",
-  "₹1 – 5 crore",
-  "Over ₹5 crore",
+  "A smaller holding",
+  "A mid-size holding",
+  "A large holding",
+  "A national holding",
   "Not sure yet",
 ];
 
@@ -195,8 +196,8 @@ export default function BarterSelector() {
           ))}
         </div>
         <p className="mt-3 text-body-s text-on-sand-dim">
-          Your estimate is fine. The number that matters is agreed in writing
-          later, by both of us.
+          Deal sizes vary by category and stock. Your estimate is fine. What
+          it is worth is agreed in writing later, by both of us.
         </p>
       </fieldset>
 
