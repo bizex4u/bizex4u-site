@@ -46,7 +46,43 @@ const ogImageCache = [
   },
 ];
 
+const CANONICAL_BARTER = "https://bizex4u.com/barter-advertising";
+
+/**
+ * /barter and /barter/ on the apex and on www each go to the canonical
+ * URL in one response. They are listed before the general www→apex
+ * rule and before the trailing-slash collapse, otherwise www /barter
+ * becomes apex /barter and only then /barter-advertising.
+ *
+ * skipTrailingSlashRedirect turns off Next's own "/:path+/" → "/:path+"
+ * redirect, which otherwise runs first and makes /barter/ a second hop.
+ * The same collapse is added back below, after the barter rules.
+ */
+function barterHop(source: "/barter" | "/barter/", host: string) {
+  return {
+    source,
+    has: [{ type: "host" as const, value: host }],
+    destination: CANONICAL_BARTER,
+    permanent: true as const,
+  };
+}
+
+const barterOneHop = [
+  ...["www.bizex4u.com", "bizex4u.com"].flatMap((host) => [
+    barterHop("/barter", host),
+    barterHop("/barter/", host),
+  ]),
+  // Preview hosts and any other host. Next treats `/barter` as matching
+  // `/barter/` as well, so this one rule covers the trailing slash.
+  {
+    source: "/barter" as const,
+    destination: CANONICAL_BARTER,
+    permanent: true as const,
+  },
+];
+
 const nextConfig: NextConfig = {
+  skipTrailingSlashRedirect: true,
   async headers() {
     return [
       {
@@ -77,6 +113,12 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      ...barterOneHop,
+      {
+        source: "/:path+/",
+        destination: "/:path+",
+        permanent: true,
+      },
       wwwToApex,
       ...cutover.paths.map((r) => ({
         source: r.source,
