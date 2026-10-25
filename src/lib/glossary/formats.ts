@@ -157,7 +157,7 @@ export const gantry: Term = {
   category: "Formats",
   metaTitle: "What Is a Gantry in Outdoor Advertising?",
   metaDescription:
-    "A gantry is an advertising structure spanning a carriageway overhead, so traffic passes beneath it. Where it works in Indian cities and what it costs to run.",
+    "A gantry is a structure spanning a carriageway overhead, so traffic passes beneath it. Where it works in Indian cities and what it costs to run.",
   definition:
     "A gantry is an outdoor advertising structure that spans a carriageway overhead, so traffic passes underneath it rather than alongside — most often a purpose-built span across a road, or advertising panels carried on a foot-over-bridge.",
   body: [
@@ -287,7 +287,7 @@ export const poleKiosk: Term = {
   category: "Formats",
   metaTitle: "What Is a Pole Kiosk in Outdoor Advertising?",
   metaDescription:
-    "A pole kiosk is a small advertising panel fixed to a street light pole, bought in runs along a stretch. How the format works and where it beats large format.",
+    "A pole kiosk is a small panel fixed to a street light pole, bought in runs along a stretch. How the format works and where it beats large format.",
   definition:
     "A pole kiosk is a small advertising panel — usually a pair, back to back — fixed to a street light or utility pole, and bought as a run of consecutive poles along a stretch of road rather than as a single position.",
   body: [

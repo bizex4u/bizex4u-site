@@ -20,7 +20,7 @@ export async function generateMetadata(
     path: "/barter-advertising",
     title: "Barter Advertising in India — Stock for Media",
     description:
-      "Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast media. Contracted, valued in advance, GST-compliant on both legs.",
+      "Convert finished goods, unsold stock, capacity or vouchers into outdoor, retail and broadcast. Contracted, valued in advance, GST-compliant on both legs.",
   });
 }
 
