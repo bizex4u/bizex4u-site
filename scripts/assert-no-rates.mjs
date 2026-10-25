@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Fail when a published page carries a price, a commission percentage,
+ * Fail when a published page carries a price (rupees or INR), a commission percentage,
  * an unverified numeric claim, a banned client, or a Gurugram/Gurgaon
  * office address.
  *
@@ -32,6 +32,7 @@ const AMOUNT =
 const PRICE_SOURCES = [
   /₹\s*\d[\d,]*(?:\.\d+)?/g,
   /(?<![A-Za-z0-9])Rs\.?\s*\d[\d,]*(?:\.\d+)?/g,
+  /(?<![A-Za-z0-9])INR\s*\d[\d,]*(?:\.\d+)?\s*k?\b/gi,
   /\bper\s+sq\.?\s*ft\b/gi,
   new RegExp(
     String.raw`\b(?:\d[\d,]*(?:\.\d+)?|${AMOUNT}(?:[-\s]${AMOUNT})?)\s*[-\s]\s*(?:lakh|lakhs|lac|lacs|crore|crores|cr)\b`,
@@ -185,6 +186,11 @@ function selfTest() {
 
   const price = (value) => collect(value, PRICE_SOURCES);
   check("rupee digits", price("Under ₹25 lakh").length === 1);
+  check("inr with commas", price("quoted INR 50,000").length === 1);
+  check("inr compact thousands", price("budget INR50k").length === 1);
+  check("inr spaced thousands", price("budget INR 50k").length === 1);
+  check("inr inside a word", price("INROADS 50").length === 0);
+  check("inr without a figure", price("paid in INR only").length === 0);
   check("rs digits", price("won for Rs 7.83 crore").length === 1);
   check("rs dot", price("quoted Rs. 10").length === 1);
   check("per sq ft", price("sold per sq ft").length === 1);
