@@ -482,5 +482,5 @@ export const buyingPractice = [
 ];
 
 export const scaleNote =
-  "The desk is built for market-by-market and corridor plans. A two-lakh local flex is usually better served locally. An eight-crore national AOR pitch is not this room. We will say so.";
+  "The desk is built for market-by-market and corridor plans. A small local flex campaign is usually better served locally. A national AOR pitch is not this room. We will say so.";
 

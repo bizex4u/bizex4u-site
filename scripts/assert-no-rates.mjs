@@ -6,11 +6,14 @@
  *
  * Reads the HTML emitted by `next build` (`.next/server/app`).
  *
- *   npx next build && npm test
+ *   npm run build
+ *
+ * The build script runs this check after `next build`, so a preview
+ * fails when a published page carries a price. `npm test` runs it alone.
  *
  * `scripts/verified-claims.json` lists numeric claims that name a source
  * on the page (an operator, a statute, or this site's own market count).
- * A claim not covered by that file fails. Rupee prices, commission
+ * A claim not covered by that file fails. Rupee and INR prices, commission
  * percentages, the names AKAI and Aditya Vision, and a Gurugram or
  * Gurgaon office address are not waiveable.
  *

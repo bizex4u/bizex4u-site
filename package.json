@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/assert-no-rates.mjs",
     "start": "next start",
-    "fresh": "node scripts/free-port.mjs && rm -rf .next && next build && next start",
+    "fresh": "node scripts/free-port.mjs && rm -rf .next && npm run build && next start",
     "lint": "eslint",
     "test": "node scripts/assert-no-rates.mjs",
     "assert:cutover": "node scripts/assert-cutover.mjs"
