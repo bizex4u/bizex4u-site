@@ -5,9 +5,26 @@ import { Band, Btn, Eyebrow, Rise } from "@/components/UI";
 import BriefButton from "@/components/BriefButton";
 import PageSchema from "@/components/PageSchema";
 import { postBySlug, posts } from "@/lib/blog/posts";
+import { externalAnchorProps } from "@/lib/href";
 import { routeMetadata } from "@/lib/metadata";
 import { organisationId } from "@/lib/schema";
 import { site } from "@/lib/site";
+
+/** One markdown link, used for a cited source. Other paragraphs stay plain. */
+function ParagraphText({ text }: { text: string }) {
+  const match = text.match(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/);
+  if (!match || match.index === undefined) return text;
+  const [raw, label, href] = match;
+  return (
+    <>
+      {text.slice(0, match.index)}
+      <a className="link-underline" {...externalAnchorProps(href)}>
+        {label}
+      </a>
+      {text.slice(match.index + raw.length)}
+    </>
+  );
+}
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -79,7 +96,7 @@ export default async function BlogPostPage({ params }: Params) {
             <div className="col-span-12 lg:col-span-7 lg:col-start-6">
               {section.paragraphs.map((para) => (
                 <p key={para} className="mt-6 max-w-[62ch] text-on-sand-dim first:mt-0">
-                  {para}
+                  <ParagraphText text={para} />
                 </p>
               ))}
               {section.bullets?.length ? (
