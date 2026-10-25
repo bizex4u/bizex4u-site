@@ -41,7 +41,7 @@ export default function Stub({
               ))}
             </ul>
             <div className="mt-10 flex gap-8">
-              <ArrowLink href="/barter">Barter</ArrowLink>
+              <ArrowLink href="/barter-advertising">Barter</ArrowLink>
               <ArrowLink href="/contact">Contact</ArrowLink>
             </div>
           </Rise>

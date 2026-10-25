@@ -31,9 +31,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   return routeMetadata(parent, {
     path: PATH,
-    title: "FMCG Advertising in India — Outdoor, Retail & Barter Media",
+    title: "FMCG Advertising in India — Outdoor & Retail",
     description:
-      "How FMCG brands buy outdoor in India: frequency formats along distribution, retail and kirana-adjacent media, regional press and radio for the trade, and barter that turns stock into media. Planned across 39 markets.",
+      "FMCG advertising in India: outdoor frequency along distribution, retail and kirana media, regional press and radio, and barter for stock.",
   });
 }
 
@@ -66,7 +66,7 @@ const mix = [
     title: "Barter — stock as the budget",
     kicker: "The FMCG advantage",
     body: "FMCG is the category barter was built for: real consumer demand for the goods, steady production, and a balance sheet that often holds more inventory than marketing cash. Product is traded at an agreed valuation against media across the same channels a cash plan would buy — with the valuation methodology and auditor treatment settled in writing first.",
-    href: "/barter",
+    href: "/barter-advertising",
     link: "How barter works",
   },
 ];
@@ -173,7 +173,7 @@ export default function FmcgAdvertisingPage() {
                   <BriefButton size="lg" context="FMCG advertising">
                     Request a plan
                   </BriefButton>
-                  <Btn href="/barter" variant="outline-plum" size="lg">
+                  <Btn href="/barter-advertising" variant="outline-plum" size="lg">
                     The barter route
                   </Btn>
                 </div>

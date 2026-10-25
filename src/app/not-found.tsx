@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { ArrowLink, PageHero, Rise, Section } from "@/components/Ledger";
 import { capabilities } from "@/lib/site";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

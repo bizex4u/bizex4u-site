@@ -8,9 +8,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   return routeMetadata(parent, {
     path: "/what-we-do/outdoor-transit",
-    title: "Outdoor Advertising in India — Hoardings & Transit, 39 Markets",
+    title: "Outdoor & Transit Ads in India",
     description:
-      "Hoardings, unipoles, metro and bus media planned across 39 Indian markets by an independent buyer. Negotiated rates disclosed to you, geo-tagged photo proof, first plan in five working days.",
+      "Outdoor and transit advertising in India: hoardings, unipoles, metro and buses, compared across owners and photographed when live.",
   });
 }
 

@@ -8,7 +8,7 @@ export const site = {
   url: "https://bizex4u.com",
   tagline: "We help brands make better OOH media decisions.",
   description:
-    "Independent OOH media planning and buying in India. We do not own inventory. We plan across owners, negotiate, run the campaign and document delivery.",
+    "Barter advertising in India for outdoor, newspaper, FM radio, cinema and OTT. Trade goods for media — planned, contracted and documented.",
   email: "yash@bizex4u.com",
   /* Desk notification list. Used only by /api/brief (server). Not a
      public byline — replies still come from `email` above. */
@@ -144,7 +144,7 @@ export const capabilities: Capability[] = [
     title: "Barter & Trade Structuring",
     short: "When the media plan is right and cash is the constraint.",
     long: "Converting what a business already owns into media, contracted and valued in advance.",
-    href: "/barter",
+    href: "/barter-advertising",
     linkLabel: "How barter works",
   },
 ];
@@ -354,7 +354,7 @@ export const objectives = [
       "GST-compliant invoicing on both legs",
       "Goods placed through controlled channels",
     ],
-    href: "/barter",
+    href: "/barter-advertising",
     linkLabel: "How barter works",
   },
 ];
@@ -482,5 +482,5 @@ export const buyingPractice = [
 ];
 
 export const scaleNote =
-  "The desk is built for market-by-market and corridor plans. A two-lakh local flex is usually better served locally. An eight-crore national AOR pitch is not this room. We will say so.";
+  "The desk is built for market-by-market and corridor plans. A small local flex campaign is usually better served locally. A national AOR pitch is not this room. We will say so.";
 

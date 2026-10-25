@@ -8,9 +8,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   return routeMetadata(parent, {
     path: "/what-we-do/broadcast-print-cinema",
-    title: "Cinema, Print & Radio Advertising in India — Planned by Market",
+    title: "Cinema, Print & Radio Advertising in India",
     description:
-      "Cinema on-screen, regional dailies, radio drive-time and news TV bought market by market across 39 Indian cities — every station and masthead verified, first plan in five working days.",
+      "Cinema, print and radio advertising in India, bought market by market. Every station and masthead is checked before the plan is booked.",
   });
 }
 

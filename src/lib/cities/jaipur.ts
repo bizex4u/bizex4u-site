@@ -19,10 +19,9 @@ export const jaipur: City = {
   state: "Rajasthan",
   region: "North",
 
-  metaTitle:
-    "Outdoor Advertising in Jaipur — Hoardings & Gantry",
+  metaTitle: "Outdoor Advertising in Jaipur",
   metaDescription:
-    "Hoarding, unipole, gantry and transit advertising in Jaipur, current on the Rajasthan advertisement rules and the walled-city constraints.",
+    "Outdoor advertising in Jaipur: hoardings, unipoles and gantries outside the walled city, timed to wedding and tourist season.",
 
   h1Lead: "Outdoor advertising in",
   h1Accent: "Jaipur",
@@ -32,7 +31,7 @@ export const jaipur: City = {
   market: [
     "Jaipur has an unusually sharp seasonal shape and it drives everything. From October to March the tourist season and the Rajasthan wedding season overlap, and the combination produces enormous jewellery, apparel, hospitality and automotive demand in a compressed window. April to June is hot, empty and commercially thin. A twelve-month flat plan in this market spends half its money in the wrong half of the year.",
     "The city splits between a gridded historic core and everything modern outside it. The walled city — Johari Bazaar, Bapu Bazaar, Tripolia, Kishanpole, Chandpole — is dense mixed-use trade and is simultaneously the highest-yield tourist zone and a genuine local volume market, which is a rare combination. It is also a UNESCO World Heritage Site, inscribed in 2019, with heritage constraints on signage that are real. Effectively all large-format inventory sits outside it.",
-    "The arterials are Tonk Road running south to Sitapura, Ajmer Road running west to the Mahindra SEZ, Sikar Road north, and Agra and Delhi Roads to the northeast, with MI Road and JLN Marg as the central commercial spines and C-Scheme as the old-money office and government district. The Ring Road is planned at 147 kilometres; the southern 47-kilometre section connecting Ajmer, Tonk and Agra Roads is complete and open, while the northern phase has been slowed by land acquisition. Plan the south ring as live inventory and the north as future.",
+    "The arterials are Tonk Road running south to Sitapura, Ajmer Road running west to the Mahindra SEZ, Sikar Road north, and Agra and Delhi Roads to the northeast, with MI Road and JLN Marg as the central commercial spines and C-Scheme as the old-money office and government district. The Ring Road is planned as a full loop; the southern section connecting Ajmer, Tonk and Agra Roads is complete and open, while the northern phase has been slowed by land acquisition. Plan the south ring as live inventory and the north as future.",
     "Money sits in C-Scheme, Malviya Nagar, JLN Marg, Vaishali Nagar, Mansarovar and along Tonk Road. Volume sits in the walled city bazaars, Sanganer, Jhotwara, the Sitapura industrial area and Bagru. One structural note worth knowing before contracting: Jaipur Municipal Corporation was split into Jaipur Heritage and Jaipur Greater, and the state decided in 2025 to merge them back into a single body. That process is live, so confirming which entity issues and holds a permission is not a formality here.",
   ],
 

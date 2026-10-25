@@ -92,7 +92,7 @@ const plexMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin()),
   title: {
-    default: "Bizex4U — Independent OOH planning and buying",
+    default: "Barter Advertising Agency in India | Bizex4U",
     template: "%s | Bizex4U",
   },
   description: site.description,

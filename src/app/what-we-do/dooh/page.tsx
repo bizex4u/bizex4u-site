@@ -8,9 +8,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   return routeMetadata(parent, {
     path: "/what-we-do/dooh",
-    title: "DOOH Advertising in India — LED Screens by Daypart, 39 Markets",
+    title: "DOOH Advertising in India — LED by Daypart",
     description:
-      "Digital out-of-home planned by daypart and location across 39 Indian markets — loop composition confirmed in writing, play-out logs reconciled against the booking, first plan in five working days.",
+      "DOOH advertising in India: LED screens planned by daypart and location, with the loop confirmed in writing before you book.",
   });
 }
 
