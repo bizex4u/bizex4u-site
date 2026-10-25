@@ -31,9 +31,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   return routeMetadata(parent, {
     path: PATH,
-    title: "FMCG Advertising in India — Outdoor, Retail & Barter Media",
+    title: "FMCG Advertising in India — Outdoor & Retail",
     description:
-      "How FMCG brands buy outdoor in India: frequency formats along distribution, retail and kirana-adjacent media, regional press and radio for the trade, and barter that turns stock into media. Planned across 39 markets.",
+      "FMCG advertising in India: outdoor frequency along distribution, retail and kirana media, regional press and radio, and barter for stock.",
   });
 }
 

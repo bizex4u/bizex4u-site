@@ -31,9 +31,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   return routeMetadata(parent, {
     path: PATH,
-    title: "Airport Advertising in India — Formats, Cost Drivers, Planning",
+    title: "Airport Advertising in India — Formats & Cost",
     description:
-      "Terminal media, approach-corridor unipoles and airport DOOH, planned across India's metro and tier-2 airports by an independent buyer. What the cost actually depends on — and when the approach road beats the terminal.",
+      "Airport advertising in India: terminal media, approach-road unipoles and DOOH. What the cost depends on, and when the road beats the terminal.",
   });
 }
 
