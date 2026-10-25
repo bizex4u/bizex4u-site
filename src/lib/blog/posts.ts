@@ -33,7 +33,7 @@ export const posts: BlogPost[] = [
       {
         heading: "What the line actually means",
         paragraphs: [
-          "The names come from an old agency budget sheet that separated mass media from promotional work. The accounting habit is gone. The planning distinction is not.",
+          "The terms are usually traced to an old agency budget sheet that separated mass media from promotional work. The accounting habit is gone. The planning distinction is not.",
           "ATL speaks to a broad audience and builds awareness and recall. BTL speaks to a defined group and asks for a specific action: a trial, a visit, a retailer putting the pack on the shelf. Digital and DOOH can behave as either, depending on whether the buy is broad or narrowly placed.",
         ],
       },
@@ -47,14 +47,14 @@ export const posts: BlogPost[] = [
       {
         heading: "BTL formats in India",
         paragraphs: [
-          "In-store and trade work sits where the purchase happens: displays, shelf, and visibility inside general trade, which still carries most FMCG volume. Sampling in malls, markets, housing clusters and transit hubs is the BTL format closest to a first purchase.",
+          "In-store and trade work sits where the purchase happens: displays, shelf, and visibility inside general trade, which still carries a large share of FMCG volume. Sampling in malls, markets, housing clusters and transit hubs is the BTL format closest to a first purchase.",
           "Area-specific leaflets and door drops still work for hyperlocal retail and services. Events and sponsorships build association rather than reach. Performance media, email, WhatsApp and tightly chosen creators are BTL logic applied to digital: a defined audience, a defined response.",
         ],
       },
       {
         heading: "How the two differ",
         paragraphs: [
-          "ATL is for awareness, a broad audience, and a result you read as reach and recall over months. BTL is for trial, a named audience, and a result you can count in days or weeks. ATL costs more in total and less per person reached. BTL is often the reverse.",
+          "ATL is for awareness, a broad audience, and a result you read as reach and recall over months. BTL is for trial, a named audience, and a result you can count in days or weeks. ATL usually costs more in total and less per person reached. BTL is often the reverse.",
         ],
         bullets: [
           "Use ATL to enter a market, reposition a brand, or hold share of voice in a season such as Diwali, weddings or the IPL.",
@@ -101,7 +101,7 @@ export const posts: BlogPost[] = [
       {
         heading: "What you are actually buying",
         paragraphs: [
-          "A printed hoarding is sole occupancy for a period. A DOOH screen is a slot inside a rotation. The usual roadside loop runs several advertisers across a minute or two, with a spot of about ten seconds, repeating through the hour. Longer spots exist. They are a different buy, not a free extra.",
+          "A printed hoarding is sole occupancy for a period. A DOOH screen is a slot inside a rotation. A roadside loop typically runs several advertisers across a minute or two, with a spot of about ten seconds, repeating through the hour. Longer spots exist. They are a different buy, not a free extra.",
           "National networks, airport concessionaires, mall networks and metro contractors all sell some version of this. The environment matters more than the logo on the proposal, because a mall atrium and a flyover face do not reach the same person or hold them for the same length of time.",
         ],
       },
@@ -109,20 +109,20 @@ export const posts: BlogPost[] = [
         heading: "Where the screens are",
         paragraphs: [
           "Roadside LED is the visible format: highway and arterial faces in Delhi, Mumbai, Bengaluru, Hyderabad, Chennai and the other large cities. Mall screens — atrium, corridor, food court, lift lobby, store entrance — reach people who are already out to shop, heaviest on weekend retail hours.",
-          "Metro screens in Delhi, Mumbai, Bengaluru and Hyderabad reach the same commuter every weekday, which is a frequency buy. Airport screens reach a narrower, higher-income audience with a long dwell, in departure halls, on columns, at baggage reclaim and airside. Fuel-forecourt screens catch a few minutes of waiting. Office-lobby and lift screens are a B2B environment: a still audience, no street noise.",
+          "Metro screens in metro cities such as Delhi, Mumbai, Bengaluru and Hyderabad reach the same commuter every weekday, which is a frequency buy. Airport screens reach a narrower, higher-income audience with a long dwell, in departure halls, on columns, at baggage reclaim and airside. Fuel-forecourt screens catch a few minutes of waiting. Office-lobby and lift screens are a B2B environment: a still audience, no street noise.",
         ],
       },
       {
         heading: "What targeting actually means",
         paragraphs: [
           "Dayparting is the useful lever. Morning drive, mid-morning, lunch, evening drive and night are different messages and different categories. Weekdays suit a corporate audience. Weekends suit retail and leisure, especially in malls.",
-          "Geographic selection is the other lever that is real today: specific screens, specific stations, a short radius around stores. Some networks add audience selection from anonymised mobile footfall. Programmatic, impression-based buying exists but the inventory behind it is still a slice of the market. Most plans that work are still a direct buy, with programmatic added where the audience data is actually on the screen you want.",
+          "Geographic selection is the other lever that is real today: specific screens, specific stations, a short radius around stores. Some networks add audience selection from anonymised mobile footfall. Programmatic, impression-based buying exists but, in our experience, the inventory behind it is still a slice of the market. Most plans that work are still a direct buy, with programmatic added where the audience data is actually on the screen you want.",
         ],
       },
       {
         heading: "Creative that survives the screen",
         paragraphs: [
-          "Most Indian DOOH is silent. Plan for that. Lead with the brand in the first moments of a ten-second spot. One line, high contrast, no fast cutting. Roadside creative has to work at speed. A mall or metro screen can carry slightly more, because people are standing still. A QR code belongs on those stationary screens, sized for the distance, not on a face people pass at 60.",
+          "Most roadside and mall DOOH runs without sound. Plan for that. Lead with the brand in the first moments of a ten-second spot. One line, high contrast, no fast cutting. Roadside creative has to work at speed. A mall or metro screen can carry slightly more, because people are standing still. A QR code belongs on those stationary screens, sized for the distance, not on a face people pass at 60.",
           "Files are typically MP4 or a still image, at HD and at 4K for premium faces. Roadside LED often has its own pixel map. Ask for it before the film is finished.",
         ],
       },
@@ -131,7 +131,7 @@ export const posts: BlogPost[] = [
         paragraphs: [
           "Pick the environment before the city list. Malls, metros, airports, roadsides and offices are different audiences. Then decide whether you need reach or repetition. A metro station repeats against the same people. A mall network spreads wider and repeats less.",
           "Match the creative to the dwell. A roadside face gets one idea. An airport screen can explain a little more because the person is not leaving. A static message on a shared loop is paying for a capability it does not use — if the frame never needs to change, a printed face may be the better instrument.",
-          "Some DOOH networks will take goods as well as cash, on the same terms as any other barter: value agreed in writing, channels named, media planned to the brief rather than to leftover slots.",
+          "We can structure part of a deal in goods or services, not only cash, on the same terms as any other barter: value agreed in writing, channels named, media planned to the brief rather than to leftover slots.",
         ],
       },
     ],
@@ -159,16 +159,16 @@ export const posts: BlogPost[] = [
         heading: "How the buy is structured",
         paragraphs: [
           "Three things set the conversation: the format (lightbox, large static, DOOH, aerobridge, floor graphic), the place (which terminal, landside or airside, which corridor), and the tenure. Airport media is usually discussed in blocks of a month, with a longer hold negotiated differently from a short one.",
-          "Most terminal inventory sits with concessionaires who hold long agreements with AAI or the private operator. The approach road is a different market: ordinary outdoor owners, municipal licensing, different economics. A plan that prices only the terminal is half a plan.",
+          "Terminal inventory usually sits with concessionaires who hold long agreements with AAI or the private operator. The approach road is a different market: ordinary outdoor owners, municipal licensing, different economics. A plan that prices only the terminal is half a plan.",
         ],
       },
       {
         heading: "Delhi, Mumbai, Bengaluru, and the smaller airports",
         paragraphs: [
-          "Delhi’s Indira Gandhi International is the highest-demand airport environment in the country. Inside T3, international departures are the narrowest, highest-spend audience and the longest dwell. Domestic departures are a larger version of a similar traveller. Aerobridge vinyl is seen by everyone boarding that flight and almost nobody else — a route buy, not a terminal buy. Baggage claim and the security hold are where people wait. Check-in is where everyone passes and few people linger.",
-          "Mumbai’s T2 carries a brand association of its own because of the building, which is why it is treated as a premium context rather than as generic terminal space. The same zones apply: departures, gate lounges, aerobridges, arrivals.",
+          "Delhi’s Indira Gandhi International is India’s busiest airport by passengers (Airports Authority of India, FY25). Inside T3, international departures are typically the narrowest, highest-spend audience and the longest dwell. Domestic departures are a larger version of a similar traveller. Aerobridge vinyl is seen by everyone boarding that flight and almost nobody else — a route buy, not a terminal buy. Baggage claim and the security hold are where people wait. Check-in is where everyone passes and few people linger.",
+          "Mumbai’s T2 is widely seen as carrying a brand association of its own because of the building, which is why it is treated as a premium context rather than as generic terminal space. The same zones apply: departures, gate lounges, aerobridges, arrivals.",
           "Bengaluru’s terminal and the Bellary Road approach are two buys that reach an overlapping business traveller. The approach also reaches the city’s ordinary commuters all day, which the terminal does not. Hyderabad, Chennai and the other metro airports follow the same split.",
-          "Smaller airports — domestic piers, and cities such as Coimbatore or Kochi — are not a cheap version of Delhi. They are a different audience, often with real returning-NRI weight, and they should be bought for that reason or not at all.",
+          "Smaller airports — domestic piers, and cities such as Coimbatore or Kochi — are not a cheap version of Delhi. They are a different audience. Kochi in particular has real returning-NRI weight, and it should be bought for that reason or not at all.",
         ],
       },
       {
@@ -202,7 +202,7 @@ export const posts: BlogPost[] = [
         heading: "The measures that are actually available",
         paragraphs: [
           "Daily effective circulation is the outdoor audience estimate: people with an opportunity to see the face that day. At an airport it should be built from published passenger numbers, the share of that flow which passes the panel, and a weight for dwell. An aerobridge is everyone boarding that flight. A check-in hall panel is a fraction of the terminal. Ask for the method. A number that is just a multiple of total passengers is not a method.",
-          "Cost per thousand follows from that circulation and from what you are paying. We will calculate it on a plan. We will not publish a benchmark, because a secondary-city static face and a Delhi or Mumbai international screen are not the same product. On this metric alone, airport media usually looks expensive next to a metro panel or a roadside hoarding. The case, if there is one, is audience quality and dwell, which a raw cost-per-thousand ignores.",
+          "Cost per thousand follows from that circulation and from what you are paying. We will calculate it on a plan. We will not publish a benchmark, because a secondary-city static face and a Delhi or Mumbai international screen are not the same product. On this metric alone, in our plans, airport media usually looks expensive next to a metro panel or a roadside hoarding. The case, if there is one, is audience quality and dwell, which a raw cost-per-thousand ignores.",
           "Audience quality is the profile of the pier: business versus leisure, domestic versus international, and the route. A Delhi–Mumbai aerobridge is not a leisure route out of a smaller city. Dwell is the other half. Passengers spend far longer in a terminal than a driver spends in front of a hoarding, and a DOOH screen in that window can be seen more than once per visit. Count those repeat exposures before you decide the terminal is inefficient.",
           "Brand stature is the measure premium brands actually buy: being in that building, next to that set of names. It shows up in tracking — awareness, premium association, intent — in a market where you ran airport media against one where you did not. It does not show up as a next-day sale.",
         ],
@@ -217,7 +217,7 @@ export const posts: BlogPost[] = [
       {
         heading: "How to structure the campaign",
         paragraphs: [
-          "Pick the terminal for the audience, not for the famous building. At Delhi, international departures are the narrowest premium audience, domestic departures are volume with quality, and the older domestic terminal is a different traveller again. A business-travel brand and a consumer brand should not be argued into the same pier.",
+          "Pick the terminal for the audience, not for the famous building. At Delhi, international departures are the narrowest premium audience, and domestic departures are volume with quality. A business-travel brand and a consumer brand should not be argued into the same pier.",
           "Put weight where people wait: baggage claim, the security hold, gate lounges. Landside check-in is unique reach with a short dwell. Use it when you need everyone, not when you need to be read.",
           "Returning business travellers are the frequency. A single month is a short window against people who fly that route a few times a season. If the job is stature rather than a one-off announcement, plan a longer hold and judge it on brand measures over several months, not on a week of sales.",
           "A plan across more than one airport is how a frequent inter-city traveller sees the same line twice. It is also how you get a national reading in tracking. Buy it because the audience connects those cities, not because a bundle looks tidier.",
@@ -227,7 +227,7 @@ export const posts: BlogPost[] = [
         heading: "A realistic test",
         paragraphs: [
           "Premium FMCG and luxury brands should look for stature and association, usually through a tracking study. Financial brands should look for brand search and fame among the travelling audience, and should not expect clean lead attribution. B2B brands should compare the quality of that reach with what they already buy in professional media. Electronics brands should look at recall against a control city.",
-          "Brands that buy airport media as direct response are usually disappointed. Brands that buy it to be known among a high-income, travelling audience can give the spend a fair test — over a long enough window, against the right category, with the approach road priced beside the terminal rather than instead of a thought.",
+          "In our experience, brands that buy airport media as direct response are usually disappointed. Brands that buy it to be known among a high-income, travelling audience can give the spend a fair test — over a long enough window, against the right category, with the approach road priced beside the terminal rather than instead of a thought.",
         ],
       },
     ],
