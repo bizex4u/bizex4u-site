@@ -5,6 +5,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { capabilities, primaryNav, site } from "@/lib/site";
 import BriefButton from "@/components/BriefButton";
+import CatchmentPlannerLink, {
+  CATCHMENT_PLANNER_NOTE,
+} from "@/components/CatchmentPlannerLink";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -98,6 +101,11 @@ export default function Nav() {
               </Link>
             ),
           )}
+          <CatchmentPlannerLink
+            presentation="nav"
+            location="header"
+            noteId="catchment-planner-note"
+          />
         </nav>
 
         <div className="flex items-center gap-2">
@@ -121,6 +129,12 @@ export default function Nav() {
           </button>
         </div>
       </div>
+      <p
+        id="catchment-planner-note"
+        className="shell hidden h-8 items-center justify-end text-caption text-on-sand-dim lg:flex"
+      >
+        {CATCHMENT_PLANNER_NOTE}
+      </p>
 
       {megaOpen && (
         <div
@@ -174,6 +188,7 @@ export default function Nav() {
                 {item.label}
               </Link>
             ))}
+            <CatchmentPlannerLink presentation="nav-mobile" location="header" />
             <div className="mt-8 grid gap-3">
               <BriefButton location="header" className="w-full">
                 Request a plan

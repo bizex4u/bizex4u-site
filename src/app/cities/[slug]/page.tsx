@@ -11,6 +11,7 @@ import { site } from "@/lib/site";
 import { organisationId, speakable } from "@/lib/schema";
 import AskAssistants from "@/components/AskAssistants";
 import BriefForm from "@/components/BriefForm";
+import CatchmentPlannerLink from "@/components/CatchmentPlannerLink";
 import PageIndex from "@/components/PageIndex";
 import { Disclosure } from "@/components/Disclosure";
 import { MediaName } from "@/components/MediaName";
@@ -91,7 +92,7 @@ export default async function CityPage({ params }: Params) {
 
   return (
     <>
-      <section className="relative bg-sand pt-14 text-on-sand md:pt-16">
+      <section className="relative bg-sand pt-14 text-on-sand md:pt-16 lg:pt-24">
         <div className="shell">
           <nav aria-label="Breadcrumb" className="py-4">
             <ol className="flex flex-wrap gap-2 eyebrow text-on-sand-dim">
@@ -550,11 +551,17 @@ export default async function CityPage({ params }: Params) {
             <p className="mt-5 max-w-[52ch] text-body-s text-on-plum-dim">
               {city.planning}
             </p>
-            <p className="mt-6">
+            <div className="mt-6 flex flex-col items-start gap-5">
               <Btn href="/what-we-do" variant="outline-sand">
                 How we plan a market
               </Btn>
-            </p>
+              <CatchmentPlannerLink
+                variant="outline-sand"
+                size="md"
+                location="city-plan"
+                noteClassName="text-on-plum-dim"
+              />
+            </div>
           </Rise>
           <div className="col-span-12 rounded-(--radius-card) bg-plum-2 p-5 md:p-7 lg:col-span-6 lg:col-start-7">
             <BriefForm

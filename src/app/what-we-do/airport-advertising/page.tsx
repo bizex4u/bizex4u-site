@@ -147,7 +147,7 @@ const faq = [
 export default function AirportAdvertisingPage() {
   return (
     <>
-      <section className="relative bg-sand pt-14 text-on-sand md:pt-16">
+      <section className="relative bg-sand pt-14 text-on-sand md:pt-16 lg:pt-24">
         <div className="shell">
           <nav aria-label="Breadcrumb" className="py-5">
             <ol className="flex flex-wrap gap-2 eyebrow text-on-sand-dim">
