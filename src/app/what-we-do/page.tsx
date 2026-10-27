@@ -30,7 +30,7 @@ const supporting = capabilities.filter(
 export default function WhatWeDoPage() {
   return (
     <>
-      <section className="relative bg-sand pt-14 text-on-sand md:pt-16">
+      <section className="relative bg-sand pt-14 text-on-sand md:pt-16 lg:pt-24">
         <div className="shell">
           <div className="grid-12 items-stretch gap-y-0 lg:min-h-[calc(100svh-10.5rem)]">
             <div className="col-span-12 order-2 flex flex-col justify-center gap-8 py-10 lg:order-1 lg:col-span-6 lg:py-10 lg:pr-10">

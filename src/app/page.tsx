@@ -7,6 +7,7 @@ import { organisationId, speakable } from "@/lib/schema";
 import { cities } from "@/lib/cities";
 import { heroPlate } from "@/lib/streets";
 import BriefButton from "@/components/BriefButton";
+import CatchmentPlannerLink from "@/components/CatchmentPlannerLink";
 import BrandStrip from "@/components/BrandStrip";
 import { routeMetadata } from "@/lib/metadata";
 
@@ -35,7 +36,7 @@ export default function Home() {
           not a competing CTA. Motion stays off: the Delhi reel
           carries licensed talent and would pull the eye off the
           buttons. */}
-      <section className="relative bg-sand pt-14 text-on-sand md:pt-16">
+      <section className="relative bg-sand pt-14 text-on-sand md:pt-16 lg:pt-24">
         <div className="shell">
           <div className="grid-12 items-center gap-y-10 py-10 lg:min-h-[calc(100svh-10.5rem)] lg:gap-x-14">
             <div className="col-span-12 flex flex-col justify-center lg:col-span-6 lg:pr-4">
@@ -58,6 +59,12 @@ export default function Home() {
                     How we work
                   </Btn>
                 </div>
+                <CatchmentPlannerLink
+                  className="mt-5"
+                  size="lg"
+                  location="hero"
+                  noteClassName="text-on-sand-dim"
+                />
               </Rise>
             </div>
 

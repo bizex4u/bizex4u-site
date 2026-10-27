@@ -69,7 +69,7 @@ export default function CitiesPage() {
 
   return (
     <>
-      <section className="relative bg-sand pt-14 text-on-sand md:pt-16">
+      <section className="relative bg-sand pt-14 text-on-sand md:pt-16 lg:pt-24">
         <div className="shell">
           <div className="grid-12 items-start gap-y-8 py-8 md:py-10">
             <div className="col-span-12 lg:col-span-6 lg:pr-8">

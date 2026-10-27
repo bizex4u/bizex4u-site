@@ -3,6 +3,7 @@ import { footerNav, site, telHref } from "@/lib/site";
 import { externalAnchorProps, isExternalHref } from "@/lib/href";
 import AskAssistants from "@/components/AskAssistants";
 import BriefButton from "@/components/BriefButton";
+import CatchmentPlannerLink from "@/components/CatchmentPlannerLink";
 import { Eyebrow } from "@/components/UI";
 
 export default function Footer() {
@@ -18,10 +19,16 @@ export default function Footer() {
               Tell us the market and the objective. We will tell you whether
               we are the right people for the buy — including when we are not.
             </p>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col items-start gap-6">
               <BriefButton location="footer" size="lg">
                 Request a plan
               </BriefButton>
+              <CatchmentPlannerLink
+                variant="outline-sand"
+                size="lg"
+                location="footer"
+                noteClassName="text-on-plum-dim"
+              />
             </div>
           </div>
 
