@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState, type RefObject } from "react";
 import { btnClass, type BtnVariant } from "@/components/UI";
 
 /** Atlas is a separate app. Link out; do not embed it. */
-export const CATCHMENT_PLANNER_HREF = "https://atlas.bizex4u.com";
+export const CATCHMENT_PLANNER_HREF = "https://atlas.bizex4u.com/plan";
 
 export const CATCHMENT_PLANNER_NOTE =
   "Opens our planning tool. The first load can take up to a minute while it wakes up.";
