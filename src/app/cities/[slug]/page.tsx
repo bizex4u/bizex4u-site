@@ -540,6 +540,21 @@ export default async function CityPage({ params }: Params) {
         </ul>
       </Band>
 
+      <Band tone="sand" grain compact>
+        <Rise>
+          <h2 className="max-w-[24ch] font-display text-h1 text-balance">
+            {`Check your catchment in ${city.name}`}
+          </h2>
+          <CatchmentPlannerLink
+            className="mt-5"
+            variant="outline-plum"
+            size="md"
+            location="city-catchment"
+            noteClassName="text-on-sand-dim"
+          />
+        </Rise>
+      </Band>
+
       <Band id="plan" tone="plum" grain compact>
         <div className="grid-12 items-start gap-y-8">
           <Rise className="col-span-12 lg:col-span-5">
