@@ -4,6 +4,7 @@ import { externalAnchorProps, isExternalHref } from "@/lib/href";
 import AskAssistants from "@/components/AskAssistants";
 import BriefButton from "@/components/BriefButton";
 import CatchmentPlannerLink from "@/components/CatchmentPlannerLink";
+import FooterTagline from "@/components/FooterTagline";
 import { Eyebrow } from "@/components/UI";
 
 export default function Footer() {
@@ -12,9 +13,7 @@ export default function Footer() {
       <div className="shell relative z-10 pt-(--spacing-band) pb-10">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           <div>
-            <p className="font-display text-h1 text-balance">
-              {site.tagline}
-            </p>
+            <FooterTagline />
             <p className="mt-5 max-w-[42ch] text-body text-on-plum-dim">
               Tell us the market and the objective. We will tell you whether
               we are the right people for the buy — including when we are not.
